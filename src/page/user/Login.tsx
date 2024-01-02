@@ -1,5 +1,5 @@
-function Login() {
-    return ( <>Login</> );
+const Login = () => {
+    return (<>Login</>);
 }
 
 export default Login;
