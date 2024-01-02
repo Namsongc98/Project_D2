@@ -1,15 +1,17 @@
 $breakpoint-pc: 1920px;
 $breakpoint-lg: 768px;
+
 $breakpoint-md: 767.02px;
+$breakpoint-xs: 0px;
 
 @mixin pc {
-  @media (max-width: $breakpoint-pc) and (min-width: $breakpoint-lg) {
+  @media (min-width: $breakpoint-lg) {
     @content;
   }
 }
-
+// mobile
 @mixin sp {
-  @media (max-width: ($breakpoint-md)) {
+  @media (min-width: $breakpoint-xs) and (max-width: ($breakpoint-md)) {
     @content;
   }
 }

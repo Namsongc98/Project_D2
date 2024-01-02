@@ -22,6 +22,7 @@ $colors: (
 
 // base spacing
 $base-padding: 1rem;
+
 $base-margin: 1rem;
 
 // base border
@@ -31,18 +32,19 @@ $base-border-radius: 20px;
 // base box shadow
 
 // base font size
-$base-font-size: 1.6rem;
-$font-size-sm: $base-font-size * 1;
+$base-font-size: 1rem;
+$font-size-nav: $base-font-size * 1.6;
+$font-size-md: $base-font-size * 1.4;
+$font-size-sm: $base-font-size * 1.2;
 $font-size-lg: $base-font-size * 2.4;
 $font-size-xl: $base-font-size * 3.2;
 $font-size-xxl: $base-font-size * 4.8;
 // base font family
-
 $font-family-open: "Open Sans", sans-serif;
 
 // color common
 $color-bg: #fff;
-$color-2: #120a21;
+$color-text: #120a21;
 $color-btn: #ffa920;
 $color-4: #8e8e93;
 $color-5: #e5e5ea;
