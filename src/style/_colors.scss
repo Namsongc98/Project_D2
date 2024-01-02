@@ -1,0 +1,61 @@
+// each colors
+@each $key, $val in $colors {
+    // text color
+    .text-#{$key} {
+      color: $val;
+    }
+    //text hover
+    .text-hover-#{$key} {
+      &:hover {
+        color: $val;
+      }
+    }
+    // background color
+    .bg-#{$key} {
+      background-color: $val;
+    }
+    .bg-hover-#{$key} {
+      &:hover {
+        background-color: $val;
+      }
+    }
+    @if ($val != black and $val != white) {
+      @for $i from 1 through 9 {
+        // light color
+        .text-#{$key}-light-#{$i} {
+          color: mix(white, $val, $i * 10%);
+        }
+        .text-hover-#{$key}-light-#{$i} {
+          &:hover {
+            background-color: $val;
+          }
+        }
+        .bg-#{$key}-light-#{$i} {
+          background-color: mix(white, $val, $i * 10%);
+        }
+        .bg-hover-#{$key}-light-#{$i} {
+          &:hover {
+            background-color: $val;
+          }
+        }
+  
+        // dark color
+        .text-#{$key}-dark-#{$i} {
+          color: mix(black, $val, $i * 10%);
+        }
+        .text-hover-#{$key}-dark-#{$i} {
+          &:hover {
+            background-color: $val;
+          }
+        }
+        .bg-#{$key}-dark-#{$i} {
+          background-color: mix(black, $val, $i * 10%);
+        }
+        .bg-hover-#{$key}-dark-#{$i} {
+          &:hover {
+            background-color: $val;
+          }
+        }
+      }
+    }
+  }
