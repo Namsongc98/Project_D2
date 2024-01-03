@@ -5,7 +5,7 @@ type Props = {
 const  DefaultLayout=({ children }: Props)=>  {
   return (
     <div>
-      {/* <Header /> */}
+      <Header />
       {children}
     </div>
   );
