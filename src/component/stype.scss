@@ -1,0 +1,16 @@
+.btn-register {
+  transition: opacity 150ms ease-in-out, box-shadow 0.15s ease-in-out;
+  &:hover {
+    box-shadow: 0 4px 12px 0 rgba(90, 141, 238, 0.6);
+  }
+}
+.input-register {
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  &:focus {
+    color: #475f7b;
+    background-color: #ffffff;
+    border-color: #5a8dee;
+    outline: 0;
+    box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.1);
+  }
+}

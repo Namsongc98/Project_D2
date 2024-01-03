@@ -1,4 +1,4 @@
-function UserManager() {
+const UserManager=() => {
   return <>user</>;
 }
 

@@ -3,7 +3,7 @@ type Props = {
 };
 import Header from "../../component/Header";
 
-function LayoutAdmin({ children }: Props) {
+const LayoutAdmin = ({ children }: Props) => {
   return (
     <>
       <Header />

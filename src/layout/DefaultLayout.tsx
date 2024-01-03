@@ -2,10 +2,10 @@ import Header from "../component/Header";
 type Props = {
   children: React.ReactNode;
 };
-function DefaultLayout({ children }: Props) {
+const  DefaultLayout=({ children }: Props)=>  {
   return (
     <div>
-      <Header />
+      {/* <Header /> */}
       {children}
     </div>
   );
