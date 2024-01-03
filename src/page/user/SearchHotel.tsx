@@ -1,4 +1,4 @@
-function SearchHotel() {
+const SearchHotel = () => {
   return <>searchHotel</>;
 }
 
