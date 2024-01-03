@@ -15,8 +15,6 @@ type Layout = {
 
 const publicPage: Layout = [
     { path: "/", component: Home, layout: true },
-    { path: "/login", component: Login, layout: true },
-    { path: "/register", component: Register, layout: true },
     { path: "/search", component: SearchHotel, layout: true },
 ]
 
@@ -24,6 +22,12 @@ const privateAmin: Layout = [
     { path: "/user", component: UserManager, layout: true }
 ]
 
-export { publicPage, privateAmin }
+const member = [
+    { path: "/register", component: Register, layout: true },
+    { path: "/login", component: Login, layout: true },
 
-export {default as PrivateAdmin} from "./PrivateAdmin"
+]
+
+export { publicPage, privateAmin, member }
+
+export { default as PrivateAdmin } from "./PrivateAdmin"

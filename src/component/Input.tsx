@@ -1,12 +1,22 @@
-const Input = () => {
+import { memo } from "react";
+import { InputType } from "../type";
+
+const Input = (props: InputType): React.JSX.Element => {
+  const { register, label, name, placeholder, type } = props;
+
   return (
     <div className="mb-4">
-      <label htmlFor="" className="font-medium text-[#475F7B] ">
-        Email:
+      <label htmlFor={name} className="font-medium text-[#475F7B] ">
+        {label}
       </label>
-      <input type="text" id="" placeholder="" className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] " />
+      <input
+        type={type}
+        className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
+        {...register(name)}
+        placeholder={placeholder}
+      />
     </div>
   );
-}
+};
 
-export default Input;
+export default memo(Input);
