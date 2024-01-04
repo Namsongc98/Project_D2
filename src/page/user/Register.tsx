@@ -1,85 +1,27 @@
 import Input from "../../component/Input";
-import "./style/registerLogin.scss";
 
 import Button from "../../component/Buttom";
 import { Link } from "react-router-dom";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import { useForm, SubmitHandler } from "react-hook-form";
 import { IFormInput } from "../../type";
+import { SubmitHandler } from "react-hook-form";
+
+import { useValidate } from "../../hook";
 import { useEffect, useState } from "react";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 
 const Register = () => {
-  const [error, setError] = useState<string>("Mời nhập đây đủ các ô");
-  const [statusError, setStatusError] = useState<boolean>(false);
+  const [error, setError] = useState<string | undefined>("");
+  const { register, handleSubmit, message } = useValidate()
 
-  const schema = yup
-    .object({
-      email: yup
-        .string()
-        .required("Email là bắt buộc")
-        .email("Email không hợp lệ")
-        .min(8, "Passworrd trên 8 kí tự")
-        .max(32, "Password dưới 32 kí tự"),
-      password: yup
-        .string()
-        .required("Password là bắt buộc")
-        .min(8, "Passworrd trên 8 kí tự")
-        .max(32, "Password dưới 32 kí tự"),
-      confirmPassword: yup
-        .string()
-        .required("Password là bắt buộc")
-        .oneOf([yup.ref("password")], "Mật khẩu không khớp"),
-    })
-    .required("Mời nhập đây đủ các ô");
-
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm<IFormInput>({
-    resolver: yupResolver(schema),
-  });
+  useEffect(() => {
+    setError(message)
+    return () => {
+      setError("")
+    }
+  }, [message])
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
     console.log(data);
   };
-  const checkEmtry =
-    errors.email?.type === "required" ||
-    errors.password?.type === "required" ||
-    errors.confirmPassword?.type === "required";
-
-  useEffect(() => {
-    if (checkEmtry) {
-      setError("Nhập đầy đủ các trường");
-      setStatusError(true);
-    } else if (errors.email?.type === "email") {
-      setError(errors.email.message!);
-      setStatusError(true);
-    } else if (errors.email?.type === "min") {
-      setError(errors.email.message!);
-      setStatusError(true);
-    } else if (errors.email?.type === "max") {
-      setError(errors.email.message!);
-      setStatusError(true);
-    } else if (errors.password?.type === "min") {
-      setError(errors.password.message!);
-      setStatusError(true);
-    } else if (errors.password?.type === "max") {
-      setError(errors.password.message!);
-      setStatusError(true);
-    } else if (errors.confirmPassword?.type === "oneOf") {
-      setError(errors.confirmPassword.message!);
-      setStatusError(true);
-    } else {
-      setStatusError(false);
-    }
-  }, [errors]);
-
-  console.log(checkEmtry || statusError);
-  console.log(errors.email?.type);
-  console.log(errors.password?.type);
-  console.log(errors.confirmPassword?.type);
 
   return (
     <div className="w-1/2 p-6  ">
@@ -91,10 +33,10 @@ const Register = () => {
 
       <div className="pr-7 pl-7 pb-7 ">
         {/* thông báo lỗi */}
-        {checkEmtry || statusError ? (
+        {error ? (
           <div className="wapper-danger w-full mb-6 bg-red-100 text-red-500 p-3 rounded-md flex items-center">
             <ErrorOutlineIcon className="mr-3" />
-            <span className="text-sm">{error}</span>
+            <span className="text-sm">{message}</span>
           </div>
         ) : (
           <></>
@@ -114,23 +56,23 @@ const Register = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <Input
               type="text"
-              label="Email"
+              title="Email"
               placeholder="Nhập Email"
-              name="email"
+              label="email"
               register={register}
             />
             <Input
               type="text"
-              label="Mật khẩu"
+              title="Mật khẩu"
               placeholder="Nhập Password"
-              name="password"
+              label="password"
               register={register}
             />
             <Input
               type="text"
-              label="Nhập lại mật khẩu"
+              title="Nhập lại mật khẩu"
               placeholder="Nhập lại Password"
-              name="confirmPassword"
+              label="confirmPassword"
               register={register}
             />
 
