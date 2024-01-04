@@ -11,7 +11,6 @@ const useInput = (initialValue: string):InputHook => {
   return {
     value,
     handleChange,
-    
   };
 };
 export default useInput;

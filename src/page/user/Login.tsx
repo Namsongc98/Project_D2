@@ -1,24 +1,55 @@
 import Input from "../../component/Input";
-import { Link } from "react-router-dom";
 import Button from "../../component/Buttom";
-
-import { SubmitHandler } from "react-hook-form";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import { IFormInput } from "../../type";
 import { useEffect, useState } from "react";
-import { useValidate } from "../../hook";
+import { Link } from "react-router-dom";
+import { IFormInput } from "../../type";
+import { SubmitHandler } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+
 const Login = () => {
   const [error, setError] = useState<string | undefined>("");
-  const { register, handleSubmit, message } = useValidate()
+
+  const schema = yup.object({
+    email: yup
+      .string()
+      .required("Email là bắt buộc")
+      .email("Email không hợp lệ")
+      .min(8, "Passworrd trên 8 kí tự")
+      .max(32, "Password dưới 32 kí tự"),
+    password: yup
+      .string()
+      .required("Password là bắt buộc")
+      .min(8, "Passworrd trên 8 kí tự")
+      .max(32, "Password dưới 32 kí tự"),
+  });
+
+  
+
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<IFormInput>({
+    resolver: yupResolver(schema),
+  });
+
+  const message: string | undefined =
+    errors?.email?.message ||
+    errors?.password?.message 
+  
+
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
     console.log(data);
   };
   useEffect(() => {
-    setError(message)
+    setError(message);
     return () => {
-      setError("")
-    }
-  }, [message])
+      setError("");
+    };
+  }, [message]);
   return (
     <>
       <div className="w-1/2 p-6  ">
@@ -69,9 +100,7 @@ const Login = () => {
             </form>
             <hr className="my-4" />
             <div className="flex items-center justify-center gap-1 text-[#6658dd] text-sm">
-
               <Link to="/register">Đăng kí tài khoản</Link>
-
 
               <p className="text-black">|</p>
               <Link to="/">Về trang Home</Link>

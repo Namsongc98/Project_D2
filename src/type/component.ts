@@ -1,4 +1,4 @@
-import { UseFormRegister } from "react-hook-form";
+
 
 type ButomType = {
   type: "submit" | "reset" | "button" | undefined;
@@ -18,13 +18,16 @@ type InputType = {
   label: "email" | "password" | "confirmPassword";
   value?: string;
   onchange?: (e: React.FormEvent<HTMLInputElement>) => string;
-  register: UseFormRegister<IFormInput>;
+  register?: unknown
 };
+
+interface IFormRegister extends IFormInput {
+  confirmPassword: string;
+}
 
 interface IFormInput {
   email: string;
   password: string;
-  confirmPassword: string;
 }
 
-export type { ButomType, InputHook, InputType, IFormInput };
+export type { ButomType, InputHook, InputType, IFormInput, IFormRegister };
