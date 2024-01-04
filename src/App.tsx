@@ -5,10 +5,12 @@ import { PrivateAdmin } from "./router";
 
 
 function App() {
+
   return (
     <>
       <Router>
         <Routes>
+        
           {publicPage.map((router, index) => {
             const Layout = DefaultLayout;
             const Page = router.component;

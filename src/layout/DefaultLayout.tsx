@@ -1,10 +1,9 @@
 import Header from "../component/Header";
-type Props = {
-  children: React.ReactNode;
-};
+import { Props } from "../type";
+
 const  DefaultLayout=({ children }: Props)=>  {
   return (
-    <div>
+    <div className="flex flex-col w-full min-h-screen">
       <Header />
       {children}
     </div>
