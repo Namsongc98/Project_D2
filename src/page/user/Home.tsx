@@ -1,7 +1,12 @@
+
+import Banner from "../../component/Banner";
+import SearchHotel from "../../component/SearchHotel";
+
 const Home = () => {
-    return (<><h1 className="text-3xl font-bold text-amber-500 underline">
-        Hello world!
-    </h1></>);
+    return (<>
+        <Banner />
+        <SearchHotel/>
+    </>);
 }
 
 export default Home;
