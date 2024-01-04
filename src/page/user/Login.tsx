@@ -53,7 +53,7 @@ const Login = () => {
             </form>
             <hr className="my-4" />
             <div className="flex items-center justify-center gap-1 text-[#6658dd] text-sm">
-              <Link to="/login">Đăng nhập bằng tài khoản</Link>
+              <Link to="/register">Đăng kí tài khoản</Link>
               <p className="text-black">|</p>
               <Link to="/">Về trang Home</Link>
             </div>
