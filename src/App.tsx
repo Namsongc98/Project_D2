@@ -1,8 +1,9 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { PrivateAdmin, privateAmin, publicPage, member } from "./router";
-import { DefaultLayout } from "./layout";
-import LayoutAdmin from "./layout/admin/LayoutAdmin";
-import LayoutMember from "./layout/LayoutMember";
+import { DefaultLayout, LayoutAdmin,LayoutMember } from "./layout";
+import { member, privateAmin, publicPage } from "./router/layoutArray";
+import { PrivateAdmin } from "./router";
+
+
 function App() {
   return (
     <>
