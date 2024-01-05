@@ -14,6 +14,81 @@
     box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.1);
   }
 }
-.custom-date-picker-icon {
-  fill: white; /* Điền màu bạn muốn sử dụng vào đây */
+
+// input search city
+.css-bz5ng3-MuiInputBase-root-MuiInput-root {
+  width: 100%;
+  height: 100%;
+  &::before {
+    display: none;
+  }
+  &::after {
+    display: none;
+  }
+
+  input {
+    width: 100%;
+    height: 3rem;
+    position: absolute;
+    box-sizing: border-box;
+    padding: 0 0 0 10px;
+    &:focus {
+      border: 2px solid yellow;
+    }
+  }
+}
+// search room
+
+.css-4jnixx-MuiStack-root {
+  width: 27%;
+  flex-direction: row !important;
+  align-items: center;
+  padding-top: 0 !important;
+  
+  .wapper-room {
+    width: 100%;
+    margin: 0px;
+    position: relative;
+    .date-picker {
+      min-width: 100% !important;
+      height: 3rem;
+      margin: 0;
+      .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root {
+        position: relative;
+        height: 3rem;
+        width: 100%;
+        border-radius: 0px;
+        input {
+          position: absolute;
+          height: 3rem;
+          padding: 0 0 0 14px;
+          width: 100%;
+          box-sizing: border-box;
+          &:focus {
+            border: 2px solid yellow;
+          }
+        }
+        .css-1laqsz7-MuiInputAdornment-root {
+          position: absolute;
+          right: 13px;
+          button {
+            background-color: white;
+            color: #09b2de;
+          }
+        }
+      }
+      // .css-1jy569b-MuiFormLabel-root-MuiInputLabel-root {
+      //   display: none;
+      // }
+    }
+  }
+}
+.css-phodop-MuiButtonBase-root-MuiButton-root {
+  color: white !important;
+  min-width: 100%;
+  height: 45px;
+  padding: 6px 40px !important;
+  &:hover {
+    background-color: #ffaf1a !important;
+  }
 }
