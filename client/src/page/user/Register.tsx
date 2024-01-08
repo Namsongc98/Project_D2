@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { axiosPublic } from "../../config";
 import bcrypt from "bcryptjs";
+import { v4 as uuidv4 } from 'uuid';
 const Register = () => {
   const [error, setError] = useState<string | undefined>("");
 
@@ -57,23 +58,27 @@ const Register = () => {
     const { email, password } = data;
 
     try {
-      const resul = await axiosPublic.get("/user");
+      const resul = await axiosPublic.get("/users");
+
       const checkEmail = resul.data.some((user: IUser) => {
         return user.email === email;
       });
+
       if (!checkEmail) {
         bcrypt.hash(password, 10, async function (err, hash) {
           if (err) {
             throw new Error("Mã hóa thất bại");
           } else {
             const guide = "guide";
-            const resul = await axiosPublic.post("/user", {
+            const id = uuidv4()
+            const resul = await axiosPublic.post("/users", {
+              id,
               email,
               password: hash,
               role: guide!,
             });
-            console.log(resul);
-            // navigate("/");
+            localStorage.setItem("accessToken", resul.data.accessToken)
+            navigate("/");
           }
         });
       } else {

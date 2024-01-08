@@ -2,15 +2,19 @@ import Input from "../../component/Input";
 import Button from "../../component/Buttom";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { IFormInput } from "../../type";
+import { Link, useNavigate } from "react-router-dom";
+import { IFormInput, IUser } from "../../type";
 import { SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
+import { axiosPublic, setLocalToken } from "../../config";
+import bcrypt from "bcryptjs";
 
 const Login = () => {
   const [error, setError] = useState<string | undefined>("");
+
+  const navigate = useNavigate()
 
   const schema = yup.object({
     email: yup
@@ -25,9 +29,6 @@ const Login = () => {
       .min(8, "Passworrd trên 8 kí tự")
       .max(32, "Password dưới 32 kí tự"),
   });
-
-  
-
   const {
     register,
     formState: { errors },
@@ -38,11 +39,37 @@ const Login = () => {
 
   const message: string | undefined =
     errors?.email?.message ||
-    errors?.password?.message 
-  
+    errors?.password?.message
 
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    console.log(data);
+
+  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+    const { email, password } = data
+    try {
+      const result = await axiosPublic.get("/users");
+      result.data.some(async (user: IUser) => {
+        if (user.email === email) {
+          const math = await bcrypt.compare(password, user.password);
+          console.log(math)
+          console.log(user.password)
+          console.log(password)
+          if (!math) throw new Error("Mật khẩu không đúng")
+          console.log(result)
+          // const res = await axiosPublic.get("/users");
+          // setLocalToken()
+          // navigate("/")
+
+        } else {
+          throw new Error("Email đã không đúng!");
+        }
+      });
+
+    } catch (error: unknown) {
+      console.log(error)
+      if (error instanceof Error) {
+        setError(error.message);
+        throw new Error(error.message);
+      }
+    }
   };
   useEffect(() => {
     setError(message);
@@ -88,7 +115,7 @@ const Login = () => {
                 placeholder="Nhập Email"
                 label="email"
                 register={register}
-                className=""
+                className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
               />
               <Input
                 type="text"
@@ -96,7 +123,7 @@ const Login = () => {
                 placeholder="Nhập Password"
                 label="password"
                 register={register}
-                className=""
+                className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
               />
               <Button type="submit">Đăng nhập</Button>
             </form>

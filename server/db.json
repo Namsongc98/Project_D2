@@ -1,11 +1,10 @@
 {
-  "user": [
+  "users": [
     {
-      "id": "200d",
-      "email": "minhduong@gmail.com",
-      "password": "$2a$10$rP.lU1j9J7HZP35..YDMhuNB6vfcArOiKgvT6BJdMVYbjV6hMEFq.",
+      "email": "namsongc98@gmail.com",
+      "password": "$2a$10$Hy94IXhOOA.zkShVzuX2lOl3GqvEktl0lNjoNOhQ7D7es50eJJI7u",
+      "id": "59523121-0299-45a8-8b3a-b815ce093db9",
       "role": "guide"
     }
-    
   ]
 }
