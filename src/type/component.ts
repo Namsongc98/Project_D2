@@ -4,7 +4,7 @@ type ButomType = {
   type: "submit" | "reset" | "button" | undefined;
   disabled?: boolean;
   children: React.ReactNode;
-  onClicK?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 };
 
 type InputHook = {
@@ -15,10 +15,11 @@ type InputType = {
   type: string;
   title: string;
   placeholder: string;
-  label: "email" | "password" | "confirmPassword";
+  label:  string | undefined;
   value?: string;
   onchange?: (e: React.FormEvent<HTMLInputElement>) => string;
   register?: unknown
+  className: string
 };
 
 interface IFormRegister extends IFormInput {

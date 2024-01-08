@@ -1,11 +1,13 @@
 import { UserManager } from "../page/admin"
 import { Home, Login, Register, SearchHotel } from "../page/user"
+import Profile from "../page/user/Profile"
 import { Layout } from "../type"
 
 //  laout user 
 const publicPage: Layout = [
     { path: "/", component: Home, layout: true },
     { path: "/search", component: SearchHotel, layout: true },
+    { path: "/profile", component: Profile, layout: true }
 ]
 
 // layout Admin

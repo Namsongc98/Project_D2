@@ -3,7 +3,7 @@ import Input from "../../component/Input";
 import Button from "../../component/Buttom";
 import { Link } from "react-router-dom";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import {   IFormRegister } from "../../type";
+import { IFormRegister } from "../../type";
 import { SubmitHandler } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -28,16 +28,14 @@ const Register = () => {
       .required("Password là bắt buộc")
       .oneOf([yup.ref("password")], "Mật khẩu không khớp"),
   });
-  
-    const {
-      register,
-      formState: { errors },
-      handleSubmit,
-    } = useForm<IFormRegister >({
-      resolver: yupResolver(schema),
-    });
 
-
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<IFormRegister>({
+    resolver: yupResolver(schema),
+  });
 
   const message: string | undefined =
     errors?.email?.message ||
@@ -51,7 +49,7 @@ const Register = () => {
     };
   }, [message]);
 
-  const onSubmit: SubmitHandler<IFormRegister > = (data) => {
+  const onSubmit: SubmitHandler<IFormRegister> = (data) => {
     console.log(data);
   };
 
@@ -92,6 +90,7 @@ const Register = () => {
               placeholder="Nhập Email"
               label="email"
               register={register}
+              className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
             />
             <Input
               type="text"
@@ -99,6 +98,7 @@ const Register = () => {
               placeholder="Nhập Password"
               label="password"
               register={register}
+              className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
             />
             <Input
               type="text"
@@ -106,6 +106,7 @@ const Register = () => {
               placeholder="Nhập lại Password"
               label="confirmPassword"
               register={register}
+              className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
             />
 
             <Button type="submit">Xác thực & đăng kí</Button>
