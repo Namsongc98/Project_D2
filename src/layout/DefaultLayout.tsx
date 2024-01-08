@@ -1,14 +1,15 @@
+import Footer from "../component/Footer";
 import Header from "../component/Header";
-type Props = {
-  children: React.ReactNode;
-};
-const  DefaultLayout=({ children }: Props)=>  {
+import { Props } from "../type";
+
+const DefaultLayout = ({ children }: Props) => {
   return (
-    <div>
-      {/* <Header /> */}
+    <div className="flex flex-col w-full min-h-screen">
+      <Header />
       {children}
+      <Footer />
     </div>
   );
-}
+};
 
 export default DefaultLayout;

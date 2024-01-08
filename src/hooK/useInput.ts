@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Input } from "../type";
+import { InputHook } from "../type";
 
 
-const useInput = (initialValue: string):Input => {
+const useInput = (initialValue: string):InputHook => {
   const [value, setValue] = useState<string>(initialValue);
   const handleChange = (e: React.FormEvent<HTMLInputElement>):string  => {
     setValue(e.currentTarget.value);
@@ -11,7 +11,6 @@ const useInput = (initialValue: string):Input => {
   return {
     value,
     handleChange,
-    
   };
 };
 export default useInput;

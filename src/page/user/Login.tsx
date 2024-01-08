@@ -1,8 +1,55 @@
 import Input from "../../component/Input";
-import { Link } from "react-router-dom";
 import Button from "../../component/Buttom";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { IFormInput } from "../../type";
+import { SubmitHandler } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+
 const Login = () => {
-  const register = () => {};
+  const [error, setError] = useState<string | undefined>("");
+
+  const schema = yup.object({
+    email: yup
+      .string()
+      .required("Email là bắt buộc")
+      .email("Email không hợp lệ")
+      .min(8, "Passworrd trên 8 kí tự")
+      .max(32, "Password dưới 32 kí tự"),
+    password: yup
+      .string()
+      .required("Password là bắt buộc")
+      .min(8, "Passworrd trên 8 kí tự")
+      .max(32, "Password dưới 32 kí tự"),
+  });
+
+  
+
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<IFormInput>({
+    resolver: yupResolver(schema),
+  });
+
+  const message: string | undefined =
+    errors?.email?.message ||
+    errors?.password?.message 
+  
+
+  const onSubmit: SubmitHandler<IFormInput> = (data) => {
+    console.log(data);
+  };
+  useEffect(() => {
+    setError(message);
+    return () => {
+      setError("");
+    };
+  }, [message]);
   return (
     <>
       <div className="w-1/2 p-6  ">
@@ -14,14 +61,14 @@ const Login = () => {
 
         <div className="pr-7 pl-7 pb-7 ">
           {/* thông báo lỗi */}
-          {/* {checkEmtry || statusError ? (
+          {error ? (
             <div className="wapper-danger w-full mb-6 bg-red-100 text-red-500 p-3 rounded-md flex items-center">
               <ErrorOutlineIcon className="mr-3" />
               <span className="text-sm">{error}</span>
             </div>
           ) : (
             <></>
-          )} */}
+          )}
 
           <div className="flex mt-4 mb-4 justify-between items-center border-solid">
             <div className="w-1/3 border-t-[1px] border-[#DFE3E7] h-[0px] "></div>
@@ -34,26 +81,27 @@ const Login = () => {
           </div>
           <div className="">
             {/* form đăng nhập */}
-            <form>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <Input
                 type="text"
-                label="Email"
+                title="Email"
                 placeholder="Nhập Email"
-                name="email"
+                label="email"
                 register={register}
               />
               <Input
                 type="text"
-                label="Mật khẩu"
+                title="Mật khẩu"
                 placeholder="Nhập Password"
-                name="password"
+                label="password"
                 register={register}
               />
               <Button type="submit">Đăng nhập</Button>
             </form>
             <hr className="my-4" />
             <div className="flex items-center justify-center gap-1 text-[#6658dd] text-sm">
-              <Link to="/login">Đăng nhập bằng tài khoản</Link>
+              <Link to="/register">Đăng kí tài khoản</Link>
+
               <p className="text-black">|</p>
               <Link to="/">Về trang Home</Link>
             </div>

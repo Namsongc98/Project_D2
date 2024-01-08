@@ -1,85 +1,57 @@
 import Input from "../../component/Input";
-import "./style/registerLogin.scss";
 
 import Button from "../../component/Buttom";
 import { Link } from "react-router-dom";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { IFormInput } from "../../type";
+import { IFormRegister } from "../../type";
+import { SubmitHandler } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
 import * as yup from "yup";
-
 const Register = () => {
-  const [error, setError] = useState<string>("Mời nhập đây đủ các ô");
-  const [statusError, setStatusError] = useState<boolean>(false);
-
-  const schema = yup
-    .object({
-      email: yup
-        .string()
-        .required("Email là bắt buộc")
-        .email("Email không hợp lệ")
-        .min(8, "Passworrd trên 8 kí tự")
-        .max(32, "Password dưới 32 kí tự"),
-      password: yup
-        .string()
-        .required("Password là bắt buộc")
-        .min(8, "Passworrd trên 8 kí tự")
-        .max(32, "Password dưới 32 kí tự"),
-      confirmPassword: yup
-        .string()
-        .required("Password là bắt buộc")
-        .oneOf([yup.ref("password")], "Mật khẩu không khớp"),
-    })
-    .required("Mời nhập đây đủ các ô");
+  const [error, setError] = useState<string | undefined>("");
+  const schema = yup.object({
+    email: yup
+      .string()
+      .required("Email là bắt buộc")
+      .email("Email không hợp lệ")
+      .min(8, "Passworrd trên 8 kí tự")
+      .max(32, "Password dưới 32 kí tự"),
+    password: yup
+      .string()
+      .required("Password là bắt buộc")
+      .min(8, "Passworrd trên 8 kí tự")
+      .max(32, "Password dưới 32 kí tự"),
+    confirmPassword: yup
+      .string()
+      .required("Password là bắt buộc")
+      .oneOf([yup.ref("password")], "Mật khẩu không khớp"),
+  });
 
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm<IFormInput>({
+  } = useForm<IFormRegister>({
     resolver: yupResolver(schema),
   });
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    console.log(data);
-  };
-  const checkEmtry =
-    errors.email?.type === "required" ||
-    errors.password?.type === "required" ||
-    errors.confirmPassword?.type === "required";
+
+  const message: string | undefined =
+    errors?.email?.message ||
+    errors?.password?.message ||
+    errors?.confirmPassword?.message;
 
   useEffect(() => {
-    if (checkEmtry) {
-      setError("Nhập đầy đủ các trường");
-      setStatusError(true);
-    } else if (errors.email?.type === "email") {
-      setError(errors.email.message!);
-      setStatusError(true);
-    } else if (errors.email?.type === "min") {
-      setError(errors.email.message!);
-      setStatusError(true);
-    } else if (errors.email?.type === "max") {
-      setError(errors.email.message!);
-      setStatusError(true);
-    } else if (errors.password?.type === "min") {
-      setError(errors.password.message!);
-      setStatusError(true);
-    } else if (errors.password?.type === "max") {
-      setError(errors.password.message!);
-      setStatusError(true);
-    } else if (errors.confirmPassword?.type === "oneOf") {
-      setError(errors.confirmPassword.message!);
-      setStatusError(true);
-    } else {
-      setStatusError(false);
-    }
-  }, [errors]);
+    setError(message);
+    return () => {
+      setError("");
+    };
+  }, [message]);
 
-  console.log(checkEmtry || statusError);
-  console.log(errors.email?.type);
-  console.log(errors.password?.type);
-  console.log(errors.confirmPassword?.type);
+  const onSubmit: SubmitHandler<IFormRegister> = (data) => {
+    console.log(data);
+  };
 
   return (
     <div className="w-1/2 p-6  ">
@@ -91,10 +63,10 @@ const Register = () => {
 
       <div className="pr-7 pl-7 pb-7 ">
         {/* thông báo lỗi */}
-        {checkEmtry || statusError ? (
+        {error ? (
           <div className="wapper-danger w-full mb-6 bg-red-100 text-red-500 p-3 rounded-md flex items-center">
             <ErrorOutlineIcon className="mr-3" />
-            <span className="text-sm">{error}</span>
+            <span className="text-sm">{message}</span>
           </div>
         ) : (
           <></>
@@ -114,24 +86,27 @@ const Register = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <Input
               type="text"
-              label="Email"
+              title="Email"
               placeholder="Nhập Email"
-              name="email"
+              label="email"
               register={register}
+              className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
             />
             <Input
               type="text"
-              label="Mật khẩu"
+              title="Mật khẩu"
               placeholder="Nhập Password"
-              name="password"
+              label="password"
               register={register}
+              className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
             />
             <Input
               type="text"
-              label="Nhập lại mật khẩu"
+              title="Nhập lại mật khẩu"
               placeholder="Nhập lại Password"
-              name="confirmPassword"
+              label="confirmPassword"
               register={register}
+              className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
             />
 
             <Button type="submit">Xác thực & đăng kí</Button>
