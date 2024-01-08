@@ -1,16 +1,20 @@
 import Input from "../../component/Input";
 
 import Button from "../../component/Buttom";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import { IFormRegister } from "../../type";
+import { IFormRegister, IUser } from "../../type";
 import { SubmitHandler } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
+import { axiosPublic } from "../../config";
+import bcrypt from "bcryptjs";
 const Register = () => {
   const [error, setError] = useState<string | undefined>("");
+
+  const navigate = useNavigate();
   const schema = yup.object({
     email: yup
       .string()
@@ -49,8 +53,38 @@ const Register = () => {
     };
   }, [message]);
 
-  const onSubmit: SubmitHandler<IFormRegister> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<IFormRegister> = async (data: IUser) => {
+    const { email, password } = data;
+
+    try {
+      const resul = await axiosPublic.get("/user");
+      const checkEmail = resul.data.some((user: IUser) => {
+        return user.email === email;
+      });
+      if (!checkEmail) {
+        bcrypt.hash(password, 10, async function (err, hash) {
+          if (err) {
+            throw new Error("Mã hóa thất bại");
+          } else {
+            const guide = "guide";
+            const resul = await axiosPublic.post("/user", {
+              email,
+              password: hash,
+              role: guide!,
+            });
+            console.log(resul);
+            // navigate("/");
+          }
+        });
+      } else {
+        throw new Error("Email đã tồn tại");
+      }
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setError(error.message);
+        throw new Error(error.message);
+      }
+    }
   };
 
   return (
@@ -60,18 +94,14 @@ const Register = () => {
           Đăng ký tài khoản trên Asahi Luxstay.
         </h4>
       </div>
-
       <div className="pr-7 pl-7 pb-7 ">
         {/* thông báo lỗi */}
-        {error ? (
+        {error && (
           <div className="wapper-danger w-full mb-6 bg-red-100 text-red-500 p-3 rounded-md flex items-center">
             <ErrorOutlineIcon className="mr-3" />
-            <span className="text-sm">{message}</span>
+            <span className="text-sm">{error}</span>
           </div>
-        ) : (
-          <></>
         )}
-
         <div className="flex mt-4 mb-4 justify-between items-center border-solid">
           <div className="w-1/3 border-t-[1px] border-[#DFE3E7] h-[0px] "></div>
           <div className="bg-white px-4">

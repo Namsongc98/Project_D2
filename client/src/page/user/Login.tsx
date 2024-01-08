@@ -88,6 +88,7 @@ const Login = () => {
                 placeholder="Nhập Email"
                 label="email"
                 register={register}
+                className=""
               />
               <Input
                 type="text"
@@ -95,6 +96,7 @@ const Login = () => {
                 placeholder="Nhập Password"
                 label="password"
                 register={register}
+                className=""
               />
               <Button type="submit">Đăng nhập</Button>
             </form>
