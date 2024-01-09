@@ -3,15 +3,15 @@ import Input from "../../component/Input";
 import Button from "../../component/Buttom";
 import { Link, useNavigate } from "react-router-dom";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import { IFormRegister, IUser } from "../../type";
+import { IFormInput, IFormRegister, IUser } from "../../type";
 import { SubmitHandler } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
-import { axiosPublic } from "../../config";
-import bcrypt from "bcryptjs";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
+import { createUser } from "../../service";
+import { AxiosError } from "axios";
 const Register = () => {
   const [error, setError] = useState<string | undefined>("");
 
@@ -21,12 +21,12 @@ const Register = () => {
       .string()
       .required("Email là bắt buộc")
       .email("Email không hợp lệ")
-      .min(8, "Passworrd trên 8 kí tự")
+      .min(6, "Passworrd trên 6 kí tự")
       .max(32, "Password dưới 32 kí tự"),
     password: yup
       .string()
       .required("Password là bắt buộc")
-      .min(8, "Passworrd trên 8 kí tự")
+      .min(6, "Passworrd trên 6 kí tự")
       .max(32, "Password dưới 32 kí tự"),
     confirmPassword: yup
       .string()
@@ -54,40 +54,26 @@ const Register = () => {
     };
   }, [message]);
 
-  const onSubmit: SubmitHandler<IFormRegister> = async (data: IUser) => {
-    const { email, password } = data;
-
+  const onSubmit: SubmitHandler<IFormInput> = async (
+    data: IUser
+  ): Promise<void> => {
     try {
-      const resul = await axiosPublic.get("/users");
-
-      const checkEmail = resul.data.some((user: IUser) => {
-        return user.email === email;
-      });
-
-      if (!checkEmail) {
-        bcrypt.hash(password, 10, async function (err, hash) {
-          if (err) {
-            throw new Error("Mã hóa thất bại");
-          } else {
-            const guide = "guide";
-            const id = uuidv4()
-            const resul = await axiosPublic.post("/users", {
-              id,
-              email,
-              password: hash,
-              role: guide!,
-            });
-            localStorage.setItem("accessToken", resul.data.accessToken)
-            navigate("/");
-          }
-        });
-      } else {
-        throw new Error("Email đã tồn tại");
-      }
+      const id = uuidv4();
+      const user: IUser = {
+        id,
+        email: data.email,
+        password: data.password,
+        role: "Guide",
+      };
+      const registerUser = await createUser(user);
+      localStorage.setItem("accessToken", registerUser.data.accessToken);
+      localStorage.setItem("user", JSON.stringify(registerUser.data.user));
+      navigate("/");
     } catch (error: unknown) {
-      if (error instanceof Error) {
-        setError(error.message);
-        throw new Error(error.message);
+      if (error instanceof AxiosError && error.response?.data) {
+        if (error.response.data === "Email already exists") {
+          setError("Email đã được sử dụng");
+        }
       }
     }
   };
@@ -144,7 +130,12 @@ const Register = () => {
               className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
             />
 
-            <Button type="submit">Xác thực & đăng kí</Button>
+            <Button
+              type="submit"
+              className="text-white bg-[#5A8DEE] mt-6 w-full rounded px-6 py-2 hover:opacity-80 shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] hover:shadow-[0_4px_12px_0_rgba(90,141,238,0.6)]"
+            >
+              Xác thực & đăng kí
+            </Button>
           </form>
           <hr className="my-4" />
           <div className="flex items-center justify-center gap-1 text-[#6658dd] text-sm">

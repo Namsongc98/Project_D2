@@ -1,16 +1,33 @@
 import { useState } from "react";
-
 import Input from "../../component/Input";
 import "./style/style.scss";
-import { Box, Modal } from "@mui/material";
+import {
+  Box,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Modal,
+  Select,
+} from "@mui/material";
 import Buttom from "../../component/Buttom";
 import { NavLink } from "react-router-dom";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import imgUser from "../../assets/image/userImg.png";
+import { getUserToken } from "../../config";
+import { useInput, useInputTypeNumber } from "../../hook";
+import InputFileUpload from "../../component/InputFileUpload";
+
 const Profile = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const user = getUserToken();
+
+  const [gender, setGender] = useState("");
+  const inputFirstName = useInput("");
+  const inputLastName = useInput("");
+  const age = useInputTypeNumber("");
+  const phone = useInputTypeNumber("");
 
   const style = {
     position: "absolute",
@@ -19,7 +36,7 @@ const Profile = () => {
     transform: "translate(-50%, -50%)",
     width: 400,
     bgcolor: "background.paper",
-    border: "2px solid #000",
+    border: "1px solid #000",
     boxShadow: 24,
     p: 4,
   };
@@ -31,20 +48,14 @@ const Profile = () => {
           <div className=" bg-white w-[20%] px-3 py-2  ">
             <div className="mx-auto my-0 pt-5">
               <div className=" w-[50px] h-[50px] rounded-full  overflow-hidden mx-auto ">
-                <img
-                  src={imgUser}
-                  alt=""
-                  width={50}
-                  height={50}
-                  className=" "
-                />
+                <img src={imgUser} alt="" width={50} height={50} className="" />
               </div>
               <p className=" text-center font-semibold text-xl mt-5 opacity-70">
                 {" "}
-                {/* {profile?.firstName} {profile?.lastName}{" "} */}
+                {user?.firstName} {user?.lastName}{" "}
               </p>
               <p className="text-center font-normal text-base opacity-70">
-                {/* {currenEmail?.email} */}
+                {user?.email}
               </p>
             </div>
           </div>
@@ -60,8 +71,7 @@ const Profile = () => {
                       label="firstname"
                       placeholder="Nhập họ..."
                       title="Họ"
-                      //   value={firstName}
-                      //      onChange={(e) => setFirstname(e.target.value)}
+                      {...inputFirstName}
                     />
                   </div>
                   <div className="wp-input">
@@ -71,51 +81,59 @@ const Profile = () => {
                       placeholder=""
                       className="form-input"
                       title="Tên"
-                      //   value={lastName}
-                      //   onChange={(e) => setlastname(e.target.value)}
+                      {...inputLastName}
                     />
                   </div>
-                  <div className="wp-input">
-                    <label className="">
-                      <select
-                        id="gender"
-                        aria-label="gender"
-                        name="gender"
-                        // onChange={(e) => setGender(e.target.value)}
-                        className="form-select"
-                      >
-                        <option> --Giới tính--</option>
-                        <option value={"Nam"}>Nam</option>
-                        <option value={"Nữ"}>Nữ</option>
-                      </select>
-                    </label>
-                  </div>
 
-                  <div className=" mt-7 wp-btn">
+                  <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+                    <InputLabel id="demo-select-small-label">
+                      Giới tính
+                    </InputLabel>
+                    <Select
+                      labelId="demo-select-small-label"
+                      id="demo-select-small"
+                      value={gender}
+                      label="Age"
+                      onChange={(e) => setGender(e.target.value)}
+                    >
+                      <MenuItem value="">
+                        <em>None</em>
+                      </MenuItem>
+                      <MenuItem value={"Nam"}>Nam</MenuItem>
+                      <MenuItem value={"Nữ"}>Nữ</MenuItem>
+                    </Select>
+                  </FormControl>
+
+                  <div className=" mt-2 wp-btn">
                     {/* {loading ? (
                       <div className=" btn-save">
                         <div className="ring-loading"></div>
                       </div>
                     ) : (
                     )} */}
-                    <button type="submit" className=" btn-save">
+                    <Buttom
+                      type="submit"
+                      className="text-white bg-[#5A8DEE] w-full rounded px-6 py-2 hover:opacity-80 shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] hover:shadow-[0_4px_12px_0_rgba(90,141,238,0.6)]"
+                    >
                       Lưu
-                    </button>
-                    <button type="reset" className=" btn-Cancel">
-                      Cancel
-                    </button>
+                    </Buttom>
+                    <Buttom
+                      type="submit"
+                      className=" bg-slate-100 w-full rounded px-6 py-2 hover:opacity-80 shadow hover:shadow-md"
+                    >
+                      Xóa
+                    </Buttom>
                   </div>
                 </div>
                 <div className="wp-form-left">
                   <div className="wp-input">
                     <Input
-                      type="number"
+                      type="text"
                       label="age"
                       placeholder=""
                       className="form-input"
                       title="Tuổi"
-                      //   value={age}
-                      //   onChange={handleInputAge}
+                      {...age}
                     />
                   </div>
                   <div className="wp-input">
@@ -125,8 +143,7 @@ const Profile = () => {
                       placeholder=""
                       className="form-input"
                       title="Số điện thoại"
-                      //   value={phone}
-                      //   onChange={handleInputPhone}
+                      {...phone}
                     />
                   </div>
                 </div>
@@ -147,16 +164,7 @@ const Profile = () => {
                     )} */}
                   </div>
 
-                  <label htmlFor="avatar" className="label-avatar">
-                    <span>Add Avatar</span>
-                    <input
-                      type="file"
-                      id="avatar"
-                      name="avatar"
-                      placeholder="avatar"
-                      //   onChange={handeAvatar}
-                    />
-                  </label>
+                  <InputFileUpload  />
                 </div>
               </form>
             </div>
@@ -168,9 +176,9 @@ const Profile = () => {
                 </h1>
                 <div className="font-medium text-xl flex justify-between items-center my-4">
                   <p className="">Email</p>
-                  <p className=" text-yellow-400"></p>
+                  <p className=" text-yellow-400">{user.email}</p>
                 </div>
-                <div className="w-[100%] line-midleware mx-auto max-w-[1600px]" />
+                <div className="w-[100%] line-midleware border border-solid border-[#e5e7eb] mx-auto max-w-[1600px]" />
                 <div className=" font-medium text-xl my-4  flex justify-between items-center">
                   <div className="cursor-pointer"> Đăng xuất</div>
                   <div className="cursor-pointer" onClick={handleOpen}>
@@ -222,7 +230,9 @@ const Profile = () => {
                 label="password"
                 className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
               />
-              <Buttom type="submit">Xác nhận</Buttom>
+              <Buttom type="submit" className="">
+                Xác nhận
+              </Buttom>
             </div>
           </Box>
         </Modal>

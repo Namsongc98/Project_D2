@@ -3,18 +3,18 @@ import Button from "../../component/Buttom";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { IFormInput, IUser } from "../../type";
+import { IFormInput } from "../../type";
 import { SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
-import { axiosPublic, setLocalToken } from "../../config";
-import bcrypt from "bcryptjs";
+import { AxiosError } from "axios";
+import { loginUser } from "../../service";
 
 const Login = () => {
   const [error, setError] = useState<string | undefined>("");
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const schema = yup.object({
     email: yup
@@ -38,39 +38,25 @@ const Login = () => {
   });
 
   const message: string | undefined =
-    errors?.email?.message ||
-    errors?.password?.message
-
+    errors?.email?.message || errors?.password?.message;
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-    const { email, password } = data
     try {
-      const result = await axiosPublic.get("/users");
-      result.data.some(async (user: IUser) => {
-        if (user.email === email) {
-          const math = await bcrypt.compare(password, user.password);
-          console.log(math)
-          console.log(user.password)
-          console.log(password)
-          if (!math) throw new Error("Mật khẩu không đúng")
-          console.log(result)
-          // const res = await axiosPublic.get("/users");
-          // setLocalToken()
-          // navigate("/")
-
-        } else {
-          throw new Error("Email đã không đúng!");
-        }
-      });
-
+      const login = await loginUser(data);
+      localStorage.setItem("accessToken", login.data.accessToken);
+      localStorage.setItem("user", JSON.stringify(login.data.user));
+      navigate("/");
     } catch (error: unknown) {
-      console.log(error)
-      if (error instanceof Error) {
-        setError(error.message);
-        throw new Error(error.message);
+      if (error instanceof AxiosError && error.response?.data) {
+        if (error.response.data === "Cannot find user") {
+          setError("Email không tồn tại");
+        } else if (error.response.data === "Incorrect password") {
+          setError("Sai mật khẩu");
+        }
       }
     }
   };
+
   useEffect(() => {
     setError(message);
     return () => {
@@ -125,7 +111,12 @@ const Login = () => {
                 register={register}
                 className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
               />
-              <Button type="submit">Đăng nhập</Button>
+              <Button
+                type="submit"
+                className="text-white bg-[#5A8DEE] mt-6 w-full  shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] hover:shadow-[0_4px_12px_0_rgba(90,141,238,0.6)]"
+              >
+                Đăng nhập
+              </Button>
             </form>
             <hr className="my-4" />
             <div className="flex items-center justify-center gap-1 text-[#6658dd] text-sm">

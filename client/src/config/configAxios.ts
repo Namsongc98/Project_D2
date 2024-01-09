@@ -22,6 +22,16 @@ function setLocalToken(accessToken: string) {
   window.localStorage.setItem("accessToken", accessToken);
 }
 
+function getUserToken() {
+  return JSON.parse(localStorage.getItem("user")!)
+}
+
+
+function remoteUser() {
+  window.localStorage.removeItem("accessToken");
+  window.localStorage.removeItem("user");
+}
+
 axiosPrivate.interceptors.request.use(
   (config) => {
     config.headers.Authorization = `Bearer ${getLocalToken()}`;
@@ -32,4 +42,4 @@ axiosPrivate.interceptors.request.use(
     return Promise.reject(error);
   }
 );
-export { axiosPrivate, axiosPublic, getLocalToken, setLocalToken };
+export { axiosPrivate, axiosPublic, getLocalToken, setLocalToken, remoteUser, getUserToken };

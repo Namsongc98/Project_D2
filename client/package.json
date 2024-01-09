@@ -20,7 +20,6 @@
     "@reduxjs/toolkit": "^2.0.1",
     "@types/react-redux": "^7.1.33",
     "axios": "^1.6.3",
-    "bcryptjs": "^2.4.3",
     "date-fns": "^2.30.0",
     "dayjs": "^1.11.10",
     "json-server": "^1.0.0-alpha.13",
