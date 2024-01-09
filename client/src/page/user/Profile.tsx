@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Input from "../../component/Input";
-import "./style/style.scss";
+import "../../style/styleComponent.scss"
+import imgUpload from "../../assets/image/upanh.png"
 import {
   Box,
   FormControl,
@@ -9,12 +10,12 @@ import {
   Modal,
   Select,
 } from "@mui/material";
-import Buttom from "../../component/Buttom";
+import Button from "../../component/Button";
 import { NavLink } from "react-router-dom";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import imgUser from "../../assets/image/userImg.png";
 import { getUserToken } from "../../config";
-import { useInput, useInputTypeNumber } from "../../hook";
+import { useInput, useInputTypeFileImg, useInputTypeNumber } from "../../hook";
 import InputFileUpload from "../../component/InputFileUpload";
 
 const Profile = () => {
@@ -28,18 +29,8 @@ const Profile = () => {
   const inputLastName = useInput("");
   const age = useInputTypeNumber("");
   const phone = useInputTypeNumber("");
+  const avatar = useInputTypeFileImg("")
 
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 400,
-    bgcolor: "background.paper",
-    border: "1px solid #000",
-    boxShadow: 24,
-    p: 4,
-  };
 
   return (
     <div className="mx-auto my-0 max-w-[1024px]  w-full ">
@@ -66,10 +57,10 @@ const Profile = () => {
                 <div className="wp-form-left">
                   <div className="wp-input">
                     <Input
-                      className="form-input"
+                      className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
                       type="text"
                       label="firstname"
-                      placeholder="Nhập họ..."
+                      placeholder=""
                       title="Họ"
                       {...inputFirstName}
                     />
@@ -79,7 +70,7 @@ const Profile = () => {
                       type="text"
                       label="lastname"
                       placeholder=""
-                      className="form-input"
+                      className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
                       title="Tên"
                       {...inputLastName}
                     />
@@ -111,18 +102,19 @@ const Profile = () => {
                       </div>
                     ) : (
                     )} */}
-                    <Buttom
+                    <Button
                       type="submit"
                       className="text-white bg-[#5A8DEE] w-full rounded px-6 py-2 hover:opacity-80 shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] hover:shadow-[0_4px_12px_0_rgba(90,141,238,0.6)]"
                     >
                       Lưu
-                    </Buttom>
-                    <Buttom
-                      type="submit"
+                    </Button>
+                    <Button
+                      type="reset"
                       className=" bg-slate-100 w-full rounded px-6 py-2 hover:opacity-80 shadow hover:shadow-md"
+                      onClick={() => onclick}
                     >
                       Xóa
-                    </Buttom>
+                    </Button>
                   </div>
                 </div>
                 <div className="wp-form-left">
@@ -131,7 +123,7 @@ const Profile = () => {
                       type="text"
                       label="age"
                       placeholder=""
-                      className="form-input"
+                      className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
                       title="Tuổi"
                       {...age}
                     />
@@ -141,7 +133,7 @@ const Profile = () => {
                       type="text"
                       label="phone"
                       placeholder=""
-                      className="form-input"
+                      className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
                       title="Số điện thoại"
                       {...phone}
                     />
@@ -149,9 +141,9 @@ const Profile = () => {
                 </div>
                 <div className="wp-right">
                   <div className="wp-avatar overflow-hidden">
-                    {/* {avatarView?.preview ? (
+                    {avatar.avatarView ? (
                       <img
-                        src={avatarView?.preview}
+                        src={avatar.avatarView}
                         alt=""
                         className="avatar-view mx-auto "
                       />
@@ -161,10 +153,12 @@ const Profile = () => {
                         alt=""
                         className="mx-auto  w-20 mt-[35%]"
                       />
-                    )} */}
+                    )}
                   </div>
+                  <div className="mx-auto my-0">
 
-                  <InputFileUpload  />
+                    <InputFileUpload {...avatar} />
+                  </div>
                 </div>
               </form>
             </div>
@@ -204,8 +198,9 @@ const Profile = () => {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Box sx={style}>
-            <div className="">
+
+          <Box >
+            <div className="absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] w-[400px] bg-white shadow-md border border-solid border-[#000] p-4" >
               <h1 className="text-center text-2xl mb-3">Đổi mật khẩu</h1>
 
               <Input
@@ -230,9 +225,9 @@ const Profile = () => {
                 label="password"
                 className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
               />
-              <Buttom type="submit" className="">
+              <Button type="submit" className="text-white bg-[#5A8DEE] w-full rounded px-6 py-2 hover:opacity-80 shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] hover:shadow-[0_4px_12px_0_rgba(90,141,238,0.6)]">
                 Xác nhận
-              </Buttom>
+              </Button>
             </div>
           </Box>
         </Modal>

@@ -1,11 +1,9 @@
-
-
-type ButomType = {
+type ButonType = {
   type: "submit" | "reset" | "button" | undefined;
   disabled?: boolean;
   children: React.ReactNode;
-  onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-  className: string
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  className: string;
 };
 
 type InputHook = {
@@ -14,10 +12,10 @@ type InputHook = {
 };
 
 type InputFileHook = {
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  avatarView: string
-}
+  value: File | string;
+  onChange: (e: React.FormEvent<HTMLInputElement>) => void;
+  avatarView: string;
+};
 type InputType = {
   type: string;
   title: string;
@@ -25,9 +23,8 @@ type InputType = {
   label: string | undefined;
   value?: string;
   onChange?: (e: React.FormEvent<HTMLInputElement>) => string;
-  register?: unknown
-  className: string
-
+  register?: unknown;
+  className: string;
 };
 
 interface IFormRegister extends IFormInput {
@@ -39,4 +36,11 @@ interface IFormInput {
   password: string;
 }
 
-export type { ButomType, InputHook, InputType, IFormInput, IFormRegister, InputFileHook };
+export type {
+  ButonType,
+  InputHook,
+  InputType,
+  IFormInput,
+  IFormRegister,
+  InputFileHook,
+};

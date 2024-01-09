@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import "./stype.scss";
+import "../style/styleComponent.scss";
 import { useEffect, useState } from "react";
 import { IProfile } from "../type";
 import Avatar from "@mui/material/Avatar";

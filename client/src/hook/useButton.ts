@@ -1,4 +1,4 @@
-const useButtom = () => {
+const useButton = () => {
     const onClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
     }
@@ -7,7 +7,7 @@ const useButtom = () => {
     }
 }
 
-export default useButtom
+export default useButton
 
 
 

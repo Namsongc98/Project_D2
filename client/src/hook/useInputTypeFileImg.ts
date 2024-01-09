@@ -1,20 +1,21 @@
-import { ChangeEvent, useState } from "react";
+import { useEffect, useState } from "react";
 import { InputFileHook } from "../type";
 
+const useInputTypeFileImg = (initialValue: string | File): InputFileHook => {
+  const [value, setValue] = useState(initialValue);
+  const [avatarView, setAvatarView] = useState<string>("");
 
-const useInputTypeFileImg = (initialValue: string): InputFileHook => {
-  const [value, setValue] = useState<string>(initialValue);
-  const [avatarView, setAvatarView] = useState<string>(initialValue);
-
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files) return;
-    const fileView = e.target.files[0];
-
+  const onChange = (e: React.FormEvent<HTMLInputElement>) => {
+    if (!e.currentTarget.files) return;
+    const fileView = e.currentTarget.files[0];
     setValue(fileView);
-    fileView.preview = URL.createObjectURL(fileView);
-    setAvatarView(fileView);
-};
- 
+    setAvatarView(URL.createObjectURL(fileView));
+  };
+  useEffect(() => {
+    return () => {
+      URL.revokeObjectURL(avatarView);
+    };
+  }, [avatarView]);
 
   return {
     avatarView,

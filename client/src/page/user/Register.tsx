@@ -1,6 +1,6 @@
 import Input from "../../component/Input";
 
-import Button from "../../component/Buttom";
+import Button from "../../component/Button";
 import { Link, useNavigate } from "react-router-dom";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { IFormInput, IFormRegister, IUser } from "../../type";

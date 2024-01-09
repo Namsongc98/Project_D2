@@ -6,7 +6,7 @@ import { Button, Input, ThemeProvider, createTheme } from "@mui/material";
 import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import iconCity from "../assets/image/icon-city.svg";
-import "./stype.scss";
+import "../style/styleComponent.scss";
 import { blue } from "@mui/material/colors";
 import EscalatorWarningIcon from "@mui/icons-material/EscalatorWarning";
 const SearchHotel = () => {
