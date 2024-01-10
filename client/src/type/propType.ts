@@ -7,7 +7,8 @@ type Props = {
 type PropsSelect = {
     value?: string | number;
     options: SelectOptionType[];
-    onChange:  any;
+    onChange: any;
+    label: string
 };
 
 

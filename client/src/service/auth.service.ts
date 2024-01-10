@@ -1,5 +1,5 @@
 import { axiosPublic } from "../config";
-import { IUser } from "../type";
+import { IProfile, IUser } from "../type";
 
 
 const createUser = async (user: IUser) => {
@@ -12,4 +12,9 @@ const loginUser = async (user: IUser) => {
     return result
 }
 
-export {  createUser, loginUser }
+const postProfile = async (id: string, profile: IProfile) => {
+    const res = await axiosPublic.patch(`/users/${id}`, profile)
+    return res
+}
+
+export { createUser, loginUser, postProfile }

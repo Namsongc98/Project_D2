@@ -1,12 +1,12 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { PropsSelect } from "../type";
 
-const SelectOption = ({ value, options, onChange }: PropsSelect) => {
+const SelectOption = ({ value, options, onChange, label }: PropsSelect) => {
   return (
     <>
       <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
         <InputLabel id="demo-select-small-label" className="bg-white">
-          Giới tính
+          {label}
         </InputLabel>
         <Select
           labelId="demo-select-small-label"

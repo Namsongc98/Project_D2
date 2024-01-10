@@ -12,10 +12,17 @@ type InputHook = {
 };
 
 type InputFileHook = {
-  value: File | string;
+  valueImg: File | string;
   onChange: (e: React.FormEvent<HTMLInputElement>) => void;
-  avatarView: string;
+  avatarView?: string;
+  errorImg?: string;
+  setValueImg: React.Dispatch<React.SetStateAction<string | File>>;
 };
+
+type InputFile = {
+  onChange: (e: React.FormEvent<HTMLInputElement>) => void;
+}
+
 type InputType = {
   type: string;
   title: string;
@@ -48,5 +55,6 @@ export type {
   IFormInput,
   IFormRegister,
   InputFileHook,
-  SelectOptionType
+  InputFile,
+  SelectOptionType,
 };

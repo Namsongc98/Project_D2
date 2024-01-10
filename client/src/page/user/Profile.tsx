@@ -14,24 +14,58 @@ import { SelectOption } from "../../component/SelectOption";
 import useSelectOption from "../../hook/useSelectOption";
 import { SelectOptionType } from "../../type";
 
+import { postProfile, upfileClodinary } from "../../service";
+
 const Profile = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const user = getUserToken();
+  const [loading, setLoading] = useState(false);
 
   const genders = ["Nam", "Nữ"];
-  const selectGender = useSelectOption("");
-
   const options: SelectOptionType[] = [
     ...genders.map((gender) => ({ label: gender, value: gender })),
   ];
 
-  const inputFirstName = useInput("");
-  const inputLastName = useInput("");
-  const age = useInputTypeNumber("");
-  const phone = useInputTypeNumber("");
-  const avatar = useInputTypeFileImg("");
+  const selectGender = useSelectOption("");
+  const inputFirstName = useInput(user?.firstName || "");
+  const inputLastName = useInput(user?.lastName || "");
+  const age = useInputTypeNumber(user?.age || "");
+  const phone = useInputTypeNumber(user?.phone || "");
+  const { avatarView, onChange, errorImg, valueImg } = useInputTypeFileImg(
+    user?.avatar || ""
+  );
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    let urlAvatar = "";
+    if (valueImg instanceof File) {
+      urlAvatar = await upfileClodinary(valueImg);
+    }
+    const newProfile = {
+      firstName: inputFirstName.value,
+      lastName: inputLastName.value,
+      gender: selectGender.value,
+      age: age.value,
+      phone: phone.value,
+      avatar: urlAvatar ,
+    };
+    try {
+      const res = await postProfile(user.id, newProfile);
+      setLoading(false);
+      console.log(res);
+    } catch (error) {
+      setLoading(false);
+    }
+
+    setLoading(false);
+  };
+
+  // const profilePost = async (urlAvatar: string) => {
+
+  // };
 
   return (
     <div className="mx-auto my-0 max-w-[1024px]  w-full ">
@@ -54,7 +88,11 @@ const Profile = () => {
           <div className=" w-[100%]">
             <div className="bg-white w-[100%] px-4 py-4">
               <h2 className=" font-semibold text-xl mb-5">Chi tiết bản thân</h2>
-              <form action="" className="form-container">
+              <form
+                action=""
+                className="form-container"
+                onSubmit={handleSubmit}
+              >
                 <div className="wp-form-left">
                   <div className="wp-input">
                     <Input
@@ -76,17 +114,20 @@ const Profile = () => {
                       {...inputLastName}
                     />
                   </div>
-                  <SelectOption {...selectGender} options={options} />
+
+                  {/* SelectOpion */}
+                  <SelectOption
+                    {...selectGender}
+                    options={options}
+                    label={"Giới tính"}
+                  />
                   <div className=" mt-2 wp-btn">
-                    {/* {loading ? (
-                      <div className=" btn-save">
-                        <div className="ring-loading"></div>
-                      </div>
-                    ) : (
-                    )} */}
                     <Button
                       type="submit"
-                      className="text-white bg-[#5A8DEE] w-full rounded px-6 py-2 hover:opacity-80 shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] hover:shadow-[0_4px_12px_0_rgba(90,141,238,0.6)]"
+                      disabled={loading}
+                      className={`text-white ${
+                        loading && "opacity-70"
+                      } bg-[#5A8DEE] w-full rounded px-6 py-2 hover:opacity-80 shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] hover:shadow-[0_4px_12px_0_rgba(90,141,238,0.6)]`}
                     >
                       Lưu
                     </Button>
@@ -122,12 +163,16 @@ const Profile = () => {
                   </div>
                 </div>
                 <div className="wp-right">
-                  <div className="wp-avatar overflow-hidden">
-                    {avatar.avatarView ? (
+                  <div
+                    className={` w-44 h-44 border border-solid  p-1  overflow-hidden ${
+                      errorImg ? " border-red-600" : "border-[#cccbcb]"
+                    }`}
+                  >
+                    {avatarView ? (
                       <img
-                        src={avatar.avatarView}
+                        src={avatarView}
                         alt=""
-                        className="avatar-view mx-auto "
+                        className="mx-auto  w-full h-full object-cover "
                       />
                     ) : (
                       <img
@@ -137,8 +182,11 @@ const Profile = () => {
                       />
                     )}
                   </div>
+                  <p className="text-red-500 leading-6 h-6 font-normal text-xs">
+                    {errorImg}
+                  </p>
                   <div className="mx-auto my-0">
-                    <InputFileUpload {...avatar} />
+                    <InputFileUpload onChange={onChange} />
                   </div>
                 </div>
               </form>
