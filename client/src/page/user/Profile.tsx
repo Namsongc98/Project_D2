@@ -1,15 +1,8 @@
 import { useState } from "react";
 import Input from "../../component/Input";
-import "../../style/styleComponent.scss"
-import imgUpload from "../../assets/image/upanh.png"
-import {
-  Box,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Modal,
-  Select,
-} from "@mui/material";
+import "../../style/styleComponent.scss";
+import imgUpload from "../../assets/image/upanh.png";
+import { Box, Modal } from "@mui/material";
 import Button from "../../component/Button";
 import { NavLink } from "react-router-dom";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
@@ -17,20 +10,62 @@ import imgUser from "../../assets/image/userImg.png";
 import { getUserToken } from "../../config";
 import { useInput, useInputTypeFileImg, useInputTypeNumber } from "../../hook";
 import InputFileUpload from "../../component/InputFileUpload";
+import { SelectOption } from "../../component/SelectOption";
+import useSelectOption from "../../hook/useSelectOption";
+import { SelectOptionType } from "../../type";
+
+import { postProfile, upfileClodinary } from "../../service";
 
 const Profile = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const user = getUserToken();
+  const [loading, setLoading] = useState(false);
 
-  const [gender, setGender] = useState("");
-  const inputFirstName = useInput("");
-  const inputLastName = useInput("");
-  const age = useInputTypeNumber("");
-  const phone = useInputTypeNumber("");
-  const avatar = useInputTypeFileImg("")
+  const genders = ["Nam", "Nữ"];
+  const options: SelectOptionType[] = [
+    ...genders.map((gender) => ({ label: gender, value: gender })),
+  ];
 
+  const selectGender = useSelectOption("");
+  const inputFirstName = useInput(user?.firstName || "");
+  const inputLastName = useInput(user?.lastName || "");
+  const age = useInputTypeNumber(user?.age || "");
+  const phone = useInputTypeNumber(user?.phone || "");
+  const { avatarView, onChange, errorImg, valueImg } = useInputTypeFileImg(
+    user?.avatar || ""
+  );
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    let urlAvatar = "";
+    if (valueImg instanceof File) {
+      urlAvatar = await upfileClodinary(valueImg);
+    }
+    const newProfile = {
+      firstName: inputFirstName.value,
+      lastName: inputLastName.value,
+      gender: selectGender.value,
+      age: age.value,
+      phone: phone.value,
+      avatar: urlAvatar ,
+    };
+    try {
+      const res = await postProfile(user.id, newProfile);
+      setLoading(false);
+      console.log(res);
+    } catch (error) {
+      setLoading(false);
+    }
+
+    setLoading(false);
+  };
+
+  // const profilePost = async (urlAvatar: string) => {
+
+  // };
 
   return (
     <div className="mx-auto my-0 max-w-[1024px]  w-full ">
@@ -53,7 +88,11 @@ const Profile = () => {
           <div className=" w-[100%]">
             <div className="bg-white w-[100%] px-4 py-4">
               <h2 className=" font-semibold text-xl mb-5">Chi tiết bản thân</h2>
-              <form action="" className="form-container">
+              <form
+                action=""
+                className="form-container"
+                onSubmit={handleSubmit}
+              >
                 <div className="wp-form-left">
                   <div className="wp-input">
                     <Input
@@ -76,35 +115,19 @@ const Profile = () => {
                     />
                   </div>
 
-                  <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-                    <InputLabel id="demo-select-small-label">
-                      Giới tính
-                    </InputLabel>
-                    <Select
-                      labelId="demo-select-small-label"
-                      id="demo-select-small"
-                      value={gender}
-                      label="Age"
-                      onChange={(e) => setGender(e.target.value)}
-                    >
-                      <MenuItem value="">
-                        <em>None</em>
-                      </MenuItem>
-                      <MenuItem value={"Nam"}>Nam</MenuItem>
-                      <MenuItem value={"Nữ"}>Nữ</MenuItem>
-                    </Select>
-                  </FormControl>
-
+                  {/* SelectOpion */}
+                  <SelectOption
+                    {...selectGender}
+                    options={options}
+                    label={"Giới tính"}
+                  />
                   <div className=" mt-2 wp-btn">
-                    {/* {loading ? (
-                      <div className=" btn-save">
-                        <div className="ring-loading"></div>
-                      </div>
-                    ) : (
-                    )} */}
                     <Button
                       type="submit"
-                      className="text-white bg-[#5A8DEE] w-full rounded px-6 py-2 hover:opacity-80 shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] hover:shadow-[0_4px_12px_0_rgba(90,141,238,0.6)]"
+                      disabled={loading}
+                      className={`text-white ${
+                        loading && "opacity-70"
+                      } bg-[#5A8DEE] w-full rounded px-6 py-2 hover:opacity-80 shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] hover:shadow-[0_4px_12px_0_rgba(90,141,238,0.6)]`}
                     >
                       Lưu
                     </Button>
@@ -140,12 +163,16 @@ const Profile = () => {
                   </div>
                 </div>
                 <div className="wp-right">
-                  <div className="wp-avatar overflow-hidden">
-                    {avatar.avatarView ? (
+                  <div
+                    className={` w-44 h-44 border border-solid  p-1  overflow-hidden ${
+                      errorImg ? " border-red-600" : "border-[#cccbcb]"
+                    }`}
+                  >
+                    {avatarView ? (
                       <img
-                        src={avatar.avatarView}
+                        src={avatarView}
                         alt=""
-                        className="avatar-view mx-auto "
+                        className="mx-auto  w-full h-full object-cover "
                       />
                     ) : (
                       <img
@@ -155,9 +182,11 @@ const Profile = () => {
                       />
                     )}
                   </div>
+                  <p className="text-red-500 leading-6 h-6 font-normal text-xs">
+                    {errorImg}
+                  </p>
                   <div className="mx-auto my-0">
-
-                    <InputFileUpload {...avatar} />
+                    <InputFileUpload onChange={onChange} />
                   </div>
                 </div>
               </form>
@@ -198,9 +227,8 @@ const Profile = () => {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-
-          <Box >
-            <div className="absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] w-[400px] bg-white shadow-md border border-solid border-[#000] p-4" >
+          <Box>
+            <div className="absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] w-[400px] bg-white shadow-md border border-solid border-[#000] p-4">
               <h1 className="text-center text-2xl mb-3">Đổi mật khẩu</h1>
 
               <Input
@@ -225,7 +253,10 @@ const Profile = () => {
                 label="password"
                 className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
               />
-              <Button type="submit" className="text-white bg-[#5A8DEE] w-full rounded px-6 py-2 hover:opacity-80 shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] hover:shadow-[0_4px_12px_0_rgba(90,141,238,0.6)]">
+              <Button
+                type="submit"
+                className="text-white bg-[#5A8DEE] w-full rounded px-6 py-2 hover:opacity-80 shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] hover:shadow-[0_4px_12px_0_rgba(90,141,238,0.6)]"
+              >
                 Xác nhận
               </Button>
             </div>
