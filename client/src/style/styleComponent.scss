@@ -1,0 +1,162 @@
+.btn-register {
+
+  transition: opacity 150ms ease-in-out, box-shadow 0.15s ease-in-out;
+
+}
+.input-register {
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  &:focus {
+    color: #475f7b;
+    background-color: #ffffff;
+    border-color: #5a8dee;
+    outline: 0;
+    box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.1);
+  }
+}
+
+// input search city
+.css-bz5ng3-MuiInputBase-root-MuiInput-root {
+  width: 100%;
+  height: 100%;
+  &::before {
+    display: none;
+  }
+  &::after {
+    display: none;
+  }
+
+  input {
+    width: 100%;
+    height: 3rem;
+    position: absolute;
+    box-sizing: border-box;
+    padding: 0 0 0 10px;
+    &:focus {
+      border: 2px solid yellow;
+    }
+  }
+}
+// search room
+
+.css-4jnixx-MuiStack-root {
+  width: 27%;
+  flex-direction: row !important;
+  align-items: center;
+  padding-top: 0 !important;
+  
+  .wapper-room {
+    width: 100%;
+    margin: 0px;
+    position: relative;
+    .date-picker {
+      min-width: 100% !important;
+      height: 3rem;
+      margin: 0;
+      .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root {
+        position: relative;
+        height: 3rem;
+        width: 100%;
+        border-radius: 0px;
+        input {
+          position: absolute;
+          height: 3rem;
+          padding: 0 0 0 14px;
+          width: 100%;
+          box-sizing: border-box;
+          &:focus {
+            border: 2px solid yellow;
+          }
+        }
+        .css-1laqsz7-MuiInputAdornment-root {
+          position: absolute;
+          right: 13px;
+          button {
+            background-color: white;
+            color: #09b2de;
+          }
+        }
+      }
+    }
+  }
+}
+.css-phodop-MuiButtonBase-root-MuiButton-root {
+  color: white !important;
+  min-width: 100%;
+  height: 45px;
+  padding: 6px 40px !important;
+  &:hover {
+    background-color: #ffaf1a !important;
+  }
+}
+
+
+.form-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 30px;
+  .wp-form-left {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .wp-btn {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+      .btn-save {
+        .ring-loading {
+          width: 20px;
+          height: 20px;
+          opacity: 0.8;
+          border-radius: 50%;
+          border: 3px solid white;
+          margin: 0 auto;
+          border-right: 3px solid transparent;
+          border-left: 3px solid transparent;
+          animation: spinner 1s infinite linear;
+          @keyframes spinner {
+            to {
+              transform: rotate(360deg);
+            }
+          }
+        }
+      }
+    
+    }
+  }
+  .wp-right {
+    margin: 0 auto;
+    .wp-avatar {
+      width: 180px;
+      height: 180px;
+      border: 1px solid rgb(204, 203, 203);
+      border-radius: 5px;
+      margin-bottom: 20px;
+      padding: 3px;
+      .avatar-view {
+        width: 170px;
+      }
+    }
+    .label-avatar {
+      margin: 0 auto;
+      display: block;
+      width: 130px;
+      height: 30px;
+      border-radius: 5px;
+      background-color: #4385f3;
+      text-align: center;
+      cursor: pointer;
+      &:hover {
+        background-color: #5d94f3;
+      }
+      span {
+        color: white;
+        font-size: large;
+        font-weight: 600;
+        line-height: 30px;
+      }
+      input {
+        display: none;
+      }
+    }
+  }
+}
