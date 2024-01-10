@@ -1,27 +1,28 @@
 import { useState } from "react";
-import Input from "../../component/Input";
+import Input from "../../component/element/Input";
 import "../../style/styleComponent.scss";
 import imgUpload from "../../assets/image/upanh.png";
 import { Box, Modal } from "@mui/material";
-import Button from "../../component/Button";
+import Button from "../../component/element/Button";
 import { NavLink } from "react-router-dom";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import imgUser from "../../assets/image/userImg.png";
 import { getUserToken } from "../../config";
 import { useInput, useInputTypeFileImg, useInputTypeNumber } from "../../hook";
-import InputFileUpload from "../../component/InputFileUpload";
-import { SelectOption } from "../../component/SelectOption";
+import InputFileUpload from "../../component/element/InputFileUpload";
+import { SelectOption } from "../../component/element/SelectOption";
 import useSelectOption from "../../hook/useSelectOption";
-import { SelectOptionType } from "../../type";
-
+import { SelectOptionType, StatusApi } from "../../type";
 import { postProfile, upfileClodinary } from "../../service";
-
+import Toast from "../../common/Toast";
 const Profile = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const user = getUserToken();
   const [loading, setLoading] = useState(false);
+
+  const [statusApi, setStatusApi] = useState<StatusApi>({ type: "", message: "" })
 
   const genders = ["Nam", "Nữ"];
   const options: SelectOptionType[] = [
@@ -37,38 +38,54 @@ const Profile = () => {
     user?.avatar || ""
   );
 
+
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (errorImg)
+      return
     setLoading(true);
-    let urlAvatar = "";
     if (valueImg instanceof File) {
-      urlAvatar = await upfileClodinary(valueImg);
+      try {
+        const urlAvatar = await upfileClodinary(valueImg);
+        profilePort(urlAvatar)
+        return
+      } catch (error: unknown) {
+        setStatusApi({ type: "error", message: "Upload ảnh thất bại!" })
+        if (error instanceof Error)
+          throw new Error(error)
+      } finally {
+        setLoading(false);
+      }
     }
+    profilePort(user?.avatar)
+  };
+
+  const profilePort = async (avatarUrl: string) => {
+    console.log(avatarUrl)
     const newProfile = {
       firstName: inputFirstName.value,
       lastName: inputLastName.value,
       gender: selectGender.value,
       age: age.value,
       phone: phone.value,
-      avatar: urlAvatar ,
+      avatar: avatarUrl,
     };
     try {
-      const res = await postProfile(user.id, newProfile);
-      setLoading(false);
-      console.log(res);
-    } catch (error) {
+      await postProfile(user.id, newProfile);
+      setStatusApi({ type: "success", message: "Cập nhật thất bại!" })
+    } catch (error: unknown) {
+      setStatusApi({ type: "error", message: "Cập nhật thất bại!" })
+      if (error instanceof Error)
+        throw new Error(error)
+    } finally {
       setLoading(false);
     }
-
-    setLoading(false);
-  };
-
-  // const profilePost = async (urlAvatar: string) => {
-
-  // };
+  }
 
   return (
     <div className="mx-auto my-0 max-w-[1024px]  w-full ">
+      {statusApi.message && <Toast status={statusApi} />}
       <div className="relative my-3">
         <div className="bg-slate-100 flex gap-5 p-8 ">
           <div className=" bg-white w-[20%] px-3 py-2  ">
@@ -125,9 +142,8 @@ const Profile = () => {
                     <Button
                       type="submit"
                       disabled={loading}
-                      className={`text-white ${
-                        loading && "opacity-70"
-                      } bg-[#5A8DEE] w-full rounded px-6 py-2 hover:opacity-80 shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] hover:shadow-[0_4px_12px_0_rgba(90,141,238,0.6)]`}
+                      className={`text-white ${loading && "opacity-70"
+                        } bg-[#5A8DEE] w-full rounded px-6 py-2 hover:opacity-80 shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] hover:shadow-[0_4px_12px_0_rgba(90,141,238,0.6)]`}
                     >
                       Lưu
                     </Button>
@@ -164,9 +180,8 @@ const Profile = () => {
                 </div>
                 <div className="wp-right">
                   <div
-                    className={` w-44 h-44 border border-solid  p-1  overflow-hidden ${
-                      errorImg ? " border-red-600" : "border-[#cccbcb]"
-                    }`}
+                    className={` w-44 h-44 border border-solid  p-1  overflow-hidden ${errorImg ? " border-red-600" : "border-[#cccbcb]"
+                      }`}
                   >
                     {avatarView ? (
                       <img

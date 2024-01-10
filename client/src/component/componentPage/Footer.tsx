@@ -1,5 +1,5 @@
 import React from "react";
-import imgLogo from "../assets/image/Logo_Luxstay.png";
+import imgLogo from "../../assets/image/Logo_Luxstay.png";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import PinterestIcon from "@mui/icons-material/Pinterest";

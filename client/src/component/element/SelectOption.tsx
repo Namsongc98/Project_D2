@@ -1,5 +1,5 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import { PropsSelect } from "../type";
+import { PropsSelect } from "../../type";
 
 const SelectOption = ({ value, options, onChange, label }: PropsSelect) => {
   return (

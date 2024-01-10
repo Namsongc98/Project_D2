@@ -1,5 +1,5 @@
-import "../style/styleComponent.scss";
-import { ButonType } from "../type";
+import "../../style/styleComponent.scss";
+import { ButonType } from "../../type";
 
 const Button = (props: ButonType): JSX.Element => {
   const { type, onClick, className } = props;

@@ -11,5 +11,10 @@ type PropsSelect = {
     label: string
 };
 
+type StatusApi = {
+    type: string,
+    message: string
+  }
 
-export type { Props, PropsSelect } 
+
+export type { Props, PropsSelect, StatusApi } 

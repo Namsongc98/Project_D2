@@ -1,5 +1,5 @@
-import Input from "../../component/Input";
-import Button from "../../component/Button";
+import Input from "../../component/element/Input";
+import Button from "../../component/element/Button";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";

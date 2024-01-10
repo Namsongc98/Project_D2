@@ -1,5 +1,6 @@
 import { memo } from "react";
-import { InputType } from "../type";
+import { InputType } from "../../type";
+
 
 const Input = (props: InputType): React.JSX.Element => {
   const { register, label, title, placeholder, type, className, onChange, value } =

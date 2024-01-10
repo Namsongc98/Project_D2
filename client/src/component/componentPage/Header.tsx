@@ -1,13 +1,13 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import "../style/styleComponent.scss";
+import "../../style/styleComponent.scss";
 import { useEffect, useState } from "react";
-import { IProfile } from "../type";
+import { IProfile } from "../../type";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
-import AvatarDefault from "../assets/image/userImg.png";
+import AvatarDefault from "../../assets/image/userImg.png";
 import { Unstable_Popup as BasePopup } from "@mui/base/Unstable_Popup";
 import { styled } from "@mui/material";
-import { remoteUser } from "../config";
+import { remoteUser } from "../../config";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -85,7 +85,7 @@ const Header = () => {
                     />
                   ) : (
                     <Avatar
-                      alt={currenEmail.email}
+                      alt={AvatarDefault}
                       src={AvatarDefault}
                       sx={{ width: 30, height: 30 }}
                     />

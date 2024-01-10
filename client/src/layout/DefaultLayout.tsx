@@ -1,5 +1,5 @@
-import Footer from "../component/Footer";
-import Header from "../component/Header";
+import Footer from "../component/componentPage/Footer";
+import Header from "../component/componentPage/Header";
 import { Props } from "../type";
 
 const DefaultLayout = ({ children }: Props) => {

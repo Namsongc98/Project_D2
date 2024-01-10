@@ -13,7 +13,7 @@ const loginUser = async (user: IUser) => {
 }
 
 const postProfile = async (id: string, profile: IProfile) => {
-    const res = await axiosPublic.patch(`/users/${id}`, profile)
+    const res = await axiosPublic.patch(`/user/${id}`, profile)
     return res
 }
 

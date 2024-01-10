@@ -1,7 +1,7 @@
 type Props = {
   children: React.ReactNode;
 };
-import Header from "../../component/Header";
+import Header from "../../component/componentPage/Header";
 
 const LayoutAdmin = ({ children }: Props) => {
   return (

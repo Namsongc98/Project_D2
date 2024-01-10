@@ -1,6 +1,6 @@
 import Button from "@mui/material/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import { InputFile } from "../type";
+import { InputFile } from "../../type";
 
 const InputFileUpload = (props: InputFile) => {
   const { onChange } = props;

@@ -1,7 +1,7 @@
 
-import Banner from "../../component/Banner";
-import ListHotel from "../../component/ListHotel";
-import SearchHotel from "../../component/SearchHotel";
+import Banner from "../../component/componentPage/Banner";
+import ListHotel from "../../component/componentPage/ListHotel";
+import SearchHotel from "../../component/componentPage/SearchHotel";
 
 const Home = () => {
     return (<>

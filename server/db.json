@@ -2,17 +2,6 @@
   "users": [
     {
       "email": "namsongc98@gmail.com",
-<<<<<<< HEAD
-      "password": "$2a$10$Hy94IXhOOA.zkShVzuX2lOl3GqvEktl0lNjoNOhQ7D7es50eJJI7u",
-      "id": "59523121-0299-45a8-8b3a-b815ce093db9",
-      "role": "guide"
-    },
-    {
-      "email": "admin123@gmail.com",
-      "password": "$2a$10$1nuIs9sj7HT/yDvvvcz5YetXL4HiUI9W6lTFMap8k7KzKCjFC6gQS",
-      "id": "f7fdf143-60ac-4b0c-a85a-d0fe6982af79",
-      "role": "Admin"
-=======
       "password": "$2a$10$Qf1tOq7osXc/gUOX7BSone.xLHa4locduz4x2GUWfDnlLHU7Y3RWG",
       "id": "a3226aa0-80e4-4a81-a6e1-e834a6ef28fe",
       "role": "Guide",
@@ -36,11 +25,9 @@
       "role": "Admin",
       "firstName": "rtyret",
       "lastName": "retyty",
-      "gender": "Nam",
+      "gender": "",
       "age": "45",
-      "phone": "45",
-      "avatar": {}
->>>>>>> 4d7c2ad9db68a7f7be97e3cd995d28bbd5d4b23a
+      "phone": "45"
     }
   ]
 }
