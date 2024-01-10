@@ -5,6 +5,12 @@
       "password": "$2a$10$Hy94IXhOOA.zkShVzuX2lOl3GqvEktl0lNjoNOhQ7D7es50eJJI7u",
       "id": "59523121-0299-45a8-8b3a-b815ce093db9",
       "role": "guide"
+    },
+    {
+      "email": "admin123@gmail.com",
+      "password": "$2a$10$1nuIs9sj7HT/yDvvvcz5YetXL4HiUI9W6lTFMap8k7KzKCjFC6gQS",
+      "id": "f7fdf143-60ac-4b0c-a85a-d0fe6982af79",
+      "role": "Admin"
     }
   ]
 }
