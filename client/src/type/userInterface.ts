@@ -11,15 +11,14 @@ interface IUser {
     role?: role
 }
 
-interface IUser {
-    email: string
-    password: string
-}
+interface IProfile  {
+    image?: string
+    firstName?: string
+    lastName?: string
+    avatar?: string | File
+    phone?: string
+    gender: string
 
-interface IProfile extends IUser {
-    image: string
-    firstName: string
-    lastName: string
 }
 
 export type { IUser, role, IProfile }

@@ -4,7 +4,13 @@
       "email": "namsongc98@gmail.com",
       "password": "$2a$10$Qf1tOq7osXc/gUOX7BSone.xLHa4locduz4x2GUWfDnlLHU7Y3RWG",
       "id": "a3226aa0-80e4-4a81-a6e1-e834a6ef28fe",
-      "role": "Guide"
+      "role": "Guide",
+      "gender": "Nam",
+      "firstName": "",
+      "lastName": "",
+      "age": "24",
+      "phone": "09876554",
+      "avatar": ""
     },
     {
       "email": "namsongc9812@gmail.com",
@@ -16,7 +22,13 @@
       "email": "admin123@gmail.com",
       "password": "$2a$10$Hf9TtksLmMnrSxmSbRQNT.3g7arnosQFdvo63IVZIqiTx5Mz2D7cy",
       "id": "313c9b13-dffe-42ed-9d35-72161f02d9ba",
-      "role": "Admin"
+      "role": "Admin",
+      "firstName": "rtyret",
+      "lastName": "retyty",
+      "gender": "Nam",
+      "age": "45",
+      "phone": "45",
+      "avatar": {}
     }
   ]
 }
