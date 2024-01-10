@@ -2,9 +2,21 @@
   "users": [
     {
       "email": "namsongc98@gmail.com",
-      "password": "$2a$10$Hy94IXhOOA.zkShVzuX2lOl3GqvEktl0lNjoNOhQ7D7es50eJJI7u",
-      "id": "59523121-0299-45a8-8b3a-b815ce093db9",
-      "role": "guide"
+      "password": "$2a$10$Qf1tOq7osXc/gUOX7BSone.xLHa4locduz4x2GUWfDnlLHU7Y3RWG",
+      "id": "a3226aa0-80e4-4a81-a6e1-e834a6ef28fe",
+      "role": "Guide"
+    },
+    {
+      "email": "namsongc9812@gmail.com",
+      "password": "$2a$10$xEsN.4ZJd0SfKG8ztLkYDOmo/8U/7u9Zi9M/brT2CHj11tll87hAa",
+      "id": "6dbe0a70-c5dd-4b0d-8bd8-3637afaff1f7",
+      "role": "Guide"
+    },
+    {
+      "email": "admin123@gmail.com",
+      "password": "$2a$10$Hf9TtksLmMnrSxmSbRQNT.3g7arnosQFdvo63IVZIqiTx5Mz2D7cy",
+      "id": "313c9b13-dffe-42ed-9d35-72161f02d9ba",
+      "role": "Admin"
     }
   ]
 }

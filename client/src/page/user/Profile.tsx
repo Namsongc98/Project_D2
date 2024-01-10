@@ -1,15 +1,8 @@
 import { useState } from "react";
 import Input from "../../component/Input";
-import "../../style/styleComponent.scss"
-import imgUpload from "../../assets/image/upanh.png"
-import {
-  Box,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Modal,
-  Select,
-} from "@mui/material";
+import "../../style/styleComponent.scss";
+import imgUpload from "../../assets/image/upanh.png";
+import { Box, Modal } from "@mui/material";
 import Button from "../../component/Button";
 import { NavLink } from "react-router-dom";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
@@ -17,6 +10,9 @@ import imgUser from "../../assets/image/userImg.png";
 import { getUserToken } from "../../config";
 import { useInput, useInputTypeFileImg, useInputTypeNumber } from "../../hook";
 import InputFileUpload from "../../component/InputFileUpload";
+import { SelectOption } from "../../component/SelectOption";
+import useSelectOption from "../../hook/useSelectOption";
+import { SelectOptionType } from "../../type";
 
 const Profile = () => {
   const [open, setOpen] = useState(false);
@@ -24,13 +20,18 @@ const Profile = () => {
   const handleClose = () => setOpen(false);
   const user = getUserToken();
 
-  const [gender, setGender] = useState("");
+  const genders = ["Nam", "Nữ"];
+  const selectGender = useSelectOption("");
+
+  const options: SelectOptionType[] = [
+    ...genders.map((gender) => ({ label: gender, value: gender })),
+  ];
+
   const inputFirstName = useInput("");
   const inputLastName = useInput("");
   const age = useInputTypeNumber("");
   const phone = useInputTypeNumber("");
-  const avatar = useInputTypeFileImg("")
-
+  const avatar = useInputTypeFileImg("");
 
   return (
     <div className="mx-auto my-0 max-w-[1024px]  w-full ">
@@ -75,26 +76,7 @@ const Profile = () => {
                       {...inputLastName}
                     />
                   </div>
-
-                  <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-                    <InputLabel id="demo-select-small-label">
-                      Giới tính
-                    </InputLabel>
-                    <Select
-                      labelId="demo-select-small-label"
-                      id="demo-select-small"
-                      value={gender}
-                      label="Age"
-                      onChange={(e) => setGender(e.target.value)}
-                    >
-                      <MenuItem value="">
-                        <em>None</em>
-                      </MenuItem>
-                      <MenuItem value={"Nam"}>Nam</MenuItem>
-                      <MenuItem value={"Nữ"}>Nữ</MenuItem>
-                    </Select>
-                  </FormControl>
-
+                  <SelectOption {...selectGender} options={options} />
                   <div className=" mt-2 wp-btn">
                     {/* {loading ? (
                       <div className=" btn-save">
@@ -156,7 +138,6 @@ const Profile = () => {
                     )}
                   </div>
                   <div className="mx-auto my-0">
-
                     <InputFileUpload {...avatar} />
                   </div>
                 </div>
@@ -198,9 +179,8 @@ const Profile = () => {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-
-          <Box >
-            <div className="absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] w-[400px] bg-white shadow-md border border-solid border-[#000] p-4" >
+          <Box>
+            <div className="absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] w-[400px] bg-white shadow-md border border-solid border-[#000] p-4">
               <h1 className="text-center text-2xl mb-3">Đổi mật khẩu</h1>
 
               <Input
@@ -225,7 +205,10 @@ const Profile = () => {
                 label="password"
                 className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
               />
-              <Button type="submit" className="text-white bg-[#5A8DEE] w-full rounded px-6 py-2 hover:opacity-80 shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] hover:shadow-[0_4px_12px_0_rgba(90,141,238,0.6)]">
+              <Button
+                type="submit"
+                className="text-white bg-[#5A8DEE] w-full rounded px-6 py-2 hover:opacity-80 shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] hover:shadow-[0_4px_12px_0_rgba(90,141,238,0.6)]"
+              >
                 Xác nhận
               </Button>
             </div>

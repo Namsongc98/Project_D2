@@ -27,6 +27,11 @@ type InputType = {
   className: string;
 };
 
+type SelectOptionType = {
+  label: string,
+  value: string,
+}
+
 interface IFormRegister extends IFormInput {
   confirmPassword: string;
 }
@@ -43,4 +48,5 @@ export type {
   IFormInput,
   IFormRegister,
   InputFileHook,
+  SelectOptionType
 };

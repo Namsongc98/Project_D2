@@ -1,4 +1,4 @@
-export * from "./component"
+export * from "./componentType"
 export * from "./routerType"
-export * from "./page"
-export * from "./user"
+export * from "./propType"
+export * from "./userInterface"
