@@ -1,58 +1,27 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../../style/styleComponent.scss";
-import { useEffect, useState } from "react";
-import { IProfile } from "../../type";
+import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import AvatarDefault from "../../assets/image/userImg.png";
-import { Unstable_Popup as BasePopup } from "@mui/base/Unstable_Popup";
-import { styled } from "@mui/material";
-import { remoteUser } from "../../config";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
-
 import LogoutIcon from "@mui/icons-material/Logout";
 import Person2Icon from "@mui/icons-material/Person2";
 import HomeIcon from "@mui/icons-material/Home";
-const Header = () => {
-  const [currenEmail, setCurrenEmail] = useState<IProfile>();
-  const location = useLocation();
-  const navigate = useNavigate();
-  const [anchor, setAnchor] = useState<null | HTMLElement>(null);
+import { useGetUser } from "../../hook";
+import Popup from "../../common/Popup";
+import { remoteToken } from "../../common/localStogate";
 
+const Header = () => {
+  const navigate = useNavigate();
+  const user = useGetUser();
+  const [anchor, setAnchor] = useState<null | HTMLElement>(null);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchor(anchor ? null : event.currentTarget);
   };
 
-  const open = Boolean(anchor);
-  const id = open ? "simple-popper" : undefined;
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user")!);
-    setCurrenEmail(user);
-  }, []);
-
-  useEffect(() => {
-    return () => {
-      setAnchor(null);
-    };
-  }, [location]);
-
-  const PopupBody = styled("div")(
-    () => `
-    width: max-content;
-    padding: 12px 0px;
-    margin: 8px;
-    border-radius: 8px;
-    border: 1px solid #DAE2ED;
-    background-color: white;
-    box-shadow: 0px 4px 8px rgb(0 0 0 / 0.1);
-    font-family: 'IBM Plex Sans', sans-serif;
-    font-size: 0.875rem;
-    z-index: 1;
-  `
-  );
-
   const handleLogout = () => {
-    remoteUser();
+    remoteToken();
     navigate("/login");
   };
 
@@ -68,7 +37,7 @@ const Header = () => {
             <HomeIcon className="text-[#1e68ff]" />
             <p>Trang chủ</p>
           </Link>
-          {currenEmail ? (
+          {user?.email ? (
             <>
               <Stack
                 direction="row"
@@ -77,10 +46,10 @@ const Header = () => {
                 className=""
               >
                 <div className="flex gap-2 items-center hover:bg-[#e6e6e6] px-3 py-2 rounded-md">
-                  {currenEmail.image ? (
+                  {user?.avatar ? (
                     <Avatar
-                      alt={currenEmail.lastName}
-                      src={currenEmail.image || AvatarDefault}
+                      alt={user?.lastName}
+                      src={user?.avatar || AvatarDefault}
                       sx={{ width: 30, height: 30 }}
                     />
                   ) : (
@@ -93,36 +62,34 @@ const Header = () => {
                   <div className="cursor-pointer text-[#808089]">Tài khoản</div>
                 </div>
               </Stack>
-              <BasePopup id={id} open={open} anchor={anchor}>
-                <PopupBody>
-                  <div className="flex flex-col  text-base text-[#808089]">
-                    {currenEmail.role === "Admin" ? (
-                      <Link
-                        to="/user"
-                        className="flex items-center gap-1 px-3 hover:bg-[#e6e6e6] py-2 hover:text-[#808089] "
-                      >
-                        <AdminPanelSettingsIcon /> <span>Admin</span>{" "}
-                      </Link>
-                    ) : (
-                      <></>
-                    )}
+              <Popup anchor={anchor} setAnchor={setAnchor}>
+                <div className="flex flex-col  text-base text-[#808089]">
+                  {user?.role === "Admin" ? (
                     <Link
-                      to="/profile"
-                      className="px-3 hover:bg-[#e6e6e6] py-2 hover:text-[#808089] flex gap-1 items-center"
+                      to="/user"
+                      className="flex items-center gap-1 px-3 hover:bg-[#e6e6e6] py-2 hover:text-[#808089] "
                     >
-                      <Person2Icon />
-                      <span> Thông tin tài khoản</span>
+                      <AdminPanelSettingsIcon /> <span>Admin</span>{" "}
                     </Link>
-                    <div
-                      className="cursor-pointer  px-3 py-2 hover:bg-[#e6e6e6] hover:text-[#808089] flex gap-1 items-center"
-                      onClick={handleLogout}
-                    >
-                      <LogoutIcon />
-                      <span>Đăng xuất</span>
-                    </div>
+                  ) : (
+                    <></>
+                  )}
+                  <Link
+                    to="/profile"
+                    className="px-3 hover:bg-[#e6e6e6] py-2 hover:text-[#808089] flex gap-1 items-center"
+                  >
+                    <Person2Icon />
+                    <span> Thông tin tài khoản</span>
+                  </Link>
+                  <div
+                    className="cursor-pointer  px-3 py-2 hover:bg-[#e6e6e6] hover:text-[#808089] flex gap-1 items-center"
+                    onClick={handleLogout}
+                  >
+                    <LogoutIcon />
+                    <span>Đăng xuất</span>
                   </div>
-                </PopupBody>
-              </BasePopup>
+                </div>
+              </Popup>
             </>
           ) : (
             <>

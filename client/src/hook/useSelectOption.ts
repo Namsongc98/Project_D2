@@ -3,7 +3,6 @@ const useSelectOption = (initialValue: string) => {
   const [value, setValue] = useState<string>(initialValue);
   const onChange = (e: any): string => {
     setValue(e.target.value);
-   
     return value
   };
 

@@ -27,7 +27,26 @@
       "lastName": "retyty",
       "gender": "",
       "age": "45",
-      "phone": "45"
+      "phone": "45",
+      "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1704935384/zx4jbwxn4axlngd6g0as.png"
+    },
+    {
+      "email": "minhduong@gmail.com",
+      "password": "$2a$10$L22dv5QuhZWt.HsoQjaV9.feWvXD0ENjvZGHWUB9lVe1e7ztR0xPS",
+      "id": "4d62c98c-0d63-4ed1-94ca-a3cffaf874f3",
+      "role": "Guide",
+      "firstName": "",
+      "lastName": "",
+      "gender": "",
+      "age": "",
+      "phone": "",
+      "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1704970591/oziabo4elqfyqab5dye1.png"
+    },
+    {
+      "email": "minhduong12@gmail.com",
+      "password": "$2a$10$Xv9yjU0rFzCeY9ECZVo7aO/pjobPtaC9H3Q0ZePE7GmfgNPInAXly",
+      "id": "af4aba3c-7c1c-46e9-b914-39773248be53",
+      "role": "Guide"
     }
   ]
 }

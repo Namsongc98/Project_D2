@@ -2,6 +2,7 @@ import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { PropsSelect } from "../../type";
 
 const SelectOption = ({ value, options, onChange, label }: PropsSelect) => {
+  
   return (
     <>
       <FormControl sx={{ m: 1, minWidth: 120 }} size="small">

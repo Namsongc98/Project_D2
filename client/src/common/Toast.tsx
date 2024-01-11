@@ -1,34 +1,30 @@
-import { toast, ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { StatusApi } from '../type';
+import { ToastProp } from "../type";
 
-
-
-
-const Toast = ({ status }: StatusApi) => {
-
+const Toast = (props: ToastProp) => {
+  const { status } = props;
   switch (status.type) {
     case "error":
       toast.error(status.message, {
-        position: toast.POSITION.TOP_LEFT
+        position: toast.POSITION.TOP_RIGHT,
       });
       break;
     case "warn":
       toast.warn("Warning Notification !", {
-        position: toast.POSITION.BOTTOM_LEFT
+        position: toast.POSITION.TOP_RIGHT,
       });
       break;
     case "success":
       toast.success("Success Notification !", {
-        position: toast.POSITION.TOP_CENTER
+        position: toast.POSITION.TOP_RIGHT,
       });
       break;
     case "info":
       toast.info("Info Notification !", {
-        position: toast.POSITION.BOTTOM_CENTER
+        position: toast.POSITION.TOP_RIGHT,
       });
       break;
-
     default:
       toast("Default Notification !");
       break;
@@ -38,6 +34,6 @@ const Toast = ({ status }: StatusApi) => {
       <ToastContainer />
     </>
   );
-}
+};
 
-export default Toast
+export default Toast;

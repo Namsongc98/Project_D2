@@ -10,10 +10,14 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { AxiosError } from "axios";
 import { loginUser } from "../../service";
+import { AppDispatch } from "../../store/configStore";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../store/reducer/userSlice";
+import { setLocalToken } from "../../common/localStogate";
 
 const Login = () => {
   const [error, setError] = useState<string | undefined>("");
-
+  const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
 
   const schema = yup.object({
@@ -43,8 +47,8 @@ const Login = () => {
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     try {
       const login = await loginUser(data);
-      localStorage.setItem("accessToken", login.data.accessToken);
-      localStorage.setItem("user", JSON.stringify(login.data.user));
+      dispatch(setUser(login.data.user));
+      setLocalToken(login.data.accessToken);
       navigate("/");
     } catch (error: unknown) {
       if (error instanceof AxiosError && error.response?.data) {

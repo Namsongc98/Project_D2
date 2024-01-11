@@ -1,35 +1,43 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Input from "../../component/element/Input";
 import "../../style/styleComponent.scss";
 import imgUpload from "../../assets/image/upanh.png";
-import { Box, Modal } from "@mui/material";
 import Button from "../../component/element/Button";
 import { NavLink } from "react-router-dom";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import imgUser from "../../assets/image/userImg.png";
-import { getUserToken } from "../../config";
-import { useInput, useInputTypeFileImg, useInputTypeNumber } from "../../hook";
+import {
+  useGetUser,
+  useInput,
+  useInputTypeFileImg,
+  useInputTypeNumber,
+} from "../../hook";
 import InputFileUpload from "../../component/element/InputFileUpload";
 import { SelectOption } from "../../component/element/SelectOption";
 import useSelectOption from "../../hook/useSelectOption";
 import { SelectOptionType, StatusApi } from "../../type";
 import { postProfile, upfileClodinary } from "../../service";
 import Toast from "../../common/Toast";
+import Changepassword from "../../component/componentPage/Changepassword";
+
 const Profile = () => {
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const user = getUserToken();
+  const handleOpen = () => setOpen(!open);
+
   const [loading, setLoading] = useState(false);
 
-  const [statusApi, setStatusApi] = useState<StatusApi>({ type: "", message: "" })
+  const user = useGetUser();
+
+  const [statusApi, setStatusApi] = useState<StatusApi>({
+    type: "",
+    message: "",
+  });
 
   const genders = ["Nam", "Nữ"];
   const options: SelectOptionType[] = [
     ...genders.map((gender) => ({ label: gender, value: gender })),
   ];
-
-  const selectGender = useSelectOption("");
+  const selectGender = useSelectOption(user?.gender || "");
   const inputFirstName = useInput(user?.firstName || "");
   const inputLastName = useInput(user?.lastName || "");
   const age = useInputTypeNumber(user?.age || "");
@@ -38,31 +46,31 @@ const Profile = () => {
     user?.avatar || ""
   );
 
-
+  useEffect(() => {
+   
+  }, [user]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (errorImg)
-      return
+    if (errorImg) return;
     setLoading(true);
     if (valueImg instanceof File) {
       try {
         const urlAvatar = await upfileClodinary(valueImg);
-        profilePort(urlAvatar)
-        return
+        profilePort(urlAvatar);
+        return;
       } catch (error: unknown) {
-        setStatusApi({ type: "error", message: "Upload ảnh thất bại!" })
-        if (error instanceof Error)
-          throw new Error(error)
+        setStatusApi({ type: "error", message: "Upload ảnh thất bại!" });
+        if (typeof error === "string") throw new Error(error);
       } finally {
         setLoading(false);
       }
     }
-    profilePort(user?.avatar)
+
+    if (user) profilePort(user.avatar!);
   };
 
   const profilePort = async (avatarUrl: string) => {
-    console.log(avatarUrl)
     const newProfile = {
       firstName: inputFirstName.value,
       lastName: inputLastName.value,
@@ -72,16 +80,15 @@ const Profile = () => {
       avatar: avatarUrl,
     };
     try {
-      await postProfile(user.id, newProfile);
-      setStatusApi({ type: "success", message: "Cập nhật thất bại!" })
+      if (user) await postProfile(user.id, newProfile);
+      setStatusApi({ type: "success", message: "Cập nhật thành công!" });
     } catch (error: unknown) {
-      setStatusApi({ type: "error", message: "Cập nhật thất bại!" })
-      if (error instanceof Error)
-        throw new Error(error)
+      setStatusApi({ type: "error", message: "Cập nhật thất bại!" });
+      if (typeof error === "string") throw new Error(error);
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   return (
     <div className="mx-auto my-0 max-w-[1024px]  w-full ">
@@ -142,8 +149,9 @@ const Profile = () => {
                     <Button
                       type="submit"
                       disabled={loading}
-                      className={`text-white ${loading && "opacity-70"
-                        } bg-[#5A8DEE] w-full rounded px-6 py-2 hover:opacity-80 shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] hover:shadow-[0_4px_12px_0_rgba(90,141,238,0.6)]`}
+                      className={`text-white ${
+                        loading && "opacity-70"
+                      } bg-[#5A8DEE] w-full rounded px-6 py-2 hover:opacity-80 shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] hover:shadow-[0_4px_12px_0_rgba(90,141,238,0.6)]`}
                     >
                       Lưu
                     </Button>
@@ -180,8 +188,9 @@ const Profile = () => {
                 </div>
                 <div className="wp-right">
                   <div
-                    className={` w-44 h-44 border border-solid  p-1  overflow-hidden ${errorImg ? " border-red-600" : "border-[#cccbcb]"
-                      }`}
+                    className={` w-44 h-44 border border-solid  p-1  overflow-hidden ${
+                      errorImg ? " border-red-600" : "border-[#cccbcb]"
+                    }`}
                   >
                     {avatarView ? (
                       <img
@@ -214,7 +223,7 @@ const Profile = () => {
                 </h1>
                 <div className="font-medium text-xl flex justify-between items-center my-4">
                   <p className="">Email</p>
-                  <p className=" text-yellow-400">{user.email}</p>
+                  <p className=" text-yellow-400">{user?.email}</p>
                 </div>
                 <div className="w-[100%] line-midleware border border-solid border-[#e5e7eb] mx-auto max-w-[1600px]" />
                 <div className=" font-medium text-xl my-4  flex justify-between items-center">
@@ -236,47 +245,7 @@ const Profile = () => {
           </div>
         </div>
 
-        <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box>
-            <div className="absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] w-[400px] bg-white shadow-md border border-solid border-[#000] p-4">
-              <h1 className="text-center text-2xl mb-3">Đổi mật khẩu</h1>
-
-              <Input
-                title="Mật khẩu cũ"
-                type="text"
-                placeholder="nhập mật khẩu cũ"
-                label="password"
-                className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
-              />
-
-              <Input
-                title="Mật khẩu mới"
-                type="text"
-                placeholder="nhập mật khẩu cũ"
-                label="password"
-                className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
-              />
-              <Input
-                title="Xác nhận mật khẩu"
-                type="text"
-                placeholder="nhập mật khẩu cũ"
-                label="password"
-                className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
-              />
-              <Button
-                type="submit"
-                className="text-white bg-[#5A8DEE] w-full rounded px-6 py-2 hover:opacity-80 shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] hover:shadow-[0_4px_12px_0_rgba(90,141,238,0.6)]"
-              >
-                Xác nhận
-              </Button>
-            </div>
-          </Box>
-        </Modal>
+        {open && <Changepassword handleOpen={handleOpen} open={open} />}
       </div>
     </div>
   );

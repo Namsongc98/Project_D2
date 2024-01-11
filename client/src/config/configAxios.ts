@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getLocalToken } from "../common/localStogate";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -10,28 +11,6 @@ const axiosPrivate = axios.create({
   baseURL: BASE_URL,
 });
 
-function getLocalToken() {
-  const token = window.localStorage.getItem("accessToken");
-  if (token) {
-    return token;
-  } else {
-    throw new Error("Không có token");
-  }
-}
-function setLocalToken(accessToken: string) {
-  window.localStorage.setItem("accessToken", accessToken);
-}
-
-function getUserToken() {
-  return JSON.parse(localStorage.getItem("user")!)
-}
-
-
-function remoteUser() {
-  window.localStorage.removeItem("accessToken");
-  window.localStorage.removeItem("user");
-}
-
 axiosPrivate.interceptors.request.use(
   (config) => {
     config.headers.Authorization = `Bearer ${getLocalToken()}`;
@@ -42,4 +21,4 @@ axiosPrivate.interceptors.request.use(
     return Promise.reject(error);
   }
 );
-export { axiosPrivate, axiosPublic, getLocalToken, setLocalToken, remoteUser, getUserToken };
+export { axiosPrivate, axiosPublic};

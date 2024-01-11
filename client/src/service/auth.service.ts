@@ -12,9 +12,14 @@ const loginUser = async (user: IUser) => {
     return result
 }
 
-const postProfile = async (id: string, profile: IProfile) => {
-    const res = await axiosPublic.patch(`/user/${id}`, profile)
+const getUserSevice = async (email: string) => {
+    const res = await axiosPublic.get(`/users/`, { params: { email } })
     return res
 }
 
-export { createUser, loginUser, postProfile }
+const postProfile = async (id: string, profile: IProfile) => {
+    const res = await axiosPublic.patch(`/users/${id}`, profile)
+    return res
+}
+
+export { createUser, loginUser, postProfile, getUserSevice }

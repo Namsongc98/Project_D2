@@ -1,4 +1,4 @@
-import { SelectOptionType } from ".";
+import { SelectOptionType, StatusApi } from ".";
 
 type Props = {
     children: React.ReactNode;
@@ -11,10 +11,21 @@ type PropsSelect = {
     label: string
 };
 
-type StatusApi = {
-    type: string,
-    message: string
-  }
 
 
-export type { Props, PropsSelect, StatusApi } 
+type ToastProp = {
+    status: StatusApi
+}
+
+type PropChangePassword = {
+    handleOpen: () => void;
+    open: boolean;
+};
+
+type PropsPopup = {
+    setAnchor: React.Dispatch<React.SetStateAction<null | HTMLElement>>,
+    anchor: null | HTMLElement,
+    children: React.ReactNode,
+}
+
+export type { Props, PropsSelect, ToastProp, PropChangePassword, PropsPopup } 
