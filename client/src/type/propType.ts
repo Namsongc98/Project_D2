@@ -1,4 +1,6 @@
-import { SelectOptionType, StatusApi } from ".";
+
+import { AlertColor } from "@mui/material";
+import { IProfileUser, SelectOptionType, StatusApi } from ".";
 
 type Props = {
     children: React.ReactNode;
@@ -11,15 +13,25 @@ type PropsSelect = {
     label: string
 };
 
-
-
 type ToastProp = {
     status: StatusApi
 }
 
+type AlertValidate = {
+    type: AlertColor | undefined;
+    message: string;
+}
+
+type AlertProp = {
+    status: AlertValidate
+}
+
+
+
 type PropChangePassword = {
     handleOpen: () => void;
     open: boolean;
+    children: React.ReactNode
 };
 
 type PropsPopup = {
@@ -28,4 +40,12 @@ type PropsPopup = {
     children: React.ReactNode,
 }
 
-export type { Props, PropsSelect, ToastProp, PropChangePassword, PropsPopup } 
+type PropAvatar = {
+    onClick?: (event: React.MouseEvent<HTMLElement>) => void
+    user?: IProfileUser
+    size: number
+}
+
+
+
+export type { Props, PropsSelect, ToastProp, PropChangePassword, PropsPopup, PropAvatar, AlertProp } 

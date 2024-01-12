@@ -1,5 +1,4 @@
-import Input from "../../component/element/Input";
-import Button from "../../component/element/Button";
+
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -13,7 +12,8 @@ import { loginUser } from "../../service";
 import { AppDispatch } from "../../store/configStore";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../store/reducer/userSlice";
-import { setLocalToken } from "../../common/localStogate";
+import { setLocalToken } from "../../common";
+import { Button, Input } from "../../component/element";
 
 const Login = () => {
   const [error, setError] = useState<string | undefined>("");

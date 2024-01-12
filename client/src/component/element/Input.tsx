@@ -1,4 +1,4 @@
-import { memo } from "react";
+
 import { InputType } from "../../type";
 
 
@@ -32,4 +32,4 @@ const Input = (props: InputType): React.JSX.Element => {
   );
 };
 
-export default memo(Input);
+export default Input;

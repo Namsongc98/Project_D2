@@ -1,16 +1,14 @@
 import { Link, useNavigate } from "react-router-dom";
 import "../../style/styleComponent.scss";
 import { useState } from "react";
-import Avatar from "@mui/material/Avatar";
-import Stack from "@mui/material/Stack";
-import AvatarDefault from "../../assets/image/userImg.png";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Person2Icon from "@mui/icons-material/Person2";
 import HomeIcon from "@mui/icons-material/Home";
 import { useGetUser } from "../../hook";
-import Popup from "../../common/Popup";
-import { remoteToken } from "../../common/localStogate";
+import Popup from "./Popup";
+import { remoteToken } from "../../common";
+import AvatarUser from "./AvatarUser";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -39,29 +37,13 @@ const Header = () => {
           </Link>
           {user?.email ? (
             <>
-              <Stack
-                direction="row"
-                spacing={2}
+              <div
+                className="flex gap-2 items-center hover:bg-[#e6e6e6] px-3 py-2 rounded-md"
                 onClick={handleClick}
-                className=""
               >
-                <div className="flex gap-2 items-center hover:bg-[#e6e6e6] px-3 py-2 rounded-md">
-                  {user?.avatar ? (
-                    <Avatar
-                      alt={user?.lastName}
-                      src={user?.avatar || AvatarDefault}
-                      sx={{ width: 30, height: 30 }}
-                    />
-                  ) : (
-                    <Avatar
-                      alt={AvatarDefault}
-                      src={AvatarDefault}
-                      sx={{ width: 30, height: 30 }}
-                    />
-                  )}
-                  <div className="cursor-pointer text-[#808089]">Tài khoản</div>
-                </div>
-              </Stack>
+                <AvatarUser user={user} size={30} />
+                <div className="cursor-pointer text-[#808089]">Tài khoản</div>
+              </div>
               <Popup anchor={anchor} setAnchor={setAnchor}>
                 <div className="flex flex-col  text-base text-[#808089]">
                   {user?.role === "Admin" ? (

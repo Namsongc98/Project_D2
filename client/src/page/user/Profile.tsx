@@ -1,33 +1,37 @@
 import { useEffect, useState } from "react";
-import Input from "../../component/element/Input";
 import "../../style/styleComponent.scss";
 import imgUpload from "../../assets/image/upanh.png";
-import Button from "../../component/element/Button";
 import { NavLink } from "react-router-dom";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-import imgUser from "../../assets/image/userImg.png";
 import {
+  useButton,
   useGetUser,
   useInput,
   useInputTypeFileImg,
   useInputTypeNumber,
+  useSelectOption,
 } from "../../hook";
-import InputFileUpload from "../../component/element/InputFileUpload";
-import { SelectOption } from "../../component/element/SelectOption";
-import useSelectOption from "../../hook/useSelectOption";
 import { SelectOptionType, StatusApi } from "../../type";
 import { postProfile, upfileClodinary } from "../../service";
-import Toast from "../../common/Toast";
-import Changepassword from "../../component/componentPage/Changepassword";
+import {
+  Changepassword,
+  ModalComponent,
+  ToastComponent,
+} from "../../component/componentPage";
+
+import {
+  Button,
+  Input,
+  InputFileUpload,
+  SelectOption,
+} from "../../component/element";
+import AvatarUser from "../../component/componentPage/AvatarUser";
 
 const Profile = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(!open);
-
   const [loading, setLoading] = useState(false);
-
   const user = useGetUser();
-
   const [statusApi, setStatusApi] = useState<StatusApi>({
     type: "",
     message: "",
@@ -42,21 +46,25 @@ const Profile = () => {
   const inputLastName = useInput(user?.lastName || "");
   const age = useInputTypeNumber(user?.age || "");
   const phone = useInputTypeNumber(user?.phone || "");
-  const { avatarView, onChange, errorImg, valueImg } = useInputTypeFileImg(
-    user?.avatar || ""
-  );
+  const InputTypeFileImg = useInputTypeFileImg(user?.avatar || "");
+  const resetButton = useButton();
 
   useEffect(() => {
-   
+    inputFirstName.setValue(user?.firstName || "");
+    inputLastName.setValue(user?.lastName || "");
+    age.setValue(user?.age || "");
+    phone.setValue(user?.phone || "");
+    InputTypeFileImg.setValueImg(user?.avatar || "");
+    selectGender.setValue(user?.gender || "");
   }, [user]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (errorImg) return;
+    if (InputTypeFileImg.errorImg) return;
     setLoading(true);
-    if (valueImg instanceof File) {
+    if (InputTypeFileImg.valueImg instanceof File) {
       try {
-        const urlAvatar = await upfileClodinary(valueImg);
+        const urlAvatar = await upfileClodinary(InputTypeFileImg.valueImg);
         profilePort(urlAvatar);
         return;
       } catch (error: unknown) {
@@ -90,26 +98,31 @@ const Profile = () => {
     }
   };
 
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    resetButton.onClick(e);
+    inputFirstName.setValue("");
+    inputLastName.setValue("");
+    age.setValue("");
+    phone.setValue("");
+    selectGender.setValue("");
+  };
   return (
     <div className="mx-auto my-0 max-w-[1024px]  w-full ">
-      {statusApi.message && <Toast status={statusApi} />}
+      {statusApi.message && <ToastComponent status={statusApi} />}
       <div className="relative my-3">
-        <div className="bg-slate-100 flex gap-5 p-8 ">
-          <div className=" bg-white w-[20%] px-3 py-2  ">
+        <div className="bg-slate-100 flex gap-3 p-3 ">
+          <div className=" bg-white w-1/4 px-3 py-2  ">
             <div className="mx-auto my-0 pt-5">
-              <div className=" w-[50px] h-[50px] rounded-full  overflow-hidden mx-auto ">
-                <img src={imgUser} alt="" width={50} height={50} className="" />
+              <div className=" w-[50px] h-[50px] flex items-center justify-center rounded-full  overflow-hidden mx-auto ">
+                <AvatarUser user={user} size={50} />
               </div>
               <p className=" text-center font-semibold text-xl mt-5 opacity-70">
                 {" "}
                 {user?.firstName} {user?.lastName}{" "}
               </p>
-              <p className="text-center font-normal text-base opacity-70">
-                {user?.email}
-              </p>
             </div>
           </div>
-          <div className=" w-[100%]">
+          <div className=" w-3/4">
             <div className="bg-white w-[100%] px-4 py-4">
               <h2 className=" font-semibold text-xl mb-5">Chi tiết bản thân</h2>
               <form
@@ -158,7 +171,7 @@ const Profile = () => {
                     <Button
                       type="reset"
                       className=" bg-slate-100 w-full rounded px-6 py-2 hover:opacity-80 shadow hover:shadow-md"
-                      onClick={() => onclick}
+                      onClick={(e) => handleClick(e)}
                     >
                       Xóa
                     </Button>
@@ -188,13 +201,22 @@ const Profile = () => {
                 </div>
                 <div className="wp-right">
                   <div
-                    className={` w-44 h-44 border border-solid  p-1  overflow-hidden ${
-                      errorImg ? " border-red-600" : "border-[#cccbcb]"
+                    className={` w-44 h-44 border border-solid mx-auto my-0 p-1  overflow-hidden ${
+                      InputTypeFileImg.errorImg
+                        ? " border-red-600"
+                        : "border-[#cccbcb]"
                     }`}
                   >
-                    {avatarView ? (
+                    {InputTypeFileImg.avatarView ? (
                       <img
-                        src={avatarView}
+                        src={InputTypeFileImg.avatarView}
+                        alt=""
+                        className="mx-auto  w-full h-full object-cover "
+                      />
+                    ) : InputTypeFileImg.valueImg &&
+                      typeof InputTypeFileImg.valueImg === "string" ? (
+                      <img
+                        src={InputTypeFileImg.valueImg}
                         alt=""
                         className="mx-auto  w-full h-full object-cover "
                       />
@@ -206,11 +228,12 @@ const Profile = () => {
                       />
                     )}
                   </div>
+
                   <p className="text-red-500 leading-6 h-6 font-normal text-xs">
-                    {errorImg}
+                    {InputTypeFileImg.errorImg}
                   </p>
-                  <div className="mx-auto my-0">
-                    <InputFileUpload onChange={onChange} />
+                  <div className="flex justify-center items-center">
+                    <InputFileUpload onChange={InputTypeFileImg.onChange} />
                   </div>
                 </div>
               </form>
@@ -244,8 +267,11 @@ const Profile = () => {
             </div>
           </div>
         </div>
-
-        {open && <Changepassword handleOpen={handleOpen} open={open} />}
+        {open && (
+          <ModalComponent handleOpen={handleOpen} open={open}>
+            <Changepassword />
+          </ModalComponent>
+        )}
       </div>
     </div>
   );

@@ -20,6 +20,7 @@ const useInputTypeFileImg = (initialValue: string): InputFileHook => {
       URL.revokeObjectURL(avatarView);
     };
   }, [avatarView]);
+
   return {
     avatarView,
     onChange,

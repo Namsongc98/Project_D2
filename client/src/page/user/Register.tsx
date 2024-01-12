@@ -1,6 +1,3 @@
-import Input from "../../component/element/Input";
-
-import Button from "../../component/element/Button";
 import { Link, useNavigate } from "react-router-dom";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { IFormInput, IFormRegister, IUser } from "../../type";
@@ -12,9 +9,10 @@ import * as yup from "yup";
 import { v4 as uuidv4 } from "uuid";
 import { createUser } from "../../service";
 import { AxiosError } from "axios";
-import { setLocalToken } from "../../common/localStogate";
+import { setLocalToken } from "../../common";
 import { AppDispatch, useAppDispatch } from "../../store/configStore";
 import { setUser } from "../../store/reducer/userSlice";
+import { Button, Input } from "../../component/element";
 const Register = () => {
   const [error, setError] = useState<string | undefined>("");
 

@@ -4,16 +4,14 @@ import { Unstable_Popup as BasePopup } from "@mui/base/Unstable_Popup";
 import { styled } from "@mui/material";
 
 import { useLocation } from "react-router-dom";
-import { PropsPopup } from "../type";
+import { PropsPopup } from "../../type";
 
 const Popup = (props: PropsPopup) => {
   const { setAnchor, anchor, children } = props;
   const location = useLocation();
 
   useEffect(() => {
-    return () => {
-      setAnchor(null);
-    };
+    setAnchor(null);
   }, [location]);
 
   const open = Boolean(anchor);

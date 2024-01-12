@@ -8,10 +8,10 @@ const useInput = (initialValue: string): InputHook => {
     setValue(e.currentTarget.value);
     return value
   };
-
   return {
     value,
     onChange,
+    setValue
   };
 };
 export default useInput;

@@ -1,34 +1,44 @@
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { ToastProp } from "../type";
+import { ToastProp } from "../../type";
+import { useEffect, useState } from "react";
 
-const Toast = (props: ToastProp) => {
+const ToastComponent = (props: ToastProp) => {
   const { status } = props;
-  switch (status.type) {
+  const [rest, setReset] = useState(status);
+  switch (rest.type) {
     case "error":
-      toast.error(status.message, {
+      toast.error(rest.message, {
         position: toast.POSITION.TOP_RIGHT,
       });
       break;
     case "warn":
-      toast.warn("Warning Notification !", {
+      toast.warn(rest.message, {
         position: toast.POSITION.TOP_RIGHT,
       });
       break;
     case "success":
-      toast.success("Success Notification !", {
+      toast.success(rest.message, {
         position: toast.POSITION.TOP_RIGHT,
       });
       break;
     case "info":
-      toast.info("Info Notification !", {
+      toast.info(rest.message, {
         position: toast.POSITION.TOP_RIGHT,
       });
       break;
     default:
-      toast("Default Notification !");
       break;
   }
+  useEffect(() => {
+    return () => {
+      setReset((prevStatus) => ({
+        ...prevStatus,
+        type: "",
+        message: "",
+      }));
+    };
+  }, [status]);
   return (
     <>
       <ToastContainer />
@@ -36,4 +46,4 @@ const Toast = (props: ToastProp) => {
   );
 };
 
-export default Toast;
+export default ToastComponent;

@@ -9,6 +9,7 @@ const useSelectOption = (initialValue: string) => {
   return {
     value,
     onChange,
+    setValue
   };
 };
 export default useSelectOption;

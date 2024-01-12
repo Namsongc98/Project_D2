@@ -14,6 +14,7 @@ const useInputTypeNumber = (initialValue: string): InputHook => {
     return {
         value,
         onChange,
+        setValue
     };
 };
 export default useInputTypeNumber;

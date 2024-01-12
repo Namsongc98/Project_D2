@@ -9,6 +9,7 @@ type ButonType = {
 type InputHook = {
   value: string;
   onChange: (e: React.FormEvent<HTMLInputElement>) => string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
 };
 
 type InputFileHook = {
@@ -43,6 +44,16 @@ interface IFormRegister extends IFormInput {
   confirmPassword: string;
 }
 
+interface IChangePasswordSubmit {
+  oldPassword: string
+  newPassword: string
+}
+interface IChangePassword extends IChangePasswordSubmit {
+  confirmNewPassword: string
+}
+
+
+
 interface IFormInput {
   email: string;
   password: string;
@@ -57,4 +68,6 @@ export type {
   InputFileHook,
   InputFile,
   SelectOptionType,
+  IChangePassword,
+  IChangePasswordSubmit
 };

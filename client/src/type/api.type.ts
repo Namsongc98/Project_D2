@@ -1,3 +1,4 @@
+
 import { IProfileUser } from "."
 
 type Decode = {
@@ -14,4 +15,4 @@ type StatusApi = {
     type: string,
     message: string
 }
-export type { Decode, GetUserApi,StatusApi }
+export type { Decode, GetUserApi, StatusApi }

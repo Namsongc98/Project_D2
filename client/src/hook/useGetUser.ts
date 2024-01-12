@@ -9,8 +9,9 @@ import { useEffect, useState } from "react";
 const useGetUser = () => {
     const [user, setUser] = useState<IProfileUser>();
     const token = getLocalToken();
-    const decodedToken: Decode = jwtDecode(token);
     useEffect(() => {
+        if (!token) return
+        const decodedToken: Decode = jwtDecode(token);
         const getUser = async () => {
             try {
                 const getUser: GetUserApi = await getUserSevice(decodedToken.email);
