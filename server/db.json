@@ -23,12 +23,12 @@
       "password": "$2a$10$Hf9TtksLmMnrSxmSbRQNT.3g7arnosQFdvo63IVZIqiTx5Mz2D7cy",
       "id": "313c9b13-dffe-42ed-9d35-72161f02d9ba",
       "role": "Admin",
-      "firstName": "rtyret",
-      "lastName": "retyty",
-      "gender": "",
-      "age": "45",
-      "phone": "45",
-      "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1704935384/zx4jbwxn4axlngd6g0as.png"
+      "firstName": "Nam ",
+      "lastName": "Sơn đẹp trai",
+      "gender": "Nam",
+      "age": "24",
+      "phone": "0981875345",
+      "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705031469/oevjxkxiadlj8icukhbw.jpg"
     },
     {
       "email": "minhduong@gmail.com",
@@ -47,6 +47,37 @@
       "password": "$2a$10$Xv9yjU0rFzCeY9ECZVo7aO/pjobPtaC9H3Q0ZePE7GmfgNPInAXly",
       "id": "af4aba3c-7c1c-46e9-b914-39773248be53",
       "role": "Guide"
+    },
+    {
+      "email": "anhphudeptrai@gmail.com",
+      "password": "$2a$10$vS1EGfR98vVaBt/BU03/uud3wb46oycuBV9tGffUXT.qgYKTsI3d.",
+      "id": "d219bf37-f35c-425d-9c6d-e074b0e4f9f3",
+      "role": "Guide",
+      "firstName": "Phú ",
+      "lastName": "Đại ca",
+      "gender": "Nam",
+      "age": "",
+      "phone": "",
+      "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705042321/qcyy4jxh5iwaenok70u4.jpg"
+    }
+  ],
+  "holtel": [
+    {
+      "id": "",
+      "name": "",
+      "price": 0,
+      "city": "",
+      "decription": "",
+      "createdAt": "",
+      "updateAt": "",
+      "address": "",
+      "image": [
+        {
+          "id": 1,
+          "image": ""
+        }
+      ],
+      "coutRoom": 0
     }
   ]
 }
