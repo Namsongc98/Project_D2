@@ -10,7 +10,8 @@
       "lastName": "",
       "age": "24",
       "phone": "09876554",
-      "avatar": ""
+      "avatar": "",
+      "non_block": false
     },
     {
       "email": "namsongc9812@gmail.com",
@@ -23,8 +24,8 @@
       "password": "$2a$10$Hf9TtksLmMnrSxmSbRQNT.3g7arnosQFdvo63IVZIqiTx5Mz2D7cy",
       "id": "313c9b13-dffe-42ed-9d35-72161f02d9ba",
       "role": "Admin",
-      "firstName": "Nam ",
-      "lastName": "Sơn đẹp trai",
+      "firstName": "Nam",
+      "lastName": "Sơn",
       "gender": "Nam",
       "age": "24",
       "phone": "0981875345",
@@ -61,23 +62,38 @@
       "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705042321/qcyy4jxh5iwaenok70u4.jpg"
     }
   ],
-  "holtel": [
+  "touris": [
     {
       "id": "",
+      "city": "",
+      "user_id": 1,
+      "status": true,
       "name": "",
       "price": 0,
-      "city": "",
       "decription": "",
-      "createdAt": "",
-      "updateAt": "",
+      "created_at": "",
       "address": "",
+      "cout_room": 0,
+      "type_tourism": "Khách sạn",
+      "bathroom": 1,
+      "bedroom": 1,
+      "cout_people": 2,
       "image": [
         {
           "id": 1,
           "image": ""
         }
-      ],
-      "coutRoom": 0
+      ]
+    }
+  ],
+  "booking": [
+    {
+      "id": 1,
+      "id_touris": 1,
+      "start_date": "987",
+      "end_date": "4567",
+      "cout_persion": 2,
+      "total": 3
     }
   ]
 }
