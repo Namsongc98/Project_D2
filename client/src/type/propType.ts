@@ -1,51 +1,63 @@
-
 import { AlertColor } from "@mui/material";
 import { IProfileUser, SelectOptionType, StatusApi } from ".";
+import { Dayjs } from "dayjs";
 
 type Props = {
-    children: React.ReactNode;
+  children: React.ReactNode;
 };
 
 type PropsSelect = {
-    value?: string | number;
-    options: SelectOptionType[];
-    onChange: any;
-    label: string
+  value?: string | number;
+  options: SelectOptionType[];
+  onChange: any;
+  label: string;
 };
 
 type ToastProp = {
-    status: StatusApi
-}
+  status: StatusApi;
+};
 
 type AlertValidate = {
-    type: AlertColor | undefined;
-    message: string;
-}
+  type: AlertColor | undefined;
+  message: string;
+};
 
 type AlertProp = {
-    status: AlertValidate
-}
-
-
+  status: AlertValidate;
+};
 
 type PropChangePassword = {
-    handleOpen: () => void;
-    open: boolean;
-    children: React.ReactNode
+  handleOpen: () => void;
+  open: boolean;
+  children: React.ReactNode;
 };
 
 type PropsPopup = {
-    setAnchor: React.Dispatch<React.SetStateAction<null | HTMLElement>>,
-    anchor: null | HTMLElement,
-    children: React.ReactNode,
-}
+  setAnchor: React.Dispatch<React.SetStateAction<null | HTMLElement>>;
+  anchor: null | HTMLElement;
+  children: React.ReactNode;
+};
 
 type PropAvatar = {
-    onClick?: (event: React.MouseEvent<HTMLElement>) => void
-    user?: IProfileUser
-    size: number
-}
+  onClick?: (event: React.MouseEvent<HTMLElement>) => void;
+  user?: IProfileUser;
+  size: number;
+};
 
+type PropDatePick = {
+  onChange: (newValue : Dayjs | null)=>void;
+  value: string | undefined;
+  label: string;
+};
 
-
-export type { Props, PropsSelect, ToastProp, PropChangePassword, PropsPopup, PropAvatar, AlertProp } 
+export type {
+  Props,
+  PropsSelect,
+  ToastProp,
+  PropChangePassword,
+  PropsPopup,
+  PropAvatar,
+  AlertProp,
+  AlertValidate,
+  PropDatePick,
+};

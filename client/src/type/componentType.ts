@@ -1,3 +1,5 @@
+import { Dayjs } from "dayjs";
+
 type ButonType = {
   type: "submit" | "reset" | "button" | undefined;
   disabled?: boolean;
@@ -7,6 +9,12 @@ type ButonType = {
 };
 
 type InputHook = {
+  value: string;
+  onChange: (e: React.FormEvent<HTMLInputElement>) => string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
+};
+
+type InputDate = {
   value: string;
   onChange: (e: React.FormEvent<HTMLInputElement>) => string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
@@ -22,7 +30,7 @@ type InputFileHook = {
 
 type InputFile = {
   onChange: (e: React.FormEvent<HTMLInputElement>) => void;
-}
+};
 
 type InputType = {
   type: string;
@@ -36,23 +44,21 @@ type InputType = {
 };
 
 type SelectOptionType = {
-  label: string,
-  value: string,
-}
+  label: string;
+  value: string;
+};
 
 interface IFormRegister extends IFormInput {
   confirmPassword: string;
 }
 
 interface IChangePasswordSubmit {
-  oldPassword: string
-  newPassword: string
+  oldPassword: string;
+  newPassword: string;
 }
 interface IChangePassword extends IChangePasswordSubmit {
-  confirmNewPassword: string
+  confirmNewPassword: string;
 }
-
-
 
 interface IFormInput {
   email: string;
@@ -69,5 +75,6 @@ export type {
   InputFile,
   SelectOptionType,
   IChangePassword,
-  IChangePasswordSubmit
+  IChangePasswordSubmit,
+  InputDate,
 };

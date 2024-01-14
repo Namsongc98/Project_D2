@@ -1,6 +1,6 @@
 import { Avatar, Stack } from "@mui/material";
 import { PropAvatar } from "../../type";
-import AvatarDefault from "../../assets/image/userImg.png";
+import AvatarDefault from "../../assets/image/userImg.jpg";
 
 function stringToColor(string: string) {
   let hash = 0;

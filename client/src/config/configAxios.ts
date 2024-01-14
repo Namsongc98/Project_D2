@@ -3,15 +3,15 @@ import { getLocalToken } from "../common/localStogate";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-const axiosPublic = axios.create({
+const instance  = axios.create({
   baseURL: BASE_URL,
 });
 
-const axiosPrivate = axios.create({
+const instance_token = axios.create({
   baseURL: BASE_URL,
 });
 
-axiosPrivate.interceptors.request.use(
+instance_token.interceptors.request.use(
   (config) => {
     config.headers.Authorization = `Bearer ${getLocalToken()}`;
 
@@ -21,4 +21,4 @@ axiosPrivate.interceptors.request.use(
     return Promise.reject(error);
   }
 );
-export { axiosPrivate, axiosPublic};
+export { instance_token, instance};

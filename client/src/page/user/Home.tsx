@@ -1,11 +1,14 @@
-import { Banner, ListHotel, SearchHotel } from "../../component/componentPage";
+import { Banner, ListHotel, PopularTravelCarousel, SearchHotel } from "../../component/componentPage";
 
 const Home = () => {
   return (
     <>
       <Banner />
       <SearchHotel />
-      <ListHotel />
+      <div className="max-w-[1300px] mx-auto my-0 ">
+        <PopularTravelCarousel />
+        <ListHotel />
+      </div>
     </>
   );
 };

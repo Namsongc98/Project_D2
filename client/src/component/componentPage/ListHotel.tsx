@@ -2,7 +2,7 @@ import React from "react";
 import imgHaNoi from "../../assets/image/HaNoi.png";
 const ListHotel = () => {
   return (
-    <div className="max-w-[948px] mx-auto ">
+    <div className="">
       <div className="mt-10">
         <h1 className="my-5 mx-0 text-4xl text-center">
           Điểm đến phổ biến trong thành phố

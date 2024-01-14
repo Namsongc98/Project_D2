@@ -2,21 +2,21 @@ import { Button, Input } from "../element";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
-import { IChangePassword, IChangePasswordSubmit, StatusApi } from "../../type";
+import { AlertValidate, IChangePassword, IChangePasswordSubmit } from "../../type";
 import { useEffect, useState } from "react";
 import { AlertComponent } from ".";
 
 const Changepassword = () => {
   const [error, setError] = useState<string | undefined>("");
-  const [statusApi, setStatusApi] = useState<StatusApi>({
-    type: "",
+  const [statusApi, setStatusApi] = useState<AlertValidate>({
+    type: undefined,
     message: "",
   });
   const schema = yup.object({
     oldPassword: yup
       .string()
-      .required("Email là bắt buộc")
-      .min(6, "Passworrd trên 6 kí tự")
+      .required("Password là bắt buộc")
+      .min(6, "Password trên 6 kí tự")
       .max(32, "Password dưới 32 kí tự"),
     newPassword: yup
       .string()
@@ -36,7 +36,7 @@ const Changepassword = () => {
   } = useForm<IChangePassword>({
     resolver: yupResolver(schema),
   });
-  console.log(error);
+
   const message: string | undefined =
     errors?.oldPassword?.message ||
     errors?.newPassword?.message ||
@@ -53,13 +53,16 @@ const Changepassword = () => {
     }
     return () => {
       setStatusApi({
-        type: "",
+        type: undefined,
         message: "",
       });
     };
   }, [error]);
 
-  const onSubmit: SubmitHandler<IChangePasswordSubmit> = () => {};
+  const onSubmit: SubmitHandler<IChangePasswordSubmit> = () => { 
+
+    
+  };
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -85,7 +88,7 @@ const Changepassword = () => {
         register={register}
       />
       <Input
-        title="Xác nhận mật khẩu"
+        title="Xác nhận mật khẩu mới"
         type="text"
         placeholder="Xác nhận mật khẩu"
         label="confirmNewPassword"

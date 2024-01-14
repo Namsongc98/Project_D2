@@ -6,7 +6,7 @@ import { AlertProp } from "../../type";
 const AlertComponent = (props: AlertProp) => {
   const { status } = props;
 
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
   return (
     <Stack sx={{ width: "100%" }} spacing={2}>
       <Alert severity={status.type}>{status.message}</Alert>
