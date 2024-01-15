@@ -1,0 +1,7 @@
+export {default as Changepassword } from "./Changepassword"
+export {default as ModalComponent } from "./ModalComponent"
+export {default as Popup } from "./Popup"
+export {default as SearchHotel } from "./SearchHotel"
+export {default as ToastComponent } from "./ToastComponent"
+export {default as AlertComponent } from "./AlertComponent"
+export {default as PreviewImg } from "./PreviewImg"

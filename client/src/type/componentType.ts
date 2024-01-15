@@ -1,5 +1,3 @@
-
-
 type ButonType = {
   type: "submit" | "reset" | "button" | undefined;
   disabled?: boolean;
@@ -29,7 +27,8 @@ type InputFileHook = {
 };
 
 type InputFile = {
-  onChange: (e: React.FormEvent<HTMLInputElement>) => void;
+  handleChange: (e: React.FormEvent<HTMLInputElement>) => void;
+  multiple?: boolean;
 };
 
 type InputType = {
@@ -44,14 +43,14 @@ type InputType = {
 };
 
 type checkboxType = {
-  checkbox: string[] | number[]
+  checkbox: string[] | number[];
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  label: string,
-  value: number | string
-}
+  label: string;
+  value: number | string;
+};
 
 type SelectOptionType = {
-  label: string;
+  label: string | number;
   value: string | number;
 };
 

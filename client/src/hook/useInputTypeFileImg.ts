@@ -7,8 +7,12 @@ const useInputTypeFileImg = (initialValue: string): InputFileHook => {
   const [errorImg, setError] = useState("");
   const allowedTypes = ["image/jpeg", "image/png", "image/gif"];
   const onChange = (e: React.FormEvent<HTMLInputElement>) => {
-    if (!e.currentTarget.files) return;
+    if (!e.currentTarget.files) {
+      setError("Bạn chưa chọn ảnh");
+      return;
+    }
     const fileView = e.currentTarget.files[0];
+    console.log(fileView);
     setValueImg(fileView);
     setAvatarView(URL.createObjectURL(fileView));
     if (!allowedTypes.includes(fileView?.type)) {

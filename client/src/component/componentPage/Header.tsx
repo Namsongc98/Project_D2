@@ -6,9 +6,9 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import Person2Icon from "@mui/icons-material/Person2";
 import HomeIcon from "@mui/icons-material/Home";
 import { useGetUser } from "../../hook";
-import Popup from "./Popup";
+import Popup from "../componentReuse/Popup";
 import { remoteToken } from "../../common";
-import AvatarUser from "./AvatarUser";
+import AvatarUser from "../componentReuse/AvatarUser";
 
 const Header = () => {
   const navigate = useNavigate();

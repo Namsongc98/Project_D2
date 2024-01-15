@@ -10,7 +10,7 @@ type PropsSelect = {
   value?: string | number;
   options: SelectOptionType[];
   onChange: any;
-  label: string;
+  label: string | number;
 };
 
 type ToastProp = {

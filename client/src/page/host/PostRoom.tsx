@@ -2,6 +2,7 @@ import { Typography } from "@mui/material";
 import { Input, SelectOption } from "../../component/element";
 import { SelectOptionType } from "../../type";
 import { useCheckbox, useSelectOption } from "../../hook";
+import { PreviewImg } from "../../component/componentReuse";
 
 const PostRoom = () => {
   const City = [
@@ -33,11 +34,16 @@ const PostRoom = () => {
 
   return (
     <section className="flex justify-center items-center ">
-      <form action="" className="bg-white rounded-xl p-4 mt-7 min-w-[70%] ">
-        <Typography variant="h6" sx={{ textAlign: "center" }}>
+      <form action="" className="bg-white rounded-xl p-4 mt-7 min-w-[70%] shadow-md">
+        <Typography variant="h6" sx={{ marginBottom: 2 }}>
           Thêm phòng
         </Typography>
-        <div className="flex flex-row gap-5">
+
+        <div className="flex flex-row gap-5 mt-5">
+          <div className="w-2/3">
+
+            <PreviewImg />
+          </div>
           <div className="w-1/3">
             <Input
               type="text"
@@ -60,35 +66,34 @@ const PostRoom = () => {
               label="price"
               placeholder="Phập giá tiền..."
             />
-          </div>
+            <div className="flex flex-col gap-7 mt-5">
+              <SelectOption
+                label="Tên thành phố"
+                options={optionsCity}
+                {...selectCity}
+              />
+              <SelectOption
+                label="Loại hình du lịch"
+                options={optionsTypetouris}
+                {...selectTypeTouris}
+              />
+              <div className="flex justify-between ">
+                <SelectOption
+                  options={optionsRoom}
+                  label="Phòng ngủ"
+                  {...checkboxBathroom}
+                />
 
-          <div className="flex flex-col gap-7 w-1/4 mt-5">
-            <SelectOption
-              label="Tên thành phố"
-              options={optionsCity}
-              {...selectCity}
-            />
-            <SelectOption
-              label="Loại hình du lịch"
-              options={optionsTypetouris}
-              {...selectTypeTouris}
-            />
-            <div className="flex justify-between">
-              <SelectOption
-                options={optionsRoom}
-                label="Phòng ngủ"
-                {...checkboxBathroom}
-              />
-              <SelectOption
-                options={optionsRoom}
-                label="Phòng tắm"
-                {...checkboxBedroom}
-              />
+                <SelectOption
+                  options={optionsRoom}
+                  label="Phòng tắm"
+                  {...checkboxBedroom}
+                />
+              </div>
             </div>
           </div>
+
         </div>
-        <div className=""></div>
-        <div className=""></div>
       </form>
     </section>
   );

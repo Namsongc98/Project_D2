@@ -6,6 +6,7 @@ import { AlertValidate, IChangePassword, IChangePasswordSubmit } from "../../typ
 import { useEffect, useState } from "react";
 import { AlertComponent } from ".";
 
+
 const Changepassword = () => {
   const [error, setError] = useState<string | undefined>("");
   const [statusApi, setStatusApi] = useState<AlertValidate>({
@@ -59,9 +60,9 @@ const Changepassword = () => {
     };
   }, [error]);
 
-  const onSubmit: SubmitHandler<IChangePasswordSubmit> = () => { 
+  const onSubmit: SubmitHandler<IChangePasswordSubmit> = () => {
 
-    
+
   };
   return (
     <form

@@ -14,7 +14,7 @@ import {
   AppBar,
   Drawer,
   mainListItems,
-} from "../../component/componentPage/dashboard";
+} from "../../component/dashboard";
 import { Outlet } from "react-router-dom";
 
 const LayoutHost = () => {

@@ -2,10 +2,10 @@ import {
   Banner,
   ListHotel,
   PopularTravelCarousel,
-  SearchHotel,
 } from "../../component/componentPage";
 import SpecialOffer from "../../component/componentPage/SpecialOffer";
 import TypeTourism from "../../component/componentPage/TypeTourism";
+import { SearchHotel } from "../../component/componentReuse";
 
 const Home = () => {
   return (
