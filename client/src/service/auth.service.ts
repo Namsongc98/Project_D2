@@ -12,7 +12,8 @@ const loginUser = async (user: IUser) => {
 };
 
 const getUserSevice = async (email: string) => {
-  const res = await instance.get(`/users/`, { params: { email } });
+  const res = await instance.get(`/users`, { params: { email } });
+  console.log(res)
   return res;
 };
 

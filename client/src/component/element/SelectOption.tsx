@@ -18,7 +18,7 @@ const SelectOption = ({ value, options, onChange, label }: PropsSelect) => {
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          {options.map(({ label, value }) => (
+          {options?.map(({ label, value }) => (
             <MenuItem value={value} key={value}>
               {label}
             </MenuItem>

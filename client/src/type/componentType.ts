@@ -1,4 +1,4 @@
-import { Dayjs } from "dayjs";
+
 
 type ButonType = {
   type: "submit" | "reset" | "button" | undefined;
@@ -43,9 +43,16 @@ type InputType = {
   className: string;
 };
 
+type checkboxType = {
+  checkbox: string[] | number[]
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  label: string,
+  value: number | string
+}
+
 type SelectOptionType = {
   label: string;
-  value: string;
+  value: string | number;
 };
 
 interface IFormRegister extends IFormInput {
@@ -77,4 +84,5 @@ export type {
   IChangePassword,
   IChangePasswordSubmit,
   InputDate,
+  checkboxType,
 };

@@ -2,7 +2,7 @@ import { AlertColor } from "@mui/material";
 import { IProfileUser, SelectOptionType, StatusApi } from ".";
 import { Dayjs } from "dayjs";
 
-type Props = {
+type PropsLayout = {
   children: React.ReactNode;
 };
 
@@ -51,7 +51,7 @@ type PropDatePick = {
 };
 
 export type {
-  Props,
+  PropsLayout,
   PropsSelect,
   ToastProp,
   PropChangePassword,

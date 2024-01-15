@@ -1,13 +1,13 @@
-import React from "react";
+
 import imgHaNoi from "../../assets/image/HaNoi.png";
 const ListHotel = () => {
   return (
-    <div className="">
-      <div className="mt-10">
-        <h1 className="my-5 mx-0 text-4xl text-center">
+    <div className="w-full mb-10">
+      <div className="">
+        <h1 className="my-5 mx-0 text-4xl text-center mb-10">
           Điểm đến phổ biến trong thành phố
         </h1>
-        <div className="w-full flex gap-5 mt-3 mb-7 flex-wrap">
+        <div className="w-full flex gap-5  mb-7 flex-wrap">
           <section className="w-[300px] rounded-lg overflow-hidden border border-solid border-[#e9e9e9]">
             <div className="w-pull relative">
               <img
