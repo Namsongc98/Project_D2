@@ -1,4 +1,3 @@
-
 enum Role {
   admin = "Admin",
   guide = "Guide",
@@ -11,8 +10,6 @@ interface IUser {
   password: string;
   role?: "Admin" | "Guide" | "Host";
 }
-
-
 
 interface IProfile {
   firstName?: string;
@@ -39,4 +36,16 @@ interface IProfileUser {
   password?: string;
 }
 
-export type { IUser, Role, IProfile, IProfileUser };
+interface IRoom {
+  id?: number;
+  nameHotel: string;
+  city: string;
+  address: string;
+  price: number;
+  typeTouris: string;
+  bedRoom: number;
+  bathRoom: number;
+  decription: string;
+}
+
+export type { IUser, Role, IProfile, IProfileUser, IRoom };

@@ -52,8 +52,8 @@ type checkboxType = {
 };
 
 type SelectOptionType = {
-  label: string | number;
-  value: string | number;
+  label?: string | number;
+  value: string | number; 
 };
 
 interface IFormRegister extends IFormInput {
@@ -85,10 +85,12 @@ type ImageMultiple = {
 }
 
 type TextArea = {
-  value: string,
-  onChange: (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void,
-  setValue: React.Dispatch<React.SetStateAction<string>>;
+  value?: string,
+  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void,
+  setValue?: React.Dispatch<React.SetStateAction<string>>;
   label?: string
+  register?: unknown;
+  title: string
 }
 
 

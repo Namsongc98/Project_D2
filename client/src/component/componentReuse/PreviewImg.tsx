@@ -61,7 +61,7 @@ function PreviewImg({ imageRoom }: PropImages) {
             border: "1px",
             borderColor: "#dee2e6",
             borderStyle: "solid",
-            maxWidth: "730px",
+            maxWidth: "750px",
           }}
         >
           <Stack>

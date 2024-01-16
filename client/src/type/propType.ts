@@ -8,9 +8,12 @@ type PropsLayout = {
 
 type PropsSelect = {
   value?: string | number;
-  options: SelectOptionType[];
-  onChange: any;
-  label: string | number;
+  options?: SelectOptionType[];
+  onChange?: any;
+  label?: string | number;
+  register?: unknown
+  field?: string
+   defaultValue?: string | number
 };
 
 type ToastProp = {
