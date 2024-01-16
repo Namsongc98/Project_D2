@@ -1,5 +1,5 @@
 import { AlertColor } from "@mui/material";
-import { IProfileUser, SelectOptionType, StatusApi } from ".";
+import { IProfileUser, ImageMultiple, SelectOptionType, StatusApi } from ".";
 import { Dayjs } from "dayjs";
 
 type PropsLayout = {
@@ -45,10 +45,14 @@ type PropAvatar = {
 };
 
 type PropDatePick = {
-  onChange: (newValue : Dayjs | null)=>void;
+  onChange: (newValue: Dayjs | null) => void;
   value: string | undefined;
   label: string;
 };
+
+type PropImages = {
+  imageRoom: ImageMultiple
+}
 
 export type {
   PropsLayout,
@@ -60,4 +64,6 @@ export type {
   AlertProp,
   AlertValidate,
   PropDatePick,
+  PropImages,
+
 };

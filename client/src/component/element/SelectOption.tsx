@@ -4,7 +4,7 @@ import { PropsSelect } from "../../type";
 const SelectOption = ({ value, options, onChange, label }: PropsSelect) => {
   return (
     <>
-      <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+      <FormControl sx={{ m: 1, minWidth: "100%" }} size="small">
         <InputLabel id="demo-select-small-label" className="bg-white">
           {label}
         </InputLabel>

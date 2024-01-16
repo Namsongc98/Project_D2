@@ -14,7 +14,6 @@ import {
 import { SelectOptionType, StatusApi } from "../../type";
 import { postProfile, upfileClodinary } from "../../service";
 
-
 import {
   Button,
   Input,
@@ -22,7 +21,11 @@ import {
   SelectOption,
 } from "../../component/element";
 import AvatarUser from "../../component/componentReuse/AvatarUser";
-import { Changepassword, ModalComponent, ToastComponent } from "../../component/componentReuse";
+import {
+  Changepassword,
+  ModalComponent,
+  ToastComponent,
+} from "../../component/componentReuse";
 
 const Profile = () => {
   const [open, setOpen] = useState(false);
@@ -54,9 +57,6 @@ const Profile = () => {
     InputTypeFileImg.setValueImg(user?.avatar || "");
     selectGender.setValue(user?.gender || "");
   }, [user]);
-
-
-
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -109,7 +109,7 @@ const Profile = () => {
 
   return (
     <div className="mx-auto my-0 max-w-[1024px]  w-full ">
-      {statusApi.message && <ToastComponent status={statusApi} />}
+      {statusApi.message && <ToastComponent status={statusApi}/>}
       <div className="relative my-3">
         <div className="bg-slate-100 flex gap-3 p-3 ">
           <div className=" bg-white w-1/4 px-3 py-2  ">
@@ -163,8 +163,9 @@ const Profile = () => {
                     <Button
                       type="submit"
                       disabled={loading}
-                      className={`text-white ${loading && "opacity-70"
-                        } bg-[#5A8DEE] w-full rounded px-6 py-2 hover:opacity-80 shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] hover:shadow-[0_4px_12px_0_rgba(90,141,238,0.6)]`}
+                      className={`text-white ${
+                        loading && "opacity-70"
+                      } bg-[#5A8DEE] w-full rounded px-6 py-2 hover:opacity-80 shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] hover:shadow-[0_4px_12px_0_rgba(90,141,238,0.6)]`}
                     >
                       Lưu
                     </Button>
@@ -201,10 +202,11 @@ const Profile = () => {
                 </div>
                 <div className="wp-right">
                   <div
-                    className={` w-44 h-44 border border-solid mx-auto my-0 p-1  overflow-hidden ${InputTypeFileImg.errorImg
-                      ? " border-red-600"
-                      : "border-[#cccbcb]"
-                      }`}
+                    className={` w-44 h-44 border border-solid mx-auto my-0 p-1  overflow-hidden ${
+                      InputTypeFileImg.errorImg
+                        ? " border-red-600"
+                        : "border-[#cccbcb]"
+                    }`}
                   >
                     {InputTypeFileImg.avatarView ? (
                       <img

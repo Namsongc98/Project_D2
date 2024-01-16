@@ -4,26 +4,27 @@ import { ToastProp } from "../../type";
 import { useEffect, useState } from "react";
 
 const ToastComponent = (props: ToastProp) => {
-  const { status } = props;
-  const [rest, setReset] = useState(status);
-  switch (rest.type) {
+  const { status, setStatusApi } = props;
+
+  switch (status.type) {
     case "error":
-      toast.error(rest.message, {
+      console.log(status)
+      toast.error(status.message, {
         position: toast.POSITION.TOP_RIGHT,
       });
       break;
     case "warn":
-      toast.warn(rest.message, {
+      toast.warn(status.message, {
         position: toast.POSITION.TOP_RIGHT,
       });
       break;
     case "success":
-      toast.success(rest.message, {
+      toast.success(status.message, {
         position: toast.POSITION.TOP_RIGHT,
       });
       break;
     case "info":
-      toast.info(rest.message, {
+      toast.info(status.message, {
         position: toast.POSITION.TOP_RIGHT,
       });
       break;
@@ -31,12 +32,9 @@ const ToastComponent = (props: ToastProp) => {
       break;
   }
   useEffect(() => {
+    console.log(status)
     return () => {
-      setReset((prevStatus) => ({
-        ...prevStatus,
-        type: "",
-        message: "",
-      }));
+      setStatusApi({ type: "", message: "" });
     };
   }, [status]);
   return (

@@ -51,11 +51,11 @@ function App() {
 
           {/* layout host */}
           <Route element={<PrivateHost />}>
-            {layoutHost.map((router) => {
+            {layoutHost.map((router, index) => {
               const Layout = LayoutHost;
               const Page = router.component;
               return (
-                <Route path="/" element={<Layout />}>
+                <Route key={index} path="/" element={<Layout />}>
                   <Route path={router.path} element={<Page />} />
                 </Route>
               );

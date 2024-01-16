@@ -1,44 +1,52 @@
 import { useEffect, useState } from "react";
+import { ImgageFiles } from "../type";
+
+
 
 const useInputMultiple = () => {
-  const [valueArrImg, setValueArrImg] = useState([] as any);
   const [arrImgView, setArrImgView] = useState([] as any);
   const [errorImg, setError] = useState("");
   const allowedTypes = ["image/jpeg", "image/png", "image/gif"];
+
   const onChange = (e: React.FormEvent<HTMLInputElement>) => {
-    if (!e.currentTarget.files) {
+    if (!e.currentTarget.files?.length) {
       setError("Bạn chưa chọn ảnh");
       return;
     }
     const fileView = e.currentTarget.files;
-    console.log(fileView);
-    setValueArrImg([...fileView]);
-
-    // setArrImgView(newImageUrls);
-
-    // setAvatarView(URL.createObjectURL(fileView));
-    // if (!allowedTypes.includes(fileView?.type)) {
-    //   setError("Chỉ sử dụng ảnh kiểu JPEG, PNG, GIF");
-    // }
+    const filesArray = Array.from(fileView);
+    const newImageUrls: ImgageFiles[] = [];
+    filesArray.forEach((image, index: number) => {
+      newImageUrls.push({ id: index, error: true, url: URL.createObjectURL(image), file: image })
+    });
+    setArrImgView(newImageUrls)
   };
 
   useEffect(() => {
-    const newImageUrls: any = [];
-    valueArrImg.forEach((image: any) =>
-      newImageUrls.push(URL.createObjectURL(image))
-    );
+    const newImageUrls: ImgageFiles[] = [];
+    arrImgView.forEach((image: ImgageFiles, index: number) => {
+      if (!allowedTypes.includes(image.file.type)) {
+        newImageUrls.push({ id: index, error: true, url: URL.createObjectURL(image.file), file: image.file })
+        setError("Chỉ sử dụng ảnh kiểu JPEG, PNG, GIF");
+      } else {
+        newImageUrls.push({ id: index, error: false, url: URL.createObjectURL(image.file), file: image.file })
+      }
+    });
+    if (arrImgView.lengh > 4) {
+      setError("Chỉ được chon 5 ảnh");
+    }
     setArrImgView(newImageUrls);
-    console.log("valueArrImg", valueArrImg);
-    console.log("arrImgView", arrImgView);
     return () => {
       arrImgView.forEach((image: any) => URL.revokeObjectURL(image));
+      setError("")
     };
-  }, [valueArrImg]);
 
+  }, [arrImgView.length]);
   return {
     arrImgView,
     onChange,
     errorImg,
+    setArrImgView,
   };
 };
 export default useInputMultiple;

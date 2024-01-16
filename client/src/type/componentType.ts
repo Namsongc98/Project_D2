@@ -1,3 +1,5 @@
+
+
 type ButonType = {
   type: "submit" | "reset" | "button" | undefined;
   disabled?: boolean;
@@ -71,6 +73,25 @@ interface IFormInput {
   password: string;
 }
 
+type ImgageFiles = {
+  id: number, error: boolean, url: string, file: File
+}
+
+type ImageMultiple = {
+  arrImgView: Array<ImgageFiles>,
+  onChange: (e: React.FormEvent<HTMLInputElement>) => void,
+  errorImg: string,
+  setArrImgView: React.Dispatch<React.SetStateAction<Array<ImgageFiles>>>
+}
+
+type TextArea = {
+  value: string,
+  onChange: (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void,
+  setValue: React.Dispatch<React.SetStateAction<string>>;
+  label?: string
+}
+
+
 export type {
   ButonType,
   InputHook,
@@ -84,4 +105,7 @@ export type {
   IChangePasswordSubmit,
   InputDate,
   checkboxType,
+  ImageMultiple,
+  ImgageFiles,
+  TextArea
 };
