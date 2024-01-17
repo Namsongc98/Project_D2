@@ -1,5 +1,3 @@
-import Input from "../../component/Input";
-import Button from "../../component/Button";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,10 +8,15 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { AxiosError } from "axios";
 import { loginUser } from "../../service";
+import { AppDispatch } from "../../store/configStore";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../store/reducer/userSlice";
+import { setLocalToken } from "../../common";
+import { Button, Input } from "../../component/element";
 
 const Login = () => {
   const [error, setError] = useState<string | undefined>("");
-
+  const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
 
   const schema = yup.object({
@@ -43,8 +46,8 @@ const Login = () => {
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     try {
       const login = await loginUser(data);
-      localStorage.setItem("accessToken", login.data.accessToken);
-      localStorage.setItem("user", JSON.stringify(login.data.user));
+      dispatch(setUser(login.data.user));
+      setLocalToken(login.data.accessToken);
       navigate("/");
     } catch (error: unknown) {
       if (error instanceof AxiosError && error.response?.data) {
@@ -102,6 +105,7 @@ const Login = () => {
                 label="email"
                 register={register}
                 className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
+                required={true}
               />
               <Input
                 type="text"
@@ -110,6 +114,7 @@ const Login = () => {
                 label="password"
                 register={register}
                 className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
+                required={true}
               />
               <Button
                 type="submit"

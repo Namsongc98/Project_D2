@@ -1,4 +1,6 @@
 import { UserManager } from "../page/admin"
+import { PostRoom } from "../page/host"
+import HostStatistics from "../page/host/HostStatistics"
 import { Home, Login, Register, SearchHotel } from "../page/user"
 import Profile from "../page/user/Profile"
 import { Layout } from "../type"
@@ -15,6 +17,11 @@ const privateAmin: Layout = [
     { path: "/user", component: UserManager, layout: true }
 ]
 
+const layoutHost: Layout = [
+    { path: "/host", component: HostStatistics, layout: true },
+    { path: "/host/postroom", component: PostRoom, layout: true }
+]
+
 // layout login register
 const member = [
     { path: "/register", component: Register, layout: true },
@@ -22,4 +29,4 @@ const member = [
 
 ]
 
-export { publicPage, privateAmin, member }
+export { publicPage, privateAmin, member, layoutHost }

@@ -10,7 +10,8 @@
       "lastName": "",
       "age": "24",
       "phone": "09876554",
-      "avatar": ""
+      "avatar": "",
+      "non_block": false
     },
     {
       "email": "namsongc9812@gmail.com",
@@ -23,12 +24,100 @@
       "password": "$2a$10$Hf9TtksLmMnrSxmSbRQNT.3g7arnosQFdvo63IVZIqiTx5Mz2D7cy",
       "id": "313c9b13-dffe-42ed-9d35-72161f02d9ba",
       "role": "Admin",
-      "firstName": "rtyret",
-      "lastName": "retyty",
+      "firstName": "Nam",
+      "lastName": "Sơn",
       "gender": "Nam",
-      "age": "45",
-      "phone": "45",
-      "avatar": {}
+      "age": "24",
+      "phone": "0981875345",
+      "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705031469/oevjxkxiadlj8icukhbw.jpg"
+    },
+    {
+      "email": "minhduong@gmail.com",
+      "password": "$2a$10$L22dv5QuhZWt.HsoQjaV9.feWvXD0ENjvZGHWUB9lVe1e7ztR0xPS",
+      "id": "4d62c98c-0d63-4ed1-94ca-a3cffaf874f3",
+      "role": "Guide",
+      "firstName": "",
+      "lastName": "",
+      "gender": "",
+      "age": "",
+      "phone": "",
+      "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1704970591/oziabo4elqfyqab5dye1.png"
+    },
+    {
+      "email": "minhduong12@gmail.com",
+      "password": "$2a$10$Xv9yjU0rFzCeY9ECZVo7aO/pjobPtaC9H3Q0ZePE7GmfgNPInAXly",
+      "id": "af4aba3c-7c1c-46e9-b914-39773248be53",
+      "role": "Guide"
+    },
+    {
+      "email": "anhphudeptrai@gmail.com",
+      "password": "$2a$10$vS1EGfR98vVaBt/BU03/uud3wb46oycuBV9tGffUXT.qgYKTsI3d.",
+      "id": "d219bf37-f35c-425d-9c6d-e074b0e4f9f3",
+      "role": "Guide",
+      "firstName": "Phú ",
+      "lastName": "Đại ca",
+      "gender": "Nam",
+      "age": "",
+      "phone": "",
+      "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705462573/ybc4vdsr0fdqungmkkir.png"
+    }
+  ],
+  "touris": [
+    {
+      "id": 1,
+      "city": "",
+      "user_id": 1,
+      "approve_room": true,
+      "name": "",
+      "price": 0,
+      "decription": "",
+      "created_at": "",
+      "address": "",
+      "type_tourism": "Khách sạn",
+      "bathroom": 1,
+      "bedroom": 1,
+      "cout_people": 2,
+      "image": [
+        {
+          "id": 1,
+          "image": ""
+        }
+      ]
+    },
+    {
+      "user_id": "d219bf37-f35c-425d-9c6d-e074b0e4f9f3",
+      "created_at": 1705465182373,
+      "name": "Hoàng Mai",
+      "address": "Mỹ Đình, Hà Nội",
+      "price": 235445,
+      "cout_people": 235445,
+      "city": "Lào Cai",
+      "type_tourism": 32,
+      "bedroom": 1,
+      "bathroom": 1,
+      "decription": "sgsgfsdfg",
+      "approve_room": false,
+      "imge": [
+        {
+          "id": 1,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705465182/qiytdfwleirmnok0pu95.webp"
+        },
+        {
+          "id": 2,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705465183/uqlv1hlpwhldopfbbyt5.webp"
+        }
+      ],
+      "id": 1
+    }
+  ],
+  "booking": [
+    {
+      "id": 1,
+      "id_touris": 1,
+      "start_date": "987",
+      "end_date": "4567",
+      "cout_persion": 2,
+      "total": 3
     }
   ]
 }

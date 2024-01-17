@@ -1,8 +1,8 @@
-import Footer from "../component/Footer";
-import Header from "../component/Header";
-import { Props } from "../type";
+import Footer from "../component/componentPage/Footer";
+import Header from "../component/componentPage/Header";
+import { PropsLayout } from "../type";
 
-const DefaultLayout = ({ children }: Props) => {
+const DefaultLayout = ({ children }: PropsLayout) => {
   return (
     <div className="flex flex-col w-full min-h-screen">
       <Header />

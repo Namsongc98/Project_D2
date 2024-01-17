@@ -1,3 +1,6 @@
+
+
+
 type ButonType = {
   type: "submit" | "reset" | "button" | undefined;
   disabled?: boolean;
@@ -9,6 +12,13 @@ type ButonType = {
 type InputHook = {
   value: string;
   onChange: (e: React.FormEvent<HTMLInputElement>) => string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
+};
+
+type InputDate = {
+  value: string;
+  onChange: (e: React.FormEvent<HTMLInputElement>) => string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
 };
 
 type InputFileHook = {
@@ -20,8 +30,9 @@ type InputFileHook = {
 };
 
 type InputFile = {
-  onChange: (e: React.FormEvent<HTMLInputElement>) => void;
-}
+  handleChange: (e: React.FormEvent<HTMLInputElement>) => void;
+  multiple?: boolean;
+};
 
 type InputType = {
   type: string;
@@ -32,21 +43,60 @@ type InputType = {
   onChange?: (e: React.FormEvent<HTMLInputElement>) => string;
   register?: unknown;
   className: string;
+  required: boolean,
+  defaultValue?: string | number
+};
+
+type checkboxType = {
+  checkbox: string[] | number[];
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  label: string;
+  value: number | string;
 };
 
 type SelectOptionType = {
-  label: string,
-  value: string,
-}
+  label?: string | number;
+  value: string | number;
+};
 
 interface IFormRegister extends IFormInput {
   confirmPassword: string;
+}
+
+interface IChangePasswordSubmit {
+  oldPassword: string;
+  newPassword: string;
+}
+interface IChangePassword extends IChangePasswordSubmit {
+  confirmNewPassword: string;
 }
 
 interface IFormInput {
   email: string;
   password: string;
 }
+
+type ImgageFiles = {
+  id: number, error: boolean, url: string, file: File
+}
+
+type ImageMultiple = {
+  arrImgView: Array<ImgageFiles>,
+  onChange: (e: React.FormEvent<HTMLInputElement>) => void,
+  errorImg: string,
+  setArrImgView: React.Dispatch<React.SetStateAction<Array<ImgageFiles>>>
+}
+
+type TextArea = {
+  value?: string,
+  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void,
+  setValue?: React.Dispatch<React.SetStateAction<string>>;
+  label?: string
+  register?: unknown;
+  title: string
+  required: boolean
+}
+
 
 export type {
   ButonType,
@@ -57,4 +107,11 @@ export type {
   InputFileHook,
   InputFile,
   SelectOptionType,
+  IChangePassword,
+  IChangePasswordSubmit,
+  InputDate,
+  checkboxType,
+  ImageMultiple,
+  ImgageFiles,
+  TextArea
 };

@@ -1,9 +1,9 @@
 import Button from "@mui/material/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import { InputFile } from "../type";
+import { InputFile } from "../../type";
 
 const InputFileUpload = (props: InputFile) => {
-  const { onChange } = props;
+  const { handleChange, multiple } = props;
 
   return (
     <Button
@@ -12,7 +12,10 @@ const InputFileUpload = (props: InputFile) => {
       startIcon={<CloudUploadIcon />}
     >
       Upload file
-      <input hidden type="file" onChange={(e) => onChange(e)} />
+      {multiple ?
+        <input hidden type="file" onChange={(e) => handleChange(e)} multiple /> :
+        <input hidden type="file" onChange={(e) => handleChange(e)} />
+      }
     </Button>
   );
 };
