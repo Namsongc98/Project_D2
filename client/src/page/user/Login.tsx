@@ -1,4 +1,3 @@
-
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -25,12 +24,12 @@ const Login = () => {
       .string()
       .required("Email là bắt buộc")
       .email("Email không hợp lệ")
-      .min(8, "Passworrd trên 8 kí tự")
+      .min(6, "Passworrd trên 8 kí tự")
       .max(32, "Password dưới 32 kí tự"),
     password: yup
       .string()
       .required("Password là bắt buộc")
-      .min(8, "Passworrd trên 8 kí tự")
+      .min(6, "Passworrd trên 8 kí tự")
       .max(32, "Password dưới 32 kí tự"),
   });
   const {
@@ -106,6 +105,7 @@ const Login = () => {
                 label="email"
                 register={register}
                 className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
+                required={true}
               />
               <Input
                 type="text"
@@ -114,6 +114,7 @@ const Login = () => {
                 label="password"
                 register={register}
                 className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
+                required={true}
               />
               <Button
                 type="submit"

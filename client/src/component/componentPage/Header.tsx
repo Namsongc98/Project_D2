@@ -9,8 +9,11 @@ import { useGetUser } from "../../hook";
 import Popup from "../componentReuse/Popup";
 import { remoteToken } from "../../common";
 import AvatarUser from "../componentReuse/AvatarUser";
+import { useSelector } from "react-redux";
+import { getUser } from "../../store/reducer/userSlice";
 
 const Header = () => {
+  const userSelector = useSelector(getUser);
   const navigate = useNavigate();
   const user = useGetUser();
   const [anchor, setAnchor] = useState<null | HTMLElement>(null);
@@ -35,7 +38,7 @@ const Header = () => {
             <HomeIcon className="text-[#1e68ff]" />
             <p>Trang chủ</p>
           </Link>
-          {user?.email ? (
+          {user ? (
             <>
               <div
                 className="flex gap-2 items-center hover:bg-[#e6e6e6] px-3 py-2 rounded-md"
@@ -48,10 +51,17 @@ const Header = () => {
                 <div className="flex flex-col  text-base text-[#808089]">
                   {user?.role === "Admin" ? (
                     <Link
-                      to="/user"
+                      to="/admin"
                       className="flex items-center gap-1 px-3 hover:bg-[#e6e6e6] py-2 hover:text-[#808089] "
                     >
                       <AdminPanelSettingsIcon /> <span>Admin</span>{" "}
+                    </Link>
+                  ) : user?.role === "Host" ? (
+                    <Link
+                      to="/host"
+                      className="flex items-center gap-1 px-3 hover:bg-[#e6e6e6] py-2 hover:text-[#808089] "
+                    >
+                      <AdminPanelSettingsIcon /> <span>Host</span>{" "}
                     </Link>
                   ) : (
                     <></>

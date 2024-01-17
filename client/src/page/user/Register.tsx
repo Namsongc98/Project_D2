@@ -115,6 +115,7 @@ const Register = () => {
               label="email"
               register={register}
               className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
+              required={true}
             />
             <Input
               type="text"
@@ -123,6 +124,7 @@ const Register = () => {
               label="password"
               register={register}
               className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
+              required={true}
             />
             <Input
               type="text"
@@ -131,6 +133,7 @@ const Register = () => {
               label="confirmPassword"
               register={register}
               className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
+              required={true}
             />
 
             <Button

@@ -1,5 +1,6 @@
 
 
+
 type ButonType = {
   type: "submit" | "reset" | "button" | undefined;
   disabled?: boolean;
@@ -42,6 +43,8 @@ type InputType = {
   onChange?: (e: React.FormEvent<HTMLInputElement>) => string;
   register?: unknown;
   className: string;
+  required: boolean,
+  defaultValue?: string | number
 };
 
 type checkboxType = {
@@ -53,7 +56,7 @@ type checkboxType = {
 
 type SelectOptionType = {
   label?: string | number;
-  value: string | number; 
+  value: string | number;
 };
 
 interface IFormRegister extends IFormInput {
@@ -91,6 +94,7 @@ type TextArea = {
   label?: string
   register?: unknown;
   title: string
+  required: boolean
 }
 
 

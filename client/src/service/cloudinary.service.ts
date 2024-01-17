@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const upfileClodinary = async (valueImgFile: File) => {
+  console.log(valueImgFile)
   const cloudName = import.meta.env.VITE_CLOUD_NAME;
   const formData = new FormData();
   formData.append("file", valueImgFile);

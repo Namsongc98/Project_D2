@@ -11,7 +11,7 @@ import {
   useInputTypeNumber,
   useSelectOption,
 } from "../../hook";
-import { SelectOptionType, StatusApi } from "../../type";
+import { SelectOptionType } from "../../type";
 import { postProfile, upfileClodinary } from "../../service";
 
 import {
@@ -21,21 +21,21 @@ import {
   SelectOption,
 } from "../../component/element";
 import AvatarUser from "../../component/componentReuse/AvatarUser";
-import {
-  Changepassword,
-  ModalComponent,
-  ToastComponent,
-} from "../../component/componentReuse";
+import { Changepassword, ModalComponent } from "../../component/componentReuse";
+import SnackBarReuse from "../../component/componentReuse/SnackBarReuse";
+import { AlertColor } from "@mui/material";
+import { AppDispatch } from "../../store/configStore";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../store/reducer/userSlice";
 
 const Profile = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(!open);
   const [loading, setLoading] = useState(false);
   const user = useGetUser();
-  const [statusApi, setStatusApi] = useState<StatusApi>({
-    type: "",
-    message: "",
-  });
+  const [type, setType] = useState<AlertColor>("success");
+  const [error, setError] = useState("");
+  const dispatch: AppDispatch = useDispatch();
 
   const genders = ["Nam", "Nữ"];
   const options: SelectOptionType[] = [
@@ -68,7 +68,8 @@ const Profile = () => {
         profilePort(urlAvatar);
         return;
       } catch (error: unknown) {
-        setStatusApi({ type: "error", message: "Upload ảnh thất bại!" });
+        setType("error");
+        setError("Upload ảnh thất bại!");
         if (typeof error === "string") throw new Error(error);
       } finally {
         setLoading(false);
@@ -88,10 +89,15 @@ const Profile = () => {
       avatar: avatarUrl,
     };
     try {
-      if (user) await postProfile(user.id, newProfile);
-      setStatusApi({ type: "success", message: "Cập nhật thành công!" });
+      if (user) {
+        const res = await postProfile(user.id, newProfile);
+        dispatch(setUser(res.data));
+      }
+      setType("success");
+      setError("Cập nhật thành công");
     } catch (error: unknown) {
-      setStatusApi({ type: "error", message: "Cập nhật thất bại!" });
+      setType("error");
+      setError("Upload ảnh thất bại!");
       if (typeof error === "string") throw new Error(error);
     } finally {
       setLoading(false);
@@ -109,7 +115,7 @@ const Profile = () => {
 
   return (
     <div className="mx-auto my-0 max-w-[1024px]  w-full ">
-      {statusApi.message && <ToastComponent status={statusApi}/>}
+      <SnackBarReuse type={type} message={error} />
       <div className="relative my-3">
         <div className="bg-slate-100 flex gap-3 p-3 ">
           <div className=" bg-white w-1/4 px-3 py-2  ">
@@ -140,6 +146,7 @@ const Profile = () => {
                       placeholder=""
                       title="Họ"
                       {...inputFirstName}
+                      required={false}
                     />
                   </div>
                   <div className="wp-input">
@@ -150,6 +157,7 @@ const Profile = () => {
                       className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
                       title="Tên"
                       {...inputLastName}
+                      required={false}
                     />
                   </div>
 
@@ -181,12 +189,13 @@ const Profile = () => {
                 <div className="wp-form-left">
                   <div className="wp-input">
                     <Input
-                      type="text"
+                      type="number"
                       label="age"
                       placeholder=""
                       className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
                       title="Tuổi"
                       {...age}
+                      required={false}
                     />
                   </div>
                   <div className="wp-input">
@@ -197,6 +206,7 @@ const Profile = () => {
                       className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
                       title="Số điện thoại"
                       {...phone}
+                      required={false}
                     />
                   </div>
                 </div>

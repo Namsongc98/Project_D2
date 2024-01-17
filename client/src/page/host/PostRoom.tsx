@@ -1,24 +1,22 @@
-import { Typography } from "@mui/material";
+import { AlertColor } from "@mui/material";
 import { Button, Input, SelectOption, TextArea } from "../../component/element";
-import { IRoom, SelectOptionType, StatusApi } from "../../type";
-import {
-  useButton,
-  useInputMultiple,
-} from "../../hook";
-import { PreviewImg, ToastComponent } from "../../component/componentReuse";
+import { IRoomSubmit, ImgageFiles, SelectOptionType } from "../../type";
+import { useButton, useGetUser, useInputMultiple } from "../../hook";
+import { PreviewImg } from "../../component/componentReuse";
 import { useEffect, useState } from "react";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
 import SnackBarReuse from "../../component/componentReuse/SnackBarReuse";
+import { createRoom, upfileClodinary } from "../../service";
+import { Title } from "../../component/componentPage";
 
 const PostRoom = () => {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | undefined>()
-  const [open, setOpen] = useState(false);
-  const [type, setType] = useState("");
-
+  const [type, setType] = useState<AlertColor>("success");
+  const [error, setError] = useState("");
+  const user = useGetUser();
   //  SelectOption
   const City = [
     "Hà Nội",
@@ -44,33 +42,18 @@ const PostRoom = () => {
   // input type ảnh
   const imageRoom = useInputMultiple();
   // butom reset
-  // const resetButton = useButton();
+  const resetButton = useButton();
 
   const schema = yup.object({
-    nameHotel: yup
-      .string()
-      .required("Nhập tên khác sạn"),
-    address: yup
-      .string()
-      .required("Nhập địa chỉ"),
-    price: yup
-      .number()
-      .required("Nhập giá tiền "),
-    city: yup
-      .string()
-      .required("Nhập tên thành phố "),
-    typeTouris: yup
-      .string()
-      .required("Nhập loại Du lich"),
-    bedRoom: yup
-      .number()
-      .required("Nhập số lượng phòng ngủ"),
-    bathRoom: yup
-      .number()
-      .required("Nhập số lượng phòng tắm"),
-    decription: yup
-      .string()
-      .required("Nhập mô tả phòng"),
+    address: yup.string().required("Nhập địa chỉ"),
+    nameHotel: yup.string().required("Nhập tên khách sạn"),
+    price: yup.number().required("Nhập giá tiền "),
+    coutPeople: yup.number().required("Nhập số lượng người "),
+    city: yup.string().required("Nhập tên thành phố "),
+    typeTouris: yup.string().required("Nhập loại Du lich"),
+    bedRoom: yup.number().required("Nhập số lượng phòng ngủ"),
+    bathRoom: yup.number().required("Nhập số lượng phòng tắm"),
+    decription: yup.string().required("Nhập mô tả phòng"),
   });
 
   const {
@@ -81,59 +64,98 @@ const PostRoom = () => {
     resolver: yupResolver(schema),
   });
 
-  const message: string | undefined | number =
-    errors?.nameHotel?.message ||
-    errors?.address?.message ||
-    errors?.price?.message ||
-    errors?.city?.message ||
-    errors?.typeTouris?.message ||
+  const message: string | undefined =
+    errors.nameHotel?.message ||
+    errors.address?.message ||
+    errors.price?.message ||
+    errors.coutPeople?.message ||
+    errors.city?.message ||
+    errors.typeTouris?.message ||
     errors.bedRoom?.message ||
     errors.bathRoom?.message ||
     errors.decription?.message;
 
-  console.log(message)
-  const handleClick = () => {
-    setOpen(true);
-  };
   useEffect(() => {
-    setError(message);
-    setType("error")
-    handleClick()
+    if (message) {
+      setType("error");
+      setError(message);
+    }
     return () => {
       setError("");
     };
   }, [message]);
+  const onSubmit: SubmitHandler<IRoomSubmit> = async (
+    data: IRoomSubmit
+  ): Promise<void> => {
+    setLoading(true);
+    if (!imageRoom.arrImgView.length) {
+      setType("error");
+      setError("Bạn chưa chọn ảnh");
+      setLoading(false);
+      return;
+    }
+    const uploadcClodinary = imageRoom.arrImgView.map((file: ImgageFiles) =>
+      upfileClodinary(file.file)
+    );
+    try {
+      const uploadUrl = await Promise.all(uploadcClodinary);
+      const dataImg = [
+        ...uploadUrl.map((item, index) => ({ id: ++index, url: item })),
+      ];
 
-  const onSubmit: SubmitHandler<IRoom> = async (): Promise<void> => {
+      const room = {
+        user_id: user?.id,
+        created_at: Date.now(),
+        name: data.nameHotel,
+        address: data.address,
+        price: data.price,
+        cout_people: data.coutPeople,
+        city: data.city,
+        type_tourism: data.typeTouris,
+        bedroom: data.bedRoom,
+        bathroom: data.bathRoom,
+        decription: data.decription,
+        image: dataImg,
+        approve_room: false,
+      };
 
-  }
+      await createRoom(room);
+      setType("success");
+      setError("Tạo phòng thành công");
+    } catch (error) {
+      setType("error");
+      setError("Tạo phòng thất bại");
+      setLoading(false);
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-
-  // const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-  //   resetButton.onClick(e);
-  //   inputCity.setValue("");
-  //   inputHost.setValue("");
-  //   inputPrice.setValue("");
-  // };
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    resetButton.onClick(e);
+  };
 
   return (
-    <section className="flex justify-center items-center ">
-      {/* <SnackBarReuse message={error} open={open} setOpen={setOpen} type={type} /> */}
+    <section className="flex justify-center items-center relative">
+      <SnackBarReuse message={error} type={type} />
       <form
         action=""
         className="bg-white rounded-xl p-4 mt-7 min-w-[70%] shadow-md"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <Typography variant="h6" sx={{ marginBottom: 2 }}>
-          Thêm phòng
-        </Typography>
-
+        <Title>Thêm phòng</Title>
         <div className="flex flex-row gap-5 mt-5">
           <div className="w-2/3">
             <PreviewImg imageRoom={imageRoom} />
             <div className="w-full flex justify-between mt-4 gap-2 ">
               <div className="w-2/3">
-                <TextArea register={register} title="Describe" label="decription" />
+                <TextArea
+                  register={register}
+                  title="Describe"
+                  label="decription"
+                  required={true}
+                />
               </div>
               <div className="flex justify-between flex-wrap w-1/3 ">
                 <SelectOption
@@ -160,9 +182,9 @@ const PostRoom = () => {
               title="Tên khách sạn"
               placeholder="Phập tên khách sạn..."
               className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
-              label="name"
+              label="nameHotel"
               register={register}
-
+              required={true}
             />
             <Input
               type="text"
@@ -171,7 +193,7 @@ const PostRoom = () => {
               className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
               label="address"
               register={register}
-
+              required={true}
             />
             <Input
               type="number"
@@ -180,7 +202,18 @@ const PostRoom = () => {
               label="price"
               placeholder="Phập giá tiền..."
               register={register}
-
+              required={true}
+              defaultValue={0}
+            />
+            <Input
+              type="number"
+              title="Số người có thể ở"
+              className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
+              label="coutPeople"
+              placeholder="Phập số người..."
+              register={register}
+              required={true}
+              defaultValue={1}
             />
             <div className="flex flex-col gap-7 mt-5">
               <SelectOption
@@ -201,15 +234,16 @@ const PostRoom = () => {
                 <Button
                   type="submit"
                   disabled={loading}
-                  className={`text-white ${loading && "opacity-70"
-                    } bg-[#5A8DEE] w-full rounded px-6 py-2 hover:opacity-80 shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] hover:shadow-[0_4px_12px_0_rgba(90,141,238,0.6)]`}
+                  className={`text-white ${
+                    loading && "opacity-70"
+                  } bg-[#5A8DEE] w-full rounded px-6 py-2 hover:opacity-80 shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] hover:shadow-[0_4px_12px_0_rgba(90,141,238,0.6)]`}
                 >
                   Lưu
                 </Button>
                 <Button
                   type="reset"
                   className=" bg-slate-100 w-full rounded px-6 py-2 hover:opacity-80 shadow hover:shadow-md"
-                // onClick={(e) => handleClick(e)}
+                  onClick={(e) => handleClick(e)}
                 >
                   Xóa
                 </Button>

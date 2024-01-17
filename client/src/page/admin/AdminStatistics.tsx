@@ -2,7 +2,7 @@ import { Box, Container, Grid, Paper } from "@mui/material";
 import { Chart, CopyRight } from "../../component/componentPage";
 import Deposits from "../../component/componentPage/host/Deposit";
 
-const HostStatistics = () => {
+const AdminStatistics = () => {
   return (
     <Box component="section">
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
@@ -34,7 +34,7 @@ const HostStatistics = () => {
           </Grid>
           <Grid item xs={12}>
             <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-            
+             
             </Paper>
           </Grid>
         </Grid>
@@ -44,4 +44,4 @@ const HostStatistics = () => {
   );
 };
 
-export default HostStatistics;
+export default AdminStatistics;

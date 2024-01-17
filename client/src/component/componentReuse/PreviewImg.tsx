@@ -1,12 +1,12 @@
-import { Box, Stack, createTheme } from "@mui/material";
+import { AlertColor, Box, Stack, createTheme } from "@mui/material";
 import { InputFileUpload } from "../element";
 import { ThemeProvider } from "@emotion/react";
 
 import FileOpenIcon from "@mui/icons-material/FileOpen";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { PropImages } from "../../type";
-import { ToastComponent } from ".";
 import { useEffect, useState } from "react";
+import SnackBarReuse from "./SnackBarReuse";
 const theme = createTheme({
   components: {
     MuiStack: {
@@ -23,10 +23,10 @@ const theme = createTheme({
 
 function PreviewImg({ imageRoom }: PropImages) {
   const { arrImgView, onChange, errorImg, setArrImgView } = imageRoom;
-  const [status, setStatus] = useState({
-    type: "",
-    message: "",
-  });
+
+  const [type, setType] = useState<AlertColor>("success");
+  const [message, setMessage] = useState("");
+
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     onChange(e);
   };
@@ -40,19 +40,15 @@ function PreviewImg({ imageRoom }: PropImages) {
 
   useEffect(() => {
     if (errorImg) {
-      setStatus({ type: "error", message: errorImg });
+      setType("error");
+      setMessage(errorImg);
     }
-    return () => {
-      setStatus({
-        type: "",
-        message: "",
-      });
-    };
+    return () => {};
   }, [errorImg]);
 
   return (
     <>
-      {status.message && <ToastComponent status={status} />}
+      <SnackBarReuse type={type} message={message} />
       <ThemeProvider theme={theme}>
         <Box
           sx={{

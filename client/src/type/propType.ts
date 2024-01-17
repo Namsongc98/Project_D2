@@ -1,5 +1,12 @@
 import { AlertColor } from "@mui/material";
-import { IProfileUser, ImageMultiple, SelectOptionType, StatusApi } from ".";
+import {
+  IProfileUser,
+  ImageMultiple,
+  PathType,
+  SelectOptionType,
+  StatusApi,
+  typeGetRoom,
+} from ".";
 import { Dayjs } from "dayjs";
 
 type PropsLayout = {
@@ -11,9 +18,9 @@ type PropsSelect = {
   options?: SelectOptionType[];
   onChange?: any;
   label?: string | number;
-  register?: unknown
-  field?: string
-   defaultValue?: string | number
+  register?: unknown;
+  field?: string;
+  defaultValue?: string | number;
 };
 
 type ToastProp = {
@@ -54,8 +61,26 @@ type PropDatePick = {
 };
 
 type PropImages = {
-  imageRoom: ImageMultiple
-}
+  imageRoom: ImageMultiple;
+};
+
+type PropTypeSnackBar = {
+  type: AlertColor;
+  message: string;
+};
+type PropAppBarType = {
+  toggleDrawer: () => void;
+  open: boolean;
+};
+type PropDrawerType = {
+  toggleDrawer: () => void;
+  open: boolean;
+  paths: Array<PathType>;
+};
+
+type PropsRoom = {
+  data: typeGetRoom[];
+};
 
 export type {
   PropsLayout,
@@ -68,5 +93,8 @@ export type {
   AlertValidate,
   PropDatePick,
   PropImages,
-
+  PropTypeSnackBar,
+  PropAppBarType,
+  PropDrawerType,
+  PropsRoom,
 };
