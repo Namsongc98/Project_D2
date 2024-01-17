@@ -1,24 +1,26 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import { PropsSelect } from "../type";
+import { PropsSelect } from "../../type";
 
-const SelectOption = ({ value, options, onChange }: PropsSelect) => {
+const SelectOption = ({ value, options, onChange, label, register, field, defaultValue }: PropsSelect) => {
+
   return (
     <>
-      <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+      <FormControl sx={{ minWidth: "100%" }} size="small">
         <InputLabel id="demo-select-small-label" className="bg-white">
-          Giới tính
+          {label}
         </InputLabel>
         <Select
           labelId="demo-select-small-label"
           id="demo-select-small"
           value={value}
-          label="Age"
           onChange={onChange}
+          defaultValue={defaultValue}
+          {...(typeof register === "function" && { ...register(field) })}
         >
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          {options.map(({ label, value }) => (
+          {options?.map(({ label, value }) => (
             <MenuItem value={value} key={value}>
               {label}
             </MenuItem>
@@ -29,4 +31,4 @@ const SelectOption = ({ value, options, onChange }: PropsSelect) => {
   );
 };
 
-export { SelectOption };
+export default SelectOption;

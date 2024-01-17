@@ -1,6 +1,3 @@
-import Input from "../../component/Input";
-
-import Button from "../../component/Button";
 import { Link, useNavigate } from "react-router-dom";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { IFormInput, IFormRegister, IUser } from "../../type";
@@ -12,8 +9,14 @@ import * as yup from "yup";
 import { v4 as uuidv4 } from "uuid";
 import { createUser } from "../../service";
 import { AxiosError } from "axios";
+import { setLocalToken } from "../../common";
+import { AppDispatch, useAppDispatch } from "../../store/configStore";
+import { setUser } from "../../store/reducer/userSlice";
+import { Button, Input } from "../../component/element";
 const Register = () => {
   const [error, setError] = useState<string | undefined>("");
+
+  const dispatch: AppDispatch = useAppDispatch();
 
   const navigate = useNavigate();
   const schema = yup.object({
@@ -66,8 +69,8 @@ const Register = () => {
         role: "Guide",
       };
       const registerUser = await createUser(user);
-      localStorage.setItem("accessToken", registerUser.data.accessToken);
-      localStorage.setItem("user", JSON.stringify(registerUser.data.user));
+      dispatch(setUser(registerUser.data.user));
+      setLocalToken(registerUser.data.accessToken);
       navigate("/");
     } catch (error: unknown) {
       if (error instanceof AxiosError && error.response?.data) {
@@ -112,6 +115,7 @@ const Register = () => {
               label="email"
               register={register}
               className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
+              required={true}
             />
             <Input
               type="text"
@@ -120,6 +124,7 @@ const Register = () => {
               label="password"
               register={register}
               className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
+              required={true}
             />
             <Input
               type="text"
@@ -128,6 +133,7 @@ const Register = () => {
               label="confirmPassword"
               register={register}
               className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
+              required={true}
             />
 
             <Button

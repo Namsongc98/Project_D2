@@ -1,5 +1,5 @@
 import React from "react";
-import imgLogo from "../assets/image/Logo_Luxstay.png";
+import imgLogo from "../../assets/image/Logo_Luxstay.png";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import PinterestIcon from "@mui/icons-material/Pinterest";
@@ -7,6 +7,8 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import ShopIcon from "@mui/icons-material/Shop";
 import AppleIcon from "@mui/icons-material/Apple";
 const Footer = () => {
+  
+
   return (
     <div className="w-full  bg-[#00AFDD]">
       <div className="max-w-[1024px] bg-[#00AFDD] mx-auto my-0 flex py-10">

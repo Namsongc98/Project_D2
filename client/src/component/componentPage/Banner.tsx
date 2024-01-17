@@ -1,5 +1,5 @@
 
-import logoLuxstay from "../assets/image/Logo_Luxstay.png";
+import logoLuxstay from "../../assets/image/Logo_Luxstay.png";
 
 const Banner = () => {
   return (
