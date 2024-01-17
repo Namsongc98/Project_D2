@@ -3,6 +3,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import DashboardIcon from "@mui/icons-material/Dashboard";
+import AddHomeIcon from "@mui/icons-material/AddHome";
 import { NavLink } from "react-router-dom";
 
 export const mainListItems = (
@@ -18,9 +19,9 @@ export const mainListItems = (
     <ListItemButton>
       <NavLink to="host/postroom" className="flex ">
         <ListItemIcon>
-          <DashboardIcon />
+          <AddHomeIcon />
         </ListItemIcon>
-        <ListItemText primary="Thống kê phòng" />
+        <ListItemText primary="Thêm phòng" />
       </NavLink>
     </ListItemButton>
   </React.Fragment>

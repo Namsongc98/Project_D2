@@ -36,7 +36,7 @@ interface IProfileUser {
   password?: string;
 }
 
-interface IRoom {
+interface IRoomSubmit {
   id?: number;
   nameHotel: string;
   city: string;
@@ -46,6 +46,25 @@ interface IRoom {
   bedRoom: number;
   bathRoom: number;
   decription: string;
+  coutPeople: number;
+
 }
 
-export type { IUser, Role, IProfile, IProfileUser, IRoom };
+interface IRoomPost {
+  user_id: string | undefined;
+  approve_room?: boolean
+  created_at: number
+  name: string,
+  address: string,
+  price: number,
+  cout_people: number,
+  city: string,
+  type_tourism: string,
+  bedroom: number,
+  bathroom: number,
+  decription: string,
+  imge: any[],
+
+}
+
+export type { IUser, Role, IProfile, IProfileUser, IRoomSubmit, IRoomPost };

@@ -10,11 +10,7 @@ import Badge from "@mui/material/Badge";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import {
-  AppBar,
-  Drawer,
-  mainListItems,
-} from "../../component/dashboard";
+import { AppBar, Drawer, mainListItems } from "../../component/dashboard";
 import { Outlet } from "react-router-dom";
 
 const LayoutHost = () => {
@@ -28,6 +24,7 @@ const LayoutHost = () => {
     <>
       <ThemeProvider theme={defaultTheme}>
         <Box sx={{ display: "flex" }}>
+          {/* header */}
           <AppBar position="absolute" open={open}>
             <Toolbar
               sx={{
@@ -60,6 +57,8 @@ const LayoutHost = () => {
               </IconButton> */}
             </Toolbar>
           </AppBar>
+
+          {/* aside */}
           <Drawer variant="permanent" open={open}>
             <Toolbar
               sx={{

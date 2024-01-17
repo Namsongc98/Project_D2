@@ -4,7 +4,7 @@ import { ImgageFiles } from "../type";
 
 
 const useInputMultiple = () => {
-  const [arrImgView, setArrImgView] = useState([] as any);
+  const [arrImgView, setArrImgView] = useState<ImgageFiles[]>([]);
   const [errorImg, setError] = useState("");
   const allowedTypes = ["image/jpeg", "image/png", "image/gif"];
 
@@ -32,7 +32,7 @@ const useInputMultiple = () => {
         newImageUrls.push({ id: index, error: false, url: URL.createObjectURL(image.file), file: image.file })
       }
     });
-    if (arrImgView.lengh > 4) {
+    if (arrImgView.length > 4) {
       setError("Chỉ được chon 5 ảnh");
     }
     setArrImgView(newImageUrls);

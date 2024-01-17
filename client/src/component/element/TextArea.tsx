@@ -2,7 +2,7 @@ import { TextField } from "@mui/material";
 import { TextArea } from "../../type";
 
 const TextArea = (props: TextArea) => {
-  const { value, onChange, label, register, title } = props;
+  const { value, onChange, label, register, title, required } = props;
   return (
     <>
       {" "}
@@ -15,7 +15,9 @@ const TextArea = (props: TextArea) => {
         fullWidth
         value={value}
         onChange={onChange}
-        {...(typeof register === "function" && { ...register(label) })}
+        {...(typeof register === "function" && {
+          ...register(label, { required: required }),
+        })}
       />
     </>
   );

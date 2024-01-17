@@ -13,7 +13,7 @@ type PropsSelect = {
   label?: string | number;
   register?: unknown
   field?: string
-   defaultValue?: string | number
+  defaultValue?: string | number
 };
 
 type ToastProp = {
@@ -57,6 +57,11 @@ type PropImages = {
   imageRoom: ImageMultiple
 }
 
+type PropTypeSnackBar = {
+  type: AlertColor,
+  message: string
+}
+
 export type {
   PropsLayout,
   PropsSelect,
@@ -68,5 +73,5 @@ export type {
   AlertValidate,
   PropDatePick,
   PropImages,
-
+  PropTypeSnackBar
 };
