@@ -1,5 +1,5 @@
 import { AlertColor } from "@mui/material";
-import { IProfileUser, ImageMultiple, SelectOptionType, StatusApi } from ".";
+import { IProfileUser, ImageMultiple, PathType, SelectOptionType, StatusApi } from ".";
 import { Dayjs } from "dayjs";
 
 type PropsLayout = {
@@ -61,6 +61,18 @@ type PropTypeSnackBar = {
   type: AlertColor,
   message: string
 }
+type PropAppBarType = {
+  toggleDrawer: () => void;
+  open: boolean;
+};
+type PropDrawerType = {
+  toggleDrawer: () => void;
+  open: boolean;
+  paths: Array<PathType>
+};
+
+
+
 
 export type {
   PropsLayout,
@@ -73,5 +85,7 @@ export type {
   AlertValidate,
   PropDatePick,
   PropImages,
-  PropTypeSnackBar
+  PropTypeSnackBar,
+  PropAppBarType,
+  PropDrawerType
 };

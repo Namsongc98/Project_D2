@@ -49,7 +49,6 @@ interface IRoomSubmit {
   coutPeople: number;
 
 }
-
 interface IRoomPost {
   user_id: string | undefined;
   approve_room?: boolean
@@ -64,7 +63,6 @@ interface IRoomPost {
   bathroom: number,
   decription: string,
   imge: any[],
-
 }
 
 export type { IUser, Role, IProfile, IProfileUser, IRoomSubmit, IRoomPost };

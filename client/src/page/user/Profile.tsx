@@ -21,12 +21,12 @@ import {
   SelectOption,
 } from "../../component/element";
 import AvatarUser from "../../component/componentReuse/AvatarUser";
-import {
-  Changepassword,
-  ModalComponent,
-} from "../../component/componentReuse";
+import { Changepassword, ModalComponent } from "../../component/componentReuse";
 import SnackBarReuse from "../../component/componentReuse/SnackBarReuse";
 import { AlertColor } from "@mui/material";
+import { AppDispatch } from "../../store/configStore";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../store/reducer/userSlice";
 
 const Profile = () => {
   const [open, setOpen] = useState(false);
@@ -35,6 +35,7 @@ const Profile = () => {
   const user = useGetUser();
   const [type, setType] = useState<AlertColor>("success");
   const [error, setError] = useState("");
+  const dispatch: AppDispatch = useDispatch();
 
   const genders = ["Nam", "Nữ"];
   const options: SelectOptionType[] = [
@@ -88,7 +89,10 @@ const Profile = () => {
       avatar: avatarUrl,
     };
     try {
-      if (user) await postProfile(user.id, newProfile);
+      if (user) {
+        const res = await postProfile(user.id, newProfile);
+        dispatch(setUser(res.data));
+      }
       setType("success");
       setError("Cập nhật thành công");
     } catch (error: unknown) {

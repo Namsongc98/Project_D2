@@ -1,8 +1,17 @@
+import { ReactNode } from "react";
 
- type Layout = {
+
+type Layout = {
     path: string;
     component: React.FC | (() => JSX.Element | React.ReactNode);
     layout: boolean;
 }[]
 
-export type {Layout}
+type PathType = {
+    id: number,
+    path: string,
+    icon: ReactNode,
+    title: string
+}
+
+export type { Layout, PathType }

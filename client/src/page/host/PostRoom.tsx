@@ -1,4 +1,4 @@
-import { AlertColor, Typography } from "@mui/material";
+import { AlertColor } from "@mui/material";
 import { Button, Input, SelectOption, TextArea } from "../../component/element";
 import { IRoomSubmit, ImgageFiles, SelectOptionType } from "../../type";
 import { useButton, useGetUser, useInputMultiple } from "../../hook";
@@ -10,6 +10,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
 import SnackBarReuse from "../../component/componentReuse/SnackBarReuse";
 import { createRoom, upfileClodinary } from "../../service";
+import { Title } from "../../component/componentPage";
 
 const PostRoom = () => {
   const [loading, setLoading] = useState(false);
@@ -143,10 +144,7 @@ const PostRoom = () => {
         className="bg-white rounded-xl p-4 mt-7 min-w-[70%] shadow-md"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <Typography variant="h6" sx={{ marginBottom: 2 }}>
-          Thêm phòng
-        </Typography>
-
+        <Title>Thêm phòng</Title>
         <div className="flex flex-row gap-5 mt-5">
           <div className="w-2/3">
             <PreviewImg imageRoom={imageRoom} />

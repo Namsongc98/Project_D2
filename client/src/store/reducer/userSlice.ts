@@ -3,17 +3,16 @@ import { fetchUser } from "../asyncThunk/userAsyncThunk";
 
 
 const initialState = {
-    user: {}
+    user: {},
+
 }
-
-
 const UserSlice = createSlice({
     name: "user",
     initialState,
     reducers: {
         setUser: (state, action) => {
             state.user = action.payload
-        }
+        },
     },
     extraReducers: (builder) => {
         builder

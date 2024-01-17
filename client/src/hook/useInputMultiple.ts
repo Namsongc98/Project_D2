@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { ImgageFiles } from "../type";
 
-
-
 const useInputMultiple = () => {
   const [arrImgView, setArrImgView] = useState<ImgageFiles[]>([]);
   const [errorImg, setError] = useState("");
@@ -42,6 +40,7 @@ const useInputMultiple = () => {
     };
 
   }, [arrImgView.length]);
+
   return {
     arrImgView,
     onChange,
