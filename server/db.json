@@ -59,21 +59,20 @@
       "gender": "Nam",
       "age": "",
       "phone": "",
-      "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705042321/qcyy4jxh5iwaenok70u4.jpg"
+      "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705462573/ybc4vdsr0fdqungmkkir.png"
     }
   ],
   "touris": [
     {
-      "id": "",
+      "id": 1,
       "city": "",
       "user_id": 1,
-      "status": true,
+      "approve_room": true,
       "name": "",
       "price": 0,
       "decription": "",
       "created_at": "",
       "address": "",
-      "cout_room": 0,
       "type_tourism": "Khách sạn",
       "bathroom": 1,
       "bedroom": 1,
@@ -84,6 +83,31 @@
           "image": ""
         }
       ]
+    },
+    {
+      "user_id": "d219bf37-f35c-425d-9c6d-e074b0e4f9f3",
+      "created_at": 1705465182373,
+      "name": "Hoàng Mai",
+      "address": "Mỹ Đình, Hà Nội",
+      "price": 235445,
+      "cout_people": 235445,
+      "city": "Lào Cai",
+      "type_tourism": 32,
+      "bedroom": 1,
+      "bathroom": 1,
+      "decription": "sgsgfsdfg",
+      "approve_room": false,
+      "imge": [
+        {
+          "id": 1,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705465182/qiytdfwleirmnok0pu95.webp"
+        },
+        {
+          "id": 2,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705465183/uqlv1hlpwhldopfbbyt5.webp"
+        }
+      ],
+      "id": 1
     }
   ],
   "booking": [
