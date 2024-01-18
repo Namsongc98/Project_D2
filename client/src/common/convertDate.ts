@@ -1,8 +1,8 @@
 import dayjs from "dayjs";
 
-const convertDateToTimestamp = (timestamp: number) => {
-    const formattedDate = dayjs(timestamp).format('DD/MM/YYYY');
-    return formattedDate;
-}
+const convertDateToTimestamp = (timestamp: number | string) => {
+  const formattedDate = dayjs(timestamp).format("DD/MM/YYYY");
+  return formattedDate;
+};
 
-export { convertDateToTimestamp }
+export { convertDateToTimestamp };

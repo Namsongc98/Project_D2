@@ -62,7 +62,7 @@ interface IRoomPost {
   bedroom: number,
   bathroom: number,
   decription: string,
-  imge: any[],
+  image: any[],
 }
 
 export type { IUser, Role, IProfile, IProfileUser, IRoomSubmit, IRoomPost };

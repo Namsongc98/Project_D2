@@ -1,5 +1,5 @@
 import { Box, Container, Grid, Paper } from "@mui/material";
-import { Chart, CopyRight, Orders } from "../../component/componentPage";
+import { Chart, CopyRight } from "../../component/componentPage";
 import Deposits from "../../component/componentPage/host/Deposit";
 
 const AdminStatistics = () => {
@@ -34,7 +34,7 @@ const AdminStatistics = () => {
           </Grid>
           <Grid item xs={12}>
             <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-              <Orders />
+             
             </Paper>
           </Grid>
         </Grid>

@@ -1,4 +1,4 @@
-import { GuideManager, HoistManager } from "../page/admin"
+import { GuideManager, HostManager } from "../page/admin"
 import AdminStatistics from "../page/admin/AdminStatistics"
 import { PostRoom } from "../page/host"
 import HostStatistics from "../page/host/HostStatistics"
@@ -17,7 +17,7 @@ const publicPage: Layout = [
 const privateAmin: Layout = [
     { path: "/admin", component: AdminStatistics, layout: true },
     { path: "/guidemanager", component: GuideManager, layout: true },
-    { path: "/hoistmanager", component: HoistManager, layout: true }
+    { path: "/hoistmanager", component: HostManager, layout: true }
 ]
 
 const layoutHost: Layout = [

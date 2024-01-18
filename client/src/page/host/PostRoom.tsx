@@ -115,7 +115,7 @@ const PostRoom = () => {
         bedroom: data.bedRoom,
         bathroom: data.bathRoom,
         decription: data.decription,
-        imge: dataImg,
+        image: dataImg,
         approve_room: false,
       };
 

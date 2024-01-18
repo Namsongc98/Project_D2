@@ -5,7 +5,7 @@ export { default as ListHotel } from "./ListHotel"
 export { default as PopularTravelCarousel } from "./PopularTravelCarousel"
 export { default as Chart } from "./host/Chart"
 export { default as Deposit } from "./host/Deposit"
-export { default as Orders } from "./host/Orders"
+export { default as TableHostRoom } from "./host/TableHostRoom"
 export { default as Title } from "./host/Title"
 export { default as CopyRight } from "./host/CopyRight"
 

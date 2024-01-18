@@ -1,5 +1,5 @@
 import { Box, Container, Grid, Paper } from "@mui/material";
-import { CopyRight, Orders } from "../../component/componentPage";
+import { CopyRight } from "../../component/componentPage";
 import { useEffect, useState } from "react";
 import { getAllRoom } from "../../service";
 import { convertDateToTimestamp } from "../../common";
@@ -11,7 +11,7 @@ const HoistManager = () => {
   const getRoom = async () => {
     try {
       const res = await getAllRoom();
-
+     
       setRoom(res.data);
     } catch (error) {
       console.log(error);
