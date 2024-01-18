@@ -11,7 +11,7 @@ const HoistManager = () => {
   const getRoom = async () => {
     try {
       const res = await getAllRoom();
-     
+
       setRoom(res.data);
     } catch (error) {
       console.log(error);
