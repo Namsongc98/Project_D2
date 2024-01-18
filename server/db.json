@@ -60,6 +60,18 @@
       "age": "",
       "phone": "",
       "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705462573/ybc4vdsr0fdqungmkkir.png"
+    },
+    {
+      "email": "host1@gmail.com",
+      "password": "$2a$10$flLWmOz7nFc72dhyiDUVIuHDxcv4DP4PN/LCIf9KbJ1kR7jcTDU0W",
+      "id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "role": "Guide",
+      "firstName": "Hello",
+      "lastName": "host1",
+      "gender": "Nam",
+      "age": "23",
+      "phone": "345546",
+      "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705484948/derxy74ryezv8hnb6fuq.webp"
     }
   ],
   "touris": [
@@ -107,7 +119,7 @@
           "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705465183/uqlv1hlpwhldopfbbyt5.webp"
         }
       ],
-      "id": 1
+      "id": 2
     }
   ],
   "booking": [
