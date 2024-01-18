@@ -1,23 +1,20 @@
 import { Box, Container, Grid, Paper } from "@mui/material";
-import { CopyRight } from "../../component/componentPage";
+import { CopyRight, TableRoomApprove } from "../../component/componentPage";
 import { useEffect, useState } from "react";
 import { getAllRoom } from "../../service";
-import { convertDateToTimestamp } from "../../common";
 
-const HoistManager = () => {
+const HostManager = () => {
   const [rooms, setRoom] = useState([] as any);
 
   // const getData =
   const getRoom = async () => {
     try {
       const res = await getAllRoom();
-     
       setRoom(res.data);
     } catch (error) {
       console.log(error);
     }
   };
-  console.log(rooms);
   useEffect(() => {
     getRoom();
   }, []);
@@ -34,7 +31,7 @@ const HoistManager = () => {
                   flexDirection: "column",
                 }}
               >
-                <Orders data={rooms} />
+                <TableRoomApprove data={rooms} getdata={getRoom} />
               </Paper>
             </Grid>
           </Grid>
@@ -45,4 +42,4 @@ const HoistManager = () => {
   );
 };
 
-export default HoistManager;
+export default HostManager;

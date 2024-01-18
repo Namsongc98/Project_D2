@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import "../../style/styleComponent.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Person2Icon from "@mui/icons-material/Person2";
@@ -10,16 +10,22 @@ import Popup from "../componentReuse/Popup";
 import { remoteToken } from "../../common";
 import AvatarUser from "../componentReuse/AvatarUser";
 import { useSelector } from "react-redux";
-import { getUser } from "../../store/reducer/userSlice";
+import { getUser, setUser } from "../../store/reducer/userSlice";
+import { useDispatch } from "react-redux";
 
 const Header = () => {
   const userSelector = useSelector(getUser);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useGetUser();
   const [anchor, setAnchor] = useState<null | HTMLElement>(null);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchor(anchor ? null : event.currentTarget);
   };
+
+  useEffect(() => {
+    dispatch(setUser(user));
+  }, [user]);
 
   const handleLogout = () => {
     remoteToken();
@@ -38,25 +44,25 @@ const Header = () => {
             <HomeIcon className="text-[#1e68ff]" />
             <p>Trang chủ</p>
           </Link>
-          {user ? (
+          {userSelector ? (
             <>
               <div
                 className="flex gap-2 items-center hover:bg-[#e6e6e6] px-3 py-2 rounded-md"
                 onClick={handleClick}
               >
-                <AvatarUser user={user} size={30} />
+                <AvatarUser user={userSelector} size={30} />
                 <div className="cursor-pointer text-[#808089]">Tài khoản</div>
               </div>
               <Popup anchor={anchor} setAnchor={setAnchor}>
                 <div className="flex flex-col  text-base text-[#808089]">
-                  {user?.role === "Admin" ? (
+                  {userSelector?.role === "Admin" ? (
                     <Link
                       to="/admin"
                       className="flex items-center gap-1 px-3 hover:bg-[#e6e6e6] py-2 hover:text-[#808089] "
                     >
                       <AdminPanelSettingsIcon /> <span>Admin</span>{" "}
                     </Link>
-                  ) : user?.role === "Host" ? (
+                  ) : userSelector?.role === "Host" ? (
                     <Link
                       to="/host"
                       className="flex items-center gap-1 px-3 hover:bg-[#e6e6e6] py-2 hover:text-[#808089] "

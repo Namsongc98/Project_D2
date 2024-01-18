@@ -1,6 +1,12 @@
 import { AlertColor } from "@mui/material";
 import { Button, Input, SelectOption, TextArea } from "../../component/element";
-import { IRoomSubmit, ImgageFiles, SelectOptionType } from "../../type";
+import {
+  BookingStatus,
+  IRoomPost,
+  IRoomSubmit,
+  ImgageFiles,
+  SelectOptionType,
+} from "../../type";
 import { useButton, useGetUser, useInputMultiple } from "../../hook";
 import { PreviewImg } from "../../component/componentReuse";
 import { useEffect, useState } from "react";
@@ -103,9 +109,10 @@ const PostRoom = () => {
         ...uploadUrl.map((item, index) => ({ id: ++index, url: item })),
       ];
 
-      const room = {
-        user_id: user?.id,
+      const room: IRoomPost = {
+        host_id: user?.id,
         created_at: Date.now(),
+        booking_status: BookingStatus.emtry,
         name: data.nameHotel,
         address: data.address,
         price: data.price,
@@ -116,7 +123,7 @@ const PostRoom = () => {
         bathroom: data.bathRoom,
         decription: data.decription,
         image: dataImg,
-        approve_room: false,
+        approve_room: "Pending",
       };
 
       await createRoom(room);
@@ -165,7 +172,6 @@ const PostRoom = () => {
                   register={register}
                   defaultValue={1}
                 />
-
                 <SelectOption
                   options={optionsRoom}
                   label="Phòng tắm"

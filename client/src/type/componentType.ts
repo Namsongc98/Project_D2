@@ -98,6 +98,27 @@ type TextArea = {
 }
 
 
+interface ColumnTable {
+  id:
+    | "id"
+    | "address"
+    | "city"
+    | "approve_room"
+    | "bathroom"
+    | "bedroom"
+    | "cout_people"
+    | "created_at"
+    | "decription"
+    | "name"
+    | "price"
+    | "type_tourism";
+  label: string;
+  minWidth?: number;
+  align?: "right";
+  format?: (value: number) => string;
+}
+
+
 export type {
   ButonType,
   InputHook,
@@ -113,5 +134,6 @@ export type {
   checkboxType,
   ImageMultiple,
   ImgageFiles,
-  TextArea
+  TextArea,
+  ColumnTable
 };

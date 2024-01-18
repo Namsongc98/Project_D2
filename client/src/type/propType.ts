@@ -1,5 +1,6 @@
 import { AlertColor } from "@mui/material";
 import {
+  IBookingData,
   IProfileUser,
   ImageMultiple,
   PathType,
@@ -70,7 +71,7 @@ type PropTypeSnackBar = {
 };
 type PropAppBarType = {
   toggleDrawer: () => void;
-  open: boolean;
+  open: any;
 };
 type PropDrawerType = {
   toggleDrawer: () => void;
@@ -80,7 +81,13 @@ type PropDrawerType = {
 
 type PropsRoom = {
   data: typeGetRoom[];
+  getdata: () => void
 };
+
+interface PropsBooking {
+  data?: IBookingData[];
+  getData: () => void;
+}
 
 export type {
   PropsLayout,
@@ -97,4 +104,5 @@ export type {
   PropAppBarType,
   PropDrawerType,
   PropsRoom,
+  PropsBooking,
 };

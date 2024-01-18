@@ -17,7 +17,7 @@ const publicPage: Layout = [
 const privateAmin: Layout = [
     { path: "/admin", component: AdminStatistics, layout: true },
     { path: "/guidemanager", component: GuideManager, layout: true },
-    { path: "/hoistmanager", component: HostManager, layout: true }
+    { path: "/hostmanager", component: HostManager, layout: true }
 ]
 
 const layoutHost: Layout = [

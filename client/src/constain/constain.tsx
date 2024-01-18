@@ -4,6 +4,7 @@ import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 
 import MapsHomeWorkIcon from "@mui/icons-material/MapsHomeWork";
 import GroupIcon from "@mui/icons-material/Group";
+import { ColumnTable } from "../type";
 
 const dataCityCarousel = [
   {
@@ -82,14 +83,44 @@ const typeTouris = [
 ];
 
 const pathHost = [
-  { id: 1, path: "/host", icon: <DashboardIcon />, title: "Thống kê phòng" },
+  { id: 1, path: "/host", icon: <DashboardIcon />, title: "Danh sách phòng" },
   { id: 2, path: "/host/postroom", icon: <AddHomeIcon />, title: "Thêm phòng" },
 ];
 
 const pathAdmin = [
-  { id: 1, path: "/admin", icon: <AdminPanelSettingsIcon />, title: "Thống kê dữ liệu" },
-  { id: 3, path: "/hoistmanager", icon: <MapsHomeWorkIcon />,title: "Thống kê khách sạn" },
-  { id: 2, path: "/guidemanager", icon: <GroupIcon />,title: "Thống kê khách hàng" },
+  {
+    id: 1,
+    path: "/admin",
+    icon: <AdminPanelSettingsIcon />,
+    title: "Thống kê dữ liệu",
+  },
+  {
+    id: 3,
+    path: "/hostmanager",
+    icon: <MapsHomeWorkIcon />,
+    title: "Thống kê khách sạn",
+  },
+  {
+    id: 2,
+    path: "/guidemanager",
+    icon: <GroupIcon />,
+    title: "Thống kê khách hàng",
+  },
 ];
 
-export { dataCityCarousel, specialOffer, typeTouris, pathHost, pathAdmin };
+const columnsTable: readonly ColumnTable[] = [
+  { id: "id", label: "Id", minWidth: 20 },
+  { id: "name", label: "Tên Khách sạn", minWidth: 100 },
+  { id: "type_tourism", label: "kiểu dịch vụ", minWidth: 120 },
+  { id: "city", label: "Thành phố", minWidth: 100 },
+  { id: "price", label: "Giá phòng", minWidth: 100 },
+];
+
+export {
+  dataCityCarousel,
+  specialOffer,
+  typeTouris,
+  pathHost,
+  pathAdmin,
+  columnsTable,
+};

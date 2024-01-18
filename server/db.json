@@ -14,12 +14,6 @@
       "non_block": false
     },
     {
-      "email": "namsongc9812@gmail.com",
-      "password": "$2a$10$xEsN.4ZJd0SfKG8ztLkYDOmo/8U/7u9Zi9M/brT2CHj11tll87hAa",
-      "id": "6dbe0a70-c5dd-4b0d-8bd8-3637afaff1f7",
-      "role": "Guide"
-    },
-    {
       "email": "admin123@gmail.com",
       "password": "$2a$10$Hf9TtksLmMnrSxmSbRQNT.3g7arnosQFdvo63IVZIqiTx5Mz2D7cy",
       "id": "313c9b13-dffe-42ed-9d35-72161f02d9ba",
@@ -44,12 +38,6 @@
       "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1704970591/oziabo4elqfyqab5dye1.png"
     },
     {
-      "email": "minhduong12@gmail.com",
-      "password": "$2a$10$Xv9yjU0rFzCeY9ECZVo7aO/pjobPtaC9H3Q0ZePE7GmfgNPInAXly",
-      "id": "af4aba3c-7c1c-46e9-b914-39773248be53",
-      "role": "Guide"
-    },
-    {
       "email": "anhphudeptrai@gmail.com",
       "password": "$2a$10$vS1EGfR98vVaBt/BU03/uud3wb46oycuBV9tGffUXT.qgYKTsI3d.",
       "id": "d219bf37-f35c-425d-9c6d-e074b0e4f9f3",
@@ -65,73 +53,80 @@
       "email": "host1@gmail.com",
       "password": "$2a$10$flLWmOz7nFc72dhyiDUVIuHDxcv4DP4PN/LCIf9KbJ1kR7jcTDU0W",
       "id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
-      "role": "Guide",
+      "role": "Host",
       "firstName": "Hello",
       "lastName": "host1",
       "gender": "Nam",
       "age": "23",
       "phone": "345546",
-      "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705484948/derxy74ryezv8hnb6fuq.webp"
+      "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705563156/jkw37npcj9jh2alq6l00.webp"
     }
   ],
   "touris": [
     {
-      "id": 1,
-      "city": "",
-      "user_id": 1,
-      "status": true,
-      "name_hotel": "",
-      "approve_room": true,
-      "name": "",
-      "price": 0,
-      "decription": "",
-      "created_at": "",
-      "address": "",
-      "type_tourism": "Khách sạn",
-      "bathroom": 1,
-      "bedroom": 1,
-      "cout_people": 2,
-      "image": [
-        {
-          "id": 1,
-          "image": ""
-        }
-      ]
-    },
-    {
-      "user_id": "d219bf37-f35c-425d-9c6d-e074b0e4f9f3",
-      "created_at": 1705465182373,
-      "name": "Hoàng Mai",
-      "address": "Mỹ Đình, Hà Nội",
-      "price": 235445,
-      "cout_people": 235445,
+      "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "created_at": 1705564741095,
+      "booking_status": "Pending",
+      "name": "khách sạn Host1 ",
+      "address": "lào cai, yên bái",
+      "price": 12000000,
+      "cout_people": 3,
       "city": "Lào Cai",
-      "type_tourism": 32,
+      "type_tourism": "khách sạn",
       "bedroom": 1,
       "bathroom": 1,
-      "decription": "sgsgfsdfg",
-      "approve_room": false,
+      "decription": "nhà đẹp nhà xinh",
       "image": [
         {
           "id": 1,
-          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705465182/qiytdfwleirmnok0pu95.webp"
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705564740/m5w0q4fcqqzyrfwi6iyq.webp"
         },
         {
           "id": 2,
-          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705465183/uqlv1hlpwhldopfbbyt5.webp"
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705564740/scaqbbfslvwledxdbeir.webp"
         }
       ],
+      "approve_room": "Success",
+      "id": 1
+    },
+    {
+      "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "created_at": 1705564839299,
+      "booking_status": "Empty",
+      "name": "khách sạn host1",
+      "address": "lào cai, yên bái",
+      "price": 12334,
+      "cout_people": 3,
+      "city": "Lào Cai",
+      "type_tourism": "Homestay",
+      "bedroom": 1,
+      "bathroom": 1,
+      "decription": "phòng đà nẵng",
+      "image": [
+        {
+          "id": 1,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705564839/woijwvng1qgrdyua8t8a.webp"
+        }
+      ],
+      "approve_room": "Success",
       "id": 2
     }
   ],
-  "booking": [
+  "bookings": [
     {
       "id": 1,
       "id_touris": 1,
+      "user_id": "d219bf37-f35c-425d-9c6d-e074b0e4f9f3",
+      "name_user": "Phú",
+      "phone": 1,
+      "email": "anhphudeptrai@gmail.com",
+      "name_room": "khách sạn host1",
+      "booking_status": "Pending",
       "start_date": "987",
       "end_date": "4567",
       "cout_persion": 2,
-      "total": 3
+      "payment": 3,
+      "pay_status": ""
     }
   ]
 }

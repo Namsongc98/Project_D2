@@ -26,7 +26,8 @@ import SnackBarReuse from "../../component/componentReuse/SnackBarReuse";
 import { AlertColor } from "@mui/material";
 import { AppDispatch } from "../../store/configStore";
 import { useDispatch } from "react-redux";
-import { setUser } from "../../store/reducer/userSlice";
+import { getUser, setUser } from "../../store/reducer/userSlice";
+import { useSelector } from "react-redux";
 
 const Profile = () => {
   const [open, setOpen] = useState(false);
@@ -35,28 +36,33 @@ const Profile = () => {
   const user = useGetUser();
   const [type, setType] = useState<AlertColor>("success");
   const [error, setError] = useState("");
+  const userSelector = useSelector(getUser);
   const dispatch: AppDispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setUser(userSelector));
+  }, [user]);
 
   const genders = ["Nam", "Nữ"];
   const options: SelectOptionType[] = [
     ...genders.map((gender) => ({ label: gender, value: gender })),
   ];
-  const selectGender = useSelectOption(user?.gender || "");
-  const inputFirstName = useInput(user?.firstName || "");
-  const inputLastName = useInput(user?.lastName || "");
-  const age = useInputTypeNumber(user?.age || "");
-  const phone = useInputTypeNumber(user?.phone || "");
-  const InputTypeFileImg = useInputTypeFileImg(user?.avatar || "");
+  const selectGender = useSelectOption(userSelector?.gender || "");
+  const inputFirstName = useInput(userSelector?.firstName || "");
+  const inputLastName = useInput(userSelector?.lastName || "");
+  const age = useInputTypeNumber(userSelector?.age || "");
+  const phone = useInputTypeNumber(userSelector?.phone || "");
+  const InputTypeFileImg = useInputTypeFileImg(userSelector?.avatar || "");
   const resetButton = useButton();
 
   useEffect(() => {
-    inputFirstName.setValue(user?.firstName || "");
-    inputLastName.setValue(user?.lastName || "");
-    age.setValue(user?.age || "");
-    phone.setValue(user?.phone || "");
-    InputTypeFileImg.setValueImg(user?.avatar || "");
-    selectGender.setValue(user?.gender || "");
-  }, [user]);
+    inputFirstName.setValue(userSelector?.firstName || "");
+    inputLastName.setValue(userSelector?.lastName || "");
+    age.setValue(userSelector?.age || "");
+    phone.setValue(userSelector?.phone || "");
+    InputTypeFileImg.setValueImg(userSelector?.avatar || "");
+    selectGender.setValue(userSelector?.gender || "");
+  }, [userSelector]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -76,7 +82,7 @@ const Profile = () => {
       }
     }
 
-    if (user) profilePort(user.avatar!);
+    if (userSelector) profilePort(userSelector.avatar!);
   };
 
   const profilePort = async (avatarUrl: string) => {
@@ -89,8 +95,8 @@ const Profile = () => {
       avatar: avatarUrl,
     };
     try {
-      if (user) {
-        const res = await postProfile(user.id, newProfile);
+      if (userSelector) {
+        const res = await postProfile(userSelector.id, newProfile);
         dispatch(setUser(res.data));
       }
       setType("success");
@@ -121,11 +127,11 @@ const Profile = () => {
           <div className=" bg-white w-1/4 px-3 py-2  ">
             <div className="mx-auto my-0 pt-5">
               <div className=" w-[50px] h-[50px] flex items-center justify-center rounded-full  overflow-hidden mx-auto ">
-                <AvatarUser user={user} size={50} />
+                <AvatarUser user={userSelector} size={50} />
               </div>
               <p className=" text-center font-semibold text-xl mt-5 opacity-70">
                 {" "}
-                {user?.firstName} {user?.lastName}{" "}
+                {userSelector?.firstName} {userSelector?.lastName}{" "}
               </p>
             </div>
           </div>
@@ -257,7 +263,7 @@ const Profile = () => {
                 </h1>
                 <div className="font-medium text-xl flex justify-between items-center my-4">
                   <p className="">Email</p>
-                  <p className=" text-yellow-400">{user?.email}</p>
+                  <p className=" text-yellow-400">{userSelector?.email}</p>
                 </div>
                 <div className="w-[100%] line-midleware border border-solid border-[#e5e7eb] mx-auto max-w-[1600px]" />
                 <div className=" font-medium text-xl my-4  flex justify-between items-center">

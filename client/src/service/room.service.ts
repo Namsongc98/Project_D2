@@ -1,5 +1,5 @@
 import { instance, instance_token } from "../config";
-import { IRoomPost } from "../type";
+import { ApprovePacth, IRoomPost } from "../type";
 
 
 const createRoom = async (room: IRoomPost) => {
@@ -10,4 +10,9 @@ const getAllRoom = async () => {
     return await instance.get("/touris");
 };
 
-export { createRoom, getAllRoom }
+const patchApprove = async (idRoom: number, approve: ApprovePacth) => {
+    return await instance.patch(`/touris/${idRoom}`, approve);
+}
+
+
+export { createRoom, getAllRoom, patchApprove }
