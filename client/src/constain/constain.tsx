@@ -10,31 +10,37 @@ const dataCityCarousel = [
   {
     id: 1,
     city: "Thành phỗ Hà Nội",
+    search: "Hà Nội",
     img: "https://cdn.asahiluxstay.com//uploads/medium/media/2022/0506/0239-e0f2d20657fbf7e-gioi-thieu-doi-net-ve-ho-hoan-kiem-ho-guom-o-ha-noi-3-2.jpg?s=aHR0cHM6Ly9jZG4uYXNhaGlsdXhzdGF5LmNvbS9tZWRpYS8yMDIyLzA1MDYvMDIzOS1lMGYyZDIwNjU3ZmJmN2UtZ2lvaS10aGlldS1kb2ktbmV0LXZlLWhvLWhvYW4ta2llbS1oby1ndW9tLW8taGEtbm9pLTMtMi5qcGc=",
   },
   {
     id: 2,
     city: "Thành phỗ Hồ Chí Minh",
+    search: "Hồ Chí Minh",
     img: "https://cdn.asahiluxstay.com//uploads/medium/media/2022/0405/0453-915b7014e87be83-ben-thanh-market-2.jpg?s=aHR0cHM6Ly9jZG4uYXNhaGlsdXhzdGF5LmNvbS9tZWRpYS8yMDIyLzA0MDUvMDQ1My05MTViNzAxNGU4N2JlODMtYmVuLXRoYW5oLW1hcmtldC0yLmpwZw==",
   },
   {
     id: 3,
     city: "Thành phỗ Đà Nẵng",
+    search: "Đà Nẵng",
     img: "https://cdn.asahiluxstay.com//uploads/medium/media/2021/1222/0937-9c3046ca53d5fe5-7-du-1634353732500.jpg?s=aHR0cHM6Ly9jZG4uZHhtYi52bi9tZWRpYS8yMDIxLzEyMjIvMDkzNy05YzMwNDZjYTUzZDVmZTUtNy1kdS0xNjM0MzUzNzMyNTAwLmpwZw==",
   },
   {
     id: 4,
     city: "Thành phỗ Lào Cai",
+    search: "Lào Cai",
     img: "https://cdn.asahiluxstay.com//uploads/medium/media/2022/0506/0232-670fec15668554a-di-sapa-can-chuan-bi-nhung-gi-de-chuyen-di-duoc-tr-10-760x367.jpg?s=aHR0cHM6Ly9jZG4uYXNhaGlsdXhzdGF5LmNvbS9tZWRpYS8yMDIyLzA1MDYvMDIzMi02NzBmZWMxNTY2ODU1NGEtZGktc2FwYS1jYW4tY2h1YW4tYmktbmh1bmctZ2ktZGUtY2h1eWVuLWRpLWR1b2MtdHItMTAtNzYweDM2Ny5qcGc=",
   },
   {
     id: 5,
     city: "Thành phỗ Quảng Ninh",
+    search: "Quảng Ninh",
     img: "https://cdn.asahiluxstay.com//uploads/medium/media/2022/0506/0236-3ca4f4f8e2fb70c-vinh-16240967369661608835259.jpg?s=aHR0cHM6Ly9jZG4uYXNhaGlsdXhzdGF5LmNvbS9tZWRpYS8yMDIyLzA1MDYvMDIzNi0zY2E0ZjRmOGUyZmI3MGMtdmluaC0xNjI0MDk2NzM2OTY2MTYwODgzNTI1OS5qcGc=",
   },
   {
     id: 6,
-    city: "Thành phỗ Hà Nội",
+    city: "Thành phỗ Ninh Bình",
+    search: "Ninh Bình",
     img: "https://cdn.asahiluxstay.com//uploads/medium/media/2022/0506/0240-18584cb54c029fb-anh-tam-coc-bich-dong-ninh-binh.jpg?s=aHR0cHM6Ly9jZG4uYXNhaGlsdXhzdGF5LmNvbS9tZWRpYS8yMDIyLzA1MDYvMDI0MC0xODU4NGNiNTRjMDI5ZmItYW5oLXRhbS1jb2MtYmljaC1kb25nLW5pbmgtYmluaC5qcGc=",
   },
 ];

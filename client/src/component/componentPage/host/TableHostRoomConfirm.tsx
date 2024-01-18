@@ -6,10 +6,12 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { getBookingPending, patchBookingConfirm } from "../../../service";
-import { IBookingData, PropsBooking } from "../../../type";
+import { patchBookingConfirm } from "../../../service";
+import { BookingStatus, IBookingData, PropsBooking } from "../../../type";
 import React, { useState } from "react";
 import { Button } from "../../element";
+import { ModalComponent } from "../../componentReuse";
+import { Stack, Typography } from "@mui/material";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -58,65 +60,113 @@ const columnBooking: TableRoom[] = [
   { index: "pay_status", label: "Thanh toán", minWidth: 50, align: "left" },
 ];
 
-const TableHostRoomConfirm: React.FC<PropsBooking> = ({ data, getData }) => {
-  const [openApprove, setOpenApprove] = useState(false);
+const TableHostRoomConfirm: React.FC<PropsBooking> = ({ data, getData, getData2 }) => {
+  const [openConfirm, setOpenConfirm] = useState(false);
+  const [inforBooking, setInforBooking] = useState<IBookingData | undefined>();
 
-  const handleOpenApprove = (room: typeGetRoom | undefined = undefined) => {
-    setOpenApprove(!openApprove);
-    setInforRoom(room);
+  const handleOpenConfirm = (Booking: IBookingData | undefined = undefined) => {
+    setOpenConfirm(!openConfirm);
+    setInforBooking(Booking);
   };
+
+  const handleConfirm = async (idBooking: number, status: BookingStatus.success | BookingStatus.emtry) => {
+    const bookingStatus = {
+      booking_status: status
+    }
+    try {
+      await patchBookingConfirm(idBooking, bookingStatus)
+      setOpenConfirm(!openConfirm);
+      getData()
+      if (getData2)
+        getData2()
+    } catch (error) {
+      console.log(error)
+    }
+
+  }
+
+
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            {columnBooking.map((column) => (
-              <StyledTableCell
-                key={column.index}
-                align={column.align}
-                style={{ minWidth: column.minWidth }}
-              >
-                {column.label}
-              </StyledTableCell>
-            ))}
-            <StyledTableCell>Booking</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data?.map((booking) => (
-            <StyledTableRow key={booking.id}>
-              {columnBooking.map((column) => {
-                const value = booking[column.index];
-                return (
-                  <StyledTableCell component="th" scope="row">
-                    {value}
+    <>
+      <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 1200 }} aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                {columnBooking.map((column) => (
+                  <StyledTableCell
+                    key={column.index}
+                    align={column.align}
+                    style={{ minWidth: column.minWidth }}
+                  >
+                    {column.label}
                   </StyledTableCell>
-                );
-              })}
-              <StyledTableCell component="th" scope="row">
-                <Button
-                  className={`px-2 py-1 rounded-md ${
-                    booking.booking_status === "Pending"
-                      ? "bg-[#5A8DEE]"
-                      : booking.booking_status === "Success"
-                      ? "bg-red-500"
-                      : "bg-green-500"
-                  } text-white`}
-                  type="button"
-                  onClick={() => handleOpenApprove(room)}
-                >
-                  {booking.booking_status === "Pending"
-                    ? "Đang chờ"
-                    : booking.booking_status === "Success"
-                    ? "Hoạt động"
-                    : "Không cho phép"}
-                </Button>
-              </StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+                ))}
+                <StyledTableCell>Booking</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {data?.map((booking) => (
+                <StyledTableRow key={booking.id}>
+                  {columnBooking.map((column) => {
+                    const value = booking[column.index];
+                    return (
+                      <StyledTableCell component="th" scope="row">
+                        {value}
+                      </StyledTableCell>
+                    );
+                  })}
+                  <StyledTableCell component="th" scope="row">
+                    <Button
+                      className={`px-2 py-1 rounded-md ${booking.booking_status === "Pending"
+                        ? "bg-[#5A8DEE]"
+                        : booking.booking_status === "Success"
+                          ? "bg-red-500"
+                          : "bg-green-500"
+                        } text-white`}
+                      type="button"
+                      onClick={() => handleOpenConfirm(booking)}
+                    >
+                      {booking.booking_status === "Pending"
+                        ? "Đang chờ"
+                        : booking.booking_status === "Success"
+                          ? "Hoạt động"
+                          : "Không cho phép"}
+                    </Button>
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        {openConfirm && (
+          <ModalComponent handleOpen={handleOpenConfirm} open={openConfirm}>
+            <Typography variant="h6" component="h2">
+              Bạn đồng ý cho đặt phòng
+            </Typography>
+            <Typography component="p">{inforBooking?.name_room}</Typography>
+            <Stack sx={{ mt: 4 }} direction="row" spacing={2}>
+              <Button
+                type="button"
+                className="text-white bg-[#5A8DEE] rounded px-4 py-2 hover:opacity-80 shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] hover:shadow-[0_4px_12px_0_rgba(90,141,238,0.6)]"
+                onClick={() =>
+                  inforBooking && handleConfirm(inforBooking.id!, BookingStatus.success)
+                }
+              >
+                Đồng ý
+              </Button>
+              <Button
+                type="button"
+                className="text-white bg-red-500  rounded px-4 py-2 hover:opacity-80 shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] hover:shadow-[0_4px_12px_0_rgba(90,141,238,0.6)] "
+                onClick={() => inforBooking && handleConfirm(inforBooking.id!, BookingStatus.emtry)}
+              >
+                Không đồng ý
+              </Button>
+            </Stack>
+          </ModalComponent>
+        )}
+      </Paper>
+    </>
   );
 };
 

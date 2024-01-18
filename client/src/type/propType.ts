@@ -81,12 +81,13 @@ type PropDrawerType = {
 
 type PropsRoom = {
   data: typeGetRoom[];
-  getdata: () => void
+  getdata: () => void;
 };
 
 interface PropsBooking {
   data?: IBookingData[];
   getData: () => void;
+  getData2?: () => void;
 }
 
 export type {
