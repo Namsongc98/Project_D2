@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { Link } from "react-router-dom";
 
 function SamplePrevArrow(props: any) {
   const { onClick } = props;
@@ -78,7 +79,7 @@ const PopularTravelCarousel = () => {
       <div className=" relative">
         <Slider {...settings}>
           {dataCityCarousel.map((item) => (
-            <div className="" key={item.id}>
+            <Link to={`/${item.search}`} className="" key={item.id}>
               <div className="relative overflow-hidden rounded cursor-pointer mx-1">
                 <h2 className="absolute text-white text-lg bottom-0 mb-4 ml-4 font-bold">
                   {item.city}
@@ -86,7 +87,7 @@ const PopularTravelCarousel = () => {
 
                 <img src={item.img} alt="" className="object-cover h-[248px]" />
               </div>
-            </div>
+            </Link>
           ))}
         </Slider>
       </div>
