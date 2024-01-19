@@ -10,13 +10,14 @@ const useDate = () => {
   date.getDate();
   const dateNow = dayjs(
     `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
-  ).format("DD/MM/YYYY");
+  ).format("YYYY-MM-DD");
   useEffect(() => {
     setValue(dateNow);
   }, []);
+  console.log(dateNow)
 
   const onChange = (newValue: Dayjs | null) => {
-    setValue(newValue?.format("DD/MM/YYYY"));
+    setValue(newValue?.format("YYYY-MM-DD"));
   };
 
   return {

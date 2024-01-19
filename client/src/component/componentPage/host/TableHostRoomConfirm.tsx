@@ -56,11 +56,15 @@ const columnBooking: TableRoom[] = [
   { index: "start_date", label: "Ngày đặt", minWidth: 50, align: "left" },
   { index: "end_date", label: "Ngày cuối", minWidth: 50, align: "left" },
   { index: "cout_persion", label: "Số người", minWidth: 50, align: "left" },
-  { index: "payment", label: "Giá tiền", minWidth: 50, align: "left" },
+  { index: "price", label: "Giá tiền", minWidth: 50, align: "left" },
   { index: "pay_status", label: "Thanh toán", minWidth: 50, align: "left" },
 ];
 
-const TableHostRoomConfirm: React.FC<PropsBooking> = ({ data, getData, getData2 }) => {
+const TableHostRoomConfirm: React.FC<PropsBooking> = ({
+  data,
+  getData,
+  getData2,
+}) => {
   const [openConfirm, setOpenConfirm] = useState(false);
   const [inforBooking, setInforBooking] = useState<IBookingData | undefined>();
 
@@ -69,26 +73,26 @@ const TableHostRoomConfirm: React.FC<PropsBooking> = ({ data, getData, getData2 
     setInforBooking(Booking);
   };
 
-  const handleConfirm = async (idBooking: number, status: BookingStatus.success | BookingStatus.emtry) => {
+  const handleConfirm = async (
+    idBooking: number,
+    status: BookingStatus.success | BookingStatus.emtry
+  ) => {
     const bookingStatus = {
-      booking_status: status
-    }
+      booking_status: status,
+    };
     try {
-      await patchBookingConfirm(idBooking, bookingStatus)
+      await patchBookingConfirm(idBooking, bookingStatus);
       setOpenConfirm(!openConfirm);
-      getData()
-      if (getData2)
-        getData2()
+      getData();
+      if (getData2) getData2();
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-
-  }
-
+  };
 
   return (
     <>
-      <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+      <Paper sx={{ width: "100%", overflow: "hidden" }}>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 1200 }} aria-label="customized table">
             <TableHead>
@@ -118,20 +122,21 @@ const TableHostRoomConfirm: React.FC<PropsBooking> = ({ data, getData, getData2 
                   })}
                   <StyledTableCell component="th" scope="row">
                     <Button
-                      className={`px-2 py-1 rounded-md ${booking.booking_status === "Pending"
-                        ? "bg-[#5A8DEE]"
-                        : booking.booking_status === "Success"
+                      className={`px-2 py-1 rounded-md ${
+                        booking.booking_status === BookingStatus.pending
+                          ? "bg-[#5A8DEE]"
+                          : booking.booking_status === BookingStatus.success
                           ? "bg-red-500"
                           : "bg-green-500"
-                        } text-white`}
+                      } text-white`}
                       type="button"
                       onClick={() => handleOpenConfirm(booking)}
                     >
                       {booking.booking_status === "Pending"
                         ? "Đang chờ"
                         : booking.booking_status === "Success"
-                          ? "Hoạt động"
-                          : "Không cho phép"}
+                        ? "Hoạt động"
+                        : "Không cho phép"}
                     </Button>
                   </StyledTableCell>
                 </StyledTableRow>
@@ -150,7 +155,8 @@ const TableHostRoomConfirm: React.FC<PropsBooking> = ({ data, getData, getData2 
                 type="button"
                 className="text-white bg-[#5A8DEE] rounded px-4 py-2 hover:opacity-80 shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] hover:shadow-[0_4px_12px_0_rgba(90,141,238,0.6)]"
                 onClick={() =>
-                  inforBooking && handleConfirm(inforBooking.id!, BookingStatus.success)
+                  inforBooking &&
+                  handleConfirm(inforBooking.id!, BookingStatus.success)
                 }
               >
                 Đồng ý
@@ -158,7 +164,10 @@ const TableHostRoomConfirm: React.FC<PropsBooking> = ({ data, getData, getData2 
               <Button
                 type="button"
                 className="text-white bg-red-500  rounded px-4 py-2 hover:opacity-80 shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] hover:shadow-[0_4px_12px_0_rgba(90,141,238,0.6)] "
-                onClick={() => inforBooking && handleConfirm(inforBooking.id!, BookingStatus.emtry)}
+                onClick={() =>
+                  inforBooking &&
+                  handleConfirm(inforBooking.id!, BookingStatus.emtry)
+                }
               >
                 Không đồng ý
               </Button>

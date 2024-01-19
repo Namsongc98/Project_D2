@@ -3,6 +3,7 @@ import AdminStatistics from "../page/admin/AdminStatistics";
 import { PostRoom } from "../page/host";
 import HostStatistics from "../page/host/HostStatistics";
 import { Home, ListStay, Login, Register, SearchHotel } from "../page/user";
+import DetailRoom from "../page/user/DetailRoom";
 import Profile from "../page/user/Profile";
 import { Layout } from "../type";
 
@@ -11,6 +12,8 @@ const publicPage: Layout = [
   { path: "/", component: Home, layout: true },
   { path: "/search", component: SearchHotel, layout: true },
   { path: "/profile", component: Profile, layout: true },
+  { path: "/detail", component: Profile, layout: true },
+  { path: "/detail/:id", component: DetailRoom, layout: true },
   { path: "/:id", component: ListStay, layout: true },
 ];
 

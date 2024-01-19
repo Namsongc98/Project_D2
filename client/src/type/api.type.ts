@@ -1,5 +1,5 @@
 
-import { Approve, IProfileUser, ImgageFiles } from "."
+import { Approve, IProfileUser, ImageFiles } from "."
 
 type Decode = {
     email: string,
@@ -26,7 +26,7 @@ type typeGetRoom = {
     cout_people: number
     created_at: number | string
     decription: string
-    image: ImgageFiles[]
+    image: ImageFiles[]
     name: string
     price: number
     type_tourism: string

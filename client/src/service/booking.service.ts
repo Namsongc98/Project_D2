@@ -12,4 +12,8 @@ const getBookingSuccess = async () => {
 const patchBookingConfirm = async (idBooking: number, bookingStatus: PatchBooking) => {
     return await instance.patch(`/bookings/${idBooking}`, bookingStatus);
 }
+// const patchPhoneBooking = async (idBooking: number) => {
+//     return await instance.patch(`/bookings/${idBooking}`, bookingStatus);
+// }
+
 export { patchBookingConfirm, getBookingPending, getBookingSuccess }

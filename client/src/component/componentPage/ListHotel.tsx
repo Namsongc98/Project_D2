@@ -1,4 +1,3 @@
-
 import imgHaNoi from "../../assets/image/HaNoi.png";
 const ListHotel = () => {
   return (
@@ -22,7 +21,7 @@ const ListHotel = () => {
             </div>
             <div className="p-4">
               <div className="flex justify-between  items-center font-semibold text-sm opacity-50">
-                <span >Nơi đi</span>
+                <span>Nơi đi</span>
                 <span>VND</span>
               </div>
               <div className="flex flex-col gap-4">
@@ -32,23 +31,33 @@ const ListHotel = () => {
                 </div>
                 <div className="flex justify-between items-center ">
                   <span className="text-sm">khách sạn</span>
-                  <span className="text-[#0085ff] text-sm font-bold">120000</span>
+                  <span className="text-[#0085ff] text-sm font-bold">
+                    120000
+                  </span>
                 </div>
                 <div className="flex justify-between items-center ">
                   <span className="text-sm">khách sạn</span>
-                  <span className="text-[#0085ff] text-sm font-bold">120000</span>
+                  <span className="text-[#0085ff] text-sm font-bold">
+                    120000
+                  </span>
                 </div>
                 <div className="flex justify-between items-center ">
                   <span className="text-sm">khách sạn</span>
-                  <span className="text-[#0085ff] text-sm font-bold">120000</span>
+                  <span className="text-[#0085ff] text-sm font-bold">
+                    120000
+                  </span>
                 </div>
                 <div className="flex justify-between items-center ">
                   <span className="text-sm">khách sạn</span>
-                  <span className="text-[#0085ff] text-sm font-bold">120000</span>
+                  <span className="text-[#0085ff] text-sm font-bold">
+                    120000
+                  </span>
                 </div>
                 <div className="flex justify-between items-center ">
                   <span className="text-sm">khách sạn</span>
-                  <span className="text-[#0085ff] text-sm font-bold">120000</span>
+                  <span className="text-[#0085ff] text-sm font-bold">
+                    120000
+                  </span>
                 </div>
               </div>
             </div>
@@ -67,7 +76,7 @@ const ListHotel = () => {
             </div>
             <div className="p-4">
               <div className="flex justify-between  items-center font-semibold text-sm opacity-50">
-                <span >Nơi đi</span>
+                <span>Nơi đi</span>
                 <span>VND</span>
               </div>
               <div className="flex flex-col gap-2">
@@ -77,23 +86,33 @@ const ListHotel = () => {
                 </div>
                 <div className="flex justify-between items-center ">
                   <span className="text-sm">khách sạn</span>
-                  <span className="text-[#0085ff] text-sm font-bold">120000</span>
+                  <span className="text-[#0085ff] text-sm font-bold">
+                    120000
+                  </span>
                 </div>
                 <div className="flex justify-between items-center ">
                   <span className="text-sm">khách sạn</span>
-                  <span className="text-[#0085ff] text-sm font-bold">120000</span>
+                  <span className="text-[#0085ff] text-sm font-bold">
+                    120000
+                  </span>
                 </div>
                 <div className="flex justify-between items-center ">
                   <span className="text-sm">khách sạn</span>
-                  <span className="text-[#0085ff] text-sm font-bold">120000</span>
+                  <span className="text-[#0085ff] text-sm font-bold">
+                    120000
+                  </span>
                 </div>
                 <div className="flex justify-between items-center ">
                   <span className="text-sm">khách sạn</span>
-                  <span className="text-[#0085ff] text-sm font-bold">120000</span>
+                  <span className="text-[#0085ff] text-sm font-bold">
+                    120000
+                  </span>
                 </div>
                 <div className="flex justify-between items-center ">
                   <span className="text-sm">khách sạn</span>
-                  <span className="text-[#0085ff] text-sm font-bold">120000</span>
+                  <span className="text-[#0085ff] text-sm font-bold">
+                    120000
+                  </span>
                 </div>
               </div>
             </div>
@@ -112,7 +131,7 @@ const ListHotel = () => {
             </div>
             <div className="p-4">
               <div className="flex justify-between  items-center font-semibold text-sm opacity-50">
-                <span >Nơi đi</span>
+                <span>Nơi đi</span>
                 <span>VND</span>
               </div>
               <div className="flex flex-col gap-2">
@@ -122,23 +141,33 @@ const ListHotel = () => {
                 </div>
                 <div className="flex justify-between items-center ">
                   <span className="text-sm">khách sạn</span>
-                  <span className="text-[#0085ff] text-sm font-bold">120000</span>
+                  <span className="text-[#0085ff] text-sm font-bold">
+                    120000
+                  </span>
                 </div>
                 <div className="flex justify-between items-center ">
                   <span className="text-sm">khách sạn</span>
-                  <span className="text-[#0085ff] text-sm font-bold">120000</span>
+                  <span className="text-[#0085ff] text-sm font-bold">
+                    120000
+                  </span>
                 </div>
                 <div className="flex justify-between items-center ">
                   <span className="text-sm">khách sạn</span>
-                  <span className="text-[#0085ff] text-sm font-bold">120000</span>
+                  <span className="text-[#0085ff] text-sm font-bold">
+                    120000
+                  </span>
                 </div>
                 <div className="flex justify-between items-center ">
                   <span className="text-sm">khách sạn</span>
-                  <span className="text-[#0085ff] text-sm font-bold">120000</span>
+                  <span className="text-[#0085ff] text-sm font-bold">
+                    120000
+                  </span>
                 </div>
                 <div className="flex justify-between items-center ">
                   <span className="text-sm">khách sạn</span>
-                  <span className="text-[#0085ff] text-sm font-bold">120000</span>
+                  <span className="text-[#0085ff] text-sm font-bold">
+                    120000
+                  </span>
                 </div>
               </div>
             </div>
@@ -157,7 +186,7 @@ const ListHotel = () => {
             </div>
             <div className="p-4">
               <div className="flex justify-between  items-center font-semibold text-sm opacity-50">
-                <span >Nơi đi</span>
+                <span>Nơi đi</span>
                 <span>VND</span>
               </div>
               <div className="flex flex-col gap-2">
@@ -167,23 +196,33 @@ const ListHotel = () => {
                 </div>
                 <div className="flex justify-between items-center ">
                   <span className="text-sm">khách sạn</span>
-                  <span className="text-[#0085ff] text-sm font-bold">120000</span>
+                  <span className="text-[#0085ff] text-sm font-bold">
+                    120000
+                  </span>
                 </div>
                 <div className="flex justify-between items-center ">
                   <span className="text-sm">khách sạn</span>
-                  <span className="text-[#0085ff] text-sm font-bold">120000</span>
+                  <span className="text-[#0085ff] text-sm font-bold">
+                    120000
+                  </span>
                 </div>
                 <div className="flex justify-between items-center ">
                   <span className="text-sm">khách sạn</span>
-                  <span className="text-[#0085ff] text-sm font-bold">120000</span>
+                  <span className="text-[#0085ff] text-sm font-bold">
+                    120000
+                  </span>
                 </div>
                 <div className="flex justify-between items-center ">
                   <span className="text-sm">khách sạn</span>
-                  <span className="text-[#0085ff] text-sm font-bold">120000</span>
+                  <span className="text-[#0085ff] text-sm font-bold">
+                    120000
+                  </span>
                 </div>
                 <div className="flex justify-between items-center ">
                   <span className="text-sm">khách sạn</span>
-                  <span className="text-[#0085ff] text-sm font-bold">120000</span>
+                  <span className="text-[#0085ff] text-sm font-bold">
+                    120000
+                  </span>
                 </div>
               </div>
             </div>

@@ -26,7 +26,6 @@ const SnackBarReuse = ({ type, message }: PropTypeSnackBar) => {
     if (message) {
       handleClick();
     }
-    return () => {};
   }, [message]);
   const handleClick = () => {
     setOpen(true);

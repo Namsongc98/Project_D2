@@ -76,15 +76,16 @@ interface IFormInput {
   password: string;
 }
 
-type ImgageFiles = {
-  id: number, error: boolean, url: string, file: File
+type ImageFiles = {
+  [x: string]: string | undefined;
+  id: number, error?: boolean, url: string, file?: File
 }
 
 type ImageMultiple = {
-  arrImgView: Array<ImgageFiles>,
+  arrImgView: Array<ImageFiles>,
   onChange: (e: React.FormEvent<HTMLInputElement>) => void,
   errorImg: string,
-  setArrImgView: React.Dispatch<React.SetStateAction<Array<ImgageFiles>>>
+  setArrImgView: React.Dispatch<React.SetStateAction<Array<ImageFiles>>>
 }
 
 type TextArea = {
@@ -133,7 +134,7 @@ export type {
   InputDate,
   checkboxType,
   ImageMultiple,
-  ImgageFiles,
+  ImageFiles,
   TextArea,
   ColumnTable
 };

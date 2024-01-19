@@ -19,15 +19,9 @@ function App() {
             const Layout = DefaultLayout;
             const Page = router.component;
             return (
-              <Route
-                key={index}
-                path={router.path}
-                element={
-                  <Layout>
-                    <Page />
-                  </Layout>
-                }
-              />
+              <Route key={index} path="/" element={<Layout />}>
+                <Route path={router.path} element={<Page />} />
+              </Route>
             );
           })}
           {/* layout Admin private */}

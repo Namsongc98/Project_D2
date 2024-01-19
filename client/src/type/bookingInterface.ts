@@ -21,7 +21,7 @@ interface IBookingData {
   start_date: number;
   end_date: number;
   cout_persion?: number;
-  payment?: number;
+  price?: number;
   pay_status?: StatusPayment;
 }
 
