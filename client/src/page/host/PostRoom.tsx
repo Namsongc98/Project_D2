@@ -1,10 +1,9 @@
-import { AlertColor } from "@mui/material";
 import { Button, Input, SelectOption, TextArea } from "../../component/element";
 import {
   BookingStatus,
   IRoomPost,
   IRoomSubmit,
-  ImgageFiles,
+  ImageFiles,
   SelectOptionType,
 } from "../../type";
 import { useButton, useGetUser, useInputMultiple } from "../../hook";
@@ -20,7 +19,7 @@ import { Title } from "../../component/componentPage";
 
 const PostRoom = () => {
   const [loading, setLoading] = useState(false);
-  const [type, setType] = useState<AlertColor>("success");
+  const [type, setType] = useState("success");
   const [error, setError] = useState("");
   const user = useGetUser();
   //  SelectOption
@@ -53,12 +52,12 @@ const PostRoom = () => {
   const schema = yup.object({
     address: yup.string().required("Nhập địa chỉ"),
     nameHotel: yup.string().required("Nhập tên khách sạn"),
-    price: yup.number().required("Nhập giá tiền "),
-    coutPeople: yup.number().required("Nhập số lượng người "),
+    price: yup.number().typeError("Nhập giá tiền "),
+    coutPeople: yup.number().typeError("Nhập số lượng người "),
     city: yup.string().required("Nhập tên thành phố "),
     typeTouris: yup.string().required("Nhập loại Du lich"),
-    bedRoom: yup.number().required("Nhập số lượng phòng ngủ"),
-    bathRoom: yup.number().required("Nhập số lượng phòng tắm"),
+    bedRoom: yup.number().typeError("Nhập số lượng phòng ngủ"),
+    bathRoom: yup.number().typeError("Nhập số lượng phòng tắm"),
     decription: yup.string().required("Nhập mô tả phòng"),
   });
 
@@ -83,24 +82,30 @@ const PostRoom = () => {
 
   useEffect(() => {
     if (message) {
-      setType("error");
+      setType("warning");
       setError(message);
+    } else {
+      setType("");
+      setError("");
     }
+  }, [message]);
+  useEffect(() => {
     return () => {
       setError("");
+      setType("success");
     };
-  }, [message]);
+  }, []);
   const onSubmit: SubmitHandler<IRoomSubmit> = async (
     data: IRoomSubmit
   ): Promise<void> => {
     setLoading(true);
     if (!imageRoom.arrImgView.length) {
       setType("error");
-      setError("Bạn chưa chọn ảnh");
+      setError("Bạn chưa chọn ảnh!");
       setLoading(false);
       return;
     }
-    const uploadcClodinary = imageRoom.arrImgView.map((file: ImgageFiles) =>
+    const uploadcClodinary = imageRoom.arrImgView.map((file: ImageFiles) =>
       upfileClodinary(file.file)
     );
     try {
@@ -145,7 +150,7 @@ const PostRoom = () => {
 
   return (
     <section className="flex justify-center items-center relative">
-      <SnackBarReuse message={error} type={type} />
+      <SnackBarReuse message={error} type={type} setError={setError}/>
       <form
         action=""
         className="bg-white rounded-xl p-4 mt-7 min-w-[70%] shadow-md"

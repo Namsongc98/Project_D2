@@ -1,27 +1,40 @@
 import { instance, instance_token } from "../config";
-import { ApprovePacth, BookingStatus, IRoomPost } from "../type";
+import { Approve, ApprovePacth, BookingStatus, IRoomPost, PatchBooking } from "../type";
 
-
+// tạo phòng 
 const createRoom = async (room: IRoomPost) => {
     return await instance_token.post("/touris", room);
 };
 
+
+// data tất cả phòng
 const getAllRoom = async () => {
     return await instance.get("/touris");
 };
 
+
+// data detail
 const getOneRevice = async (id: string,) => {
     return await instance.get(`/touris/${id}`);
 
 }
 
-const getRoomCity = async (city: string, status: BookingStatus.emtry) => {
-    return await instance.get("/touris", { params: { city, status } });
+//lấy dữ liệu theo city có status là emtry admin  success
+const getRoomCity = async (city: string, status: BookingStatus.emtry, approve: Approve.success) => {
+    return await instance.get("/touris", { params: { city, booking_status: status, approve_room: approve } });
 };
 
+// addmin cho phép đặt phòng
 const patchApprove = async (idRoom: number, approve: ApprovePacth) => {
     return await instance.patch(`/touris/${idRoom}`, approve);
 }
 
+// thay đổi BookingStatus pending khi khách đặt phòng
+const patchStatusBooking = async (idRoom: number, statusBooking: PatchBooking) => {
+    return await instance.patch(`/touris/${idRoom}`, statusBooking);
+}
 
-export { createRoom, getAllRoom, patchApprove, getRoomCity, getOneRevice }
+// thay đổi booking statuss succes
+
+
+export { createRoom, getAllRoom, patchApprove, getRoomCity, getOneRevice, patchStatusBooking }

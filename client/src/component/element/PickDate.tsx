@@ -32,7 +32,7 @@ const PickDate = (props: PropDatePick) => {
 
   return (
     <div className="relative w-1/2">
-      <label className="absolute top-[-25px] text-white opacity-70 text-sm">
+      <label className={`absolute  text-white opacity-70 text-sm`}>
         {label}
       </label>
       <ThemeProvider theme={theme}>

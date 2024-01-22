@@ -7,20 +7,43 @@ import Person2Icon from "@mui/icons-material/Person2";
 import HomeIcon from "@mui/icons-material/Home";
 import { useGetUser } from "../../hook";
 import Popup from "../componentReuse/Popup";
-import { remoteToken } from "../../common";
+import { convertDateToTimestamp, remoteToken } from "../../common";
 import AvatarUser from "../componentReuse/AvatarUser";
 import { useSelector } from "react-redux";
 import { getUser, setUser } from "../../store/reducer/userSlice";
 import { useDispatch } from "react-redux";
+import { Button, Menu, MenuItem, Stack } from "@mui/material";
+import BookIcon from "@mui/icons-material/Book";
+import { getBookingUser } from "../../service";
+import { IBookingData } from "../../type";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 const Header = () => {
   const userSelector = useSelector(getUser);
+  const [booking, setBooking] = useState<IBookingData[] | undefined>();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useGetUser();
   const [anchor, setAnchor] = useState<null | HTMLElement>(null);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchor(anchor ? null : event.currentTarget);
+  };
+
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClickMenu = async (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    setAnchorEl(event.currentTarget);
+    try {
+      const res = await getBookingUser(userSelector.id);
+      setBooking(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
   useEffect(() => {
@@ -39,11 +62,77 @@ const Header = () => {
         <div className="flex gap-2 items-center h-full">
           <Link
             to="/"
-            className="flex gap-2 items-center hover:bg-[#e0ecff] px-3 py-2 rounded-md text-base text-[#1e68ff]"
+            className="flex gap-2 items-center hover:bg-[#e0ecff] px-3 py-2 rounded-md text-base text-[#00afdd]"
           >
-            <HomeIcon className="text-[#1e68ff]" />
+            <HomeIcon className="text-[#00afdd]" />
             <p>Trang chủ</p>
           </Link>
+          {userSelector && (
+            <div className="">
+              <Button
+                id="basic-button"
+                aria-controls={open ? "basic-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+                onClick={handleClickMenu}
+                sx={{ color: "#00afdd" }}
+                startIcon={<BookIcon />}
+              >
+                Đơn đặt
+              </Button>
+              <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: -100,
+                }}
+                MenuListProps={{
+                  "aria-labelledby": "basic-button",
+                }}
+              >
+                {booking && booking.length > 0 ? (
+                  booking?.map((item) => (
+                    <MenuItem
+                      sx={{ px: "10px", minWidth: "300px" }}
+                      key={item.id}
+                    >
+                      <div className="w-full">
+                        <div className="flex justify-between items-center">
+                          <div className="">
+                            <span>{item.name_room}</span>
+                            <p className="text-xs opacity-70">
+                              <span className="text-sm">Từ ngày: </span>
+                              {convertDateToTimestamp(item.start_date) +
+                                " - " +
+                                convertDateToTimestamp(item.end_date)}
+                            </p>
+                          </div>
+                          <MoreVertIcon fontSize="small" />
+                        </div>
+                      </div>
+                    </MenuItem>
+                  ))
+                ) : (
+                  <Stack
+                    sx={{
+                      border: "1px solid #dadae1",
+                      borderRadius: "6px",
+                      height: "100px",
+                      width: "200px",
+                      mx: "10px",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <span>Chưa đặt chuyến nào!</span>
+                  </Stack>
+                )}
+              </Menu>
+            </div>
+          )}
           {userSelector ? (
             <>
               <div

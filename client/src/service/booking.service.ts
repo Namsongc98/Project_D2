@@ -1,19 +1,37 @@
+import { patchStatusBooking } from ".";
 import { instance } from "../config";
-import { PatchBooking } from "../type";
+import { BookingStatus, IBookingData, PatchBooking } from "../type";
 
+
+//  lấy data Booking status pending
 const getBookingPending = async () => {
-    return await instance.get(`/bookings/`, { params: { booking_status: "Pending" } });
+    return await instance.get(`/bookings/`, { params: { booking_status: BookingStatus.pending } });
 }
+
+// data booking statust success
 const getBookingSuccess = async () => {
-    const res = await instance.get(`/bookings/`, { params: { booking_status: "Success" } });
+    const res = await instance.get(`/bookings/`, { params: { booking_status: BookingStatus.success } });
     return res
 }
 
+// cho phép người dùng đặt phòng
 const patchBookingConfirm = async (idBooking: number, bookingStatus: PatchBooking) => {
-    return await instance.patch(`/bookings/${idBooking}`, bookingStatus);
+    await instance.patch(`/bookings/${idBooking}`, bookingStatus);
+    patchStatusBooking(idBooking, bookingStatus)
+    return
 }
-// const patchPhoneBooking = async (idBooking: number) => {
-//     return await instance.patch(`/bookings/${idBooking}`, bookingStatus);
-// }
 
-export { patchBookingConfirm, getBookingPending, getBookingSuccess }
+
+
+// tạo booking 
+const createBooking = async (booking: IBookingData) => {
+    const bookingStatus: PatchBooking = { booking_status: BookingStatus.pending }
+    patchStatusBooking(booking.id_touris!, bookingStatus)
+    return await instance.post(`/bookings/`, booking);
+}
+
+const getBookingUser = async (userId: string) => {
+    return await instance.get('/bookings', { params: { user_id: userId } })
+}
+
+export { patchBookingConfirm, getBookingPending, getBookingSuccess, createBooking, getBookingUser }

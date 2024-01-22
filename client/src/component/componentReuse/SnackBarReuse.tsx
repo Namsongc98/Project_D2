@@ -11,7 +11,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-const SnackBarReuse = ({ type, message }: PropTypeSnackBar) => {
+const SnackBarReuse = ({ type, message, setError }: PropTypeSnackBar) => {
   const [open, setOpen] = React.useState(false);
   const handleClose = (
     event?: React.SyntheticEvent | Event,
@@ -21,28 +21,31 @@ const SnackBarReuse = ({ type, message }: PropTypeSnackBar) => {
       return;
     }
     setOpen(false);
+    setError("");
   };
   React.useEffect(() => {
-    if (message) {
-      handleClick();
-    }
+    handleClick();
+    return () => {};
   }, [message]);
   const handleClick = () => {
     setOpen(true);
   };
   return (
-    <Stack spacing={2} sx={{ width: "100%", position: "absolute" }}>
-      <Snackbar
-        open={open}
-        autoHideDuration={4000}
-        onClose={handleClose}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      >
-        <Alert onClose={handleClose} severity={type} sx={{ width: "100%" }}>
-          {message}
-        </Alert>
-      </Snackbar>
-    </Stack>
+    <>
+      {message && (
+        <Stack spacing={2} sx={{ width: "100%", position: "absolute" }}>
+          <Snackbar
+            open={open}
+            onClose={handleClose}
+            anchorOrigin={{ vertical: "top", horizontal: "right" }}
+          >
+            <Alert onClose={handleClose} severity={type} sx={{ width: "100%" }}>
+              {message}
+            </Alert>
+          </Snackbar>
+        </Stack>
+      )}
+    </>
   );
 };
 export default SnackBarReuse;

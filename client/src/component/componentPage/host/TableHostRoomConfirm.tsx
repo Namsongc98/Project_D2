@@ -12,6 +12,7 @@ import React, { useState } from "react";
 import { Button } from "../../element";
 import { ModalComponent } from "../../componentReuse";
 import { Stack, Typography } from "@mui/material";
+import { convertDateToTimestamp, formatcurrency } from "../../../common";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -45,6 +46,7 @@ type TableRoom = {
   label: string;
   minWidth: number;
   align: AlignTable;
+  format?: (value: number) => void;
 };
 
 const columnBooking: TableRoom[] = [
@@ -53,10 +55,28 @@ const columnBooking: TableRoom[] = [
   { index: "email", label: "Email", minWidth: 100, align: "left" },
   { index: "phone", label: "Số điện thoại", minWidth: 20, align: "left" },
   { index: "name_room", label: "Tên phòng", minWidth: 20, align: "left" },
-  { index: "start_date", label: "Ngày đặt", minWidth: 50, align: "left" },
-  { index: "end_date", label: "Ngày cuối", minWidth: 50, align: "left" },
+  {
+    index: "start_date",
+    label: "Ngày đặt",
+    minWidth: 50,
+    align: "left",
+    format: (value) => convertDateToTimestamp(value),
+  },
+  {
+    index: "end_date",
+    label: "Ngày cuối",
+    minWidth: 50,
+    align: "left",
+    format: (value) => convertDateToTimestamp(value),
+  },
   { index: "cout_persion", label: "Số người", minWidth: 50, align: "left" },
-  { index: "price", label: "Giá tiền", minWidth: 50, align: "left" },
+  {
+    index: "total",
+    label: "Giá tiền",
+    minWidth: 50,
+    align: "left",
+    format: (value) => formatcurrency(value),
+  },
   { index: "pay_status", label: "Thanh toán", minWidth: 50, align: "left" },
 ];
 
@@ -89,7 +109,7 @@ const TableHostRoomConfirm: React.FC<PropsBooking> = ({
       console.log(error);
     }
   };
-
+  console.log(data);
   return (
     <>
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
@@ -116,7 +136,9 @@ const TableHostRoomConfirm: React.FC<PropsBooking> = ({
                     const value = booking[column.index];
                     return (
                       <StyledTableCell component="th" scope="row">
-                        {value}
+                        {column.format && typeof value === "number"
+                          ? column.format(value)
+                          : value}
                       </StyledTableCell>
                     );
                   })}
@@ -126,8 +148,8 @@ const TableHostRoomConfirm: React.FC<PropsBooking> = ({
                         booking.booking_status === BookingStatus.pending
                           ? "bg-[#5A8DEE]"
                           : booking.booking_status === BookingStatus.success
-                          ? "bg-red-500"
-                          : "bg-green-500"
+                          ? "bg-green-500"
+                          : "bg-red-500"
                       } text-white`}
                       type="button"
                       onClick={() => handleOpenConfirm(booking)}

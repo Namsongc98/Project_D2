@@ -77,8 +77,10 @@ interface IFormInput {
 }
 
 type ImageFiles = {
-  [x: string]: string | undefined;
-  id: number, error?: boolean, url: string, file?: File
+  id: number,
+  error: boolean,
+  url: string,
+  file: File
 }
 
 type ImageMultiple = {
@@ -101,18 +103,18 @@ type TextArea = {
 
 interface ColumnTable {
   id:
-    | "id"
-    | "address"
-    | "city"
-    | "approve_room"
-    | "bathroom"
-    | "bedroom"
-    | "cout_people"
-    | "created_at"
-    | "decription"
-    | "name"
-    | "price"
-    | "type_tourism";
+  | "id"
+  | "address"
+  | "city"
+  | "approve_room"
+  | "bathroom"
+  | "bedroom"
+  | "cout_people"
+  | "created_at"
+  | "decription"
+  | "name"
+  | "price"
+  | "type_tourism";
   label: string;
   minWidth?: number;
   align?: "right";

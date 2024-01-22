@@ -20,7 +20,7 @@ import BathtubIcon from "@mui/icons-material/Bathtub";
 import GroupIcon from "@mui/icons-material/Group";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getOneRevice } from "../../service";
+import { createBooking, getOneRevice } from "../../service";
 import {
   BookingStatus,
   IBookingData,
@@ -36,14 +36,21 @@ import { useGetUser } from "../../hook";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import useDate from "../../hook/useDate";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import SnackBarReuse from "../../component/componentReuse/SnackBarReuse";
+import { formatcurrency } from "../../common";
 const DetailRoom = () => {
   const [detailRoom, setDetailRoom] = useState<typeGetRoom | undefined>();
-  const [error, setError] = useState<string | undefined>("");
+  const [gapDate, setGapDate] = useState<number>(0);
+  const [type, setType] = useState("success");
+  const [mess, setMess] = useState("");
+  const [total, setTotal] = useState<number>(0);
+  const [error, setError] = useState("");
   const [openConfirm, setOpenConfirm] = useState(false);
   const param = useParams();
   const user = useGetUser();
   const inputStartDate = useDate();
   const inputEndDate = useDate();
+
   const getRoom = async () => {
     try {
       if (param.id) {
@@ -76,17 +83,30 @@ const DetailRoom = () => {
 
   const message: string | undefined = errors?.phone?.message;
   useEffect(() => {
-    setError(message);
+    setError(message!);
     return () => {
       setError("");
     };
   }, [message]);
+  useEffect(() => {
+    const gapTimespamp = inputEndDate.timestamp! - inputStartDate.timestamp!;
+    const gapDate = gapTimespamp / (1000 * 60 * 60 * 24);
+    setGapDate(gapDate);
+    if (detailRoom) {
+      const total = gapDate * detailRoom.price;
+      setTotal(total);
+    }
+  }, [detailRoom, inputStartDate.timestamp, inputEndDate.timestamp]);
 
   const onSubmit: SubmitHandler<any> = async (data) => {
     const userName = user?.firstName + " " + user?.lastName;
 
-    console.log(inputStartDate.value);
-    console.log(inputEndDate.value);
+    if (inputStartDate.timestamp! >= inputEndDate.timestamp!) {
+      setError("Ngày trả phòng không hợp lệ");
+      return;
+    }
+
+    setError("");
     const booking: IBookingData = {
       id_touris: 1,
       user_id: user!.id,
@@ -95,15 +115,22 @@ const DetailRoom = () => {
       email: user!.email,
       name_room: detailRoom!.name,
       booking_status: BookingStatus.pending,
-      start_date: 0,
-      end_date: 0,
-      price: detailRoom!.price,
+      start_date: inputStartDate.timestamp!,
+      end_date: inputEndDate.timestamp!,
+      total: total,
       pay_status: StatusPayment.pending,
     };
+    try {
+      await createBooking(booking);
+      setType("success");
+      setMess("Booking thành công xin chờ xác nhận");
+    } catch (error) {
+      setError("Booking không thành công");
+    }
   };
 
   return (
-    <Box sx={{ backgroundColor: "#f5f5f5" }}>
+    <Box sx={{ backgroundColor: "#P5f5f5" }}>
       <div className="w-full flex h-[480px]">
         {detailRoom?.image?.map((item) => {
           return (
@@ -111,7 +138,7 @@ const DetailRoom = () => {
               <img
                 srcSet={`${item.url}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
                 src={`${item.url}?w=164&h=164&fit=crop&auto=format`}
-                alt={item.title}
+                alt={item.url}
                 loading="lazy"
               />
             </ImageListItem>
@@ -154,9 +181,8 @@ const DetailRoom = () => {
               <div className="flex justify-between items-center mt-3">
                 <div className="text-lg">{detailRoom?.address}</div>
                 <div className="">
-                  <span>đ</span>{" "}
                   <span className="text-red-500 text-2xl font-semibold">
-                    {detailRoom?.price}
+                    {detailRoom?.price && formatcurrency(detailRoom.price)}
                   </span>
                 </div>
               </div>
@@ -218,6 +244,7 @@ const DetailRoom = () => {
             </div>
           )}
           <form onSubmit={handleSubmit(onSubmit)} className="">
+            <SnackBarReuse type={type} message={mess} />
             <Input
               type="number"
               title="Số điện thoại"
@@ -241,6 +268,23 @@ const DetailRoom = () => {
                 <PickDate label="Trả phòng" {...inputEndDate} />
               </Box>
             </LocalizationProvider>
+
+            <Stack
+              sx={{ mt: 2 }}
+              direction="row"
+              justifyContent="space-between"
+            >
+              <span className="text-xl ">Số ngày đặt:</span>
+              <span className="">{gapDate} Ngày</span>
+            </Stack>
+            <Stack
+              sx={{ mt: 2 }}
+              direction="row"
+              justifyContent="space-between"
+            >
+              <span className="text-xl ">Ước tính tiền phải trả</span>
+              <span className="">{formatcurrency(total)}</span>
+            </Stack>
             <Stack sx={{ mt: 4 }} direction="row" spacing={2}>
               <Button
                 type="submit"

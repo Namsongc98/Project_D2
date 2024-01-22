@@ -1,8 +1,9 @@
-import { Box, Container, Grid, Paper } from "@mui/material";
+import { Box, Container, Grid, Paper, Typography } from "@mui/material";
 import {
   //Chart,
   CopyRight,
   TableHostRoomConfirm,
+  Title,
 } from "../../component/componentPage";
 //import Deposits from "../../component/componentPage/host/Deposit";
 import { useEffect, useState } from "react";
@@ -36,35 +37,31 @@ const HostStatistics = () => {
 
   return (
     <Box component="section">
-      <Container  sx={{ mt: 4, mb: 4 }}>
+      <Container sx={{ mt: 4, mb: 4 }}>
         <Grid container spacing={3}>
-          {/* <Grid item xs={12} md={8} lg={9}>
+          <Grid item xs={12}>
             <Paper
               sx={{
                 p: 2,
                 display: "flex",
-                flexDirection: "column",
-                height: 240,
+                justifyContent: "center",
+                height: "100%",
               }}
             >
-              <Chart />
+              <Typography
+                sx={{}}
+                color="#1976d2"
+                fontSize="24px"
+                fontWeight="700"
+              >
+                Quản lý phòng khách sạn
+              </Typography>
             </Paper>
           </Grid>
 
-          <Grid item xs={12} md={4} lg={3}>
-            <Paper
-              sx={{
-                p: 2,
-                display: "flex",
-                flexDirection: "column",
-                height: 240,
-              }}
-            >
-              <Deposits />
-            </Paper>
-          </Grid> */}
           <Grid item xs={12}>
             <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
+              <Title>Khách đặt phòng chờ duyệt</Title>
               <TableHostRoomConfirm
                 data={bookingPending}
                 getData={getAllBookingPending}
@@ -74,6 +71,7 @@ const HostStatistics = () => {
           </Grid>
           <Grid item xs={12}>
             <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
+              <Title>Khách đặt phòng đã duyệt</Title>
               <TableHostRoomConfirm
                 data={bookingSuccess}
                 getData={getAllBookingSuccess}

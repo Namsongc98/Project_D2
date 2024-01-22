@@ -118,9 +118,9 @@ export default function TableHostRoomConfirm({ data, getdata }: PropsRoom) {
                     <TableCell align="center">
                       <Button
                         className={`px-2 py-1 rounded-md ${
-                          room.approve_room === "Pending"
+                          room.approve_room === Approve.pending
                             ? "bg-[#5A8DEE]"
-                            : room.approve_room === "Fail"
+                            : room.approve_room === Approve.fail
                             ? "bg-red-500"
                             : "bg-green-500"
                         } text-white`}
@@ -160,7 +160,7 @@ export default function TableHostRoomConfirm({ data, getdata }: PropsRoom) {
               type="button"
               className="text-white bg-[#5A8DEE] rounded px-4 py-2 hover:opacity-80 shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] hover:shadow-[0_4px_12px_0_rgba(90,141,238,0.6)]"
               onClick={() =>
-                inforRoom && handleApprove(inforRoom.id!, "Success")
+                inforRoom && handleApprove(inforRoom.id!, Approve.success)
               }
             >
               Đồng ý
@@ -168,7 +168,9 @@ export default function TableHostRoomConfirm({ data, getdata }: PropsRoom) {
             <Button
               type="button"
               className="text-white bg-red-500  rounded px-4 py-2 hover:opacity-80 shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] hover:shadow-[0_4px_12px_0_rgba(90,141,238,0.6)] "
-              onClick={() => inforRoom && handleApprove(inforRoom.id!, "Fail")}
+              onClick={() =>
+                inforRoom && handleApprove(inforRoom.id!, Approve.fail)
+              }
             >
               Không đồng ý
             </Button>

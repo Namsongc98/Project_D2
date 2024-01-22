@@ -12,7 +12,11 @@ interface IRoomSubmit {
     decription: string;
     coutPeople: number;
 }
-type Approve = "Pending" | "Fail" | "Success"
+enum Approve  {
+    pending = "Pending",
+    success = "Success",
+    fail = "Empty"
+}
 
 enum BookingStatus {
     pending = "Pending",
@@ -41,5 +45,5 @@ type ApprovePacth = {
     approve_room: Approve
 }
 
-export type { IRoomSubmit, IRoomPost, Approve, ApprovePacth }
-export { BookingStatus }
+export type { IRoomSubmit, IRoomPost, ApprovePacth }
+export { BookingStatus, Approve }
