@@ -14,6 +14,14 @@ const getBookingSuccess = async () => {
     return res
 }
 
+
+// tạo booking 
+const createBooking = async (booking: IBookingData) => {
+    const bookingStatus: PatchBooking = { booking_status: BookingStatus.pending }
+    patchStatusBooking(booking.id_touris!, bookingStatus)
+    return await instance.post(`/bookings/`, booking);
+}
+
 // cho phép người dùng đặt phòng
 const patchBookingConfirm = async (idBooking: number, bookingStatus: PatchBooking) => {
     await instance.patch(`/bookings/${idBooking}`, bookingStatus);
@@ -23,14 +31,8 @@ const patchBookingConfirm = async (idBooking: number, bookingStatus: PatchBookin
 
 
 
-// tạo booking 
-const createBooking = async (booking: IBookingData) => {
-    const bookingStatus: PatchBooking = { booking_status: BookingStatus.pending }
-    patchStatusBooking(booking.id_touris!, bookingStatus)
-    return await instance.post(`/bookings/`, booking);
-}
-
 const getBookingUser = async (userId: string) => {
+
     return await instance.get('/bookings', { params: { user_id: userId } })
 }
 

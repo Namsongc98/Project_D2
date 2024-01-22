@@ -6,7 +6,10 @@ enum StatusPayment {
 }
 
 type PatchBooking = {
-  booking_status: BookingStatus.success | BookingStatus.emtry |  BookingStatus.pending;
+  booking_status:
+    | BookingStatus.success
+    | BookingStatus.emtry
+    | BookingStatus.pending;
 };
 
 interface IBookingData {
@@ -22,6 +25,7 @@ interface IBookingData {
   end_date: number;
   cout_persion?: number;
   price?: number;
+  count_date: number;
   pay_status?: StatusPayment;
   total: number;
 }

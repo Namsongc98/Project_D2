@@ -20,7 +20,7 @@ import BathtubIcon from "@mui/icons-material/Bathtub";
 import GroupIcon from "@mui/icons-material/Group";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { createBooking, getOneRevice } from "../../service";
+import { createBooking, getOneRoom } from "../../service";
 import {
   BookingStatus,
   IBookingData,
@@ -54,7 +54,7 @@ const DetailRoom = () => {
   const getRoom = async () => {
     try {
       if (param.id) {
-        const dataRoom = await getOneRevice(param.id);
+        const dataRoom = await getOneRoom(param.id);
         setDetailRoom(dataRoom.data);
       }
     } catch (error) {
@@ -117,6 +117,7 @@ const DetailRoom = () => {
       booking_status: BookingStatus.pending,
       start_date: inputStartDate.timestamp!,
       end_date: inputEndDate.timestamp!,
+      count_date: gapDate,
       total: total,
       pay_status: StatusPayment.pending,
     };

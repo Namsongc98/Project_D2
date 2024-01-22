@@ -117,21 +117,20 @@ export default function TableHostRoomConfirm({ data, getdata }: PropsRoom) {
                     })}
                     <TableCell align="center">
                       <Button
-                        className={`px-2 py-1 rounded-md ${
-                          room.approve_room === Approve.pending
+                        className={`px-2 py-1 rounded-md ${room.approve_room === Approve.pending
                             ? "bg-[#5A8DEE]"
                             : room.approve_room === Approve.fail
-                            ? "bg-red-500"
-                            : "bg-green-500"
-                        } text-white`}
+                              ? "bg-red-500"
+                              : "bg-green-500"
+                          } text-white`}
                         type="button"
                         onClick={() => handleOpenApprove(room)}
                       >
                         {room.approve_room === "Pending"
                           ? "Đang chờ"
                           : room.approve_room === "Success"
-                          ? "Hoạt động"
-                          : "Không cho phép"}
+                            ? "Hoạt động"
+                            : "Không cho phép"}
                       </Button>
                     </TableCell>
                     <TableCell align="center">
@@ -179,70 +178,72 @@ export default function TableHostRoomConfirm({ data, getdata }: PropsRoom) {
       )}
       {openInfor && (
         <ModalComponent handleOpen={handleOpenInfor} open={openInfor}>
-          <Stack
-            display={"flex"}
-            direction="row"
-            justifyContent="space-between"
-          >
-            <Typography variant="h6" component="h2" color="primary">
-              Chi tiết phòng
-            </Typography>
-            <Typography variant="h6" component="h4" color="primary">
-              {inforRoom?.created_at &&
-                convertDateToTimestamp(inforRoom?.created_at)}
-            </Typography>
-          </Stack>
-          <Divider sx={{ my: 2 }} light />
-          <Stack direction="row" spacing={2} useFlexGap flexWrap="wrap">
-            <Box sx={{ width: 1 / 2 }}>
-              <ImageList sx={{ height: "auto" }} cols={2} rowHeight={164}>
-                {inforRoom!.image.map((item) => (
-                  <ImageListItem key={item.id}>
-                    <img src={item.url} alt={inforRoom?.city} loading="lazy" />
-                  </ImageListItem>
-                ))}
-              </ImageList>
+          <>
+            <Stack
+              display={"flex"}
+              direction="row"
+              justifyContent="space-between"
+            >
+              <Typography variant="h6" component="h2" color="primary">
+                Chi tiết phòng
+              </Typography>
+              <Typography variant="h6" component="h4" color="primary">
+                {inforRoom?.created_at &&
+                  convertDateToTimestamp(inforRoom?.created_at)}
+              </Typography>
+            </Stack>
+            <Divider sx={{ my: 2 }} light />
+            <Stack direction="row" spacing={2} useFlexGap flexWrap="wrap">
+              <Box sx={{ width: 1 / 2 }}>
+                <ImageList sx={{ height: "auto" }} cols={2} rowHeight={164}>
+                  {inforRoom!.image.map((item) => (
+                    <ImageListItem key={item.id}>
+                      <img src={item.url} alt={inforRoom?.city} loading="lazy" />
+                    </ImageListItem>
+                  ))}
+                </ImageList>
 
-              <Box sx={{}}>
+                <Box sx={{}}>
+                  <Divider sx={{ my: 2 }} light />
+                  <div className="">
+                    <h3 className="font-medium mb-2 ">Mô tả: </h3>
+                    <span>{inforRoom?.decription}</span>
+                  </div>
+                </Box>
+              </Box>
+              <Box sx={{ width: "45%" }}>
+                <div className="flex justify-between items-center ">
+                  <h3 className="font-medium">Tên khách sạn: </h3>
+                  <span>{inforRoom?.name}</span>
+                </div>
                 <Divider sx={{ my: 2 }} light />
-                <div className="">
-                  <h3 className="font-medium mb-2 ">Mô tả: </h3>
-                  <span>{inforRoom?.decription}</span>
+                <div className="flex justify-between items-center ">
+                  <h3 className="font-medium">Loại hình du lịch: </h3>
+                  <span>{inforRoom?.type_tourism}</span>
+                </div>
+                <Divider sx={{ my: 2 }} light />
+                <div className="flex justify-between items-center ">
+                  <h3 className="font-medium">Giá phòng: </h3>
+                  <span>{inforRoom?.price}</span>
+                </div>
+                <Divider sx={{ my: 2 }} light />
+                <div className="flex justify-between items-center  ">
+                  <h3 className="font-medium">Địa Chỉ: </h3>
+                  <span>{inforRoom?.address}</span>
+                </div>
+                <Divider sx={{ my: 2 }} light />
+                <div className="flex justify-between items-center  ">
+                  <h3 className="font-medium">Số lượng phòng ngủ</h3>
+                  <span>{inforRoom?.bedroom}</span>
+                </div>
+                <Divider sx={{ my: 2 }} light />
+                <div className="flex justify-between items-center  ">
+                  <h3 className="font-medium">Số lượng phòng tắm</h3>
+                  <span>{inforRoom?.bathroom}</span>
                 </div>
               </Box>
-            </Box>
-            <Box sx={{ width: "45%" }}>
-              <div className="flex justify-between items-center ">
-                <h3 className="font-medium">Tên khách sạn: </h3>
-                <span>{inforRoom?.name}</span>
-              </div>
-              <Divider sx={{ my: 2 }} light />
-              <div className="flex justify-between items-center ">
-                <h3 className="font-medium">Loại hình du lịch: </h3>
-                <span>{inforRoom?.type_tourism}</span>
-              </div>
-              <Divider sx={{ my: 2 }} light />
-              <div className="flex justify-between items-center ">
-                <h3 className="font-medium">Giá phòng: </h3>
-                <span>{inforRoom?.price}</span>
-              </div>
-              <Divider sx={{ my: 2 }} light />
-              <div className="flex justify-between items-center  ">
-                <h3 className="font-medium">Địa Chỉ: </h3>
-                <span>{inforRoom?.address}</span>
-              </div>
-              <Divider sx={{ my: 2 }} light />
-              <div className="flex justify-between items-center  ">
-                <h3 className="font-medium">Số lượng phòng ngủ</h3>
-                <span>{inforRoom?.bedroom}</span>
-              </div>
-              <Divider sx={{ my: 2 }} light />
-              <div className="flex justify-between items-center  ">
-                <h3 className="font-medium">Số lượng phòng tắm</h3>
-                <span>{inforRoom?.bathroom}</span>
-              </div>
-            </Box>
-          </Stack>
+            </Stack>
+          </>
         </ModalComponent>
       )}
       <TablePagination

@@ -1,7 +1,7 @@
 enum Role {
   admin = "Admin",
   guide = "Guide",
-  hosh = "Host",
+  host = "Host",
 }
 
 interface IUser {

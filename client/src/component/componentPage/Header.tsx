@@ -12,15 +12,16 @@ import AvatarUser from "../componentReuse/AvatarUser";
 import { useSelector } from "react-redux";
 import { getUser, setUser } from "../../store/reducer/userSlice";
 import { useDispatch } from "react-redux";
-import { Button, Menu, MenuItem, Stack } from "@mui/material";
+import { Box, Button, Divider, ImageList, ImageListItem, Menu, MenuItem, Stack, Typography } from "@mui/material";
 import BookIcon from "@mui/icons-material/Book";
-import { getBookingUser } from "../../service";
-import { IBookingData } from "../../type";
+import { getBookingUser, getOneRoom, patchBookingConfirm } from "../../service";
+import { BookingStatus, IBookingData, Role, StatusPayment, typeGetRoom } from "../../type";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { ModalComponent } from "../componentReuse";
 
 const Header = () => {
   const userSelector = useSelector(getUser);
-  const [booking, setBooking] = useState<IBookingData[] | undefined>();
+  const [bookingArr, setBooking] = useState<IBookingData[] | undefined>();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useGetUser();
@@ -28,6 +29,10 @@ const Header = () => {
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchor(anchor ? null : event.currentTarget);
   };
+
+  const [openInfor, setOpenInfor] = useState(false);
+  const [inforRoom, setInforRoom] = useState<typeGetRoom>();
+  const [inforBooking, setInforBooking] = useState<IBookingData>();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -45,6 +50,32 @@ const Header = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleOpenInfor = async (booking: IBookingData | undefined = undefined) => {
+    try {
+      if (booking?.id_touris) {
+        const res = await getOneRoom(booking.id_touris)
+        setInforRoom(res.data)
+      }
+      setInforBooking(booking);
+      setOpenInfor(!openInfor);
+
+    } catch (error) {
+      console.log(error)
+    }
+  };
+
+  const handleCancel = (idBooking: number) => {
+    const bookingStatus = {
+      booking_status: BookingStatus.pending,
+    };
+    try {
+      const res = patchBookingConfirm(idBooking, bookingStatus)
+      console.log(res)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   useEffect(() => {
     dispatch(setUser(user));
@@ -93,21 +124,22 @@ const Header = () => {
                   "aria-labelledby": "basic-button",
                 }}
               >
-                {booking && booking.length > 0 ? (
-                  booking?.map((item) => (
+                {bookingArr && bookingArr.length > 0 ? (
+                  bookingArr?.map((booking) => (
                     <MenuItem
                       sx={{ px: "10px", minWidth: "300px" }}
-                      key={item.id}
+                      key={booking.id}
+                      onClick={() => handleOpenInfor(booking)}
                     >
                       <div className="w-full">
                         <div className="flex justify-between items-center">
                           <div className="">
-                            <span>{item.name_room}</span>
+                            <span>{booking.name_room}</span>
                             <p className="text-xs opacity-70">
                               <span className="text-sm">Từ ngày: </span>
-                              {convertDateToTimestamp(item.start_date) +
+                              {convertDateToTimestamp(booking.start_date) +
                                 " - " +
-                                convertDateToTimestamp(item.end_date)}
+                                convertDateToTimestamp(booking.end_date)}
                             </p>
                           </div>
                           <MoreVertIcon fontSize="small" />
@@ -144,14 +176,14 @@ const Header = () => {
               </div>
               <Popup anchor={anchor} setAnchor={setAnchor}>
                 <div className="flex flex-col  text-base text-[#808089]">
-                  {userSelector?.role === "Admin" ? (
+                  {userSelector?.role === Role.admin ? (
                     <Link
                       to="/admin"
                       className="flex items-center gap-1 px-3 hover:bg-[#e6e6e6] py-2 hover:text-[#808089] "
                     >
                       <AdminPanelSettingsIcon /> <span>Admin</span>{" "}
                     </Link>
-                  ) : userSelector?.role === "Host" ? (
+                  ) : userSelector?.role === Role.host ? (
                     <Link
                       to="/host"
                       className="flex items-center gap-1 px-3 hover:bg-[#e6e6e6] py-2 hover:text-[#808089] "
@@ -203,6 +235,100 @@ const Header = () => {
           )}
         </div>
       </div>
+      {openInfor && (
+        <ModalComponent handleOpen={handleOpenInfor} open={openInfor}>
+          <>
+            <Stack
+              display={"flex"}
+              direction="row"
+              justifyContent="space-between"
+            >
+              <Typography variant="h6" component="h2" color="primary">
+                Chi tiết phòng
+              </Typography>
+              <Typography variant="h6" component="h2" color={inforBooking?.booking_status === BookingStatus.pending ? "primary" : inforBooking?.booking_status === BookingStatus.success ? "#4caf50" : inforBooking?.booking_status === BookingStatus.cancel ? "error" : "error"} >
+                {inforBooking?.booking_status === BookingStatus.pending ? "Đợi xác nhận " : inforBooking?.booking_status === BookingStatus.success ? "Đã được chấp nhận" : inforBooking?.booking_status === BookingStatus.cancel ? "Đơn đẵ bị hủy" : "Đơn đã bị hủy"}
+              </Typography>
+            </Stack>
+            <Divider sx={{ my: 2 }} light />
+            <Stack direction="row" spacing={2} useFlexGap flexWrap="wrap">
+              <Box sx={{ width: 1 / 2 }}>
+                <ImageList sx={{ height: "auto" }} cols={2} rowHeight={164}>
+                  {inforRoom!.image.map((item) => (
+                    <ImageListItem key={item.id}>
+                      <img src={item.url} alt={inforRoom?.city} loading="lazy" />
+                    </ImageListItem>
+                  ))}
+                </ImageList>
+
+                <Box sx={{}}>
+                  <Divider sx={{ my: 2 }} light />
+                  <div className="">
+                    <h3 className="font-medium mb-2 ">Mô tả: </h3>
+                    <span>{inforRoom?.decription}</span>
+                  </div>
+                </Box>
+              </Box>
+              <Box sx={{ width: "45%", mb: 6 }}>
+                <div className="flex justify-between items-center ">
+                  <h3 className="font-medium">Tên khách sạn: </h3>
+                  <span>{inforRoom?.name}</span>
+                </div>
+                <Divider sx={{ my: 2 }} light />
+                <div className="flex justify-between items-center ">
+                  <h3 className="font-medium">Loại hình du lịch: </h3>
+                  <span>{inforRoom?.type_tourism}</span>
+                </div>
+                <Divider sx={{ my: 2 }} light />
+                <div className="flex justify-between items-center ">
+                  <h3 className="font-medium">Giá phòng: </h3>
+                  <span>{inforRoom?.price}</span>
+                </div>
+                <Divider sx={{ my: 2 }} light />
+                <div className="flex justify-between items-center  ">
+                  <h3 className="font-medium">Địa Chỉ: </h3>
+                  <span>{inforRoom?.address}</span>
+                </div>
+                <Divider sx={{ my: 2 }} light />
+                <div className="flex justify-between items-center  ">
+                  <h3 className="font-medium">Số lượng phòng ngủ</h3>
+                  <span>{inforRoom?.bedroom}</span>
+                </div>
+                <Divider sx={{ my: 2 }} light />
+                <div className="flex justify-between items-center  ">
+                  <h3 className="font-medium">Số lượng phòng tắm</h3>
+                  <span>{inforRoom?.bathroom}</span>
+                </div>
+                <Divider sx={{ my: 2 }} light />
+                <div className="flex justify-between items-center  ">
+                  <h3 className="font-medium">Từ ngày</h3>
+                  <span>{convertDateToTimestamp(inforBooking!.start_date) + " - " + convertDateToTimestamp(inforBooking!.end_date)} </span>
+                </div>
+                <Divider sx={{ my: 2 }} light />
+                <div className="flex justify-between items-center  ">
+                  <h3 className="font-medium">Số ngày</h3>
+                  <span>{inforBooking?.count_date} </span>
+                </div>
+                <Divider sx={{ my: 2 }} light />
+                <div className="flex justify-between items-center  ">
+                  <h3 className="font-medium">Thanh toán:</h3>
+                  <span>{inforBooking?.total} </span>
+                </div>
+                <Divider sx={{ my: 2 }} light />
+                <div className="flex justify-between items-center  ">
+                  <h3 className="font-medium">Trạng thái thanh toán:</h3>
+                  <span>{inforBooking?.pay_status === StatusPayment.pending ? "Chưa thanh toán" : inforBooking?.pay_status === StatusPayment.success ? "đã thanh toán" : ""} </span>
+                </div>
+                <Divider sx={{ my: 2 }} light />
+                <div className="flex justify-between ">
+                  <div className=""></div>
+                  <Button variant="contained" color="error" onClick={() => handleCancel(inforBooking.id)} >Hủy đơn</Button>
+                </div>
+              </Box>
+            </Stack>
+          </>
+        </ModalComponent>
+      )}
     </header>
   );
 };

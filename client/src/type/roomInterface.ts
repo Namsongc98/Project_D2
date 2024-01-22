@@ -15,13 +15,15 @@ interface IRoomSubmit {
 enum Approve  {
     pending = "Pending",
     success = "Success",
-    fail = "Empty"
+    fail = "Empty",
+   
 }
 
 enum BookingStatus {
     pending = "Pending",
     success = "Success",
-    emtry = "Empty"
+    emtry = "Empty",
+    cancel = "Cancel"
 }
 
 interface IRoomPost {

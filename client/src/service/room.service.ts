@@ -14,7 +14,7 @@ const getAllRoom = async () => {
 
 
 // data detail
-const getOneRevice = async (id: string,) => {
+const getOneRoom = async (id: string | number) => {
     return await instance.get(`/touris/${id}`);
 
 }
@@ -37,4 +37,4 @@ const patchStatusBooking = async (idRoom: number, statusBooking: PatchBooking) =
 // thay đổi booking statuss succes
 
 
-export { createRoom, getAllRoom, patchApprove, getRoomCity, getOneRevice, patchStatusBooking }
+export { createRoom, getAllRoom, patchApprove, getRoomCity, getOneRoom, patchStatusBooking }
