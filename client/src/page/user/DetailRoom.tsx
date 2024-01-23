@@ -1,4 +1,5 @@
 import {
+  AlertColor,
   Box,
   Container,
   Divider,
@@ -41,7 +42,7 @@ import { formatcurrency } from "../../common";
 const DetailRoom = () => {
   const [detailRoom, setDetailRoom] = useState<typeGetRoom | undefined>();
   const [gapDate, setGapDate] = useState<number>(0);
-  const [type, setType] = useState("success");
+  const [type, setType] = useState<AlertColor | undefined>(undefined);
   const [mess, setMess] = useState("");
   const [total, setTotal] = useState<number>(0);
   const [error, setError] = useState("");
@@ -71,6 +72,7 @@ const DetailRoom = () => {
 
   const schema = yup.object({
     phone: yup.number().typeError("Mời nhập số điên thoại"),
+    countPerson: yup.number().typeError("Mời nhập số lượng người"),
   });
 
   const {
@@ -81,7 +83,9 @@ const DetailRoom = () => {
     resolver: yupResolver(schema),
   });
 
-  const message: string | undefined = errors?.phone?.message;
+  const message: string | undefined =
+    errors?.phone?.message || errors?.countPerson?.message;
+  console.log(message);
   useEffect(() => {
     setError(message!);
     return () => {
@@ -97,6 +101,7 @@ const DetailRoom = () => {
       setTotal(total);
     }
   }, [detailRoom, inputStartDate.timestamp, inputEndDate.timestamp]);
+  console.log(detailRoom);
 
   const onSubmit: SubmitHandler<any> = async (data) => {
     const userName = user?.firstName + " " + user?.lastName;
@@ -105,11 +110,15 @@ const DetailRoom = () => {
       setError("Ngày trả phòng không hợp lệ");
       return;
     }
-
+    if (data.countPerson > detailRoom!.cout_people) {
+      setError("Phòng nhiều nhất chỉ " + detailRoom!.cout_people + "người");
+      return;
+    }
     setError("");
     const booking: IBookingData = {
-      id_touris: 1,
+      id_touris: detailRoom?.id,
       user_id: user!.id,
+      host_id: detailRoom!.host_id,
       name_user: userName,
       phone: data.phone,
       email: user!.email,
@@ -118,6 +127,7 @@ const DetailRoom = () => {
       start_date: inputStartDate.timestamp!,
       end_date: inputEndDate.timestamp!,
       count_date: gapDate,
+      count_person: data.countPerson,
       total: total,
       pay_status: StatusPayment.pending,
     };
@@ -132,6 +142,7 @@ const DetailRoom = () => {
 
   return (
     <Box sx={{ backgroundColor: "#P5f5f5" }}>
+      <SnackBarReuse type={type} message={mess} setError={setError} />
       <div className="w-full flex h-[480px]">
         {detailRoom?.image?.map((item) => {
           return (
@@ -245,7 +256,6 @@ const DetailRoom = () => {
             </div>
           )}
           <form onSubmit={handleSubmit(onSubmit)} className="">
-            <SnackBarReuse type={type} message={mess} />
             <Input
               type="number"
               title="Số điện thoại"
@@ -269,7 +279,15 @@ const DetailRoom = () => {
                 <PickDate label="Trả phòng" {...inputEndDate} />
               </Box>
             </LocalizationProvider>
-
+            <Input
+              type="number"
+              title="Số lượng người"
+              label="countPerson"
+              placeholder="Số người là..."
+              className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
+              required={true}
+              register={register}
+            ></Input>
             <Stack
               sx={{ mt: 2 }}
               direction="row"

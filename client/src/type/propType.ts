@@ -66,8 +66,9 @@ type PropImages = {
 };
 
 type PropTypeSnackBar = {
-  type: AlertColor;
+  type: AlertColor | undefined;
   message: string;
+  setError: React.Dispatch<React.SetStateAction<string>>;
 };
 type PropAppBarType = {
   toggleDrawer: () => void;
@@ -84,10 +85,15 @@ type PropsRoom = {
   getdata: () => void;
 };
 
+
 interface PropsBooking {
-  data?: IBookingData[];
-  getData: () => void;
+  data: IBookingData[];
+  getData?: () => void;
   getData2?: () => void;
+}
+
+interface PropsUser {
+  data: IProfileUser[]
 }
 
 export type {
@@ -106,4 +112,5 @@ export type {
   PropDrawerType,
   PropsRoom,
   PropsBooking,
+  PropsUser
 };

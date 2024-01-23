@@ -25,7 +25,7 @@ import { patchApprove } from "../../../service";
 import SnackBarReuse from "../../componentReuse/SnackBarReuse";
 import { columnsTable } from "../../../constain";
 import { convertDateToTimestamp } from "../../../common";
-export default function TableHostRoomConfirm({ data, getdata }: PropsRoom) {
+export default function TableRoomApprove({ data, getdata }: PropsRoom) {
   // modal
   const [openApprove, setOpenApprove] = useState(false);
   const [openInfor, setOpenInfor] = useState(false);
@@ -83,7 +83,7 @@ export default function TableHostRoomConfirm({ data, getdata }: PropsRoom) {
 
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
-      <SnackBarReuse type={type} message={message} />
+      <SnackBarReuse type={type} message={message} setError={setMessage}/>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -117,20 +117,21 @@ export default function TableHostRoomConfirm({ data, getdata }: PropsRoom) {
                     })}
                     <TableCell align="center">
                       <Button
-                        className={`px-2 py-1 rounded-md ${room.approve_room === Approve.pending
+                        className={`px-2 py-1 rounded-md ${
+                          room.approve_room === Approve.pending
                             ? "bg-[#5A8DEE]"
                             : room.approve_room === Approve.fail
-                              ? "bg-red-500"
-                              : "bg-green-500"
-                          } text-white`}
+                            ? "bg-red-500"
+                            : "bg-green-500"
+                        } text-white`}
                         type="button"
                         onClick={() => handleOpenApprove(room)}
                       >
                         {room.approve_room === "Pending"
                           ? "Đang chờ"
                           : room.approve_room === "Success"
-                            ? "Hoạt động"
-                            : "Không cho phép"}
+                          ? "Hoạt động"
+                          : "Không cho phép"}
                       </Button>
                     </TableCell>
                     <TableCell align="center">
@@ -198,7 +199,11 @@ export default function TableHostRoomConfirm({ data, getdata }: PropsRoom) {
                 <ImageList sx={{ height: "auto" }} cols={2} rowHeight={164}>
                   {inforRoom!.image.map((item) => (
                     <ImageListItem key={item.id}>
-                      <img src={item.url} alt={inforRoom?.city} loading="lazy" />
+                      <img
+                        src={item.url}
+                        alt={inforRoom?.city}
+                        loading="lazy"
+                      />
                     </ImageListItem>
                   ))}
                 </ImageList>

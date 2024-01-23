@@ -1,7 +1,6 @@
 
 
 interface IRoomSubmit {
-    id?: number;
     nameHotel: string;
     city: string;
     address: string;
@@ -12,11 +11,11 @@ interface IRoomSubmit {
     decription: string;
     coutPeople: number;
 }
-enum Approve  {
+enum Approve {
     pending = "Pending",
     success = "Success",
     fail = "Empty",
-   
+
 }
 
 enum BookingStatus {

@@ -12,7 +12,7 @@ import React, { useState } from "react";
 import { Button } from "../../element";
 import { ModalComponent } from "../../componentReuse";
 import { Stack, Typography } from "@mui/material";
-import { convertDateToTimestamp, formatcurrency } from "../../../common";
+import { columnBooking } from "../../../constain";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -33,52 +33,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
 }));
-type AlignTable =
-  | "center"
-  | "right"
-  | "left"
-  | "inherit"
-  | "justify"
-  | undefined;
-
-type TableRoom = {
-  index: string;
-  label: string;
-  minWidth: number;
-  align: AlignTable;
-  format?: (value: number) => void;
-};
-
-const columnBooking: TableRoom[] = [
-  { index: "id", label: "id", minWidth: 20, align: "left" },
-  { index: "name_user", label: "Name", minWidth: 70, align: "left" },
-  { index: "email", label: "Email", minWidth: 100, align: "left" },
-  { index: "phone", label: "Số điện thoại", minWidth: 20, align: "left" },
-  { index: "name_room", label: "Tên phòng", minWidth: 20, align: "left" },
-  {
-    index: "start_date",
-    label: "Ngày đặt",
-    minWidth: 50,
-    align: "left",
-    format: (value) => convertDateToTimestamp(value),
-  },
-  {
-    index: "end_date",
-    label: "Ngày cuối",
-    minWidth: 50,
-    align: "left",
-    format: (value) => convertDateToTimestamp(value),
-  },
-  { index: "cout_persion", label: "Số người", minWidth: 50, align: "left" },
-  {
-    index: "total",
-    label: "Giá tiền",
-    minWidth: 50,
-    align: "left",
-    format: (value) => formatcurrency(value),
-  },
-  { index: "pay_status", label: "Thanh toán", minWidth: 50, align: "left" },
-];
 
 const TableHostRoomConfirm: React.FC<PropsBooking> = ({
   data,
@@ -95,7 +49,7 @@ const TableHostRoomConfirm: React.FC<PropsBooking> = ({
 
   const handleConfirm = async (
     idBooking: number,
-    status: BookingStatus.success | BookingStatus.emtry
+    status: BookingStatus.success | BookingStatus.cancel
   ) => {
     const bookingStatus = {
       booking_status: status,
@@ -103,13 +57,12 @@ const TableHostRoomConfirm: React.FC<PropsBooking> = ({
     try {
       await patchBookingConfirm(idBooking, bookingStatus);
       setOpenConfirm(!openConfirm);
-      getData();
+      if (getData) getData();
       if (getData2) getData2();
     } catch (error) {
       console.log(error);
     }
   };
-  console.log(data);
   return (
     <>
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
@@ -142,7 +95,11 @@ const TableHostRoomConfirm: React.FC<PropsBooking> = ({
                       </StyledTableCell>
                     );
                   })}
-                  <StyledTableCell component="th" scope="row">
+                  <StyledTableCell
+                    component="th"
+                    scope="row"
+                    sx={{ minWidth: 200 }}
+                  >
                     <Button
                       className={`px-2 py-1 rounded-md ${
                         booking.booking_status === BookingStatus.pending
@@ -154,9 +111,9 @@ const TableHostRoomConfirm: React.FC<PropsBooking> = ({
                       type="button"
                       onClick={() => handleOpenConfirm(booking)}
                     >
-                      {booking.booking_status === "Pending"
+                      {booking.booking_status === BookingStatus.pending
                         ? "Đang chờ"
-                        : booking.booking_status === "Success"
+                        : booking.booking_status === BookingStatus.success
                         ? "Hoạt động"
                         : "Không cho phép"}
                     </Button>
@@ -188,7 +145,7 @@ const TableHostRoomConfirm: React.FC<PropsBooking> = ({
                 className="text-white bg-red-500  rounded px-4 py-2 hover:opacity-80 shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] hover:shadow-[0_4px_12px_0_rgba(90,141,238,0.6)] "
                 onClick={() =>
                   inforBooking &&
-                  handleConfirm(inforBooking.id!, BookingStatus.emtry)
+                  handleConfirm(inforBooking.id!, BookingStatus.cancel)
                 }
               >
                 Không đồng ý

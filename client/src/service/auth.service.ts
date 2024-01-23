@@ -1,5 +1,5 @@
 import { instance, instance_token } from "../config";
-import { IProfile, IUser } from "../type";
+import { IProfile, IUser, Role } from "../type";
 
 
 //  regisster 
@@ -26,4 +26,11 @@ const postProfile = async (id: string, profile: IProfile) => {
   return res;
 };
 
-export { createUser, loginUser, postProfile, getUserSevice };
+const getAllHost = async () => {
+  return await instance.get('/users/', { params: { role: Role.host } })
+}
+const getAllUser = async () => {
+  return await instance.get('/users/', { params: { role: Role.guide } })
+}
+
+export { createUser, loginUser, postProfile, getUserSevice, getAllHost, getAllUser };

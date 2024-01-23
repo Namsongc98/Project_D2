@@ -9,4 +9,5 @@ export { default as TableRoomApprove } from "./admin/TableRoomApprove"
 export { default as Title } from "./host/Title"
 export { default as CopyRight } from "./host/CopyRight"
 export { default as TableHostRoomConfirm } from "./host/TableHostRoomConfirm"
+export { default as TableUser } from "./admin/TableUser"
 

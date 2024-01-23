@@ -40,7 +40,7 @@ const Profile = () => {
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setUser(userSelector));
+    dispatch(setUser(user));
   }, [user]);
 
   const genders = ["Nam", "Nữ"];
@@ -121,7 +121,7 @@ const Profile = () => {
 
   return (
     <div className="mx-auto my-0 max-w-[1024px]  w-full ">
-      <SnackBarReuse type={type} message={error} />
+      <SnackBarReuse type={type} message={error} setError={setError} />
       <div className="relative my-3">
         <div className="bg-slate-100 flex gap-3 p-3 ">
           <div className=" bg-white w-1/4 px-3 py-2  ">
