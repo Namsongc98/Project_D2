@@ -539,7 +539,7 @@
       "phone": 2354245,
       "email": "host1@gmail.com",
       "name_room": "Hà Nội 2",
-      "booking_status": "Success",
+      "-": "Success",
       "start_date": 1705881600000,
       "end_date": 1705968000000,
       "total": 1050000,
