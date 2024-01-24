@@ -12,10 +12,26 @@ import AvatarUser from "../componentReuse/AvatarUser";
 import { useSelector } from "react-redux";
 import { getUser, setUser } from "../../store/reducer/userSlice";
 import { useDispatch } from "react-redux";
-import { Box, Button, Divider, ImageList, ImageListItem, Menu, MenuItem, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Divider,
+  ImageList,
+  ImageListItem,
+  Menu,
+  MenuItem,
+  Stack,
+  Typography,
+} from "@mui/material";
 import BookIcon from "@mui/icons-material/Book";
 import { getBookingUser, getOneRoom, patchBookingConfirm } from "../../service";
-import { BookingStatus, IBookingData, Role, StatusPayment, typeGetRoom } from "../../type";
+import {
+  BookingStatus,
+  IBookingData,
+  Role,
+  StatusPayment,
+  typeGetRoom,
+} from "../../type";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { ModalComponent } from "../componentReuse";
 
@@ -25,6 +41,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useGetUser();
+
   const [anchor, setAnchor] = useState<null | HTMLElement>(null);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchor(anchor ? null : event.currentTarget);
@@ -51,17 +68,18 @@ const Header = () => {
     setAnchorEl(null);
   };
 
-  const handleOpenInfor = async (booking: IBookingData | undefined = undefined) => {
+  const handleOpenInfor = async (
+    booking: IBookingData | undefined = undefined
+  ) => {
     try {
       if (booking?.id_touris) {
-        const res = await getOneRoom(booking.id_touris)
-        setInforRoom(res.data)
+        const res = await getOneRoom(booking.id_touris);
+        setInforRoom(res.data);
       }
       setInforBooking(booking);
       setOpenInfor(!openInfor);
-
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
@@ -70,12 +88,11 @@ const Header = () => {
       booking_status: BookingStatus.pending,
     };
     try {
-      const res = patchBookingConfirm(idBooking, bookingStatus)
-      console.log(res)
+      patchBookingConfirm(idBooking, bookingStatus);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   useEffect(() => {
     dispatch(setUser(user));
@@ -246,8 +263,26 @@ const Header = () => {
               <Typography variant="h6" component="h2" color="primary">
                 Chi tiết phòng
               </Typography>
-              <Typography variant="h6" component="h2" color={inforBooking?.booking_status === BookingStatus.pending ? "primary" : inforBooking?.booking_status === BookingStatus.success ? "#4caf50" : inforBooking?.booking_status === BookingStatus.cancel ? "error" : "error"} >
-                {inforBooking?.booking_status === BookingStatus.pending ? "Đợi xác nhận " : inforBooking?.booking_status === BookingStatus.success ? "Đã được chấp nhận" : inforBooking?.booking_status === BookingStatus.cancel ? "Đơn đẵ bị hủy" : "Đơn đã bị hủy"}
+              <Typography
+                variant="h6"
+                component="h2"
+                color={
+                  inforBooking?.booking_status === BookingStatus.pending
+                    ? "primary"
+                    : inforBooking?.booking_status === BookingStatus.success
+                    ? "#4caf50"
+                    : inforBooking?.booking_status === BookingStatus.cancel
+                    ? "error"
+                    : "error"
+                }
+              >
+                {inforBooking?.booking_status === BookingStatus.pending
+                  ? "Đợi xác nhận "
+                  : inforBooking?.booking_status === BookingStatus.success
+                  ? "Đã được chấp nhận"
+                  : inforBooking?.booking_status === BookingStatus.cancel
+                  ? "Đơn đẵ bị hủy"
+                  : "Đơn đã bị hủy"}
               </Typography>
             </Stack>
             <Divider sx={{ my: 2 }} light />
@@ -256,7 +291,11 @@ const Header = () => {
                 <ImageList sx={{ height: "auto" }} cols={2} rowHeight={164}>
                   {inforRoom!.image.map((item) => (
                     <ImageListItem key={item.id}>
-                      <img src={item.url} alt={inforRoom?.city} loading="lazy" />
+                      <img
+                        src={item.url}
+                        alt={inforRoom?.city}
+                        loading="lazy"
+                      />
                     </ImageListItem>
                   ))}
                 </ImageList>
@@ -302,7 +341,11 @@ const Header = () => {
                 <Divider sx={{ my: 2 }} light />
                 <div className="flex justify-between items-center  ">
                   <h3 className="font-medium">Từ ngày</h3>
-                  <span>{convertDateToTimestamp(inforBooking!.start_date) + " - " + convertDateToTimestamp(inforBooking!.end_date)} </span>
+                  <span>
+                    {convertDateToTimestamp(inforBooking!.start_date) +
+                      " - " +
+                      convertDateToTimestamp(inforBooking!.end_date)}{" "}
+                  </span>
                 </div>
                 <Divider sx={{ my: 2 }} light />
                 <div className="flex justify-between items-center  ">
@@ -317,12 +360,24 @@ const Header = () => {
                 <Divider sx={{ my: 2 }} light />
                 <div className="flex justify-between items-center  ">
                   <h3 className="font-medium">Trạng thái thanh toán:</h3>
-                  <span>{inforBooking?.pay_status === StatusPayment.pending ? "Chưa thanh toán" : inforBooking?.pay_status === StatusPayment.success ? "đã thanh toán" : ""} </span>
+                  <span>
+                    {inforBooking?.pay_status === StatusPayment.pending
+                      ? "Chưa thanh toán"
+                      : inforBooking?.pay_status === StatusPayment.success
+                      ? "đã thanh toán"
+                      : ""}{" "}
+                  </span>
                 </div>
                 <Divider sx={{ my: 2 }} light />
                 <div className="flex justify-between ">
                   <div className=""></div>
-                  <Button variant="contained" color="error" onClick={() => handleCancel(inforBooking.id)} >Hủy đơn</Button>
+                  <Button
+                    variant="contained"
+                    color="error"
+                    onClick={() => handleCancel(inforBooking.id)}
+                  >
+                    Hủy đơn
+                  </Button>
                 </div>
               </Box>
             </Stack>

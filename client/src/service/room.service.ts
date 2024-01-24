@@ -8,13 +8,13 @@ const createRoom = async (room: IRoomPost) => {
 
 
 // data tất cả phòng
-const getAllRoom = async () => {
-    return await instance.get("/touris");
+const getAllRoom = async (page, limit) => {
+    return await instance.get(`/touris?_page=${page}&_limit=${limit}`);
 };
 
 
 // data detail
-const getOneRoom = async (id: string | number) => {
+const getOneRoom = async (id: number) => {
     return await instance.get(`/touris/${id}`);
 
 }

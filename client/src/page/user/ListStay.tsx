@@ -23,6 +23,7 @@ const ListStay = () => {
         BookingStatus.emtry,
         Approve.success
       );
+      console.log(res.data)
       setDataRoom(res.data);
     } catch (error) {
       console.log(error);

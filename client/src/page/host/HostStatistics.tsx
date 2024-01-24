@@ -63,7 +63,7 @@ const HostStatistics = () => {
             <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
               <Title>Khách đặt phòng chờ duyệt</Title>
               <TableHostRoomConfirm
-                data={bookingPending}
+                data={bookingPending!}
                 getData={getAllBookingPending}
                 getData2={getAllBookingSuccess}
               />
@@ -73,7 +73,7 @@ const HostStatistics = () => {
             <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
               <Title>Khách đặt phòng đã duyệt</Title>
               <TableHostRoomConfirm
-                data={bookingSuccess}
+                data={bookingSuccess!}
                 getData={getAllBookingSuccess}
               />
             </Paper>

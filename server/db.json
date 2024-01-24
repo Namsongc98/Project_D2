@@ -113,7 +113,7 @@
     {
       "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
       "created_at": 1705907284516,
-      "booking_status": "Empty",
+      "booking_status": "Success",
       "name": "Hà Nội 1",
       "address": "Mỹ Đình, Hà Nội",
       "price": 900000,
@@ -197,7 +197,7 @@
           "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705907381/t7cp1akqmhy4e3ijqzpr.jpg"
         }
       ],
-      "approve_room": "Pending",
+      "approve_room": "Success",
       "id": 5
     },
     {
@@ -257,7 +257,7 @@
           "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705907683/prh0fwa7wtae9bhwbmic.jpg"
         }
       ],
-      "approve_room": "Pending",
+      "approve_room": "Success",
       "id": 7
     },
     {
@@ -317,7 +317,7 @@
           "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705908454/riptufp2g4sjop5youxp.jpg"
         }
       ],
-      "approve_room": "Pending",
+      "approve_room": "Success",
       "id": 9
     },
     {
@@ -347,7 +347,7 @@
           "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705908740/mq1crvbzysea8jmrg7bi.jpg"
         }
       ],
-      "approve_room": "Pending",
+      "approve_room": "Success",
       "id": 10
     },
     {
@@ -377,7 +377,7 @@
           "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705908807/t5atv6dlihlarrh8eclz.jpg"
         }
       ],
-      "approve_room": "Pending",
+      "approve_room": "Success",
       "id": 11
     },
     {
@@ -407,7 +407,7 @@
           "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705908957/lomlawjzzx5jmdvqldb3.jpg"
         }
       ],
-      "approve_room": "Pending",
+      "approve_room": "Success",
       "id": 12
     },
     {
@@ -505,6 +505,7 @@
     {
       "id_touris": 1,
       "user_id": "083fad4e-73a0-4975-a2cb-adeb8237d1ec",
+      "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
       "name_user": "vũ Sơn",
       "phone": 958978576,
       "email": "namsongc98@gmail.com",
@@ -514,17 +515,19 @@
       "end_date": 1705968000000,
       "total": 12000000,
       "count_date": 1,
+      "count_person": 2,
       "pay_status": "Pending",
       "id": 2
     },
     {
       "id_touris": 1,
       "user_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
       "name_user": "Hello host1",
       "phone": 958978576,
       "email": "host1@gmail.com",
       "name_room": "Hà Nội 2",
-      "booking_status": "Empty",
+      "booking_status": "Success",
       "start_date": 1705881600000,
       "end_date": 1706054400000,
       "total": 2100000,

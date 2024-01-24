@@ -4,7 +4,8 @@ import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 
 import MapsHomeWorkIcon from "@mui/icons-material/MapsHomeWork";
 import GroupIcon from "@mui/icons-material/Group";
-import { ColumnTable } from "../type";
+import { ColumnTable, TableRoom } from "../type";
+import { convertDateToTimestamp, formatcurrency } from "../common";
 
 const dataCityCarousel = [
   {
@@ -91,6 +92,12 @@ const typeTouris = [
 const pathHost = [
   { id: 1, path: "/host", icon: <DashboardIcon />, title: "Danh sách phòng" },
   { id: 2, path: "/host/postroom", icon: <AddHomeIcon />, title: "Thêm phòng" },
+  {
+    id: 3,
+    path: "/host/depositbooking",
+    icon: <AddHomeIcon />,
+    title: "Danh sách người dùng",
+  },
 ];
 
 const pathAdmin = [
@@ -102,13 +109,13 @@ const pathAdmin = [
   },
   {
     id: 3,
-    path: "/hostmanager",
+    path: "/admin/hostmanager",
     icon: <MapsHomeWorkIcon />,
     title: "Thống kê khách sạn",
   },
   {
     id: 2,
-    path: "/guidemanager",
+    path: "/admin/guidemanager",
     icon: <GroupIcon />,
     title: "Thống kê khách hàng",
   },
@@ -122,6 +129,48 @@ const columnsTable: readonly ColumnTable[] = [
   { id: "price", label: "Giá phòng", minWidth: 100 },
 ];
 
+const columnBooking: TableRoom[] = [
+  { index: "id", label: "id", minWidth: 20, align: "left" },
+  { index: "name_user", label: "Name", minWidth: 150, align: "left" },
+  { index: "email", label: "Email", minWidth: 100, align: "left" },
+  { index: "phone", label: "Số điện thoại", minWidth: 150, align: "left" },
+  { index: "name_room", label: "Tên phòng", minWidth: 200, align: "left" },
+  {
+    index: "start_date",
+    label: "Ngày đặt",
+    minWidth: 50,
+    align: "left",
+    format: (value) => convertDateToTimestamp(value),
+  },
+  {
+    index: "end_date",
+    label: "Ngày cuối",
+    minWidth: 50,
+    align: "left",
+    format: (value) => convertDateToTimestamp(value),
+  },
+  { index: "cout_persion", label: "Số người", minWidth: 100, align: "left" },
+  {
+    index: "total",
+    label: "Giá tiền",
+    minWidth: 80,
+    align: "left",
+    format: (value) => formatcurrency(value),
+  },
+  { index: "pay_status", label: "Thanh toán", minWidth: 110, align: "left" },
+];
+
+const columnUser: TableRoom[] = [
+  { index: "gender", label: "Giới tình", minWidth: 30, align: "left" },
+  { index: "age", label: "Tuổi", minWidth: 30, align: "left" },
+  {
+    index: "phone",
+    label: "Số điện thoại",
+    minWidth: 30,
+    align: "left",
+  },
+];
+
 export {
   dataCityCarousel,
   specialOffer,
@@ -129,4 +178,6 @@ export {
   pathHost,
   pathAdmin,
   columnsTable,
+  columnBooking,
+  columnUser,
 };

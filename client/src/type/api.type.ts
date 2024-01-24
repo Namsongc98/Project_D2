@@ -19,6 +19,7 @@ type StatusApi = {
 type typeGetRoom = {
     id: number,
     address: string,
+    host_id: string,
     city: string
     approve_room: Approve,
     bathroom: number

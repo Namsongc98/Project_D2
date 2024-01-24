@@ -3,10 +3,9 @@ import { Box, Toolbar, createTheme } from "@mui/material";
 import { useState } from "react";
 import { AppBarComponent, DrawerComponent } from "../../component/dashboard";
 import { pathAdmin } from "../../constain";
-type Props = {
-  children: React.ReactNode;
-};
-const LayoutAdmin = ({ children }: Props) => {
+import { Outlet } from "react-router-dom";
+
+const LayoutAdmin = () => {
   const defaultTheme = createTheme();
   const [open, setOpen] = useState(true);
   const toggleDrawer = () => {
@@ -32,7 +31,7 @@ const LayoutAdmin = ({ children }: Props) => {
             }}
           >
             <Toolbar />
-            {children}
+            <Outlet />
           </Box>
         </Box>
       </ThemeProvider>

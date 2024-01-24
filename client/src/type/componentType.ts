@@ -121,6 +121,23 @@ interface ColumnTable {
   format?: (value: number) => string;
 }
 
+type AlignTable =
+  | "center"
+  | "right"
+  | "left"
+  | "inherit"
+  | "justify"
+  | undefined;
+
+type TableRoom = {
+  index: string;
+  label: string;
+  minWidth: number;
+  align: AlignTable;
+  url?: boolean
+  format?: (value: number) => void;
+};
+
 
 export type {
   ButonType,
@@ -138,5 +155,6 @@ export type {
   ImageMultiple,
   ImageFiles,
   TextArea,
-  ColumnTable
+  ColumnTable,
+  TableRoom
 };

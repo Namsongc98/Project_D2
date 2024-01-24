@@ -1,8 +1,8 @@
 import { Button, Input, SelectOption, TextArea } from "../../component/element";
 import {
+  Approve,
   BookingStatus,
   IRoomPost,
-  IRoomSubmit,
   ImageFiles,
   SelectOptionType,
 } from "../../type";
@@ -16,10 +16,11 @@ import * as yup from "yup";
 import SnackBarReuse from "../../component/componentReuse/SnackBarReuse";
 import { createRoom, upfileClodinary } from "../../service";
 import { Title } from "../../component/componentPage";
+import { AlertColor } from "@mui/material";
 
 const PostRoom = () => {
   const [loading, setLoading] = useState(false);
-  const [type, setType] = useState("success");
+  const [type, setType] = useState<AlertColor | undefined>(undefined);
   const [error, setError] = useState("");
   const user = useGetUser();
   //  SelectOption
@@ -85,19 +86,17 @@ const PostRoom = () => {
       setType("warning");
       setError(message);
     } else {
-      setType("");
+      setType(undefined);
       setError("");
     }
   }, [message]);
   useEffect(() => {
     return () => {
       setError("");
-      setType("success");
+      setType(undefined);
     };
   }, []);
-  const onSubmit: SubmitHandler<IRoomSubmit> = async (
-    data: IRoomSubmit
-  ): Promise<void> => {
+  const onSubmit: SubmitHandler<any> = async (data): Promise<void> => {
     setLoading(true);
     if (!imageRoom.arrImgView.length) {
       setType("error");
@@ -115,7 +114,7 @@ const PostRoom = () => {
       ];
 
       const room: IRoomPost = {
-        host_id: user?.id,
+        host_id: user!.id,
         created_at: Date.now(),
         booking_status: BookingStatus.emtry,
         name: data.nameHotel,
@@ -128,7 +127,7 @@ const PostRoom = () => {
         bathroom: data.bathRoom,
         decription: data.decription,
         image: dataImg,
-        approve_room: "Pending",
+        approve_room: Approve.pending,
       };
 
       await createRoom(room);
@@ -138,7 +137,6 @@ const PostRoom = () => {
       setType("error");
       setError("Tạo phòng thất bại");
       setLoading(false);
-      console.log(error);
     } finally {
       setLoading(false);
     }
@@ -150,7 +148,9 @@ const PostRoom = () => {
 
   return (
     <section className="flex justify-center items-center relative">
-      <SnackBarReuse message={error} type={type} setError={setError}/>
+
+        <SnackBarReuse message={error} type={type} setError={setError} />
+    
       <form
         action=""
         className="bg-white rounded-xl p-4 mt-7 min-w-[70%] shadow-md"
