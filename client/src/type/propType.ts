@@ -83,6 +83,11 @@ type PropDrawerType = {
 type PropsRoom = {
   data: typeGetRoom[];
   getdata: () => void;
+  page: number,
+  rowsPerPage: number,
+  handleChangePage: (event: unknown, newPage: number) => void,
+  handleChangeRowsPerPage: (event: React.ChangeEvent<HTMLInputElement>) => void,
+
 };
 
 

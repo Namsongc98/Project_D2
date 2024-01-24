@@ -105,7 +105,7 @@ export default function TableBooking({ data }: PropsBooking) {
       <TablePagination
         rowsPerPageOptions={[2, 4, 8]}
         component="div"
-        count={data?.length}
+        count={ data.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}

@@ -63,7 +63,7 @@
   ],
   "touris": [
     {
-      " ": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
       "created_at": 1705564741095,
       "booking_status": "Pending",
       "name": "khách sạn Host1 ",
@@ -505,7 +505,7 @@
     {
       "id_touris": 1,
       "user_id": "083fad4e-73a0-4975-a2cb-adeb8237d1ec",
-      "host_id": "",
+      "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
       "name_user": "vũ Sơn",
       "phone": 958978576,
       "email": "namsongc98@gmail.com",
@@ -522,7 +522,7 @@
     {
       "id_touris": 1,
       "user_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
-      "host_id": "",
+      "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
       "name_user": "Hello host1",
       "phone": 958978576,
       "email": "host1@gmail.com",

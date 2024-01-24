@@ -25,7 +25,14 @@ import { patchApprove } from "../../../service";
 import SnackBarReuse from "../../componentReuse/SnackBarReuse";
 import { columnsTable } from "../../../constain";
 import { convertDateToTimestamp } from "../../../common";
-export default function TableRoomApprove({ data, getdata }: PropsRoom) {
+export default function TableRoomApprove({
+  data,
+  getdata,
+  page,
+  rowsPerPage,
+  handleChangePage,
+  handleChangeRowsPerPage,
+}: PropsRoom) {
   // modal
   const [openApprove, setOpenApprove] = useState(false);
   const [openInfor, setOpenInfor] = useState(false);
@@ -34,8 +41,6 @@ export default function TableRoomApprove({ data, getdata }: PropsRoom) {
   const [type, setType] = useState<AlertColor>("success");
   const [message, setMessage] = useState<string>("");
   // page
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   // open modal duyệt room
   const handleOpenApprove = (room: typeGetRoom | undefined = undefined) => {
@@ -47,16 +52,6 @@ export default function TableRoomApprove({ data, getdata }: PropsRoom) {
   const handleOpenInfor = (room: typeGetRoom | undefined = undefined) => {
     setInforRoom(room);
     setOpenInfor(!openInfor);
-  };
-
-  const handleChangePage = (event: unknown, newPage: number) => {
-    setPage(newPage);
-  };
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
   };
 
   // duyệt phòng
@@ -83,7 +78,7 @@ export default function TableRoomApprove({ data, getdata }: PropsRoom) {
 
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
-      <SnackBarReuse type={type} message={message} setError={setMessage}/>
+      <SnackBarReuse type={type} message={message} setError={setMessage} />
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -106,46 +101,44 @@ export default function TableRoomApprove({ data, getdata }: PropsRoom) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((room) => {
-                return (
-                  <TableRow hover key={room.id}>
-                    {columnsTable.map((column) => {
-                      const value = room[column.id];
-                      return <TableCell key={column.id}>{value}</TableCell>;
-                    })}
-                    <TableCell align="center">
-                      <Button
-                        className={`px-2 py-1 rounded-md ${
-                          room.approve_room === Approve.pending
-                            ? "bg-[#5A8DEE]"
-                            : room.approve_room === Approve.fail
-                            ? "bg-red-500"
-                            : "bg-green-500"
-                        } text-white`}
-                        type="button"
-                        onClick={() => handleOpenApprove(room)}
-                      >
-                        {room.approve_room === "Pending"
-                          ? "Đang chờ"
-                          : room.approve_room === "Success"
-                          ? "Hoạt động"
-                          : "Không cho phép"}
-                      </Button>
-                    </TableCell>
-                    <TableCell align="center">
-                      <IconButton
-                        aria-label="infor"
-                        size="small"
-                        onClick={() => handleOpenInfor(room)}
-                      >
-                        <InfoIcon color="primary" fontSize="inherit" />
-                      </IconButton>
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
+            {data.map((room) => {
+              return (
+                <TableRow hover key={room.id}>
+                  {columnsTable.map((column) => {
+                    const value = room[column.id];
+                    return <TableCell key={column.id}>{value}</TableCell>;
+                  })}
+                  <TableCell align="center">
+                    <Button
+                      className={`px-2 py-1 rounded-md ${
+                        room.approve_room === Approve.pending
+                          ? "bg-[#5A8DEE]"
+                          : room.approve_room === Approve.fail
+                          ? "bg-red-500"
+                          : "bg-green-500"
+                      } text-white`}
+                      type="button"
+                      onClick={() => handleOpenApprove(room)}
+                    >
+                      {room.approve_room === "Pending"
+                        ? "Đang chờ"
+                        : room.approve_room === "Success"
+                        ? "Hoạt động"
+                        : "Không cho phép"}
+                    </Button>
+                  </TableCell>
+                  <TableCell align="center">
+                    <IconButton
+                      aria-label="infor"
+                      size="small"
+                      onClick={() => handleOpenInfor(room)}
+                    >
+                      <InfoIcon color="primary" fontSize="inherit" />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </TableContainer>
@@ -252,9 +245,9 @@ export default function TableRoomApprove({ data, getdata }: PropsRoom) {
         </ModalComponent>
       )}
       <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
+        rowsPerPageOptions={[5, 10, 15]}
         component="div"
-        count={data.length}
+        count={Infinity}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}

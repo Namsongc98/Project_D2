@@ -92,6 +92,12 @@ const typeTouris = [
 const pathHost = [
   { id: 1, path: "/host", icon: <DashboardIcon />, title: "Danh sách phòng" },
   { id: 2, path: "/host/postroom", icon: <AddHomeIcon />, title: "Thêm phòng" },
+  {
+    id: 3,
+    path: "/host/depositbooking",
+    icon: <AddHomeIcon />,
+    title: "Danh sách người dùng",
+  },
 ];
 
 const pathAdmin = [
@@ -103,13 +109,13 @@ const pathAdmin = [
   },
   {
     id: 3,
-    path: "/hostmanager",
+    path: "/admin/hostmanager",
     icon: <MapsHomeWorkIcon />,
     title: "Thống kê khách sạn",
   },
   {
     id: 2,
-    path: "/guidemanager",
+    path: "/admin/guidemanager",
     icon: <GroupIcon />,
     title: "Thống kê khách hàng",
   },

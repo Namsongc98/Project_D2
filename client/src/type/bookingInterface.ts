@@ -14,7 +14,7 @@ type PatchBooking = {
 
 interface IBookingData {
   id?: number;
-  id_touris?: number;
+  id_touris: number;
   host_id: string;
   user_id?: string;
   name_user: string;

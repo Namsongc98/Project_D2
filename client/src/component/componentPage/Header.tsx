@@ -41,6 +41,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useGetUser();
+
   const [anchor, setAnchor] = useState<null | HTMLElement>(null);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchor(anchor ? null : event.currentTarget);
@@ -87,8 +88,7 @@ const Header = () => {
       booking_status: BookingStatus.pending,
     };
     try {
-      const res = patchBookingConfirm(idBooking, bookingStatus);
-      console.log(res);
+      patchBookingConfirm(idBooking, bookingStatus);
     } catch (error) {
       console.log(error);
     }

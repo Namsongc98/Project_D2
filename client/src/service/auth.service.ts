@@ -29,8 +29,13 @@ const postProfile = async (id: string, profile: IProfile) => {
 const getAllHost = async () => {
   return await instance.get('/users/', { params: { role: Role.host } })
 }
+
 const getAllUser = async () => {
   return await instance.get('/users/', { params: { role: Role.guide } })
 }
 
-export { createUser, loginUser, postProfile, getUserSevice, getAllHost, getAllUser };
+const getUserHostId = async ()=>{
+  return await instance.get('users', {params: {}})
+}
+
+export { createUser, loginUser, postProfile, getUserSevice, getAllHost, getAllUser,getUserHostId };

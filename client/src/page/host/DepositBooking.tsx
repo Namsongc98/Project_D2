@@ -1,22 +1,25 @@
 import { Box, Container, Grid, Paper, Typography } from "@mui/material";
-import { CopyRight, TableUser } from "../../component/componentPage";
-import TableBooking from "../../component/componentPage/admin/TableBooking";
 import { useEffect, useState } from "react";
-import { getAllUser, getBookingService } from "../../service";
+import { Deposit, TableUser } from "../../component/componentPage";
+import { getAllUser, getBookingHostId } from "../../service";
+import { useGetUser } from "../../hook";
 
-const GuideManager = () => {
-  const [data, setData] = useState([]);
+const DepositBooking = () => {
+  const user = useGetUser();
   const [dataUser, setDataUser] = useState([]);
+  const [countBooking, setCountBooking] = useState();
 
   useEffect(() => {
     getBooking();
     getUser();
-  }, []);
+  }, [user]);
 
   const getBooking = async () => {
     try {
-      const res = await getBookingService();
-      setData(res.data);
+      if (user) {
+        const res = await getBookingHostId(user.id);
+        setCountBooking(res.data.length);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -46,7 +49,7 @@ const GuideManager = () => {
               </Typography>
             </Paper>
           </Grid>
-          <Grid item xs={12} md={12} lg={12}>
+          <Grid item xs={4} md={4} lg={4}>
             <Paper
               sx={{
                 p: 2,
@@ -54,16 +57,7 @@ const GuideManager = () => {
                 flexDirection: "column",
               }}
             >
-              <Typography
-                color="#1976d2"
-                fontSize="24px"
-                fontWeight="700"
-                textAlign="center"
-                mb={2}
-              >
-                Danh sách đặt phòng
-              </Typography>
-              <TableBooking data={data!} getData={getBooking} />
+              <Deposit label="Số lượng booking" count={countBooking} />
             </Paper>
           </Grid>
           <Grid item xs={12} md={12} lg={12}>
@@ -87,10 +81,9 @@ const GuideManager = () => {
             </Paper>
           </Grid>
         </Grid>
-        <CopyRight sx={{ pt: 4 }} />
       </Container>
     </Box>
   );
 };
 
-export default GuideManager;
+export default DepositBooking;

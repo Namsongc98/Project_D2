@@ -36,5 +36,8 @@ const getBookingUser = async (userId: string) => {
     return await instance.get('/bookings', { params: { user_id: userId } })
 }
 
+const getBookingHostId = async (host_id: string) => {
+    return await instance.get('/bookings', { params: { host_id } })
+}
 
-export { patchBookingConfirm, getBookingPending, getBookingSuccess, createBooking, getBookingUser, getBookingService }
+export { patchBookingConfirm, getBookingPending, getBookingSuccess, createBooking, getBookingUser, getBookingService, getBookingHostId }
