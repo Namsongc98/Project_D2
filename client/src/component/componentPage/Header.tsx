@@ -13,15 +13,11 @@ import { useSelector } from "react-redux";
 import { getUser, setUser } from "../../store/reducer/userSlice";
 import { useDispatch } from "react-redux";
 import {
-  Box,
   Button,
   Divider,
-  ImageList,
-  ImageListItem,
   Menu,
   MenuItem,
   Stack,
-  Typography,
 } from "@mui/material";
 import BookIcon from "@mui/icons-material/Book";
 import { getBookingUser, getOneRoom, patchBookingConfirm } from "../../service";
@@ -29,11 +25,11 @@ import {
   BookingStatus,
   IBookingData,
   Role,
-  StatusPayment,
   typeGetRoom,
 } from "../../type";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { ModalComponent } from "../componentReuse";
+import DetailComponent from "../componentReuse/DetailComponent";
 
 const Header = () => {
   const userSelector = useSelector(getUser);
@@ -85,7 +81,7 @@ const Header = () => {
 
   const handleCancel = (idBooking: number) => {
     const bookingStatus = {
-      booking_status: BookingStatus.pending,
+      booking_status: BookingStatus.pendngCancel,
     };
     try {
       patchBookingConfirm(idBooking, bookingStatus);
@@ -211,11 +207,18 @@ const Header = () => {
                     <></>
                   )}
                   <Link
-                    to="/profile"
+                    to="user/profile"
                     className="px-3 hover:bg-[#e6e6e6] py-2 hover:text-[#808089] flex gap-1 items-center"
                   >
                     <Person2Icon />
                     <span> Thông tin tài khoản</span>
+                  </Link>
+                  <Link
+                    to="user"
+                    className="px-3 hover:bg-[#e6e6e6] py-2 hover:text-[#808089] flex gap-1 items-center"
+                  >
+                    <Person2Icon />
+                    <span>Đơn đặt</span>
                   </Link>
                   <div
                     className="cursor-pointer  px-3 py-2 hover:bg-[#e6e6e6] hover:text-[#808089] flex gap-1 items-center"
@@ -255,132 +258,18 @@ const Header = () => {
       {openInfor && (
         <ModalComponent handleOpen={handleOpenInfor} open={openInfor}>
           <>
-            <Stack
-              display={"flex"}
-              direction="row"
-              justifyContent="space-between"
-            >
-              <Typography variant="h6" component="h2" color="primary">
-                Chi tiết phòng
-              </Typography>
-              <Typography
-                variant="h6"
-                component="h2"
-                color={
-                  inforBooking?.booking_status === BookingStatus.pending
-                    ? "primary"
-                    : inforBooking?.booking_status === BookingStatus.success
-                    ? "#4caf50"
-                    : inforBooking?.booking_status === BookingStatus.cancel
-                    ? "error"
-                    : "error"
-                }
+            <DetailComponent booking={inforBooking!} room={inforRoom!} />
+            <Divider light sx={{ my: 2 }} />
+            <div className="flex justify-between">
+              <div className=""></div>
+              <Button
+                variant="contained"
+                color="error"
+                onClick={() => handleCancel(inforBooking!.id!)}
               >
-                {inforBooking?.booking_status === BookingStatus.pending
-                  ? "Đợi xác nhận "
-                  : inforBooking?.booking_status === BookingStatus.success
-                  ? "Đã được chấp nhận"
-                  : inforBooking?.booking_status === BookingStatus.cancel
-                  ? "Đơn đẵ bị hủy"
-                  : "Đơn đã bị hủy"}
-              </Typography>
-            </Stack>
-            <Divider sx={{ my: 2 }} light />
-            <Stack direction="row" spacing={2} useFlexGap flexWrap="wrap">
-              <Box sx={{ width: 1 / 2 }}>
-                <ImageList sx={{ height: "auto" }} cols={2} rowHeight={164}>
-                  {inforRoom!.image.map((item) => (
-                    <ImageListItem key={item.id}>
-                      <img
-                        src={item.url}
-                        alt={inforRoom?.city}
-                        loading="lazy"
-                      />
-                    </ImageListItem>
-                  ))}
-                </ImageList>
-
-                <Box sx={{}}>
-                  <Divider sx={{ my: 2 }} light />
-                  <div className="">
-                    <h3 className="font-medium mb-2 ">Mô tả: </h3>
-                    <span>{inforRoom?.decription}</span>
-                  </div>
-                </Box>
-              </Box>
-              <Box sx={{ width: "45%", mb: 6 }}>
-                <div className="flex justify-between items-center ">
-                  <h3 className="font-medium">Tên khách sạn: </h3>
-                  <span>{inforRoom?.name}</span>
-                </div>
-                <Divider sx={{ my: 2 }} light />
-                <div className="flex justify-between items-center ">
-                  <h3 className="font-medium">Loại hình du lịch: </h3>
-                  <span>{inforRoom?.type_tourism}</span>
-                </div>
-                <Divider sx={{ my: 2 }} light />
-                <div className="flex justify-between items-center ">
-                  <h3 className="font-medium">Giá phòng: </h3>
-                  <span>{inforRoom?.price}</span>
-                </div>
-                <Divider sx={{ my: 2 }} light />
-                <div className="flex justify-between items-center  ">
-                  <h3 className="font-medium">Địa Chỉ: </h3>
-                  <span>{inforRoom?.address}</span>
-                </div>
-                <Divider sx={{ my: 2 }} light />
-                <div className="flex justify-between items-center  ">
-                  <h3 className="font-medium">Số lượng phòng ngủ</h3>
-                  <span>{inforRoom?.bedroom}</span>
-                </div>
-                <Divider sx={{ my: 2 }} light />
-                <div className="flex justify-between items-center  ">
-                  <h3 className="font-medium">Số lượng phòng tắm</h3>
-                  <span>{inforRoom?.bathroom}</span>
-                </div>
-                <Divider sx={{ my: 2 }} light />
-                <div className="flex justify-between items-center  ">
-                  <h3 className="font-medium">Từ ngày</h3>
-                  <span>
-                    {convertDateToTimestamp(inforBooking!.start_date) +
-                      " - " +
-                      convertDateToTimestamp(inforBooking!.end_date)}{" "}
-                  </span>
-                </div>
-                <Divider sx={{ my: 2 }} light />
-                <div className="flex justify-between items-center  ">
-                  <h3 className="font-medium">Số ngày</h3>
-                  <span>{inforBooking?.count_date} </span>
-                </div>
-                <Divider sx={{ my: 2 }} light />
-                <div className="flex justify-between items-center  ">
-                  <h3 className="font-medium">Thanh toán:</h3>
-                  <span>{inforBooking?.total} </span>
-                </div>
-                <Divider sx={{ my: 2 }} light />
-                <div className="flex justify-between items-center  ">
-                  <h3 className="font-medium">Trạng thái thanh toán:</h3>
-                  <span>
-                    {inforBooking?.pay_status === StatusPayment.pending
-                      ? "Chưa thanh toán"
-                      : inforBooking?.pay_status === StatusPayment.success
-                      ? "đã thanh toán"
-                      : ""}{" "}
-                  </span>
-                </div>
-                <Divider sx={{ my: 2 }} light />
-                <div className="flex justify-between ">
-                  <div className=""></div>
-                  <Button
-                    variant="contained"
-                    color="error"
-                    onClick={() => handleCancel(inforBooking.id)}
-                  >
-                    Hủy đơn
-                  </Button>
-                </div>
-              </Box>
-            </Stack>
+                Hủy đơn
+              </Button>
+            </div>
           </>
         </ModalComponent>
       )}

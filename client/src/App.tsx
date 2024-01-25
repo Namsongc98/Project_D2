@@ -5,6 +5,7 @@ import { PrivateAdmin, PrivateHost, PrivateUser } from "./router";
 import LayoutHost from "./layout/host/LayoutHost";
 import { Role } from "./type";
 import LayoutUser from "./layout/LayoutUser";
+import { User } from "./page/user";
 function App() {
   return (
     <>
@@ -36,10 +37,16 @@ function App() {
                   <Route key={router.id} element={<PrivateUser />}>
                     <Route
                       key={router.id}
-                      path="user"
+                      path="/user"
                       element={<LayoutRoleGuige />}
                     >
-                      <Route key={router.id} path={router.path} element={<Page />} />
+                      <Route path="" element={<User />}>
+                        <Route
+                          path={""}
+                          element={router.children && <Page />}
+                        ></Route>
+                      </Route>
+                      <Route path={router.path} element={<Page />} />
                     </Route>
                   </Route>
                 )}

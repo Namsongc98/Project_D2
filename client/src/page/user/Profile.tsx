@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import "../../style/styleComponent.scss";
 import imgUpload from "../../assets/image/upanh.png";
 import { NavLink } from "react-router-dom";
@@ -38,7 +38,7 @@ const Profile = () => {
   const userSelector = useSelector(getUser);
   const dispatch: AppDispatch = useDispatch();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     dispatch(setUser(user));
   }, [user]);
 
@@ -158,8 +158,9 @@ const Profile = () => {
               <Button
                 type="submit"
                 disabled={loading}
-                className={`text-white ${loading && "opacity-70"
-                  } bg-[#5A8DEE] w-full rounded px-6 py-2 hover:opacity-80 shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] hover:shadow-[0_4px_12px_0_rgba(90,141,238,0.6)]`}
+                className={`text-white ${
+                  loading && "opacity-70"
+                } bg-[#5A8DEE] w-full rounded px-6 py-2 hover:opacity-80 shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] hover:shadow-[0_4px_12px_0_rgba(90,141,238,0.6)]`}
               >
                 Lưu
               </Button>
@@ -198,10 +199,11 @@ const Profile = () => {
           </div>
           <div className="wp-right">
             <div
-              className={` w-44 h-44 border border-solid mx-auto my-0 p-1  overflow-hidden ${InputTypeFileImg.errorImg
+              className={` w-44 h-44 border border-solid mx-auto my-0 p-1  overflow-hidden ${
+                InputTypeFileImg.errorImg
                   ? " border-red-600"
                   : "border-[#cccbcb]"
-                }`}
+              }`}
             >
               {InputTypeFileImg.avatarView ? (
                 <img

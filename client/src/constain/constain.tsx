@@ -171,6 +171,14 @@ const columnUser: TableRoom[] = [
   },
 ];
 
+const tapUserBooking = [
+  { id: 1, value: 0, label: "Tất cả", to: "?type=0" },
+  { id: 2, value: 1, label: "Chờ xác nhận", to: "?type=1" },
+  { id: 3, value: 2, label: "Đã xác nhận", to: "?type=2" },
+  { id: 4, value: 3, label: "Hoàn thành chuyến", to: "?type=3" },
+  { id: 5, value: 4, label: "Hủy chuyến", to: "?type=4" },
+];
+
 export {
   dataCityCarousel,
   specialOffer,
@@ -180,4 +188,5 @@ export {
   columnsTable,
   columnBooking,
   columnUser,
+  tapUserBooking,
 };

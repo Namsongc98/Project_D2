@@ -4,3 +4,7 @@ export { default as Register } from "./Register";
 export { default as SearchHotel } from "./SearchHotel";
 export { default as ListStay } from "./ListStay";
 export { default as User } from "./User";
+export { default as Detail } from "./Detail";
+export { default as DetailRoom } from "./DetailRoom";
+export { default as HistoryBooking } from "./HistoryBooking";
+export { default as Profile } from "./Profile";

@@ -1,3 +1,4 @@
+import { BookingStatus } from ".";
 
 
 interface IRoomSubmit {
@@ -18,12 +19,7 @@ enum Approve {
 
 }
 
-enum BookingStatus {
-    pending = "Pending",
-    success = "Success",
-    emtry = "Empty",
-    cancel = "Cancel"
-}
+
 
 interface IRoomPost {
     host_id: string | undefined;
@@ -47,4 +43,4 @@ type ApprovePacth = {
 }
 
 export type { IRoomSubmit, IRoomPost, ApprovePacth }
-export { BookingStatus, Approve }
+export { Approve }

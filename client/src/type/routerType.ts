@@ -3,11 +3,12 @@ import { Role } from ".";
 
 
 type Layout = {
-    id:number,
+    id: number,
     path: string;
     component: React.FC | (() => JSX.Element | React.ReactNode);
     layout: boolean;
-    role?:Role
+    role?: Role
+    children?: boolean
 }[]
 
 type PathType = {

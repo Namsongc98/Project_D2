@@ -12,8 +12,6 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 });
 
 const SnackBarReuse = ({ type, message, setError }: PropTypeSnackBar) => {
-  const [open, setOpen] = React.useState(false);
-
   const handleClose = (
     event?: React.SyntheticEvent | Event,
     reason?: string
@@ -21,25 +19,14 @@ const SnackBarReuse = ({ type, message, setError }: PropTypeSnackBar) => {
     if (reason === "clickaway") {
       return;
     }
-    setOpen(false);
     setError("");
-  };
-
-  React.useEffect(() => {
-    if (message) {
-      handleClick();
-    }
-  }, [message, setOpen, setError]);
-
-  const handleClick = () => {
-    setOpen(true);
   };
 
   return (
     <>
       <Stack spacing={2} sx={{ width: "100%", position: "absolute" }}>
         <Snackbar
-          open={open}
+          open={!!message}
           onClose={handleClose}
           anchorOrigin={{ vertical: "top", horizontal: "right" }}
         >

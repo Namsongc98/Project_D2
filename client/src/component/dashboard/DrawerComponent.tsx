@@ -11,6 +11,7 @@ import {
 import MuiDrawer from "@mui/material/Drawer";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { PropDrawerType } from "../../type";
+import HomeIcon from "@mui/icons-material/Home";
 
 import { NavLink } from "react-router-dom";
 
@@ -65,6 +66,14 @@ const DrawerComponent = ({ toggleDrawer, open, paths }: PropDrawerType) => {
             </NavLink>
           </ListItemButton>
         ))}
+        <ListItemButton>
+          <NavLink to={"/"} className="flex ">
+            <ListItemIcon>
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText primary={"Home"} />
+          </NavLink>
+        </ListItemButton>
       </List>
     </Drawer>
   );

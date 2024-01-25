@@ -4,7 +4,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Person2Icon from "@mui/icons-material/Person2";
-import { IProfileUser, PropAppBarType } from "../../type";
+import { IProfileUser, PropAppBarType, Role } from "../../type";
 import AvatarUser from "../componentReuse/AvatarUser";
 import { useGetUser } from "../../hook";
 import { Link, useNavigate } from "react-router-dom";
@@ -97,18 +97,25 @@ const AppBarComponent = ({ toggleDrawer, open }: PropAppBarType) => {
         </div>
         <Popup anchor={anchor} setAnchor={setAnchor}>
           <div className="flex flex-col  text-base text-[#808089]">
-            {userSelect?.role === "Host" ? (
+            {userSelect?.role === Role.admin ? (
               <Link
                 to="/admin"
                 className="flex items-center gap-1 px-3 hover:bg-[#e6e6e6] py-2 hover:text-[#808089] "
               >
                 <AdminPanelSettingsIcon /> <span>Admin</span>{" "}
               </Link>
+            ) : userSelect?.role === Role.host ? (
+              <Link
+                to="/host"
+                className="flex items-center gap-1 px-3 hover:bg-[#e6e6e6] py-2 hover:text-[#808089] "
+              >
+                <AdminPanelSettingsIcon /> <span>Host</span>{" "}
+              </Link>
             ) : (
               <></>
             )}
             <Link
-              to="/profile"
+              to="/user/profile"
               className="px-3 hover:bg-[#e6e6e6] py-2 hover:text-[#808089] flex gap-1 items-center"
             >
               <Person2Icon />

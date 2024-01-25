@@ -1,4 +1,4 @@
-import { BookingStatus } from ".";
+
 
 enum StatusPayment {
   pending = "Pending",
@@ -6,12 +6,18 @@ enum StatusPayment {
 }
 
 type PatchBooking = {
-  booking_status:
-  | BookingStatus.success
-  | BookingStatus.cancel
-  | BookingStatus.pending;
+  booking_status: BookingType
 };
 
+enum BookingStatus {
+  pending = "Pending",
+  success = "Success",
+  emtry = "Empty",
+  cancel = "Cancel",
+  pendngCancel = "Pendng Cancel"
+}
+
+type BookingType = BookingStatus.cancel | BookingStatus.emtry | BookingStatus.pending | BookingStatus.success | BookingStatus.pendngCancel
 interface IBookingData {
   id?: number;
   id_touris: number;
@@ -30,7 +36,8 @@ interface IBookingData {
   count_person?: number;
   pay_status?: StatusPayment;
   total: number;
+  complete_touris: boolean
 }
 
-export { StatusPayment };
-export type { IBookingData, PatchBooking };
+export { StatusPayment, BookingStatus };
+export type { IBookingData, PatchBooking, BookingType };

@@ -85,17 +85,9 @@ const PostRoom = () => {
     if (message) {
       setType("warning");
       setError(message);
-    } else {
-      setType(undefined);
-      setError("");
     }
   }, [message]);
-  useEffect(() => {
-    return () => {
-      setError("");
-      setType(undefined);
-    };
-  }, []);
+
   const onSubmit: SubmitHandler<any> = async (data): Promise<void> => {
     setLoading(true);
     if (!imageRoom.arrImgView.length) {
@@ -148,9 +140,7 @@ const PostRoom = () => {
 
   return (
     <section className="flex justify-center items-center relative">
-
-        <SnackBarReuse message={error} type={type} setError={setError} />
-    
+      <SnackBarReuse message={error} type={type} setError={setError} />
       <form
         action=""
         className="bg-white rounded-xl p-4 mt-7 min-w-[70%] shadow-md"

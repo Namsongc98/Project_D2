@@ -3,16 +3,17 @@ import AdminStatistics from "../page/admin/AdminStatistics";
 import { DepositBooking, PostRoom } from "../page/host";
 import HostStatistics from "../page/host/HostStatistics";
 import {
+  Detail,
+  DetailRoom,
+  HistoryBooking,
   Home,
   ListStay,
   Login,
+  Profile,
   Register,
   SearchHotel,
-  User,
 } from "../page/user";
-import Detail from "../page/user/Detail";
-import DetailRoom from "../page/user/DetailRoom";
-import Profile from "../page/user/Profile";
+
 import { Layout, Role } from "../type";
 
 //  laout user
@@ -25,7 +26,7 @@ const publicPage: Layout = [
   { id: 14, path: "/register", component: Register, layout: false },
   { id: 15, path: "/login", component: Login, layout: false },
   // lyout User
-  { id: 6, path: "", component: User, layout: true, role: Role.guide },
+  { id: 6, path: "type", component: HistoryBooking, layout: true, role: Role.guide, children: true },
   {
     id: 7,
     path: "profile",
@@ -79,6 +80,6 @@ const publicPage: Layout = [
   },
 ];
 // layout login register
-const member = [];
 
-export { publicPage, member };
+
+export { publicPage };

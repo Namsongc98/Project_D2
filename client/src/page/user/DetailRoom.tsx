@@ -55,7 +55,7 @@ const DetailRoom = () => {
   const getRoom = async () => {
     try {
       if (param.id) {
-        const dataRoom = await getOneRoom(param.id);
+        const dataRoom = await getOneRoom(+param.id);
         setDetailRoom(dataRoom.data);
       }
     } catch (error) {
@@ -116,7 +116,7 @@ const DetailRoom = () => {
     }
     setError("");
     const booking: IBookingData = {
-      id_touris: detailRoom?.id,
+      id_touris: detailRoom!.id,
       user_id: user!.id,
       host_id: detailRoom!.host_id,
       name_user: userName,
@@ -128,7 +128,9 @@ const DetailRoom = () => {
       end_date: inputEndDate.timestamp!,
       count_date: gapDate,
       count_person: data.countPerson,
+      price: detailRoom!.price,
       total: total,
+      complete_touris: false,
       pay_status: StatusPayment.pending,
     };
     try {

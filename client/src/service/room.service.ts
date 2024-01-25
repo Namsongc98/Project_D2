@@ -8,7 +8,7 @@ const createRoom = async (room: IRoomPost) => {
 
 
 // data tất cả phòng
-const getAllRoom = async (page, limit) => {
+const getAllRoom = async (page: number, limit: number) => {
     return await instance.get(`/touris?_page=${page}&_limit=${limit}`);
 };
 
@@ -16,8 +16,9 @@ const getAllRoom = async (page, limit) => {
 // data detail
 const getOneRoom = async (id: number) => {
     return await instance.get(`/touris/${id}`);
-
 }
+
+
 
 //lấy dữ liệu theo city có status là emtry admin  success
 const getRoomCity = async (city: string, status: BookingStatus.emtry, approve: Approve.success) => {

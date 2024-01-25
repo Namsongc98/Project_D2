@@ -46,7 +46,6 @@ const HostManager = () => {
                 }}
               >
                 <Typography
-                  sx={{}}
                   color="#1976d2"
                   fontSize="24px"
                   fontWeight="700"
