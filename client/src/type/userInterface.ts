@@ -34,9 +34,10 @@ interface IProfileUser {
   email: string;
   age?: string;
   password?: string;
+  [key: string]: any
 }
 
 
 
 export { Role, };
-export type { IProfile, IProfileUser,  IUser }
+export type { IProfile, IProfileUser, IUser }

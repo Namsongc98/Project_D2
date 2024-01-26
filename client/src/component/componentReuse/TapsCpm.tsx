@@ -1,9 +1,10 @@
 import { Tab, Tabs } from "@mui/material";
 import React, { useState } from "react";
-import { tapUserBooking } from "../../constain";
-import { Link } from "react-router-dom";
 
-const TapsCpm = () => {
+import { Link } from "react-router-dom";
+import { ITaps } from "../../type";
+
+const TapsCpm = ({ taps }: { taps: ITaps[] }) => {
   const [value, setValue] = useState(0);
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -16,7 +17,7 @@ const TapsCpm = () => {
       indicatorColor="secondary"
       aria-label="secondary tabs example"
     >
-      {tapUserBooking.map((tap) => (
+      {taps?.map((tap) => (
         <Tab
           key={tap.id}
           value={tap.value}

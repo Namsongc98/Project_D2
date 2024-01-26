@@ -10,9 +10,14 @@ import { patchBookingConfirm } from "../../../service";
 import { BookingStatus, IBookingData, PropsBooking } from "../../../type";
 import React, { useState } from "react";
 import { Button } from "../../element";
-import { ModalComponent } from "../../componentReuse";
-import { Stack, Typography } from "@mui/material";
+import {
+  ModalComponent,
+  ModalConfirm,
+  SnackBarReuse,
+} from "../../componentReuse";
+import { AlertColor, Stack } from "@mui/material";
 import { columnBooking } from "../../../constain";
+import imgEmtry from "../../../assets/image/img_emtry.png";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -34,11 +39,9 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const TableHostRoomConfirm: React.FC<PropsBooking> = ({
-  data,
-  getData,
-  getData2,
-}) => {
+const TableHostRoomConfirm: React.FC<PropsBooking> = ({ data }) => {
+  const [type, setType] = useState<AlertColor | undefined>();
+  const [message, setMessage] = useState<string>("");
   const [openConfirm, setOpenConfirm] = useState(false);
   const [inforBooking, setInforBooking] = useState<IBookingData | undefined>();
 
@@ -47,26 +50,42 @@ const TableHostRoomConfirm: React.FC<PropsBooking> = ({
     setInforBooking(Booking);
   };
 
-  const handleConfirm = async (
-    idBooking: number,
-    status: BookingStatus.success | BookingStatus.cancel
-  ) => {
+  const handleSuccess = async (idBooking: number) => {
     const bookingStatus = {
-      booking_status: status,
+      booking_status: BookingStatus.cancel,
     };
     try {
       await patchBookingConfirm(idBooking, bookingStatus);
-      setOpenConfirm(!openConfirm);
-      if (getData) getData();
-      if (getData2) getData2();
+      setType("success");
+      setMessage("Xác Nhận cho hủy");
     } catch (error) {
-      console.log(error);
+      setType("error");
+      setMessage("Có lỗi không thể thực hiện");
+    } finally {
+      setOpenConfirm(!openConfirm);
     }
   };
+  const handleFail = async (idBooking: number) => {
+    const bookingStatus = {
+      booking_status: BookingStatus.pending,
+    };
+    try {
+      await patchBookingConfirm(idBooking, bookingStatus);
+      setType("success");
+      setMessage("Xác Nhận không cho hủy");
+    } catch (error) {
+      setType("error");
+      setMessage("Có lỗi không thể thực hiện");
+    } finally {
+      setOpenConfirm(!openConfirm);
+    }
+  };
+
   return (
     <>
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
-        <TableContainer component={Paper}>
+        <SnackBarReuse type={type} setError={setMessage} message={message} />
+        <TableContainer component={Paper} sx={{ minHeight: "400px" }}>
           <Table sx={{ minWidth: 1200 }} aria-label="customized table">
             <TableHead>
               <TableRow>
@@ -82,13 +101,18 @@ const TableHostRoomConfirm: React.FC<PropsBooking> = ({
                 <StyledTableCell>Booking</StyledTableCell>
               </TableRow>
             </TableHead>
+
             <TableBody>
               {data?.map((booking) => (
                 <StyledTableRow key={booking.id}>
                   {columnBooking.map((column) => {
                     const value = booking[column.index];
                     return (
-                      <StyledTableCell component="th" scope="row">
+                      <StyledTableCell
+                        key={column.index}
+                        component="th"
+                        scope="row"
+                      >
                         {column.format && typeof value === "number"
                           ? column.format(value)
                           : value}
@@ -102,7 +126,8 @@ const TableHostRoomConfirm: React.FC<PropsBooking> = ({
                   >
                     <Button
                       className={`px-2 py-1 rounded-md ${
-                        booking.booking_status === BookingStatus.pending
+                        booking.booking_status ===
+                        (BookingStatus.pending || BookingStatus.pendingCancel)
                           ? "bg-[#5A8DEE]"
                           : booking.booking_status === BookingStatus.success
                           ? "bg-green-500"
@@ -115,42 +140,43 @@ const TableHostRoomConfirm: React.FC<PropsBooking> = ({
                         ? "Đang chờ"
                         : booking.booking_status === BookingStatus.success
                         ? "Hoạt động"
-                        : "Không cho phép"}
+                        : booking.booking_status === BookingStatus.pendingCancel
+                        ? "Khách muốn hủy"
+                        : "Hủy phòng"}
                     </Button>
                   </StyledTableCell>
                 </StyledTableRow>
               ))}
             </TableBody>
           </Table>
+          {!data?.length && (
+            <Stack
+              sx={{ height: "300px" }}
+              direction={"row"}
+              justifyContent={"center"}
+              alignItems={"center"}
+            >
+              <div className="">
+                <img
+                  src={imgEmtry}
+                  width={100}
+                  height={100}
+                  alt={imgEmtry}
+                  className="mx-auto my-0"
+                />
+                <p className="text-center mt-2">Đơn hàng trống</p>
+              </div>
+            </Stack>
+          )}
         </TableContainer>
         {openConfirm && (
           <ModalComponent handleOpen={handleOpenConfirm} open={openConfirm}>
-            <Typography variant="h6" component="h2">
-              Bạn đồng ý cho đặt phòng
-            </Typography>
-            <Typography component="p">{inforBooking?.name_room}</Typography>
-            <Stack sx={{ mt: 4 }} direction="row" spacing={2}>
-              <Button
-                type="button"
-                className="text-white bg-[#5A8DEE] rounded px-4 py-2 hover:opacity-80 shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] hover:shadow-[0_4px_12px_0_rgba(90,141,238,0.6)]"
-                onClick={() =>
-                  inforBooking &&
-                  handleConfirm(inforBooking.id!, BookingStatus.success)
-                }
-              >
-                Đồng ý
-              </Button>
-              <Button
-                type="button"
-                className="text-white bg-red-500  rounded px-4 py-2 hover:opacity-80 shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] hover:shadow-[0_4px_12px_0_rgba(90,141,238,0.6)] "
-                onClick={() =>
-                  inforBooking &&
-                  handleConfirm(inforBooking.id!, BookingStatus.cancel)
-                }
-              >
-                Không đồng ý
-              </Button>
-            </Stack>
+            <ModalConfirm
+              infor={inforBooking}
+              handleSuccess={handleSuccess}
+              handleFail={handleFail}
+              label="Xác nhận hủy phòng"
+            />
           </ModalComponent>
         )}
       </Paper>

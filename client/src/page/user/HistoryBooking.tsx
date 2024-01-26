@@ -1,8 +1,13 @@
-import { Box, Button, Divider, Paper, Stack } from "@mui/material";
+import { AlertColor, Box, Button, Divider, Paper, Stack } from "@mui/material";
 
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { getBookingUser, getBookingUserStatus } from "../../service";
+import {
+  getBookingUser,
+  getBookingUserStatus,
+  getOneRoom,
+  patchBookingConfirm,
+} from "../../service";
 import { useGetUser } from "../../hook";
 import imgEmtry from "../../assets/image/img_emtry.png";
 import {
@@ -10,14 +15,24 @@ import {
   BookingType,
   IBookingData,
   StatusPayment,
+  typeGetRoom,
 } from "../../type";
 import { convertDateToTimestamp, formatcurrency } from "../../common";
+import { ModalComponent } from "../../component/componentReuse";
+import DetailComponent from "../../component/componentReuse/DetailComponent";
+import SnackBarReuse from "../../component/componentReuse/SnackBarReuse";
 
 const HistoryBooking = () => {
   const [searchParams] = useSearchParams();
   const [bookingArr, setBookingArr] = useState<IBookingData[]>([]);
   const user = useGetUser();
   const type = searchParams.get("type");
+  const [openInfor, setOpenInfor] = useState(false);
+  const [inforBooking, setInforBooking] = useState<IBookingData>();
+  const [inforRoom, setInforRoom] = useState<typeGetRoom>();
+  const [typeErr, setTypeErr] = useState<AlertColor | undefined>();
+  const [message, setMessage] = useState("");
+
   const getBooking = async (userId: string) => {
     try {
       const res = await getBookingUser(userId);
@@ -56,11 +71,44 @@ const HistoryBooking = () => {
     }
   }, [type, user]);
 
+  const handleCancel = (idBooking: number) => {
+    // if (inforBooking?.complete_touris === ) {
+
+    //   return;
+    // }
+    const bookingStatus = {
+      booking_status: BookingStatus.pendingCancel,
+    };
+    try {
+      patchBookingConfirm(idBooking, bookingStatus);
+      setTypeErr("info");
+      setMessage("Đợi xác nhận");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleOpenInfor = async (
+    booking: IBookingData | undefined = undefined
+  ) => {
+    try {
+      if (booking?.id_touris) {
+        const res = await getOneRoom(booking.id_touris);
+        setInforRoom(res.data);
+      }
+      setInforBooking(booking);
+      setOpenInfor(!openInfor);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
-      <Box sx={{ width: "100%" }}>
+      <Box sx={{ width: "100%", overflow: "auto" }}>
+        <SnackBarReuse type={typeErr} message={message} setError={setMessage} />
         <Paper sx={{ p: 2, width: "100%" }}>
-          <Box width={"100%"}>
+          <Stack width={"100%"} spacing={2}>
             {bookingArr.length ? (
               bookingArr?.map((booking) => {
                 return (
@@ -97,7 +145,7 @@ const HistoryBooking = () => {
                               : booking.booking_status === BookingStatus.success
                               ? "Đặt phòng thành công"
                               : booking.booking_status ===
-                                BookingStatus.pendngCancel
+                                BookingStatus.pendingCancel
                               ? "Chờ xác nhận hủy phòng"
                               : ""}
                           </span>
@@ -142,9 +190,20 @@ const HistoryBooking = () => {
                             {formatcurrency(booking.total)}
                           </span>
                         </div>
-                        <Stack sx={{ mt: 2 }} direction="row" spacing={2}>
-                          <Button variant="outlined">Đặt lại</Button>
-                          <Button variant="outlined">Chi tiết</Button>
+                        <Stack
+                          sx={{ mt: 2 }}
+                          direction="row"
+                          spacing={2}
+                          justifyContent={"space-between"}
+                        >
+                          {/* <Button variant="outlined">Đặt lại</Button> */}
+                          <div></div>
+                          <Button
+                            variant="outlined"
+                            onClick={() => handleOpenInfor(booking)}
+                          >
+                            Chi tiết
+                          </Button>
                         </Stack>
                       </div>
                     </Stack>
@@ -170,8 +229,26 @@ const HistoryBooking = () => {
                 </div>
               </Stack>
             )}
-          </Box>
+          </Stack>
         </Paper>
+        {openInfor && (
+          <ModalComponent handleOpen={handleOpenInfor} open={openInfor}>
+            <>
+              <DetailComponent booking={inforBooking!} room={inforRoom!} />
+              <Divider light sx={{ my: 2 }} />
+              <div className="flex justify-between">
+                <div className=""></div>
+                <Button
+                  variant="contained"
+                  color="error"
+                  onClick={() => handleCancel(inforBooking!.id!)}
+                >
+                  Hủy đơn
+                </Button>
+              </div>
+            </>
+          </ModalComponent>
+        )}
       </Box>
     </>
   );

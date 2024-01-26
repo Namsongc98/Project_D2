@@ -1,10 +1,10 @@
 import { Box, Container, Grid, Paper, Typography } from "@mui/material";
 import { CopyRight } from "../../component/componentPage";
-import { useGetUser } from "../../hook";
+import { Outlet } from "react-router-dom";
+import { TapsCpm } from "../../component/componentReuse";
+import { tapHostBooking } from "../../constain";
 
-const HostStatistics = () => {
-  const user = useGetUser();
-
+const BookingConfirm = () => {
   return (
     <Box component="section">
       <Container sx={{ mt: 4, mb: 4 }}>
@@ -25,10 +25,13 @@ const HostStatistics = () => {
           </Grid>
 
           <Grid item xs={12}>
-          
+            <Paper>
+              <TapsCpm taps={tapHostBooking} />
+            </Paper>
           </Grid>
-          <Grid item xs={12}></Grid>
-          <Grid item xs={12}></Grid>
+          <Grid item xs={12}>
+            <Outlet />
+          </Grid>
         </Grid>
         <CopyRight sx={{ pt: 4 }} />
       </Container>
@@ -36,4 +39,4 @@ const HostStatistics = () => {
   );
 };
 
-export default HostStatistics;
+export default BookingConfirm;

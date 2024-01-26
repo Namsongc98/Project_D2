@@ -138,6 +138,13 @@ type TableRoom = {
   format?: (value: number) => void;
 };
 
+interface ITaps {
+  id: number;
+  value: number;
+  label: string;
+  to: string;
+}
+
 
 export type {
   ButonType,
@@ -156,5 +163,6 @@ export type {
   ImageFiles,
   TextArea,
   ColumnTable,
-  TableRoom
+  TableRoom,
+  ITaps
 };

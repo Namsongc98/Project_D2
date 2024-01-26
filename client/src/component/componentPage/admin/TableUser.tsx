@@ -130,13 +130,14 @@ const TableUser = ({ data }: PropsUser) => {
                         <div className="">
                           <p className="font-semibold">{profile.email} </p>
                           <p className="text-sm ">
-                            {profile.firstName + " " + profile.lastName}
+                            {profile.firstName} {profile.lastName}
                           </p>
                         </div>
                       </Stack>
                     </TableCell>
                     {columnUser.map((column, index) => {
                       const value = profile[column.index];
+
                       return (
                         <TableCell key={index}>
                           {column.format && typeof value === "number" ? (

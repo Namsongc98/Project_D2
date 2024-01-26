@@ -7,87 +7,24 @@ import Person2Icon from "@mui/icons-material/Person2";
 import HomeIcon from "@mui/icons-material/Home";
 import { useGetUser } from "../../hook";
 import Popup from "../componentReuse/Popup";
-import { convertDateToTimestamp, remoteToken } from "../../common";
+import { remoteToken } from "../../common";
 import AvatarUser from "../componentReuse/AvatarUser";
 import { useSelector } from "react-redux";
 import { getUser, setUser } from "../../store/reducer/userSlice";
 import { useDispatch } from "react-redux";
-import {
-  Button,
-  Divider,
-  Menu,
-  MenuItem,
-  Stack,
-} from "@mui/material";
+
 import BookIcon from "@mui/icons-material/Book";
-import { getBookingUser, getOneRoom, patchBookingConfirm } from "../../service";
-import {
-  BookingStatus,
-  IBookingData,
-  Role,
-  typeGetRoom,
-} from "../../type";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { ModalComponent } from "../componentReuse";
-import DetailComponent from "../componentReuse/DetailComponent";
+
+import { Role } from "../../type";
 
 const Header = () => {
-  const userSelector = useSelector(getUser);
-  const [bookingArr, setBooking] = useState<IBookingData[] | undefined>();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useGetUser();
-
+  const userSelector = useSelector(getUser);
   const [anchor, setAnchor] = useState<null | HTMLElement>(null);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchor(anchor ? null : event.currentTarget);
-  };
-
-  const [openInfor, setOpenInfor] = useState(false);
-  const [inforRoom, setInforRoom] = useState<typeGetRoom>();
-  const [inforBooking, setInforBooking] = useState<IBookingData>();
-
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  const handleClickMenu = async (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    setAnchorEl(event.currentTarget);
-    try {
-      const res = await getBookingUser(userSelector.id);
-      setBooking(res.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const handleOpenInfor = async (
-    booking: IBookingData | undefined = undefined
-  ) => {
-    try {
-      if (booking?.id_touris) {
-        const res = await getOneRoom(booking.id_touris);
-        setInforRoom(res.data);
-      }
-      setInforBooking(booking);
-      setOpenInfor(!openInfor);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleCancel = (idBooking: number) => {
-    const bookingStatus = {
-      booking_status: BookingStatus.pendngCancel,
-    };
-    try {
-      patchBookingConfirm(idBooking, bookingStatus);
-    } catch (error) {
-      console.log(error);
-    }
   };
 
   useEffect(() => {
@@ -112,71 +49,12 @@ const Header = () => {
             <p>Trang chủ</p>
           </Link>
           {userSelector && (
-            <div className="">
-              <Button
-                id="basic-button"
-                aria-controls={open ? "basic-menu" : undefined}
-                aria-haspopup="true"
-                aria-expanded={open ? "true" : undefined}
-                onClick={handleClickMenu}
-                sx={{ color: "#00afdd" }}
-                startIcon={<BookIcon />}
-              >
-                Đơn đặt
-              </Button>
-              <Menu
-                id="basic-menu"
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: -100,
-                }}
-                MenuListProps={{
-                  "aria-labelledby": "basic-button",
-                }}
-              >
-                {bookingArr && bookingArr.length > 0 ? (
-                  bookingArr?.map((booking) => (
-                    <MenuItem
-                      sx={{ px: "10px", minWidth: "300px" }}
-                      key={booking.id}
-                      onClick={() => handleOpenInfor(booking)}
-                    >
-                      <div className="w-full">
-                        <div className="flex justify-between items-center">
-                          <div className="">
-                            <span>{booking.name_room}</span>
-                            <p className="text-xs opacity-70">
-                              <span className="text-sm">Từ ngày: </span>
-                              {convertDateToTimestamp(booking.start_date) +
-                                " - " +
-                                convertDateToTimestamp(booking.end_date)}
-                            </p>
-                          </div>
-                          <MoreVertIcon fontSize="small" />
-                        </div>
-                      </div>
-                    </MenuItem>
-                  ))
-                ) : (
-                  <Stack
-                    sx={{
-                      border: "1px solid #dadae1",
-                      borderRadius: "6px",
-                      height: "100px",
-                      width: "200px",
-                      mx: "10px",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <span>Chưa đặt chuyến nào!</span>
-                  </Stack>
-                )}
-              </Menu>
-            </div>
+            <Link
+              to="/user"
+              className="flex gap-2 items-center hover:bg-[#e0ecff] px-3 py-2 rounded-md text-base text-[#00afdd]"
+            >
+              <BookIcon /> <span>Đơn đặt</span>
+            </Link>
           )}
           {userSelector ? (
             <>
@@ -255,24 +133,6 @@ const Header = () => {
           )}
         </div>
       </div>
-      {openInfor && (
-        <ModalComponent handleOpen={handleOpenInfor} open={openInfor}>
-          <>
-            <DetailComponent booking={inforBooking!} room={inforRoom!} />
-            <Divider light sx={{ my: 2 }} />
-            <div className="flex justify-between">
-              <div className=""></div>
-              <Button
-                variant="contained"
-                color="error"
-                onClick={() => handleCancel(inforBooking!.id!)}
-              >
-                Hủy đơn
-              </Button>
-            </div>
-          </>
-        </ModalComponent>
-      )}
     </header>
   );
 };

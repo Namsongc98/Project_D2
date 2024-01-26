@@ -19,8 +19,6 @@ enum Approve {
 
 }
 
-
-
 interface IRoomPost {
     host_id: string | undefined;
     booking_status: BookingStatus
@@ -36,6 +34,7 @@ interface IRoomPost {
     bathroom: number,
     decription: string,
     image: any[],
+    [key: string]: any;
 }
 
 type ApprovePacth = {

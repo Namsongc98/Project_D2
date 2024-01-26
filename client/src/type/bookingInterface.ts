@@ -14,10 +14,10 @@ enum BookingStatus {
   success = "Success",
   emtry = "Empty",
   cancel = "Cancel",
-  pendngCancel = "Pendng Cancel"
+  pendingCancel = "Pendng Cancel"
 }
 
-type BookingType = BookingStatus.cancel | BookingStatus.emtry | BookingStatus.pending | BookingStatus.success | BookingStatus.pendngCancel
+type BookingType = BookingStatus.cancel | BookingStatus.emtry | BookingStatus.pending | BookingStatus.success | BookingStatus.pendingCancel
 interface IBookingData {
   id?: number;
   id_touris: number;
@@ -36,7 +36,8 @@ interface IBookingData {
   count_person?: number;
   pay_status?: StatusPayment;
   total: number;
-  complete_touris: boolean
+  complete_touris: boolean;
+  [key: string]: any; 
 }
 
 export { StatusPayment, BookingStatus };

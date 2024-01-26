@@ -1,10 +1,10 @@
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import AddHomeIcon from "@mui/icons-material/AddHome";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
-
+import BookIcon from "@mui/icons-material/Book";
 import MapsHomeWorkIcon from "@mui/icons-material/MapsHomeWork";
 import GroupIcon from "@mui/icons-material/Group";
-import { ColumnTable, TableRoom } from "../type";
+import { ColumnTable, ITaps, TableRoom } from "../type";
 import { convertDateToTimestamp, formatcurrency } from "../common";
 
 const dataCityCarousel = [
@@ -95,8 +95,14 @@ const pathHost = [
   {
     id: 3,
     path: "/host/depositbooking",
-    icon: <AddHomeIcon />,
+    icon: <GroupIcon />,
     title: "Danh sách người dùng",
+  },
+  {
+    id: 4,
+    path: "/host/booking",
+    icon: <BookIcon />,
+    title: "Trang thái đặt phòng",
   },
 ];
 
@@ -109,7 +115,7 @@ const pathAdmin = [
   },
   {
     id: 3,
-    path: "/admin/hostmanager",
+    path: "/admin/room",
     icon: <MapsHomeWorkIcon />,
     title: "Thống kê khách sạn",
   },
@@ -171,12 +177,64 @@ const columnUser: TableRoom[] = [
   },
 ];
 
-const tapUserBooking = [
+const tapUserBooking: ITaps[] = [
   { id: 1, value: 0, label: "Tất cả", to: "?type=0" },
   { id: 2, value: 1, label: "Chờ xác nhận", to: "?type=1" },
   { id: 3, value: 2, label: "Đã xác nhận", to: "?type=2" },
   { id: 4, value: 3, label: "Hoàn thành chuyến", to: "?type=3" },
   { id: 5, value: 4, label: "Hủy chuyến", to: "?type=4" },
+];
+const tapHostBooking: ITaps[] = [
+  { id: 1, value: 0, label: "Tất cả", to: "?type=0" },
+  { id: 2, value: 1, label: "Chờ xác nhận", to: "?type=1" },
+  { id: 3, value: 2, label: "Đã xác nhận", to: "?type=2" },
+  { id: 4, value: 3, label: "Hoàn thành chuyến", to: "?type=3" },
+  { id: 5, value: 4, label: "Muốn hủy chuyến", to: "?type=4" },
+  { id: 6, value: 5, label: "Hủy chuyến", to: "?type=5" },
+];
+const tapAdminRoom: ITaps[] = [
+  { id: 1, value: 0, label: "Tất cả", to: "?type=0" },
+  { id: 2, value: 1, label: "Chờ xác nhận", to: "?type=1" },
+  { id: 3, value: 2, label: "Đã xác nhận", to: "?type=2" },
+  { id: 4, value: 3, label: "Phòng không xác nhận", to: "?type=3" },
+];
+
+const rowsRoom = [
+  { id: "name", label: "Tên khách sạn:" },
+  { id: "type_tourism", label: "Loại hình du lịch:" },
+  {
+    id: "price",
+    label: "Giá phòng:",
+    format: (value: number) => formatcurrency(value),
+  },
+  { id: "address", label: "Địa Chỉ:" },
+  { id: "bedroom", label: "Phòng ngủ" },
+  { id: "bathroom", label: "Phòng tắm" },
+];
+const rowsBooking = [
+  {
+    id: "start_date",
+    label: "Từ ngày:",
+    format: (value: number) => convertDateToTimestamp(value),
+  },
+  {
+    id: "end_date",
+    label: "Đến ngày:",
+    format: (value: number) => convertDateToTimestamp(value),
+  },
+  {
+    id: "count_date",
+    label: "Số ngày: ",
+  },
+  {
+    id: "count_person",
+    label: "Số người",
+  },
+  {
+    id: "total",
+    label: "Thanh toán",
+    format: (value: number) => formatcurrency(value),
+  },
 ];
 
 export {
@@ -189,4 +247,8 @@ export {
   columnBooking,
   columnUser,
   tapUserBooking,
+  rowsRoom,
+  rowsBooking,
+  tapHostBooking,
+  tapAdminRoom,
 };

@@ -4,16 +4,9 @@ import { BookingStatus, BookingType, IBookingData, PatchBooking } from "../type"
 
 
 //  lấy data Booking status pending
-const getBookingPending = async () => {
-    return await instance.get(`/bookings/`, { params: { booking_status: BookingStatus.pending } });
+const getBookingStatus = async (host_id: string, booking_status: BookingType) => {
+    return await instance.get(`/bookings/`, { params: { booking_status, host_id } });
 }
-
-// data booking statust success
-const getBookingSuccess = async () => {
-    const res = await instance.get(`/bookings/`, { params: { booking_status: BookingStatus.success } });
-    return res
-}
-
 
 // tạo booking 
 const createBooking = async (booking: IBookingData) => {
@@ -45,4 +38,4 @@ const getBookingUserStatus = async (user_id: string, booking_status: BookingType
     return booking
 }
 
-export { patchBookingConfirm, getBookingPending, getBookingSuccess, createBooking, getBookingUser, getBookingService, getBookingHostId, getBookingUserStatus }
+export { patchBookingConfirm, getBookingStatus, createBooking, getBookingUser, getBookingService, getBookingHostId, getBookingUserStatus }

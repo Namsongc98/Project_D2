@@ -1,7 +1,8 @@
 import { Box, Container, Grid, Paper, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Deposit, TableUser } from "../../component/componentPage";
-import { getAllUser, getBookingHostId } from "../../service";
+import { 
+  getBookingHostId } from "../../service";
 import { useGetUser } from "../../hook";
 
 const DepositBooking = () => {
@@ -11,27 +12,20 @@ const DepositBooking = () => {
 
   useEffect(() => {
     getBooking();
-    getUser();
   }, [user]);
 
   const getBooking = async () => {
     try {
       if (user) {
         const res = await getBookingHostId(user.id);
+        setDataUser(res.data);
         setCountBooking(res.data.length);
       }
     } catch (error) {
       console.log(error);
     }
   };
-  const getUser = async () => {
-    try {
-      const res = await getAllUser();
-      setDataUser(res.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
   return (
     <Box component="section">
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>

@@ -248,10 +248,7 @@ const Profile = () => {
           </div>
           <div className="w-[100%] line-midleware border border-solid border-[#e5e7eb] mx-auto max-w-[1600px]" />
           <div className=" font-medium text-xl my-4  flex justify-between items-center">
-            <div className="cursor-pointer"> Đăng xuất</div>
-            <div className="cursor-pointer" onClick={handleOpen}>
-              Đổi mật khẩu
-            </div>
+           
           </div>
           <div className="font-semibold text-base my-4  flex justify-between items-center">
             <div></div>

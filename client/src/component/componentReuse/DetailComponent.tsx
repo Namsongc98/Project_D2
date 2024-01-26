@@ -12,52 +12,14 @@ import {
   StatusPayment,
   typeGetRoom,
 } from "../../type";
-import { convertDateToTimestamp, formatcurrency } from "../../common";
-
-const rowsRoom = [
-  { id: "name", label: "Tên khách sạn:" },
-  { id: "type_tourism", label: "Loại hình du lịch:" },
-  {
-    id: "price",
-    label: "Giá phòng:",
-    format: (value: number) => formatcurrency(value),
-  },
-  { id: "address", label: "Địa Chỉ:" },
-  { id: "bedroom", label: "Phòng ngủ" },
-  { id: "bathroom", label: "Phòng tắm" },
-];
-const rowsBooking = [
-  {
-    id: "start_date",
-    label: "Từ ngày:",
-    format: (value: number) => convertDateToTimestamp(value),
-  },
-  {
-    id: "end_date",
-    label: "Đến ngày:",
-    format: (value: number) => convertDateToTimestamp(value),
-  },
-  {
-    id: "count_date",
-    label: "Số ngày: ",
-  },
-  {
-    id: "count_person",
-    label: "Số người",
-  },
-  {
-    id: "total",
-    label: "Thanh toán",
-    format: (value: number) => formatcurrency(value),
-  },
-];
+import { rowsRoom, rowsBooking } from "../../constain";
 
 const DetailComponent = ({
   booking,
   room,
 }: {
-  booking: IBookingData;
-  room: typeGetRoom;
+  booking?: IBookingData;
+  room?: typeGetRoom;
 }) => {
   return (
     <>
@@ -65,27 +27,29 @@ const DetailComponent = ({
         <Typography variant="h6" component="h2" color="primary">
           Chi tiết phòng
         </Typography>
-        <Typography
-          variant="h6"
-          component="h2"
-          color={
-            booking?.booking_status === BookingStatus.pending
-              ? "primary"
+        {booking && (
+          <Typography
+            variant="h6"
+            component="h2"
+            color={
+              booking?.booking_status === BookingStatus.pending
+                ? "primary"
+                : booking?.booking_status === BookingStatus.success
+                ? "#4caf50"
+                : booking?.booking_status === BookingStatus.cancel
+                ? "error"
+                : "error"
+            }
+          >
+            {booking?.booking_status === BookingStatus.pending
+              ? "Đợi xác nhận "
               : booking?.booking_status === BookingStatus.success
-              ? "#4caf50"
+              ? "Đã được chấp nhận"
               : booking?.booking_status === BookingStatus.cancel
-              ? "error"
-              : "error"
-          }
-        >
-          {booking?.booking_status === BookingStatus.pending
-            ? "Đợi xác nhận "
-            : booking?.booking_status === BookingStatus.success
-            ? "Đã được chấp nhận"
-            : booking?.booking_status === BookingStatus.cancel
-            ? "Đơn đẵ bị hủy"
-            : "Đơn đã bị hủy"}
-        </Typography>
+              ? "Đơn đẵ bị hủy"
+              : "Đơn đã bị hủy"}
+          </Typography>
+        )}
       </Stack>
       <Divider sx={{ my: 2 }} light />
       <Stack direction="row" spacing={2} useFlexGap flexWrap="wrap">
@@ -123,34 +87,37 @@ const DetailComponent = ({
               </div>
             );
           })}
-          {rowsBooking.map((row) => {
-            const value = booking[row.id];
-            console.log(booking);
-            return (
-              <div key={row.id}>
-                <div className="flex justify-between items-center ">
-                  <h3 className="font-medium">{row.label}</h3>
-                  <span>
-                    {row.format && typeof value === "number" && value > 1000
-                      ? row.format(value)
-                      : value}{" "}
-                  </span>
-                </div>
-                <Divider sx={{ my: 2 }} light />
-              </div>
-            );
-          })}
 
-          <div className="flex justify-between items-center  ">
-            <h3 className="font-medium">Trạng thái thanh toán:</h3>
-            <span>
-              {booking?.pay_status === StatusPayment.pending
-                ? "Chưa thanh toán"
-                : booking?.pay_status === StatusPayment.success
-                ? "đã thanh toán"
-                : ""}{" "}
-            </span>
-          </div>
+          {booking &&
+            rowsBooking.map((row) => {
+              const value = booking[row.id];
+              console.log(booking);
+              return (
+                <div key={row.id}>
+                  <div className="flex justify-between items-center ">
+                    <h3 className="font-medium">{row.label}</h3>
+                    <span>
+                      {row.format && typeof value === "number" && value > 1000
+                        ? row.format(value)
+                        : value}{" "}
+                    </span>
+                  </div>
+                  <Divider sx={{ my: 2 }} light />
+                </div>
+              );
+            })}
+          {booking && (
+            <div className="flex justify-between items-center  ">
+              <h3 className="font-medium">Trạng thái thanh toán:</h3>
+              <span>
+                {booking?.pay_status === StatusPayment.pending
+                  ? "Chưa thanh toán"
+                  : booking?.pay_status === StatusPayment.success
+                  ? "đã thanh toán"
+                  : ""}{" "}
+              </span>
+            </div>
+          )}
         </Box>
       </Stack>
     </>

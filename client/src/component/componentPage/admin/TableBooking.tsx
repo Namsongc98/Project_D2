@@ -8,21 +8,15 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import { BookingStatus, PropsBooking } from "../../../type";
-import { AlertColor } from "@mui/material";
 import { Button } from "../../element";
-import SnackBarReuse from "../../componentReuse/SnackBarReuse";
 import { columnBooking } from "../../../constain";
 
 export default function TableBooking({ data }: PropsBooking) {
-  // error
-  const [type, setType] = useState<AlertColor>("success");
-  const [message, setMessage] = useState<string>("");
   // page
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(2);
 
   // open modal chi tiết phòng
-
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
@@ -35,7 +29,6 @@ export default function TableBooking({ data }: PropsBooking) {
 
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
-      <SnackBarReuse type={type} message={message} setError={setMessage} />
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -105,7 +98,7 @@ export default function TableBooking({ data }: PropsBooking) {
       <TablePagination
         rowsPerPageOptions={[2, 4, 8]}
         component="div"
-        count={ data.length}
+        count={data.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}

@@ -18,7 +18,7 @@ import { Approve, typeGetRoom } from "../../type";
 import { columnsTable } from "../../constain";
 import DetailComponent from "../../component/componentReuse/DetailComponent";
 
-const HostManager = () => {
+const Roomtype = () => {
   const [rooms, setRoom] = useState([] as any);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -186,4 +186,4 @@ const HostManager = () => {
   );
 };
 
-export default HostManager;
+export default Roomtype;

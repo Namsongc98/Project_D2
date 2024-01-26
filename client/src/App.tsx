@@ -6,6 +6,8 @@ import LayoutHost from "./layout/host/LayoutHost";
 import { Role } from "./type";
 import LayoutUser from "./layout/LayoutUser";
 import { User } from "./page/user";
+import { BookingConfirm } from "./page/host";
+import { RoomManager } from "./page/admin";
 function App() {
   return (
     <>
@@ -21,13 +23,35 @@ function App() {
             return router.role === Role.admin ? (
               <Route key={router.id} element={<PrivateAdmin />}>
                 <Route key={router.id} path="/" element={<LayoutRoleAmin />}>
-                  <Route path={router.path} element={<Page />} />
+                  {router.layout && (
+                    <Route path={router.path} element={<Page />} />
+                  )}
+                  <Route
+                    key={router.id}
+                    path="admin/room"
+                    element={<RoomManager />}
+                  >
+                    {router.children && (
+                      <Route path={router.path} element={<Page />} />
+                    )}
+                  </Route>
                 </Route>
               </Route>
             ) : router.role === Role.host ? (
               <Route key={router.id} element={<PrivateHost />}>
                 <Route key={router.id} path="/" element={<LayoutRoleHost />}>
-                  <Route path={router.path} element={<Page />} />
+                  {router.layout && (
+                    <Route path={router.path} element={<Page />} />
+                  )}
+                  <Route
+                    key={router.id}
+                    path="host/booking"
+                    element={<BookingConfirm />}
+                  >
+                    {router.children && (
+                      <Route path={router.path} element={<Page />} />
+                    )}
+                  </Route>
                 </Route>
               </Route>
             ) : (

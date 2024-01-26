@@ -101,7 +101,6 @@ const DetailRoom = () => {
       setTotal(total);
     }
   }, [detailRoom, inputStartDate.timestamp, inputEndDate.timestamp]);
-  console.log(detailRoom);
 
   const onSubmit: SubmitHandler<any> = async (data) => {
     const userName = user?.firstName + " " + user?.lastName;
@@ -110,6 +109,8 @@ const DetailRoom = () => {
       setError("Ngày trả phòng không hợp lệ");
       return;
     }
+    console.log(data.countPerson);
+    console.log(detailRoom!.cout_people);
     if (data.countPerson > detailRoom!.cout_people) {
       setError("Phòng nhiều nhất chỉ " + detailRoom!.cout_people + "người");
       return;

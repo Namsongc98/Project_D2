@@ -1,6 +1,6 @@
-import { GuideManager, HostManager } from "../page/admin";
+import { GuideManager, HostManager, RoomManager, RoomType } from "../page/admin";
 import AdminStatistics from "../page/admin/AdminStatistics";
-import { DepositBooking, PostRoom } from "../page/host";
+import { BookingHostStatus, DepositBooking, PostRoom } from "../page/host";
 import HostStatistics from "../page/host/HostStatistics";
 import {
   Detail,
@@ -23,61 +23,87 @@ const publicPage: Layout = [
   { id: 3, path: "/detail", component: Detail, layout: true },
   { id: 4, path: "/detail/:id", component: DetailRoom, layout: true },
   { id: 5, path: "/:id", component: ListStay, layout: true },
-  { id: 14, path: "/register", component: Register, layout: false },
-  { id: 15, path: "/login", component: Login, layout: false },
+  { id: 6, path: "/register", component: Register, layout: false },
+  { id: 7, path: "/login", component: Login, layout: false },
   // lyout User
-  { id: 6, path: "type", component: HistoryBooking, layout: true, role: Role.guide, children: true },
+  { id: 8, path: "", component: HistoryBooking, layout: true, role: Role.guide, children: true },
   {
-    id: 7,
+    id: 9,
     path: "profile",
     component: Profile,
     layout: true,
     role: Role.guide,
+
   },
   // layout Admin
   {
-    id: 8,
+    id: 10,
     path: "/admin",
     component: AdminStatistics,
     layout: true,
     role: Role.admin,
+    children: false
+
   },
   {
-    id: 9,
+    id: 11,
     path: "/admin/guidemanager",
     component: GuideManager,
     layout: true,
     role: Role.admin,
+    children: false
+
   },
   {
-    id: 10,
+    id: 12,
     path: "/admin/hostmanager",
     component: HostManager,
     layout: true,
     role: Role.admin,
+    children: false
+  },
+  {
+    id: 17,
+    path: "",
+    component: RoomType,
+    layout: false,
+    role: Role.admin,
+    children: true
   },
   // layout Host
   {
-    id: 11,
+    id: 13,
     path: "/host",
     component: HostStatistics,
     layout: true,
     role: Role.host,
+    children: false
   },
   {
-    id: 12,
+    id: 14,
     path: "/host/postroom",
     component: PostRoom,
     layout: true,
     role: Role.host,
+    children: false
   },
   {
-    id: 13,
+    id: 15,
     path: "/host/depositbooking",
     component: DepositBooking,
     layout: true,
     role: Role.host,
+    children: false
   },
+  {
+    id: 16,
+    path: "",
+    component: BookingHostStatus,
+    layout: true,
+    role: Role.host,
+    children: true
+  },
+
 ];
 // layout login register
 

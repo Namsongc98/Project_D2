@@ -13,18 +13,6 @@
       "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705031469/oevjxkxiadlj8icukhbw.jpg"
     },
     {
-      "email": "minhduong@gmail.com",
-      "password": "$2a$10$L22dv5QuhZWt.HsoQjaV9.feWvXD0ENjvZGHWUB9lVe1e7ztR0xPS",
-      "id": "4d62c98c-0d63-4ed1-94ca-a3cffaf874f3",
-      "role": "Guide",
-      "firstName": "",
-      "lastName": "",
-      "gender": "",
-      "age": "",
-      "phone": "",
-      "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1704970591/oziabo4elqfyqab5dye1.png"
-    },
-    {
       "email": "anhphudeptrai@gmail.com",
       "password": "$2a$10$vS1EGfR98vVaBt/BU03/uud3wb46oycuBV9tGffUXT.qgYKTsI3d.",
       "id": "d219bf37-f35c-425d-9c6d-e074b0e4f9f3",
@@ -59,6 +47,42 @@
       "age": "25",
       "phone": "09895787654",
       "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705895708/dvhrdeurur6zeqwhn7i5.png"
+    },
+    {
+      "email": "host2@gmail.com",
+      "password": "$2a$10$E3RPu.B8SIuBzikoelxDxuv973M.3KYavbdlFSOc/eWkGWE/.fwpK",
+      "id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
+      "role": "Host",
+      "firstName": "host",
+      "lastName": "2",
+      "gender": "Nữ",
+      "age": "30",
+      "phone": "0978967853",
+      "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1706232008/d9ompej5qr51obgbrxda.jpg"
+    },
+    {
+      "email": "host3@gmail.com",
+      "password": "$2a$10$GAkLBOib7KwhDN/6nIeq3.ojuJfS2kh/GPbT/xvKQHippAbCBsNKO",
+      "id": "397418b9-5290-4005-bcd9-fbb62a074569",
+      "role": "Host",
+      "firstName": "host",
+      "lastName": "1",
+      "gender": "Nam",
+      "age": "23",
+      "phone": "08567545435",
+      "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1706231761/pdmkyigog2l7jedidin2.jpg"
+    },
+    {
+      "email": "host4@gmail.com",
+      "password": "$2a$10$OP2vps1OpkeooFNIdB1R9.Y3c.wwLsfvv9TmYsARixX3ZImSdvd5W",
+      "id": "640f7a52-7f62-4403-8019-55cbae2609c9",
+      "role": "Guide",
+      "firstName": "host ",
+      "lastName": "4",
+      "gender": "Nam",
+      "age": "35",
+      "phone": "09854534534",
+      "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1706231932/ywmwq34e8wdnfcemjvj3.jpg"
     }
   ],
   "touris": [
@@ -91,8 +115,8 @@
     {
       "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
       "created_at": 1705564839299,
-      "booking_status": "Success",
-      "name": "khách sạn host1",
+      "booking_status": "Pending",
+      "name": "khách sạn host2",
       "address": "lào cai, yên bái",
       "price": 12334,
       "cout_people": 3,
@@ -141,7 +165,7 @@
       "id": 3
     },
     {
-      "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "host_id": "640f7a52-7f62-4403-8019-55cbae2609c9",
       "created_at": 1705907356838,
       "booking_status": "Success",
       "name": "Hà Nội 2",
@@ -171,7 +195,7 @@
       "id": 4
     },
     {
-      "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "host_id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
       "created_at": 1705907382605,
       "booking_status": "Empty",
       "name": "Hà Nội 2",
@@ -201,7 +225,7 @@
       "id": 5
     },
     {
-      "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "host_id": "397418b9-5290-4005-bcd9-fbb62a074569",
       "created_at": 1705907644011,
       "booking_status": "Empty",
       "name": "Lào Cai1",
@@ -261,9 +285,9 @@
       "id": 7
     },
     {
-      "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "host_id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
       "created_at": 1705908348456,
-      "booking_status": "Empty",
+      "booking_status": "Pending",
       "name": "Palette Collect's Boutique Hotel Ha Long",
       "address": "Bãi cháy, Hạ Long, Quảng Ninh",
       "price": 700000,
@@ -321,7 +345,7 @@
       "id": 9
     },
     {
-      "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "host_id": "640f7a52-7f62-4403-8019-55cbae2609c9",
       "created_at": 1705908741427,
       "booking_status": "Empty",
       "name": "Tam Cốc Palm House",
@@ -351,7 +375,7 @@
       "id": 10
     },
     {
-      "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "host_id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
       "created_at": 1705908808696,
       "booking_status": "Empty",
       "name": "Ninh Bình Bamboo Farmstay",
@@ -411,7 +435,7 @@
       "id": 12
     },
     {
-      "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "host_id": "640f7a52-7f62-4403-8019-55cbae2609c9",
       "created_at": 1705909065246,
       "booking_status": "Empty",
       "name": "Radisson Blu Danang",
@@ -441,7 +465,7 @@
       "id": 13
     },
     {
-      "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "host_id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
       "created_at": 1705909357691,
       "booking_status": "Empty",
       "name": "M Village TP HCM",
@@ -471,7 +495,7 @@
       "id": 14
     },
     {
-      "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "host_id": "397418b9-5290-4005-bcd9-fbb62a074569",
       "created_at": 1705909409250,
       "booking_status": "Empty",
       "name": "New World Sài Gòn Hotel",
@@ -504,13 +528,13 @@
   "bookings": [
     {
       "id_touris": 1,
-      "user_id": "083fad4e-73a0-4975-a2cb-adeb8237d1ec",
+      "user_id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
       "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
       "name_user": "vũ Sơn",
       "phone": 958978576,
       "email": "namsongc98@gmail.com",
       "name_room": "khách sạn Host1 ",
-      "booking_status": "Success",
+      "booking_status": "Pending",
       "start_date": 1705881600000,
       "end_date": 1705968000000,
       "price": 6756578,
@@ -539,6 +563,25 @@
       "complete_touris": false,
       "pay_status": "Pending",
       "id": 3
+    },
+    {
+      "id_touris": 8,
+      "user_id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
+      "host_id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
+      "name_user": "host 2",
+      "phone": 9813456,
+      "email": "host2@gmail.com",
+      "name_room": "Palette Collect's Boutique Hotel Ha Long",
+      "booking_status": "Success",
+      "start_date": 1706227200000,
+      "end_date": 1706313600000,
+      "count_date": 1,
+      "count_person": 2,
+      "price": 700000,
+      "total": 700000,
+      "complete_touris": false,
+      "pay_status": "Pending",
+      "id": 4
     }
   ]
 }
