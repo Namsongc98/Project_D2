@@ -246,8 +246,8 @@ const DetailRoom = () => {
           </Paper>
         </Stack>
       </Container>
-      {openConfirm && (
-        <ModalComponent handleOpen={handleOpenConfirm} open={openConfirm}>
+    
+        <ModalComponent setOpen={setOpenConfirm} open={openConfirm}>
           <Typography variant="h6" component="h2">
             Bạn đồng ý đặt phòng
           </Typography>
@@ -323,7 +323,7 @@ const DetailRoom = () => {
             </Stack>
           </form>
         </ModalComponent>
-      )}
+
     </Box>
   );
 };

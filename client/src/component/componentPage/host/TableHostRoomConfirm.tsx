@@ -16,7 +16,7 @@ import {
   SnackBarReuse,
 } from "../../componentReuse";
 import { AlertColor, Stack } from "@mui/material";
-import { columnBooking } from "../../../constain";
+
 import imgEmtry from "../../../assets/image/img_emtry.png";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -39,7 +39,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const TableHostRoomConfirm: React.FC<PropsBooking> = ({ data }) => {
+const TableHostRoomConfirm: React.FC<PropsBooking> = ({ data, columns }) => {
   const [type, setType] = useState<AlertColor | undefined>();
   const [message, setMessage] = useState<string>("");
   const [openConfirm, setOpenConfirm] = useState(false);
@@ -83,13 +83,16 @@ const TableHostRoomConfirm: React.FC<PropsBooking> = ({ data }) => {
 
   return (
     <>
-      <Paper sx={{ width: "100%", overflow: "hidden" }}>
+      <Paper sx={{ width: "100%" }}>
         <SnackBarReuse type={type} setError={setMessage} message={message} />
-        <TableContainer component={Paper} sx={{ minHeight: "400px" }}>
+        <TableContainer
+          component={Paper}
+          sx={{ height: "500px", overflow: "auto" }}
+        >
           <Table sx={{ minWidth: 1200 }} aria-label="customized table">
             <TableHead>
               <TableRow>
-                {columnBooking.map((column) => (
+                {columns.map((column) => (
                   <StyledTableCell
                     key={column.index}
                     align={column.align}
@@ -105,7 +108,7 @@ const TableHostRoomConfirm: React.FC<PropsBooking> = ({ data }) => {
             <TableBody>
               {data?.map((booking) => (
                 <StyledTableRow key={booking.id}>
-                  {columnBooking.map((column) => {
+                  {columns.map((column) => {
                     const value = booking[column.index];
                     return (
                       <StyledTableCell
@@ -169,16 +172,15 @@ const TableHostRoomConfirm: React.FC<PropsBooking> = ({ data }) => {
             </Stack>
           )}
         </TableContainer>
-        {openConfirm && (
-          <ModalComponent handleOpen={handleOpenConfirm} open={openConfirm}>
-            <ModalConfirm
-              infor={inforBooking}
-              handleSuccess={handleSuccess}
-              handleFail={handleFail}
-              label="Xác nhận hủy phòng"
-            />
-          </ModalComponent>
-        )}
+
+        <ModalComponent setOpen={setOpenConfirm} open={openConfirm}>
+          <ModalConfirm
+            infor={inforBooking}
+            handleSuccess={handleSuccess}
+            handleFail={handleFail}
+            label="Xác nhận hủy phòng"
+          />
+        </ModalComponent>
       </Paper>
     </>
   );

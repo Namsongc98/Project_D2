@@ -7,15 +7,22 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import { BookingStatus, PropsBooking } from "../../../type";
+import { BookingStatus, IBookingData, PropsBooking } from "../../../type";
 import { Button } from "../../element";
-import { columnBooking } from "../../../constain";
+import InfoIcon from "@mui/icons-material/Info";
+import { DetailComponent, ModalComponent } from "../../componentReuse";
+import { getOneRoom } from "../../../service";
+import { Stack } from "@mui/material";
+import imgEmtry from "../../../assets/image/img_emtry.png";
 
-export default function TableBooking({ data }: PropsBooking) {
+export default function TableBooking({ data, columns, detail }: PropsBooking) {
   // page
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(2);
 
+  const [openInfor, setOpenInfor] = useState(false);
+  const [booking, setBooking] = useState<IBookingData>();
+  const [room, setRoom] = useState();
   // open modal chi tiết phòng
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -27,13 +34,25 @@ export default function TableBooking({ data }: PropsBooking) {
     setPage(0);
   };
 
+  const handleOpenInfor = async (booking: IBookingData) => {
+    try {
+      setBooking(booking);
+      const res = await getOneRoom(booking!.id_touris);
+      setRoom(res.data);
+      console.log(openInfor);
+      setOpenInfor(!openInfor);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <Paper sx={{ width: "100%", overflow: "hidden" }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
+    <Paper sx={{ width: "100%", overflow: "auto" }}>
+      <TableContainer sx={{ height: 440, overflow: "auto" }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              {columnBooking.map((column) => (
+              {columns.map((column) => (
                 <TableCell
                   key={column.index}
                   align={column.align}
@@ -45,9 +64,13 @@ export default function TableBooking({ data }: PropsBooking) {
               <TableCell style={{ minWidth: 200 }} align="center">
                 Trạng thái
               </TableCell>
-              {/* <TableCell style={{ minWidth: 70 }} align="center">
-                Chi tiết
-              </TableCell> */}
+              {detail ? (
+                <TableCell style={{ minWidth: 200 }} align="center">
+                  Chi tiết đặt phòng
+                </TableCell>
+              ) : (
+                <></>
+              )}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -56,7 +79,7 @@ export default function TableBooking({ data }: PropsBooking) {
               ?.map((booking) => {
                 return (
                   <TableRow hover key={booking.id}>
-                    {columnBooking.map((column, index) => {
+                    {columns.map((column, index) => {
                       const value = booking[column.index];
                       return (
                         <TableCell key={index}>
@@ -88,12 +111,46 @@ export default function TableBooking({ data }: PropsBooking) {
                           : "Phòng chống"}
                       </Button>
                     </TableCell>
+                    {detail ? (
+                      <TableCell style={{ minWidth: 200 }} align="center">
+                        <InfoIcon
+                          color="primary"
+                          fontSize="medium"
+                          onClick={() => handleOpenInfor(booking)}
+                        />
+                      </TableCell>
+                    ) : (
+                      <></>
+                    )}
                   </TableRow>
                 );
               })}
           </TableBody>
         </Table>
+        {!data?.length && (
+          <Stack
+            sx={{ height: "300px" }}
+            direction={"row"}
+            justifyContent={"center"}
+            alignItems={"center"}
+          >
+            <div className="">
+              <img
+                src={imgEmtry}
+                width={100}
+                height={100}
+                alt={imgEmtry}
+                className="mx-auto my-0"
+              />
+              <p className="text-center mt-2">Đơn hàng trống</p>
+            </div>
+          </Stack>
+        )}
       </TableContainer>
+
+      <ModalComponent setOpen={setOpenInfor} open={openInfor}>
+        <DetailComponent booking={booking} room={room} />
+      </ModalComponent>
 
       <TablePagination
         rowsPerPageOptions={[2, 4, 8]}

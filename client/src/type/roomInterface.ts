@@ -19,6 +19,8 @@ enum Approve {
 
 }
 
+type ApproveType = Approve.fail | Approve.pending | Approve.success
+
 interface IRoomPost {
     host_id: string | undefined;
     booking_status: BookingStatus
@@ -41,5 +43,5 @@ type ApprovePacth = {
     approve_room: Approve
 }
 
-export type { IRoomSubmit, IRoomPost, ApprovePacth }
+export type { IRoomSubmit, IRoomPost, ApprovePacth, ApproveType }
 export { Approve }

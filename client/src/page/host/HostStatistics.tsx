@@ -1,9 +1,11 @@
 import { Box, Container, Grid, Paper, Typography } from "@mui/material";
 import { CopyRight } from "../../component/componentPage";
-import { useGetUser } from "../../hook";
+import { TabsCpm } from "../../component/componentReuse";
+import { tapsHostRoom } from "../../constain";
+import { Outlet } from "react-router-dom";
 
 const HostStatistics = () => {
-  const user = useGetUser();
+
 
   return (
     <Box component="section">
@@ -25,10 +27,20 @@ const HostStatistics = () => {
           </Grid>
 
           <Grid item xs={12}>
-          
+            <Paper>
+              <TabsCpm taps={tapsHostRoom} />
+            </Paper>
           </Grid>
-          <Grid item xs={12}></Grid>
-          <Grid item xs={12}></Grid>
+          <Grid item xs={12}>
+            <Paper
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <Outlet />
+            </Paper>
+          </Grid>
         </Grid>
         <CopyRight sx={{ pt: 4 }} />
       </Container>

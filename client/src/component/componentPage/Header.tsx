@@ -67,16 +67,16 @@ const Header = () => {
               </div>
               <Popup anchor={anchor} setAnchor={setAnchor}>
                 <div className="flex flex-col  text-base text-[#808089]">
-                  {userSelector?.role === Role.admin ? (
+                  {userSelector?.role === Role.admin && userSelector?.id ? (
                     <Link
                       to="/admin"
                       className="flex items-center gap-1 px-3 hover:bg-[#e6e6e6] py-2 hover:text-[#808089] "
                     >
                       <AdminPanelSettingsIcon /> <span>Admin</span>{" "}
                     </Link>
-                  ) : userSelector?.role === Role.host ? (
+                  ) : userSelector?.role === Role.host && userSelector?.id ? (
                     <Link
-                      to="/host"
+                      to={`/host/${userSelector.id}`}
                       className="flex items-center gap-1 px-3 hover:bg-[#e6e6e6] py-2 hover:text-[#808089] "
                     >
                       <AdminPanelSettingsIcon /> <span>Host</span>{" "}

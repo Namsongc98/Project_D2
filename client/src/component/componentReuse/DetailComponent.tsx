@@ -62,7 +62,7 @@ const DetailComponent = ({
             ))}
           </ImageList>
 
-          <Box sx={{}}>
+          <Box>
             <Divider sx={{ my: 2 }} light />
             <div className="">
               <h3 className="font-medium mb-2 ">Mô tả: </h3>
@@ -71,27 +71,27 @@ const DetailComponent = ({
           </Box>
         </Box>
         <Box sx={{ width: "45%" }}>
-          {rowsRoom.map((row) => {
-            const value = room[row.id];
-            return (
-              <div key={row.id}>
-                <div className="flex justify-between items-center ">
-                  <h3 className="font-medium">{row.label} </h3>
-                  <span>
-                    {row.format && typeof value === "number"
-                      ? row.format(value)
-                      : value}
-                  </span>
+          {room &&
+            rowsRoom.map((row) => {
+              const value = room[row.id];
+              return (
+                <div key={row.id}>
+                  <div className="flex justify-between items-center ">
+                    <h3 className="font-medium">{row.label} </h3>
+                    <span>
+                      {row.format && typeof value === "number"
+                        ? row.format(value)
+                        : value}
+                    </span>
+                  </div>
+                  <Divider sx={{ my: 2 }} light />
                 </div>
-                <Divider sx={{ my: 2 }} light />
-              </div>
-            );
-          })}
+              );
+            })}
 
           {booking &&
             rowsBooking.map((row) => {
               const value = booking[row.id];
-              console.log(booking);
               return (
                 <div key={row.id}>
                   <div className="flex justify-between items-center ">

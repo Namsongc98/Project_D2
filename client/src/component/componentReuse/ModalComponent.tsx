@@ -15,9 +15,15 @@ const style = {
   pb: 3,
 };
 
-const ModalComponent = ({ handleOpen, open, children }: PropChangePassword) => {
+const ModalComponent = ({
+  setOpen,
+  open,
+  children,
+}: PropChangePassword) => {
+  const handleClose = () => setOpen(false);
+
   return (
-    <Modal open={open} onClose={handleOpen}>
+    <Modal open={open} onClose={handleClose}>
       <Box sx={{ ...style }}>{children}</Box>
     </Modal>
   );

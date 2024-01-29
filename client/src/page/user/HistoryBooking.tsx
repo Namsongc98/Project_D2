@@ -55,27 +55,32 @@ const HistoryBooking = () => {
     }
   };
 
-  useEffect(() => {
+  const checkTypeParam = () => {
     if (user) {
       if (type === "1") {
         getBookingStatus(user!.id, BookingStatus.pending, false);
+        return;
       } else if (type === "2") {
         getBookingStatus(user!.id, BookingStatus.success, false);
+        return;
       } else if (type === "3") {
         getBookingStatus(user!.id, BookingStatus.success, true);
+        return;
       } else if (type === "4") {
         getBookingStatus(user!.id, BookingStatus.cancel, false);
+        return;
       } else {
         getBooking(user!.id);
+        return;
       }
     }
+  };
+
+  useEffect(() => {
+    checkTypeParam();
   }, [type, user]);
 
   const handleCancel = (idBooking: number) => {
-    // if (inforBooking?.complete_touris === ) {
-
-    //   return;
-    // }
     const bookingStatus = {
       booking_status: BookingStatus.pendingCancel,
     };
@@ -105,7 +110,7 @@ const HistoryBooking = () => {
 
   return (
     <>
-      <Box sx={{ width: "100%", overflow: "auto" }}>
+      <Box sx={{ width: "100%", overflow: "auto", height: "500px" }}>
         <SnackBarReuse type={typeErr} message={message} setError={setMessage} />
         <Paper sx={{ p: 2, width: "100%" }}>
           <Stack width={"100%"} spacing={2}>
@@ -196,7 +201,6 @@ const HistoryBooking = () => {
                           spacing={2}
                           justifyContent={"space-between"}
                         >
-                          {/* <Button variant="outlined">Đặt lại</Button> */}
                           <div></div>
                           <Button
                             variant="outlined"
@@ -231,24 +235,23 @@ const HistoryBooking = () => {
             )}
           </Stack>
         </Paper>
-        {openInfor && (
-          <ModalComponent handleOpen={handleOpenInfor} open={openInfor}>
-            <>
-              <DetailComponent booking={inforBooking!} room={inforRoom!} />
-              <Divider light sx={{ my: 2 }} />
-              <div className="flex justify-between">
-                <div className=""></div>
-                <Button
-                  variant="contained"
-                  color="error"
-                  onClick={() => handleCancel(inforBooking!.id!)}
-                >
-                  Hủy đơn
-                </Button>
-              </div>
-            </>
-          </ModalComponent>
-        )}
+
+        <ModalComponent setOpen={setOpenInfor} open={openInfor}>
+          <>
+            <DetailComponent booking={inforBooking!} room={inforRoom!} />
+            <Divider light sx={{ my: 2 }} />
+            <div className="flex justify-between">
+              <div className=""></div>
+              <Button
+                variant="contained"
+                color="error"
+                onClick={() => handleCancel(inforBooking!.id!)}
+              >
+                Hủy đơn
+              </Button>
+            </div>
+          </>
+        </ModalComponent>
       </Box>
     </>
   );

@@ -11,6 +11,8 @@ interface IUser {
   role?: Role;
 }
 
+type TypeRole = Role.admin | Role.guide | Role.host
+
 interface IProfile {
   firstName?: string;
   lastName?: string;
@@ -40,4 +42,4 @@ interface IProfileUser {
 
 
 export { Role, };
-export type { IProfile, IProfileUser, IUser }
+export type { IProfile, IProfileUser, IUser, TypeRole }

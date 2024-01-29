@@ -1,8 +1,8 @@
 import { Box, Container, Grid, Paper, Typography } from "@mui/material";
 import { CopyRight } from "../../component/componentPage";
 import { Outlet } from "react-router-dom";
-import { TapsCpm } from "../../component/componentReuse";
 import { tapHostBooking } from "../../constain";
+import { TabsCpm } from "../../component/componentReuse";
 
 const BookingConfirm = () => {
   return (
@@ -26,7 +26,7 @@ const BookingConfirm = () => {
 
           <Grid item xs={12}>
             <Paper>
-              <TapsCpm taps={tapHostBooking} />
+              <TabsCpm taps={tapHostBooking} />
             </Paper>
           </Grid>
           <Grid item xs={12}>

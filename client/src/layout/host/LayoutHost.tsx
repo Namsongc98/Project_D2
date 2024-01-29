@@ -10,6 +10,7 @@ import { pathHost } from "../../constain";
 
 const LayoutHost = () => {
   const defaultTheme = createTheme();
+
   const [open, setOpen] = useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -25,7 +26,7 @@ const LayoutHost = () => {
           <DrawerComponent
             toggleDrawer={toggleDrawer}
             open={open}
-            paths={pathHost}
+            paths={pathHost }
           />
 
           <Box

@@ -5,23 +5,24 @@ import {
   Grid,
   Paper,
   TablePagination,
-  Typography,
 } from "@mui/material";
-import { CopyRight } from "../../component/componentPage";
 import { useEffect, useState } from "react";
-import { getAllRoom, patchApprove } from "../../service";
+import { getAllRoom, getAllRoomApprove, patchApprove } from "../../service";
 import SnackBarReuse from "../../component/componentReuse/SnackBarReuse";
 import TableConfirm from "../../component/componentReuse/TableConfirm";
 import { ModalComponent } from "../../component/componentReuse";
 import ModalConfirm from "../../component/componentReuse/ModalConfirm";
-import { Approve, typeGetRoom } from "../../type";
+import { Approve, ApproveType, typeGetRoom } from "../../type";
 import { columnsTable } from "../../constain";
 import DetailComponent from "../../component/componentReuse/DetailComponent";
+import { useSearchParams } from "react-router-dom";
 
 const Roomtype = () => {
+  const [searchParams] = useSearchParams();
   const [rooms, setRoom] = useState([] as any);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const typeParam = searchParams.get("approve");
   // modal
   const [openApprove, setOpenApprove] = useState(false);
   const [openInfor, setOpenInfor] = useState(false);
@@ -53,7 +54,7 @@ const Roomtype = () => {
       setOpenApprove(!openApprove);
       setType("success");
       setMessage("khách sạn hoạt động thành công");
-      getRoom();
+      changePage(page + 1, rowsPerPage);
     } catch (error: unknown) {
       setType("error");
       setMessage("Duyệt phòng thất bại");
@@ -70,22 +71,18 @@ const Roomtype = () => {
       setOpenApprove(!openApprove);
       setType("warning");
       setMessage("Không cho khách sạn hoạt động");
-      getRoom();
+      changePage(page + 1, rowsPerPage);
     } catch (error: unknown) {
       setType("error");
       setMessage("Duyệt phòng thất bại");
     }
   };
 
-  const handleChangePage = async (event: unknown, newPage: number) => {
-    try {
-      const res = await getAllRoom(newPage + 1, rowsPerPage);
-      setRoom(res.data);
-      setPage(newPage);
-    } catch (error) {
-      console.log(error);
-    }
+  const handleChangePage = (event: unknown, newPage: number) => {
+    setPage(newPage);
+    changePage(newPage + 1, rowsPerPage);
   };
+
   const handleChangeRowsPerPage = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -93,17 +90,43 @@ const Roomtype = () => {
     setPage(0);
   };
 
-  const getRoom = async () => {
+  const getRoom = async (page: number, rowsPerPage: number) => {
     try {
-      const res = await getAllRoom(page + 1, rowsPerPage);
+      const res = await getAllRoom(page, rowsPerPage);
       setRoom(res.data);
     } catch (error) {
       console.log(error);
     }
   };
+
+  const getRoomApprove = async (
+    page: number,
+    rowsPerPage: number,
+    approve: ApproveType
+  ) => {
+    try {
+      const res = await getAllRoomApprove(page, rowsPerPage, approve);
+      setRoom(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const changePage = (page: number, rowsPerPage: number) => {
+    if (typeParam === "1") {
+      getRoomApprove(page, rowsPerPage, Approve.pending);
+    } else if (typeParam === "2") {
+      getRoomApprove(page, rowsPerPage, Approve.success);
+    } else if (typeParam === "3") {
+      getRoomApprove(page, rowsPerPage, Approve.fail);
+    } else {
+      getRoom(page, rowsPerPage);
+    }
+  };
+
   useEffect(() => {
-    getRoom();
-  }, []);
+    changePage(page + 1, rowsPerPage);
+  }, [typeParam]);
+
   return (
     <>
       <Box component="section">
@@ -115,71 +138,46 @@ const Roomtype = () => {
                   p: 2,
                   display: "flex",
                   flexDirection: "column",
-                  mb: 5,
                 }}
               >
-                <Typography color="#1976d2" fontSize="24px" fontWeight="700">
-                  Quản lý phòng
-                </Typography>
+                <SnackBarReuse
+                  type={type}
+                  message={message}
+                  setError={setMessage}
+                />
+                <TableConfirm
+                  columnsTable={columnsTable}
+                  data={rooms}
+                  handleOpenApprove={handleOpenApprove}
+                  handleOpenInfor={handleOpenInfor}
+                />
+
+                <ModalComponent setOpen={setOpenApprove} open={openApprove}>
+                  <ModalConfirm
+                    handleSuccess={handleApproveSuccess}
+                    handleFail={handleApproveFail}
+                    infor={inforRoom}
+                    label="Bạn đồng ý duyệt phòng!"
+                  />
+                </ModalComponent>
+
+                <ModalComponent setOpen={setOpenInfor} open={openInfor}>
+                  <DetailComponent room={inforRoom!} />
+                </ModalComponent>
+
+                <TablePagination
+                  rowsPerPageOptions={[5, 10, 15]}
+                  component="div"
+                  count={Infinity}
+                  rowsPerPage={rowsPerPage}
+                  page={page}
+                  onPageChange={handleChangePage}
+                  onRowsPerPageChange={handleChangeRowsPerPage}
+                />
               </Paper>
             </Grid>
           </Grid>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={12} lg={12}>
-              <Paper
-                sx={{
-                  p: 2,
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-              >
-                <Paper sx={{ width: "100%", overflow: "hidden" }}>
-                  <SnackBarReuse
-                    type={type}
-                    message={message}
-                    setError={setMessage}
-                  />
-                  <TableConfirm
-                    columnsTable={columnsTable}
-                    data={rooms}
-                    handleOpenApprove={handleOpenApprove}
-                    handleOpenInfor={handleOpenInfor}
-                  />
-                  {openApprove && (
-                    <ModalComponent
-                      handleOpen={handleOpenApprove}
-                      open={openApprove}
-                    >
-                      <ModalConfirm
-                        handleSuccess={handleApproveSuccess}
-                        handleFail={handleApproveFail}
-                        infor={inforRoom}
-                        label="Bạn đồng ý duyệt phòng!"
-                      />
-                    </ModalComponent>
-                  )}
-                  {openInfor && (
-                    <ModalComponent
-                      handleOpen={handleOpenInfor}
-                      open={openInfor}
-                    >
-                      <DetailComponent room={inforRoom!} />
-                    </ModalComponent>
-                  )}
-                  <TablePagination
-                    rowsPerPageOptions={[5, 10, 15]}
-                    component="div"
-                    count={Infinity}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    onPageChange={handleChangePage}
-                    onRowsPerPageChange={handleChangeRowsPerPage}
-                  />
-                </Paper>
-              </Paper>
-            </Grid>
-          </Grid>
-          <CopyRight sx={{ pt: 4 }} />
+        
         </Container>
       </Box>
     </>

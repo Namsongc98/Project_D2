@@ -1,8 +1,7 @@
 import { Box, Container, Grid, Paper, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Deposit, TableUser } from "../../component/componentPage";
-import { 
-  getBookingHostId } from "../../service";
+import { getBookingHostId } from "../../service";
 import { useGetUser } from "../../hook";
 
 const DepositBooking = () => {
@@ -74,6 +73,7 @@ const DepositBooking = () => {
               <TableUser data={dataUser!} />
             </Paper>
           </Grid>
+         
         </Grid>
       </Container>
     </Box>

@@ -32,5 +32,6 @@ type typeGetRoom = {
     price: number
     type_tourism: string
     user_id?: string
+    [key: string]: any
 }
 export type { Decode, GetUserApi, StatusApi, typeGetRoom }
