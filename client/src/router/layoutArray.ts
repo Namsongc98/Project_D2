@@ -1,4 +1,4 @@
-import { GuideManager, HostManager, RoomManager, RoomType } from "../page/admin";
+import { GuideManager, HostManager, RoomType } from "../page/admin";
 import AdminStatistics from "../page/admin/AdminStatistics";
 import { BookingHostStatus, DepositBooking, PostRoom } from "../page/host";
 import HostStatistics from "../page/host/HostStatistics";
@@ -26,14 +26,20 @@ const publicPage: Layout = [
   { id: 6, path: "/register", component: Register, layout: false },
   { id: 7, path: "/login", component: Login, layout: false },
   // lyout User
-  { id: 8, path: "", component: HistoryBooking, layout: true, role: Role.guide, children: true },
+  {
+    id: 8,
+    path: "",
+    component: HistoryBooking,
+    layout: true,
+    role: Role.guide,
+    children: true,
+  },
   {
     id: 9,
     path: "profile",
     component: Profile,
     layout: true,
     role: Role.guide,
-
   },
   // layout Admin
   {
@@ -42,8 +48,7 @@ const publicPage: Layout = [
     component: AdminStatistics,
     layout: true,
     role: Role.admin,
-    children: false
-
+    children: false,
   },
   {
     id: 11,
@@ -51,8 +56,7 @@ const publicPage: Layout = [
     component: GuideManager,
     layout: true,
     role: Role.admin,
-    children: false
-
+    children: false,
   },
   {
     id: 12,
@@ -60,7 +64,7 @@ const publicPage: Layout = [
     component: HostManager,
     layout: true,
     role: Role.admin,
-    children: false
+    children: false,
   },
   {
     id: 17,
@@ -68,7 +72,7 @@ const publicPage: Layout = [
     component: RoomType,
     layout: false,
     role: Role.admin,
-    children: true
+    children: true,
   },
   // layout Host
   {
@@ -77,7 +81,7 @@ const publicPage: Layout = [
     component: HostStatistics,
     layout: true,
     role: Role.host,
-    children: false
+    children: false,
   },
   {
     id: 14,
@@ -85,7 +89,7 @@ const publicPage: Layout = [
     component: PostRoom,
     layout: true,
     role: Role.host,
-    children: false
+    children: false,
   },
   {
     id: 15,
@@ -93,7 +97,7 @@ const publicPage: Layout = [
     component: DepositBooking,
     layout: true,
     role: Role.host,
-    children: false
+    children: false,
   },
   {
     id: 16,
@@ -101,11 +105,9 @@ const publicPage: Layout = [
     component: BookingHostStatus,
     layout: true,
     role: Role.host,
-    children: true
+    children: true,
   },
-
 ];
 // layout login register
-
 
 export { publicPage };
