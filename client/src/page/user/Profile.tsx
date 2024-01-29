@@ -30,7 +30,6 @@ import { useSelector } from "react-redux";
 
 const Profile = () => {
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(!open);
   const [loading, setLoading] = useState(false);
   const [type, setType] = useState<AlertColor>("success");
   const [error, setError] = useState("");
@@ -247,9 +246,7 @@ const Profile = () => {
             <p className=" text-yellow-400">{userSelector?.email}</p>
           </div>
           <div className="w-[100%] line-midleware border border-solid border-[#e5e7eb] mx-auto max-w-[1600px]" />
-          <div className=" font-medium text-xl my-4  flex justify-between items-center">
-           
-          </div>
+          <div className=" font-medium text-xl my-4  flex justify-between items-center"></div>
           <div className="font-semibold text-base my-4  flex justify-between items-center">
             <div></div>
             <NavLink to="/" className="flex items-center   ">
@@ -260,11 +257,10 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      {open && (
-        <ModalComponent handleOpen={handleOpen} open={open}>
-          <Changepassword />
-        </ModalComponent>
-      )}
+
+      <ModalComponent setOpen={setOpen} open={open}>
+        <Changepassword />
+      </ModalComponent>
     </>
   );
 };

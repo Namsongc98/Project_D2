@@ -1,7 +1,6 @@
-import { GuideManager, HostManager, RoomManager, RoomType } from "../page/admin";
+import { GuideManager, RoomType, UserBooking } from "../page/admin";
 import AdminStatistics from "../page/admin/AdminStatistics";
-import { BookingHostStatus, DepositBooking, PostRoom } from "../page/host";
-import HostStatistics from "../page/host/HostStatistics";
+import { BookingHostStatus, DepositBooking, PostRoom, RoomHost } from "../page/host";
 import {
   Detail,
   DetailRoom,
@@ -52,15 +51,15 @@ const publicPage: Layout = [
     layout: true,
     role: Role.admin,
     children: false
-
   },
   {
-    id: 12,
-    path: "/admin/hostmanager",
-    component: HostManager,
+    id: 18,
+    path: "",
+    component: UserBooking,
     layout: true,
     role: Role.admin,
-    children: false
+    children: true,
+    childrenRole: "user"
   },
   {
     id: 17,
@@ -68,17 +67,11 @@ const publicPage: Layout = [
     component: RoomType,
     layout: false,
     role: Role.admin,
-    children: true
+    children: true,
+    childrenRole: "room"
   },
   // layout Host
-  {
-    id: 13,
-    path: "/host",
-    component: HostStatistics,
-    layout: true,
-    role: Role.host,
-    children: false
-  },
+
   {
     id: 14,
     path: "/host/postroom",
@@ -101,7 +94,17 @@ const publicPage: Layout = [
     component: BookingHostStatus,
     layout: true,
     role: Role.host,
-    children: true
+    children: true,
+    childrenRole: "booking"
+  },
+  {
+    id: 19,
+    path: "",
+    component: RoomHost,
+    layout: true,
+    role: Role.host,
+    children: true,
+    childrenRole: "room"
   },
 
 ];

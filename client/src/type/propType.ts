@@ -6,6 +6,7 @@ import {
   PathType,
   SelectOptionType,
   StatusApi,
+  TableRoom,
   typeGetRoom,
 } from ".";
 import { Dayjs } from "dayjs";
@@ -38,7 +39,7 @@ type AlertProp = {
 };
 
 type PropChangePassword = {
-  handleOpen: () => void;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   open: boolean;
   children: React.ReactNode;
 };
@@ -93,6 +94,8 @@ type PropsRoom = {
 
 interface PropsBooking {
   data: IBookingData[];
+  columns: TableRoom[];
+  detail: boolean;
   getData?: () => void;
   getData2?: () => void;
 }

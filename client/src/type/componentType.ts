@@ -142,7 +142,7 @@ interface ITaps {
   id: number;
   value: number;
   label: string;
-  to: string;
+  to: { pathname: string, search: string };
 }
 
 

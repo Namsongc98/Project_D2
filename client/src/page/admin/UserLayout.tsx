@@ -2,9 +2,9 @@ import { Box, Container, Grid, Paper, Typography } from "@mui/material";
 import { CopyRight } from "../../component/componentPage";
 import { Outlet } from "react-router-dom";
 import { TabsCpm } from "../../component/componentReuse";
-import { tapAdminRoom } from "../../constain";
+import { tapUserBookingAdmin } from "../../constain";
 
-const RoomManager = () => {
+const UserLayout = () => {
   return (
     <>
       <Box component="section">
@@ -20,7 +20,7 @@ const RoomManager = () => {
                 }}
               >
                 <Typography color="#1976d2" fontSize="24px" fontWeight="700">
-                  Quản lý phòng 
+                  Quản lý người dùng
                 </Typography>
               </Paper>
             </Grid>
@@ -34,12 +34,13 @@ const RoomManager = () => {
                   flexDirection: "column",
                 }}
               >
-                <TabsCpm taps={tapAdminRoom} />
+                <TabsCpm taps={tapUserBookingAdmin} />
               </Paper>
             </Grid>
             <Grid item xs={12} md={12} lg={12}>
               <Paper
                 sx={{
+                  p: 2,
                   display: "flex",
                   flexDirection: "column",
                 }}
@@ -55,4 +56,4 @@ const RoomManager = () => {
   );
 };
 
-export default RoomManager;
+export default UserLayout;

@@ -1,5 +1,6 @@
 import {
   IconButton,
+  Stack,
   Table,
   TableBody,
   TableCell,
@@ -10,6 +11,7 @@ import {
 import InfoIcon from "@mui/icons-material/Info";
 import { Button } from "../element";
 import { Approve } from "../../type";
+import imgEmtry from "../../assets/image/img_emtry.png";
 
 const TableConfirm = ({
   columnsTable,
@@ -19,7 +21,9 @@ const TableConfirm = ({
 }: any) => {
   return (
     <>
-      <TableContainer sx={{ maxHeight: 440 }}>
+      <TableContainer
+        sx={{ maxHeight: 440, minHeight: "400px", overflow: "auto" }}
+      >
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
@@ -41,7 +45,7 @@ const TableConfirm = ({
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.length &&
+            {data.length ? (
               data?.map((item: any) => {
                 return (
                   <TableRow hover key={item.id}>
@@ -59,7 +63,9 @@ const TableConfirm = ({
                             : "bg-green-500"
                         } text-white`}
                         type="button"
-                        onClick={() => handleOpenApprove(item)}
+                        onClick={
+                          handleOpenApprove && (() => handleOpenApprove(item))
+                        }
                       >
                         {item.approve_room === "Pending"
                           ? "Đang chờ"
@@ -79,9 +85,31 @@ const TableConfirm = ({
                     </TableCell>
                   </TableRow>
                 );
-              })}
+              })
+            ) : (
+              <></>
+            )}
           </TableBody>
         </Table>
+        {!data?.length && (
+          <Stack
+            sx={{ height: "300px" }}
+            direction={"row"}
+            justifyContent={"center"}
+            alignItems={"center"}
+          >
+            <div className="">
+              <img
+                src={imgEmtry}
+                width={100}
+                height={100}
+                alt={imgEmtry}
+                className="mx-auto my-0"
+              />
+              <p className="text-center mt-2">Đơn hàng trống</p>
+            </div>
+          </Stack>
+        )}
       </TableContainer>
     </>
   );

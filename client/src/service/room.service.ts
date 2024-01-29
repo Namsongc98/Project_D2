@@ -1,5 +1,5 @@
 import { instance, instance_token } from "../config";
-import { Approve, ApprovePacth, BookingStatus, IRoomPost, PatchBooking } from "../type";
+import { Approve, ApprovePacth, ApproveType, BookingStatus, IRoomPost, PatchBooking } from "../type";
 
 // tạo phòng 
 const createRoom = async (room: IRoomPost) => {
@@ -10,6 +10,10 @@ const createRoom = async (room: IRoomPost) => {
 // data tất cả phòng
 const getAllRoom = async (page: number, limit: number) => {
     return await instance.get(`/touris?_page=${page}&_limit=${limit}`);
+};
+
+const getAllRoomApprove = async (page: number, limit: number, approve_room: ApproveType) => {
+    return await instance.get(`/touris?_page=${page}&_limit=${limit}`, { params: { approve_room } });
 };
 
 
@@ -38,4 +42,4 @@ const patchStatusBooking = async (idRoom: number, statusBooking: PatchBooking) =
 // thay đổi booking statuss succes
 
 
-export { createRoom, getAllRoom, patchApprove, getRoomCity, getOneRoom, patchStatusBooking }
+export { createRoom, getAllRoom, patchApprove, getRoomCity, getOneRoom, patchStatusBooking, getAllRoomApprove }

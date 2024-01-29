@@ -3,6 +3,7 @@ import { CopyRight, TableUser } from "../../component/componentPage";
 import TableBooking from "../../component/componentPage/admin/TableBooking";
 import { useEffect, useState } from "react";
 import { getAllUser, getBookingService } from "../../service";
+import { columnBooking } from "../../constain";
 
 const GuideManager = () => {
   const [data, setData] = useState([]);
@@ -41,7 +42,12 @@ const GuideManager = () => {
                 flexDirection: "column",
               }}
             >
-              <Typography color="#1976d2" fontSize="24px" fontWeight="700">
+              <Typography
+                color="#1976d2"
+                fontSize="24px"
+                fontWeight="700"
+                align="center"
+              >
                 Quản lý người đặt phòng
               </Typography>
             </Paper>
@@ -63,7 +69,12 @@ const GuideManager = () => {
               >
                 Danh sách đặt phòng
               </Typography>
-              <TableBooking data={data!} getData={getBooking} />
+              <TableBooking
+                data={data!}
+                getData={getBooking}
+                columns={columnBooking}
+                detail={false}
+              />
             </Paper>
           </Grid>
           <Grid item xs={12} md={12} lg={12}>

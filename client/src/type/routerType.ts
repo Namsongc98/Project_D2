@@ -9,6 +9,7 @@ type Layout = {
     layout: boolean;
     role?: Role
     children?: boolean
+    childrenRole?:  "booking" | "user" | "room" | "type"
 }[]
 
 type PathType = {

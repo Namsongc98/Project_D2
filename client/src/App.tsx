@@ -6,8 +6,10 @@ import LayoutHost from "./layout/host/LayoutHost";
 import { Role } from "./type";
 import LayoutUser from "./layout/LayoutUser";
 import { User } from "./page/user";
-import { BookingConfirm } from "./page/host";
+import { BookingConfirm, HostStatistics } from "./page/host";
 import { RoomManager } from "./page/admin";
+import UserLayout from "./page/admin/UserLayout";
+
 function App() {
   return (
     <>
@@ -31,7 +33,16 @@ function App() {
                     path="admin/room"
                     element={<RoomManager />}
                   >
-                    {router.children && (
+                    {router.children && router.childrenRole === "room" && (
+                      <Route path={router.path} element={<Page />} />
+                    )}
+                  </Route>
+                  <Route
+                    key={router.id}
+                    path="admin/user/:id"
+                    element={<UserLayout />}
+                  >
+                    {router.children && router.childrenRole === "user" && (
                       <Route path={router.path} element={<Page />} />
                     )}
                   </Route>
@@ -40,15 +51,21 @@ function App() {
             ) : router.role === Role.host ? (
               <Route key={router.id} element={<PrivateHost />}>
                 <Route key={router.id} path="/" element={<LayoutRoleHost />}>
+                  <Route path={"host"} element={<HostStatistics />}>
+                    {router.childrenRole === "room" && (
+                      <Route path={router.path} element={<Page />} />
+                    )}
+                  </Route>
                   {router.layout && (
                     <Route path={router.path} element={<Page />} />
                   )}
+
                   <Route
                     key={router.id}
                     path="host/booking"
                     element={<BookingConfirm />}
                   >
-                    {router.children && (
+                    {router.childrenRole === "booking" && (
                       <Route path={router.path} element={<Page />} />
                     )}
                   </Route>

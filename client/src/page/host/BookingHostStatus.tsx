@@ -5,11 +5,12 @@ import { useSearchParams } from "react-router-dom";
 import { useGetUser } from "../../hook";
 import { BookingStatus, BookingType, IBookingData } from "../../type";
 import { getBookingUser, getBookingUserStatus } from "../../service";
+import { columnBooking } from "../../constain";
 
 const BookingHostStatus = () => {
   const [bookingArr, setBookingArr] = useState<IBookingData[]>([]);
   const [searchParams] = useSearchParams();
-  const type = searchParams.get("type");
+  const type = searchParams.get("booking");
   const user = useGetUser();
 
   const getBookingStatus = async (
@@ -54,7 +55,7 @@ const BookingHostStatus = () => {
   return (
     <Grid item xs={12}>
       <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-        <TableHostRoomConfirm data={bookingArr!} />
+        <TableHostRoomConfirm data={bookingArr!} columns={columnBooking} />
       </Paper>
     </Grid>
   );
