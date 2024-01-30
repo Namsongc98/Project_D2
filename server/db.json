@@ -113,7 +113,7 @@
       "id": 1
     },
     {
-      "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "host_id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
       "created_at": 1705564839299,
       "booking_status": "Pending",
       "name": "khách sạn host2",
@@ -255,7 +255,7 @@
       "id": 6
     },
     {
-      "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "host_id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
       "created_at": 1705907685985,
       "booking_status": "Empty",
       "name": "Lào Cai2",
