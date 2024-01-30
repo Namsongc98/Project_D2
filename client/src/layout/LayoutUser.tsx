@@ -26,7 +26,6 @@ const LayoutUser = () => {
                 <AvatarUser user={userSelector} size={50} />
               </div>
               <p className=" text-center font-semibold text-xl mt-5 opacity-70">
-               
                 {userSelector?.firstName} {userSelector?.lastName}
               </p>
             </div>

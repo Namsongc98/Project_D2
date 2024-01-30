@@ -163,11 +163,17 @@ const tapsHostRoom = [
 ];
 
 const pathHost = [
-  { id: 1, path: "/host", icon: <DashboardIcon />, title: "Danh sách phòng", chilrend: true },
+  {
+    id: 1,
+    path: "/host",
+    icon: <DashboardIcon />,
+    title: "Danh sách phòng",
+    chilrend: true,
+  },
   { id: 2, path: "/host/postroom", icon: <AddHomeIcon />, title: "Thêm phòng" },
   {
     id: 3,
-    path: "/host/depositbooking",
+    path: "/host/user",
     icon: <GroupIcon />,
     title: "Danh sách người dùng",
   },
@@ -175,7 +181,7 @@ const pathHost = [
     id: 4,
     path: "/host/booking",
     icon: <BookIcon />,
-    title: "Trang thái đặt phòng",
+    title: "thông kê đơn hàng",
   },
 ];
 
@@ -194,9 +200,15 @@ const pathAdmin = [
   },
   {
     id: 2,
-    path: "/admin/guidemanager",
+    path: "/admin/user",
     icon: <GroupIcon />,
     title: "Thống kê khách hàng",
+  },
+  {
+    id: 4,
+    path: "/admin/bookingmanager",
+    icon: <BookIcon />,
+    title: "Thống kê đơn hàng",
   },
 ];
 
@@ -207,6 +219,5 @@ export {
   tapHostBooking,
   tapAdminRoom,
   tapUserBookingAdmin,
-  tapsHostRoom
+  tapsHostRoom,
 };
-

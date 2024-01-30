@@ -20,7 +20,7 @@ const RoomManager = () => {
                 }}
               >
                 <Typography color="#1976d2" fontSize="24px" fontWeight="700">
-                  Quản lý phòng 
+                  Thống kê phòng 
                 </Typography>
               </Paper>
             </Grid>

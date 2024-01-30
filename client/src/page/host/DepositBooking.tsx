@@ -3,26 +3,34 @@ import { useEffect, useState } from "react";
 import { Deposit, TableUser } from "../../component/componentPage";
 import { getBookingHostId } from "../../service";
 import { useGetUser } from "../../hook";
+import { useNavigate } from "react-router-dom";
+import { IProfileUser } from "../../type";
 
 const DepositBooking = () => {
-  const user = useGetUser();
-  const [dataUser, setDataUser] = useState([]);
-  const [countBooking, setCountBooking] = useState();
+  const navigate = useNavigate();
+  const host = useGetUser();
+  const [dataUser, setDataUser] = useState([] as IProfileUser[]);
+  const [countBooking, setCountBooking] = useState<number>(0);
 
   useEffect(() => {
     getBooking();
-  }, [user]);
+  }, [host]);
 
   const getBooking = async () => {
     try {
-      if (user) {
-        const res = await getBookingHostId(user.id);
-        setDataUser(res.data);
-        setCountBooking(res.data.length);
+      if (host) {
+        const res: IProfileUser[] = await getBookingHostId(host.id);
+        console.log(res);
+        setDataUser(res);
+        setCountBooking(res.length);
       }
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleClickNav = (idUser: string) => {
+    navigate("/host/user/" + idUser);
   };
 
   return (
@@ -38,7 +46,7 @@ const DepositBooking = () => {
               }}
             >
               <Typography color="#1976d2" fontSize="24px" fontWeight="700">
-                Quản lý người đặt phòng
+                Thống kê khách hàng
               </Typography>
             </Paper>
           </Grid>
@@ -70,10 +78,10 @@ const DepositBooking = () => {
               >
                 Danh sách người dùng
               </Typography>
-              <TableUser data={dataUser!} />
+              kjghhg
+              <TableUser data={dataUser!} onClickNav={handleClickNav} />
             </Paper>
           </Grid>
-         
         </Grid>
       </Container>
     </Box>

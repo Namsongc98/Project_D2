@@ -1,4 +1,4 @@
-import { patchStatusBooking } from ".";
+import { getUserHostId, patchStatusBooking } from ".";
 import { instance } from "../config";
 import { BookingStatus, BookingType, IBookingData, PatchBooking } from "../type";
 
@@ -12,7 +12,10 @@ const getBookingStatus = async (host_id: string, booking_status: BookingType) =>
 const createBooking = async (booking: IBookingData) => {
     const bookingStatus: PatchBooking = { booking_status: BookingStatus.pending }
     await patchStatusBooking(booking.id_touris!, bookingStatus)
-    return await instance.post(`/bookings/`, booking);
+    const res = await instance.post(`/bookings/`, booking);
+    const bookingUser = { id_user: booking.user_id, id_host: res.data.host_id }
+    await instance.post("/user_booking/", bookingUser)
+    return res
 }
 
 // cho phép người dùng đặt phòng
@@ -25,17 +28,48 @@ const patchBookingConfirm = async (idBooking: number, bookingStatus: PatchBookin
 const getBookingService = async () => {
     return await instance.get('/bookings')
 }
-const getBookingUser = async (userId: string) => {
-    return await instance.get('/bookings', { params: { user_id: userId } })
+
+const getBookingHostId = async (id_host: string) => {
+    const res = await instance.get("user_booking", { params: { id_host } })
+    console.log(res.data)
+    try {
+        const data = Promise.all(res.data.map((item: { id: number, id_user: string, id_host: string }) => (
+
+            getUserHostId(item.id_user)
+        )))
+
+        return data
+    } catch (error) {
+        throw new Error("user Ivalid")
+    }
+
 }
 
-const getBookingHostId = async (host_id: string) => {
-    return await instance.get('/bookings', { params: { host_id } })
-}
+const getBookingUserHost = async (user_id: string, host_id: string) => {
 
-const getBookingUserStatus = async (user_id: string, booking_status: BookingType, complete_touris: boolean) => {
-    const booking = await instance.get("./bookings", { params: { user_id, booking_status, complete_touris } })
+    return await instance.get('/bookings', { params: { user_id, host_id } })
+}
+const getBookingUserHostStatus = async (user_id: string, host_id: string, booking_status: BookingType, complete_touris: boolean) => {
+    const booking = await instance.get("/bookings", { params: { user_id, host_id, booking_status, complete_touris } })
     return booking
 }
 
-export { patchBookingConfirm, getBookingStatus, createBooking, getBookingUser, getBookingService, getBookingHostId, getBookingUserStatus }
+
+const getBookingHost = async (host_id: string) => {
+    return await instance.get("/bookings/", { params: { host_id } })
+}
+const getBookingHostStatus = async (user_id: string, booking_status: BookingType, complete_touris: boolean) => {
+    const booking = await instance.get("/bookings", { params: { user_id, booking_status, complete_touris } })
+    return booking
+}
+
+const getBookingUser = async (user_id: string) => {
+    return await instance.get('/bookings', { params: { user_id } })
+}
+
+const getBookingUserStatus = async (user_id: string, booking_status: BookingType, complete_touris: boolean) => {
+    const booking = await instance.get("/bookings", { params: { user_id, booking_status, complete_touris } })
+    return booking
+}
+
+export { patchBookingConfirm, getBookingStatus, createBooking, getBookingUserHost, getBookingService, getBookingHostId, getBookingUserHostStatus, getBookingHost, getBookingHostStatus, getBookingUser, getBookingUserStatus }

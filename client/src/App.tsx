@@ -1,11 +1,16 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { DefaultLayout, LayoutAdmin, LayoutMember } from "./layout";
+import {
+  DefaultLayout,
+  LayoutAdmin,
+  LayoutBookingUser,
+  LayoutMember,
+} from "./layout";
 import { publicPage } from "./router/layoutArray";
 import { PrivateAdmin, PrivateHost, PrivateUser } from "./router";
 import LayoutHost from "./layout/host/LayoutHost";
 import { Role } from "./type";
 import LayoutUser from "./layout/LayoutUser";
-import { User } from "./page/user";
+import { NotFound, User } from "./page/user";
 import { BookingConfirm, HostStatistics } from "./page/host";
 import { RoomManager } from "./page/admin";
 import UserLayout from "./page/admin/UserLayout";
@@ -62,6 +67,15 @@ function App() {
 
                   <Route
                     key={router.id}
+                    path="host/user/:id"
+                    element={<LayoutBookingUser />}
+                  >
+                    {router.childrenRole === "user" && (
+                      <Route path={router.path} element={<Page />} />
+                    )}
+                  </Route>
+                  <Route
+                    key={router.id}
                     path="host/booking"
                     element={<BookingConfirm />}
                   >
@@ -94,6 +108,7 @@ function App() {
               </Route>
             );
           })}
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
     </>

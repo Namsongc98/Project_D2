@@ -102,6 +102,7 @@ interface PropsBooking {
 
 interface PropsUser {
   data: IProfileUser[]
+  onClickNav: (idUser: string) => void
 }
 
 export type {

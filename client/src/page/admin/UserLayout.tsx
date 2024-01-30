@@ -19,8 +19,13 @@ const UserLayout = () => {
                   mb: 5,
                 }}
               >
-                <Typography color="#1976d2" fontSize="24px" fontWeight="700">
-                  Quản lý người dùng
+                <Typography
+                  color="#1976d2"
+                  fontSize="24px"
+                  fontWeight="700"
+                  align="center"
+                >
+                  Thống kê đơn đặt hàng của người dùng
                 </Typography>
               </Paper>
             </Grid>

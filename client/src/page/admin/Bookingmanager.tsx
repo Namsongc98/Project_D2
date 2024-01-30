@@ -1,29 +1,24 @@
 import { Box, Container, Grid, Paper, Typography } from "@mui/material";
-import { CopyRight, TableUser } from "../../component/componentPage";
-
+import { CopyRight } from "../../component/componentPage";
+import TableBooking from "../../component/componentPage/admin/TableBooking";
 import { useEffect, useState } from "react";
-import { getAllUser } from "../../service";
-import { useNavigate } from "react-router-dom";
+import { getBookingService } from "../../service";
+import { columnBooking } from "../../constain";
 
-const GuideManager = () => {
-  const [dataUser, setDataUser] = useState([]);
-  const navigate = useNavigate();
+const Bookingmanager = () => {
+  const [data, setData] = useState([]);
 
   useEffect(() => {
-    getUser();
+    getBooking();
   }, []);
 
-  const getUser = async () => {
+  const getBooking = async () => {
     try {
-      const res = await getAllUser();
-      setDataUser(res.data);
+      const res = await getBookingService();
+      setData(res.data);
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const handleClickNav = (idUser: string) => {
-    navigate("/admin/user/" + idUser);
   };
   return (
     <Box component="section">
@@ -43,7 +38,7 @@ const GuideManager = () => {
                 fontWeight="700"
                 align="center"
               >
-                Thống kê khách hàng
+                Thống kê đặt phòng
               </Typography>
             </Paper>
           </Grid>
@@ -62,10 +57,14 @@ const GuideManager = () => {
                 textAlign="center"
                 mb={2}
               >
-                Danh sách người dùng
+                Danh sách đặt phòng
               </Typography>
-    
-              <TableUser data={dataUser!} onClickNav={handleClickNav} />
+              <TableBooking
+                data={data!}
+                getData={getBooking}
+                columns={columnBooking}
+                detail={false}
+              />
             </Paper>
           </Grid>
         </Grid>
@@ -75,4 +74,4 @@ const GuideManager = () => {
   );
 };
 
-export default GuideManager;
+export default Bookingmanager;

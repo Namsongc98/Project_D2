@@ -4,14 +4,14 @@ import { TableHostRoomConfirm } from "../../component/componentPage";
 import { useSearchParams } from "react-router-dom";
 import { useGetUser } from "../../hook";
 import { BookingStatus, BookingType, IBookingData } from "../../type";
-import { getBookingUser, getBookingUserStatus } from "../../service";
+import { getBookingHost, getBookingHostStatus } from "../../service";
 import { columnBooking } from "../../constain";
 
 const BookingHostStatus = () => {
   const [bookingArr, setBookingArr] = useState<IBookingData[]>([]);
   const [searchParams] = useSearchParams();
   const type = searchParams.get("booking");
-  const user = useGetUser();
+  const host = useGetUser();
 
   const getBookingStatus = async (
     userId: string,
@@ -19,16 +19,18 @@ const BookingHostStatus = () => {
     complete: boolean
   ) => {
     try {
-      const res = await getBookingUserStatus(userId, bookingStatus, complete);
+      const res = await getBookingHostStatus(userId, bookingStatus, complete);
+      console.log(res.data);
       setBookingArr(res.data);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const getBooking = async (userId: string) => {
+  const getBooking = async (hostId: string) => {
     try {
-      const res = await getBookingUser(userId);
+      const res = await getBookingHost(hostId);
+      console.log(res.data);
       setBookingArr(res.data);
     } catch (error) {
       console.log(error);
@@ -36,26 +38,30 @@ const BookingHostStatus = () => {
   };
 
   useEffect(() => {
-    if (user) {
+    if (host) {
       if (type === "1") {
-        getBookingStatus(user!.id, BookingStatus.pending, false);
+        getBookingStatus(host!.id, BookingStatus.pending, false);
       } else if (type === "2") {
-        getBookingStatus(user!.id, BookingStatus.success, false);
+        getBookingStatus(host!.id, BookingStatus.success, false);
       } else if (type === "3") {
-        getBookingStatus(user!.id, BookingStatus.success, true);
+        getBookingStatus(host!.id, BookingStatus.success, true);
       } else if (type === "4") {
-        getBookingStatus(user!.id, BookingStatus.pendingCancel, false);
+        getBookingStatus(host!.id, BookingStatus.pendingCancel, false);
       } else if (type === "5") {
-        getBookingStatus(user!.id, BookingStatus.cancel, false);
+        getBookingStatus(host!.id, BookingStatus.cancel, false);
       } else {
-        getBooking(user!.id);
+        getBooking(host!.id);
       }
     }
-  }, [type, user]);
+  }, [type, host]);
   return (
     <Grid item xs={12}>
-      <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-        <TableHostRoomConfirm data={bookingArr!} columns={columnBooking} />
+      <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>   
+        <TableHostRoomConfirm
+          data={bookingArr!}
+          columns={columnBooking}
+          detail={false}
+        />
       </Paper>
     </Grid>
   );

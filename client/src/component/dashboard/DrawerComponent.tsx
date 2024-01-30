@@ -64,7 +64,6 @@ const DrawerComponent = ({ toggleDrawer, open, paths }: PropDrawerType) => {
 
         {paths?.map((path) => (
           <ListItemButton key={path.id}>
-
             <NavLink to={user?.id && path.chilrend ? path?.path + "/" + user.id : path.path} className="flex ">
               <ListItemIcon>{path?.icon}</ListItemIcon>
               <ListItemText primary={path.title} />

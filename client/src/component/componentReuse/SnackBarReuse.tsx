@@ -19,6 +19,8 @@ const SnackBarReuse = ({ type, message, setError }: PropTypeSnackBar) => {
     if (reason === "clickaway") {
       return;
     }
+    message
+    console.log(message)
     setError("");
   };
 

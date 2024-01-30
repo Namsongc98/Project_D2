@@ -18,7 +18,7 @@ import imgEmtry from "../../../assets/image/img_emtry.png";
 export default function TableBooking({ data, columns, detail }: PropsBooking) {
   // page
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(2);
+  const [rowsPerPage, setRowsPerPage] = useState(4);
 
   const [openInfor, setOpenInfor] = useState(false);
   const [booking, setBooking] = useState<IBookingData>();
@@ -33,13 +33,14 @@ export default function TableBooking({ data, columns, detail }: PropsBooking) {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+ 
 
   const handleOpenInfor = async (booking: IBookingData) => {
     try {
       setBooking(booking);
       const res = await getOneRoom(booking!.id_touris);
+      console.log(res.data)
       setRoom(res.data);
-      console.log(openInfor);
       setOpenInfor(!openInfor);
     } catch (error) {
       console.log(error);
@@ -85,7 +86,9 @@ export default function TableBooking({ data, columns, detail }: PropsBooking) {
                         <TableCell key={index}>
                           {column.format && typeof value === "number"
                             ? column.format(value)
-                            : value}
+                            : value
+                            ? value
+                            : "Đang cập nhật"}
                         </TableCell>
                       );
                     })}
@@ -153,7 +156,7 @@ export default function TableBooking({ data, columns, detail }: PropsBooking) {
       </ModalComponent>
 
       <TablePagination
-        rowsPerPageOptions={[2, 4, 8]}
+        rowsPerPageOptions={[4, 6, 8]}
         component="div"
         count={data.length}
         rowsPerPage={rowsPerPage}

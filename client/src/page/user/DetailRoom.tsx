@@ -19,7 +19,7 @@ import { Button, Input, PickDate } from "../../component/element";
 import HotelIcon from "@mui/icons-material/Hotel";
 import BathtubIcon from "@mui/icons-material/Bathtub";
 import GroupIcon from "@mui/icons-material/Group";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { createBooking, getOneRoom } from "../../service";
 import {
@@ -51,12 +51,15 @@ const DetailRoom = () => {
   const user = useGetUser();
   const inputStartDate = useDate();
   const inputEndDate = useDate();
-
+  const navigate = useNavigate();
   const getRoom = async () => {
     try {
+      console.log(param);
       if (param.id) {
         const dataRoom = await getOneRoom(+param.id);
         setDetailRoom(dataRoom.data);
+      } else {
+        navigate("*");
       }
     } catch (error) {
       console.log(error);
@@ -85,7 +88,6 @@ const DetailRoom = () => {
 
   const message: string | undefined =
     errors?.phone?.message || errors?.countPerson?.message;
-  console.log(message);
   useEffect(() => {
     setError(message!);
     return () => {
@@ -103,14 +105,15 @@ const DetailRoom = () => {
   }, [detailRoom, inputStartDate.timestamp, inputEndDate.timestamp]);
 
   const onSubmit: SubmitHandler<any> = async (data) => {
-    const userName = user?.firstName + " " + user?.lastName;
+    const userName =
+      (user?.firstName ? user.firstName : "") +
+      " " +
+      (user?.lastName ? user.lastName : "");
 
     if (inputStartDate.timestamp! >= inputEndDate.timestamp!) {
       setError("Ngày trả phòng không hợp lệ");
       return;
     }
-    console.log(data.countPerson);
-    console.log(detailRoom!.cout_people);
     if (data.countPerson > detailRoom!.cout_people) {
       setError("Phòng nhiều nhất chỉ " + detailRoom!.cout_people + "người");
       return;
@@ -145,7 +148,7 @@ const DetailRoom = () => {
 
   return (
     <Box sx={{ backgroundColor: "#P5f5f5" }}>
-      <SnackBarReuse type={type} message={mess} setError={setError} />
+      <SnackBarReuse type={type} message={mess} setError={setMess} />
       <div className="w-full flex h-[480px]">
         {detailRoom?.image?.map((item) => {
           return (
@@ -246,84 +249,75 @@ const DetailRoom = () => {
           </Paper>
         </Stack>
       </Container>
-    
-        <ModalComponent setOpen={setOpenConfirm} open={openConfirm}>
-          <Typography variant="h6" component="h2">
-            Bạn đồng ý đặt phòng
-          </Typography>
-          <Divider light sx={{ my: 2 }} />
-          {error && (
-            <div className="wapper-danger w-full mb-6 bg-red-100 text-red-500 p-3 rounded-md flex items-center">
-              <ErrorOutlineIcon className="mr-3" />
-              <span className="text-sm">{error}</span>
-            </div>
-          )}
-          <form onSubmit={handleSubmit(onSubmit)} className="">
-            <Input
-              type="number"
-              title="Số điện thoại"
-              label="phone"
-              placeholder="Số điện thoại là..."
-              className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
-              required={true}
-              register={register}
-            />
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <Box
-                sx={{
-                  width: "400px",
-                  height: "50px",
-                  display: "flex",
-                  justifyContent: "center",
-                  position: "relative",
-                }}
-              >
-                <PickDate label="Nhận phòng " {...inputStartDate} />
-                <PickDate label="Trả phòng" {...inputEndDate} />
-              </Box>
-            </LocalizationProvider>
-            <Input
-              type="number"
-              title="Số lượng người"
-              label="countPerson"
-              placeholder="Số người là..."
-              className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
-              required={true}
-              register={register}
-            ></Input>
-            <Stack
-              sx={{ mt: 2 }}
-              direction="row"
-              justifyContent="space-between"
-            >
-              <span className="text-xl ">Số ngày đặt:</span>
-              <span className="">{gapDate} Ngày</span>
-            </Stack>
-            <Stack
-              sx={{ mt: 2 }}
-              direction="row"
-              justifyContent="space-between"
-            >
-              <span className="text-xl ">Ước tính tiền phải trả</span>
-              <span className="">{formatcurrency(total)}</span>
-            </Stack>
-            <Stack sx={{ mt: 4 }} direction="row" spacing={2}>
-              <Button
-                type="submit"
-                className="text-white bg-[#5A8DEE] rounded px-4 py-2 hover:opacity-80 shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] hover:shadow-[0_4px_12px_0_rgba(90,141,238,0.6)]"
-              >
-                Đồng ý
-              </Button>
-              <Button
-                type="button"
-                className="text-white bg-red-500  rounded px-4 py-2 hover:opacity-80 shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] hover:shadow-[0_4px_12px_0_rgba(90,141,238,0.6)] "
-              >
-                Không đồng ý
-              </Button>
-            </Stack>
-          </form>
-        </ModalComponent>
 
+      <ModalComponent setOpen={setOpenConfirm} open={openConfirm}>
+        <Typography variant="h6" component="h2">
+          Bạn đồng ý đặt phòng
+        </Typography>
+        <Divider light sx={{ my: 2 }} />
+        {error && (
+          <div className="wapper-danger w-full mb-6 bg-red-100 text-red-500 p-3 rounded-md flex items-center">
+            <ErrorOutlineIcon className="mr-3" />
+            <span className="text-sm">{error}</span>
+          </div>
+        )}
+        <form onSubmit={handleSubmit(onSubmit)} className="">
+          <Input
+            type="number"
+            title="Số điện thoại"
+            label="phone"
+            placeholder="Số điện thoại là..."
+            className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
+            required={true}
+            register={register}
+          />
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <Box
+              sx={{
+                width: "400px",
+                height: "50px",
+                display: "flex",
+                justifyContent: "center",
+                position: "relative",
+              }}
+            >
+              <PickDate label="Nhận phòng " {...inputStartDate} />
+              <PickDate label="Trả phòng" {...inputEndDate} />
+            </Box>
+          </LocalizationProvider>
+          <Input
+            type="number"
+            title="Số lượng người"
+            label="countPerson"
+            placeholder="Số người là..."
+            className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
+            required={true}
+            register={register}
+          ></Input>
+          <Stack sx={{ mt: 2 }} direction="row" justifyContent="space-between">
+            <span className="text-xl ">Số ngày đặt:</span>
+            <span className="">{gapDate} Ngày</span>
+          </Stack>
+          <Stack sx={{ mt: 2 }} direction="row" justifyContent="space-between">
+            <span className="text-xl ">Ước tính tiền phải trả</span>
+            <span className="">{formatcurrency(total)}</span>
+          </Stack>
+          <Stack sx={{ mt: 4 }} direction="row" spacing={2}>
+            <Button
+              type="submit"
+              className="text-white bg-[#5A8DEE] rounded px-4 py-2 hover:opacity-80 shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] hover:shadow-[0_4px_12px_0_rgba(90,141,238,0.6)]"
+            >
+              Đồng ý
+            </Button>
+            <Button
+              type="button"
+              className="text-white bg-red-500  rounded px-4 py-2 hover:opacity-80 shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] hover:shadow-[0_4px_12px_0_rgba(90,141,238,0.6)] "
+            >
+              Không đồng ý
+            </Button>
+          </Stack>
+        </form>
+      </ModalComponent>
     </Box>
   );
 };
