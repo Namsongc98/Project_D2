@@ -3,12 +3,8 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import {
   Box,
   InputBase,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  ThemeProvider,
-  createTheme,
+  List,
+  MenuItem,
 } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import EscalatorWarningIcon from "@mui/icons-material/EscalatorWarning";
@@ -18,21 +14,18 @@ import useDate from "../../hook/useDate";
 import { useEffect, useState } from "react";
 import LocationCityIcon from "@mui/icons-material/LocationCity";
 import { useDebounce } from "../../hook";
-const theme = createTheme({
-  components: {
-    MuiTextField: {
-      styleOverrides: {
-        root: {},
-      },
-    },
-  },
-});
+import { searchCityFindRoom } from "../../service";
+import { IRoomPost } from "../../type";
+
+
+
 
 const SearchHotel = () => {
   const inputStartDate = useDate();
   const inputEndDate = useDate();
   const [persion, setPersion] = useState<number | "">("");
   const [search, setSearch] = useState("");
+  const [dataCity, setDataCity] = useState([] as IRoomPost[])
   const deBounce: string = useDebounce(search, 500);
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     const inputValue = e.currentTarget.value.replace(/\D/g, "");
@@ -40,16 +33,31 @@ const SearchHotel = () => {
   };
 
   const handleOnChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    setSearch(e.currentTarget.value);
+    const changeValue = e.currentTarget.value
+    if (!changeValue.startsWith(" ")) {
+      setSearch(e.currentTarget.value);
+    }
   };
 
-  const handleSearch = () => {
-    console.log("deBounce", deBounce);
+  const handleSearch = async () => {
+    try {
+      const res = await searchCityFindRoom(deBounce)
+      setDataCity(res.data)
+    } catch (error) {
+      throw new Error("Không tìm thấy thành phố")
+    }
   };
 
   useEffect(() => {
+    if (!deBounce) return
     handleSearch();
   }, [deBounce]);
+
+  const handleChangeCity = (e) => {
+    console.log("first")
+    setSearch(e.target.innerText)
+
+  }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -70,39 +78,41 @@ const SearchHotel = () => {
                 search={search}
                 handleSearch={handleOnChange}
               />
+              {dataCity.length ?
+                <List component="div"
+                  disablePadding
+                  sx={{ bgcolor: "white", position: "absolute", top: "55px", maxHeight: 200, width: "100%", overflow: "auto", paddingTop: 1, paddingBottom: 1 }}
+                >
+                  {dataCity?.map((item) => (
+                    <MenuItem value="jhjhjk" sx={{ width: "100%" }} onClick={handleChangeCity} key={item.id} selected={search === item.address}>
+                      <LocationCityIcon
+                        fontSize="small"
+                        sx={{ color: "#00afdd", marginRight: 1 }}
+                      />
+                      {item.address}
+                    </MenuItem>
+                  ))}
+                </List>
+                : <></>
+              }
             </div>
-            <ListItem
-              component="div"
-              disablePadding
-              sx={{ bgcolor: "white", position: "absolute", bottom: "-55px" }}
-            >
-              <ListItemButton>
-                <ListItemIcon>
-                  <LocationCityIcon
-                    fontSize="small"
-                    sx={{ color: "#00afdd" }}
-                  />
-                </ListItemIcon>
-                <ListItemText primary={`Item `} />
-              </ListItemButton>
-            </ListItem>
           </div>
-          <ThemeProvider theme={theme}>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <Box
-                sx={{
-                  width: "30%",
-                  height: "50px",
-                  display: "flex",
-                  justifyContent: "center",
-                  position: "relative",
-                }}
-              >
-                <PickDate label="Nhận phòng " {...inputStartDate} />
-                <PickDate label="Trả phòng" {...inputEndDate} />
-              </Box>
-            </LocalizationProvider>
-          </ThemeProvider>
+
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <Box
+              sx={{
+                width: "30%",
+                height: "50px",
+                display: "flex",
+                justifyContent: "center",
+                position: "relative",
+              }}
+            >
+              <PickDate label="Nhận phòng " {...inputStartDate} />
+              <PickDate label="Trả phòng" {...inputEndDate} />
+            </Box>
+          </LocalizationProvider>
+
 
           <div className="relative bg-white w-[10%] h-12 flex items-center">
             <label

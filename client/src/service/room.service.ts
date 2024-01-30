@@ -72,6 +72,10 @@ const patchStatusBooking = async (
   return await instance.patch(`/touris/${idRoom}`, statusBooking);
 };
 
+const searchCityFindRoom = async (city: string) => {
+  return await instance.get(`/touris?city_like=${city}`);
+};
+
 // thay đổi booking statuss succes
 
 export {
@@ -84,4 +88,5 @@ export {
   getAllRoomApprove,
   getAllRoomHost,
   getAllRoomApproveHost,
+  searchCityFindRoom,
 };
