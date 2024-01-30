@@ -11,15 +11,12 @@ import InfoIcon from "@mui/icons-material/Info";
 import { PropsUser } from "../../../type";
 import { Avatar, IconButton, Stack } from "@mui/material";
 import { columnUser } from "../../../constain";
-import { useNavigate } from "react-router-dom";
-import imgEmtry from "../../../assets/image/img_emtry.png"
+import imgEmtry from "../../../assets/image/img_emtry.png";
 
-const TableUser = ({ data }: PropsUser) => {
-  const navigate = useNavigate();
-
+const TableUser = ({ data, onClickNav }: PropsUser) => {
   // page
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(2);
+  const [rowsPerPage, setRowsPerPage] = useState(4);
 
   // thay đổi trang
   const handleChangePage = (event: unknown, newPage: number) => {
@@ -30,10 +27,6 @@ const TableUser = ({ data }: PropsUser) => {
   ) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
-  };
-
-  const handleClickNav = (idUser: string) => {
-    navigate("/admin/user/" + idUser);
   };
 
   return (
@@ -65,7 +58,7 @@ const TableUser = ({ data }: PropsUser) => {
                   <TableRow
                     hover
                     key={profile.id}
-                    onClick={() => handleClickNav(profile.id)}
+                    onClick={() => onClickNav(profile.id)}
                   >
                     <TableCell key={profile.id}>
                       <Stack direction="row" spacing={2} alignItems="center">
@@ -126,7 +119,7 @@ const TableUser = ({ data }: PropsUser) => {
 
       {data && (
         <TablePagination
-          rowsPerPageOptions={[2, 4, 8]}
+          rowsPerPageOptions={[4, 6, 8]}
           component="div"
           count={data.length}
           rowsPerPage={rowsPerPage}

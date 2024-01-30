@@ -16,6 +16,8 @@ const useInputTypeFileImg = (initialValue: string): InputFileHook => {
     setAvatarView(URL.createObjectURL(fileView));
     if (!allowedTypes.includes(fileView?.type)) {
       setError("Chỉ sử dụng ảnh kiểu JPEG, PNG, GIF");
+    } else {
+      setError("")
     }
   };
   useEffect(() => {

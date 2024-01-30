@@ -4,16 +4,14 @@ import MenuIcon from "@mui/icons-material/Menu";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Person2Icon from "@mui/icons-material/Person2";
-import { IProfileUser, PropAppBarType, Role } from "../../type";
+import { PropAppBarType, Role } from "../../type";
 import AvatarUser from "../componentReuse/AvatarUser";
 import { useGetUser } from "../../hook";
 import { Link, useNavigate } from "react-router-dom";
 import { Popup } from "../componentReuse";
 import { remoteToken } from "../../common";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { getUser, setUser } from "../../store/reducer/userSlice";
-import { useDispatch } from "react-redux";
+import { useState } from "react";
+
 const drawerWidth = 240;
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -35,18 +33,16 @@ const AppBar = styled(MuiAppBar, {
 
 const AppBarComponent = ({ toggleDrawer, open }: PropAppBarType) => {
   const user = useGetUser();
-  const userSelect: IProfileUser = useSelector(getUser);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [anchor, setAnchor] = useState<null | HTMLElement>(null);
-
-  useEffect(() => {
-    dispatch(setUser(userSelect));
-  }, [user]);
-
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchor(anchor ? null : event.currentTarget);
   };
+
+  const fullName =
+    (user?.firstName ? user.firstName : "") +
+    " " +
+    (user?.lastName ? user.lastName : "");
 
   const handleLogout = () => {
     remoteToken();
@@ -78,10 +74,10 @@ const AppBarComponent = ({ toggleDrawer, open }: PropAppBarType) => {
           noWrap
           sx={{ flexGrow: 1 }}
         >
-          {userSelect.role === "Admin" ? (
-            "Admin"
-          ) : userSelect.role === "Host" ? (
-            "Host"
+          {user?.role === Role.admin ? (
+            <>{fullName}</>
+          ) : user?.role === Role.host ? (
+            <>{fullName}</>
           ) : (
             <></>
           )}
@@ -90,23 +86,23 @@ const AppBarComponent = ({ toggleDrawer, open }: PropAppBarType) => {
           className="flex gap-2 items-center hover:bg-[#1871ca] px-3 py-2 rounded-md"
           onClick={handleClick}
         >
-          <AvatarUser user={userSelect} size={30} />
+          <AvatarUser user={user} size={30} />
           <p className="cursor-pointer text-white leading-8 font-semibold">
             Tài khoản
           </p>
         </div>
         <Popup anchor={anchor} setAnchor={setAnchor}>
           <div className="flex flex-col  text-base text-[#808089]">
-            {userSelect?.role === Role.admin ? (
+            {user?.role === Role.admin ? (
               <Link
                 to="/admin"
                 className="flex items-center gap-1 px-3 hover:bg-[#e6e6e6] py-2 hover:text-[#808089] "
               >
                 <AdminPanelSettingsIcon /> <span>Admin</span>{" "}
               </Link>
-            ) : userSelect?.role === Role.host ? (
+            ) : user?.role === Role.host ? (
               <Link
-                to={"/host/" + userSelect?.id}
+                to={"/host/" + user?.id}
                 className="flex items-center gap-1 px-3 hover:bg-[#e6e6e6] py-2 hover:text-[#808089] "
               >
                 <AdminPanelSettingsIcon /> <span>Host</span>{" "}

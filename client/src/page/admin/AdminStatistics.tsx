@@ -41,7 +41,7 @@ const AdminStatistics = () => {
               }}
             >
               <Typography color="#1976d2" fontSize="24px" fontWeight="700">
-                Quản lý người đặt phòng
+               Thống kê khách hàng
               </Typography>
             </Paper>
           </Grid>

@@ -76,13 +76,49 @@
       "email": "host4@gmail.com",
       "password": "$2a$10$OP2vps1OpkeooFNIdB1R9.Y3c.wwLsfvv9TmYsARixX3ZImSdvd5W",
       "id": "640f7a52-7f62-4403-8019-55cbae2609c9",
-      "role": "Guide",
+      "role": "Host",
       "firstName": "host ",
       "lastName": "4",
       "gender": "Nam",
       "age": "35",
       "phone": "09854534534",
       "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1706231932/ywmwq34e8wdnfcemjvj3.jpg"
+    },
+    {
+      "email": "quynhanh@gmail.com",
+      "password": "$2a$10$CEj2d43k2yREGr7lnddQJ.iDM51hwSivzApgl6Wp7Z0xLIowUA8Pi",
+      "id": "9708f548-48ce-4e96-94cb-2a18419e54f2",
+      "role": "Guide",
+      "firstName": "quỳnh",
+      "lastName": "anh",
+      "gender": "Nữ",
+      "age": "21",
+      "phone": "098657546",
+      "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1706599263/kmkphghontpohm7qjlmw.jpg"
+    },
+    {
+      "email": "tramyxinhgai@gmail.com",
+      "password": "$2a$10$67DN6gw.0CeEu9YmjsyNZexOhSdsrVQgZbWCbclNIcmjxEJRgr2eK",
+      "id": "b4818218-fde8-426c-8aad-97b020fc927a",
+      "role": "Guide",
+      "firstName": "tra",
+      "lastName": "my",
+      "gender": "Nữ",
+      "age": "23",
+      "phone": "0977685675",
+      "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1706599026/rtkvossgkkvrim0zwk0c.jpg"
+    },
+    {
+      "email": "truongbeo@gmail.com",
+      "password": "$2a$10$SReAgh3zCfcROeWqAgZAJuyEpjgIfBYwi9vMh79LF2Ik.rEJ6QhTC",
+      "id": "ad350080-38e2-4be0-8808-3614d23978c6",
+      "role": "Guide",
+      "firstName": "trường",
+      "lastName": "béo",
+      "gender": "Nam",
+      "age": "30",
+      "phone": "0934665756",
+      "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1706597789/occn4yalobujlkp035rl.jpg"
     }
   ],
   "touris": [
@@ -109,7 +145,7 @@
           "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705564740/scaqbbfslvwledxdbeir.webp"
         }
       ],
-      "approve_room": "Success",
+      "approve_room": "Empty",
       "id": 1
     },
     {
@@ -131,7 +167,7 @@
           "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705564839/woijwvng1qgrdyua8t8a.webp"
         }
       ],
-      "approve_room": "Success",
+      "approve_room": "Empty",
       "id": 2
     },
     {
@@ -197,7 +233,7 @@
     {
       "host_id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
       "created_at": 1705907382605,
-      "booking_status": "Empty",
+      "booking_status": "Pending",
       "name": "Hà Nội 2",
       "address": "Cầu Giấy, Hà Nội",
       "price": 1050000,
@@ -227,7 +263,7 @@
     {
       "host_id": "397418b9-5290-4005-bcd9-fbb62a074569",
       "created_at": 1705907644011,
-      "booking_status": "Empty",
+      "booking_status": "Pending",
       "name": "Lào Cai1",
       "address": " Sa Pa, Lào Cai",
       "price": 11000000,
@@ -257,7 +293,7 @@
     {
       "host_id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
       "created_at": 1705907685985,
-      "booking_status": "Empty",
+      "booking_status": "Pending",
       "name": "Lào Cai2",
       "address": " Sa Pa, Lào Cai",
       "price": 10500000,
@@ -317,7 +353,7 @@
     {
       "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
       "created_at": 1705908454613,
-      "booking_status": "Empty",
+      "booking_status": "Pending",
       "name": "Sài Gòn Hạ Long Hotel",
       "address": "Bãi cháy, Hạ Long, Quảng Ninh",
       "price": 900000,
@@ -347,7 +383,7 @@
     {
       "host_id": "640f7a52-7f62-4403-8019-55cbae2609c9",
       "created_at": 1705908741427,
-      "booking_status": "Empty",
+      "booking_status": "Pending",
       "name": "Tam Cốc Palm House",
       "address": "Xóm 5 - Thôn Đam Khê Trong - Xã Ninh Hải - Huyện Hoa Lư - Tỉnh Ninh Bình",
       "price": 600000,
@@ -377,7 +413,7 @@
     {
       "host_id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
       "created_at": 1705908808696,
-      "booking_status": "Empty",
+      "booking_status": "Pending",
       "name": "Ninh Bình Bamboo Farmstay",
       "address": "Xóm 10 - Thôn Đam Khê Trong - Xã Ninh Hải - Huyện Hoa Lư - Tỉnh Ninh Bình",
       "price": 700000,
@@ -407,7 +443,7 @@
     {
       "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
       "created_at": 1705908957801,
-      "booking_status": "Empty",
+      "booking_status": "Pending",
       "name": "Yarra Ocean Suites Danang",
       "address": "Phường Mỹ An - Quận Ngũ Hành Sơn - Thành phố Đà Nẵng ",
       "price": 700000,
@@ -437,7 +473,7 @@
     {
       "host_id": "640f7a52-7f62-4403-8019-55cbae2609c9",
       "created_at": 1705909065246,
-      "booking_status": "Empty",
+      "booking_status": "Pending",
       "name": "Radisson Blu Danang",
       "address": "Phường Phước Mỹ - Quận Sơn Trà - Thành phố Đà Nẵng",
       "price": 670000,
@@ -461,13 +497,13 @@
           "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705909064/emc6hh0dzycr4ohqgqii.jpg"
         }
       ],
-      "approve_room": "Pending",
+      "approve_room": "Success",
       "id": 13
     },
     {
-      "host_id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
+      "host_id": "397418b9-5290-4005-bcd9-fbb62a074569",
       "created_at": 1705909357691,
-      "booking_status": "Empty",
+      "booking_status": "Pending",
       "name": "M Village TP HCM",
       "address": "Phường Bến Nghé - Quận 1 - Thành phố Hồ Chí Minh ",
       "price": 1200000,
@@ -491,7 +527,7 @@
           "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705909357/eg7xjvayuanvqrewa5f5.jpg"
         }
       ],
-      "approve_room": "Pending",
+      "approve_room": "Success",
       "id": 14
     },
     {
@@ -527,61 +563,150 @@
   ],
   "bookings": [
     {
-      "id_touris": 1,
-      "user_id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
+      "id_touris": 12,
+      "user_id": "ad350080-38e2-4be0-8808-3614d23978c6",
       "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
-      "name_user": "vũ Sơn",
-      "phone": 958978576,
-      "email": "namsongc98@gmail.com",
-      "name_room": "khách sạn Host1 ",
+      "name_user": "trường trường",
+      "phone": 981879567,
+      "email": "truongbeo@gmail.com",
+      "name_room": "Yarra Ocean Suites Danang",
       "booking_status": "Pending",
-      "start_date": 1705881600000,
-      "end_date": 1705968000000,
-      "price": 6756578,
-      "total": 12000000,
-      "count_date": 1,
-      "count_person": 2,
-      "complete_touris": false,
-      "pay_status": "Pending",
-      "id": 2
-    },
-    {
-      "id_touris": 1,
-      "user_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
-      "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
-      "name_user": "Hello host1",
-      "phone": 958978576,
-      "email": "host1@gmail.com",
-      "name_room": "Hà Nội 2",
-      "booking_status": "Success",
-      "start_date": 1705881600000,
-      "end_date": 1706054400000,
-      "price": 987676,
-      "total": 2100000,
-      "count_date": 2,
-      "count_person": 2,
-      "complete_touris": false,
-      "pay_status": "Pending",
-      "id": 3
-    },
-    {
-      "id_touris": 8,
-      "user_id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
-      "host_id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
-      "name_user": "host 2",
-      "phone": 9813456,
-      "email": "host2@gmail.com",
-      "name_room": "Palette Collect's Boutique Hotel Ha Long",
-      "booking_status": "Success",
-      "start_date": 1706227200000,
-      "end_date": 1706313600000,
+      "start_date": 1706572800000,
+      "end_date": 1706659200000,
       "count_date": 1,
       "count_person": 2,
       "price": 700000,
       "total": 700000,
       "complete_touris": false,
       "pay_status": "Pending",
+      "id": 1
+    },
+    {
+      "id_touris": 10,
+      "user_id": "ad350080-38e2-4be0-8808-3614d23978c6",
+      "host_id": "640f7a52-7f62-4403-8019-55cbae2609c9",
+      "name_user": "trường béo",
+      "phone": 895675467,
+      "email": "truongbeo@gmail.com",
+      "name_room": "Tam Cốc Palm House",
+      "booking_status": "Pending",
+      "start_date": 1706572800000,
+      "end_date": 1706659200000,
+      "count_date": 1,
+      "count_person": 2,
+      "price": 600000,
+      "total": 600000,
+      "complete_touris": false,
+      "pay_status": "Pending",
+      "id": 2
+    },
+    {
+      "id_touris": 9,
+      "user_id": "b4818218-fde8-426c-8aad-97b020fc927a",
+      "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "name_user": "tra my",
+      "phone": 981868898,
+      "email": "tramyxinhgai@gmail.com",
+      "name_room": "Sài Gòn Hạ Long Hotel",
+      "booking_status": "Pending",
+      "start_date": 1706572800000,
+      "end_date": 1706659200000,
+      "count_date": 1,
+      "count_person": 2,
+      "price": 900000,
+      "total": 900000,
+      "complete_touris": false,
+      "pay_status": "Pending",
+      "id": 3
+    },
+    {
+      "id_touris": 5,
+      "user_id": "b4818218-fde8-426c-8aad-97b020fc927a",
+      "host_id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
+      "name_user": "tra my",
+      "phone": 34253452,
+      "email": "tramyxinhgai@gmail.com",
+      "name_room": "Hà Nội 2",
+      "booking_status": "Pending",
+      "start_date": 1706572800000,
+      "end_date": 1706745600000,
+      "count_date": 2,
+      "count_person": 2,
+      "price": 1050000,
+      "total": 2100000,
+      "complete_touris": false,
+      "pay_status": "Pending",
       "id": 4
+    },
+    {
+      "id_touris": 11,
+      "user_id": "9708f548-48ce-4e96-94cb-2a18419e54f2",
+      "host_id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
+      "name_user": "quỳnh anh",
+      "phone": 967875,
+      "email": "quynhanh@gmail.com",
+      "name_room": "Ninh Bình Bamboo Farmstay",
+      "booking_status": "Pending",
+      "start_date": 1706572800000,
+      "end_date": 1706832000000,
+      "count_date": 3,
+      "count_person": 2,
+      "price": 700000,
+      "total": 2100000,
+      "complete_touris": false,
+      "pay_status": "Pending",
+      "id": 5
+    },
+    {
+      "id_touris": 14,
+      "user_id": "9708f548-48ce-4e96-94cb-2a18419e54f2",
+      "host_id": "397418b9-5290-4005-bcd9-fbb62a074569",
+      "name_user": "quỳnh anh",
+      "phone": 8785674,
+      "email": "quynhanh@gmail.com",
+      "name_room": "M Village TP HCM",
+      "booking_status": "Pending",
+      "start_date": 1706572800000,
+      "end_date": 1706659200000,
+      "count_date": 1,
+      "count_person": 2,
+      "price": 1200000,
+      "total": 1200000,
+      "complete_touris": false,
+      "pay_status": "Pending",
+      "id": 6
+    }
+  ],
+  "user_booking": [
+    {
+      "id_user": "ad350080-38e2-4be0-8808-3614d23978c6",
+      "id_host": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "id": 1
+    },
+    {
+      "id_user": "ad350080-38e2-4be0-8808-3614d23978c6",
+      "id_host": "640f7a52-7f62-4403-8019-55cbae2609c9",
+      "id": 2
+    },
+    {
+      "id_user": "b4818218-fde8-426c-8aad-97b020fc927a",
+      "id_host": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "id": 3
+    },
+    {
+      "id_user": "b4818218-fde8-426c-8aad-97b020fc927a",
+      "id_host": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
+      "id": 4
+    },
+    {
+      "id_user": "9708f548-48ce-4e96-94cb-2a18419e54f2",
+      "id_host": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
+      "id": 5
+    },
+    {
+      "id_user": "9708f548-48ce-4e96-94cb-2a18419e54f2",
+      "id_host": "397418b9-5290-4005-bcd9-fbb62a074569",
+      "id": 6
     }
   ]
 }

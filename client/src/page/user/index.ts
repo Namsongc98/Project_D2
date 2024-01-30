@@ -8,3 +8,4 @@ export { default as Detail } from "./Detail";
 export { default as DetailRoom } from "./DetailRoom";
 export { default as HistoryBooking } from "./HistoryBooking";
 export { default as Profile } from "./Profile";
+export { default as NotFound } from "./NotFound";

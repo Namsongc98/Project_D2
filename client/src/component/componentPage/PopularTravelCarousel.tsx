@@ -79,7 +79,7 @@ const PopularTravelCarousel = () => {
       <div className=" relative">
         <Slider {...settings}>
           {dataCityCarousel.map((item) => (
-            <Link to={`/${item.search}`} className="" key={item.id}>
+            <Link to={`/city/${item.search}`} className="" key={item.id}>
               <div className="relative overflow-hidden rounded cursor-pointer mx-1">
                 <h2 className="absolute text-white text-lg bottom-0 mb-4 ml-4 font-bold">
                   {item.city}

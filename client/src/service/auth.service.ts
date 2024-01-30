@@ -34,8 +34,15 @@ const getAllUser = async () => {
   return await instance.get('/users/', { params: { role: Role.guide } })
 }
 
-const getUserHostId = async ()=>{
-  return await instance.get('users', {params: {}})
+const getUserHostId = async (idUser: string) => {
+  try {
+    const res = await instance.get('users/' + idUser)
+    return res.data
+  } catch (error) {
+    throw new Error("user Invalid")
+  }
 }
 
-export { createUser, loginUser, postProfile, getUserSevice, getAllHost, getAllUser,getUserHostId };
+
+
+export { createUser, loginUser, postProfile, getUserSevice, getAllHost, getAllUser, getUserHostId };
