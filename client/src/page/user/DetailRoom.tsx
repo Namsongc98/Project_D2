@@ -54,7 +54,6 @@ const DetailRoom = () => {
   const navigate = useNavigate();
   const getRoom = async () => {
     try {
-      console.log(param);
       if (param.id) {
         const dataRoom = await getOneRoom(+param.id);
         setDetailRoom(dataRoom.data);
@@ -127,6 +126,7 @@ const DetailRoom = () => {
       phone: data.phone,
       email: user!.email,
       name_room: detailRoom!.name,
+      address_room: detailRoom!.address,
       booking_status: BookingStatus.pending,
       start_date: inputStartDate.timestamp!,
       end_date: inputEndDate.timestamp!,

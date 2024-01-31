@@ -117,6 +117,8 @@ const PostRoom = () => {
         type_tourism: data.typeTouris,
         bedroom: data.bedRoom,
         bathroom: data.bathRoom,
+        start_date: Date.now(),
+        end_date: Date.now(),
         decription: data.decription,
         image: dataImg,
         approve_room: Approve.pending,

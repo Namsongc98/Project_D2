@@ -19,10 +19,12 @@ const InputSearch = ({
   placeholder,
   search,
   handleSearch,
+  required,
 }: {
   placeholder: string;
-  search: string;
-  handleSearch:React.ChangeEventHandler<HTMLInputElement>
+  search: string | null;
+  handleSearch: React.ChangeEventHandler<HTMLInputElement>;
+  required: boolean;
 }) => {
   return (
     <>
@@ -52,19 +54,21 @@ const InputSearch = ({
           onChange={handleSearch}
           inputProps={{ "aria-label": "search google maps" }}
           fullWidth
+          required={required}
         />
         <IconButton
           type="button"
           sx={{
             p: "10px",
             position: "absolute",
-            right: 0,
-            top: 0,
-            width: 50,
-            height: 50,
+            right: "3px",
+            top: "3px",
+            width: 40,
+            height: 40,
             display: "flex",
             justifyItems: "center",
             alignItems: "center",
+            backgroundColor: "white",
           }}
           aria-label="search"
         >

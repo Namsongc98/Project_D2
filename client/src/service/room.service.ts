@@ -1,9 +1,9 @@
+
 import { instance, instance_token } from "../config";
 import {
   Approve,
   ApprovePacth,
   ApproveType,
-  BookingStatus,
   IRoomPost,
   PatchBooking,
 } from "../type";
@@ -51,11 +51,10 @@ const getOneRoom = async (id: number) => {
 //lấy dữ liệu theo city có status là emtry admin  success
 const getRoomCity = async (
   city: string,
-  status: BookingStatus.emtry,
   approve: Approve.success
 ) => {
   return await instance.get("/touris", {
-    params: { city, booking_status: status, approve_room: approve },
+    params: { city, approve_room: approve },
   });
 };
 
@@ -72,11 +71,17 @@ const patchStatusBooking = async (
   return await instance.patch(`/touris/${idRoom}`, statusBooking);
 };
 
+
+// search input city
 const searchCityFindRoom = async (city: string) => {
   return await instance.get(`/touris?city_like=${city}`);
 };
 
-// thay đổi booking statuss succes
+// summitSearch get city 
+const getRoomSearchAddress = async (dataSearch: { address: string, checkin: string, checkout: string, person: string }) => {
+  const res = await instance.get(`/touris/`, { params: { address_like: dataSearch.address, cout_people_gte: dataSearch.person, start_date_lte: dataSearch.checkin, end_date_lte: dataSearch.checkin } })
+  return res
+}
 
 export {
   createRoom,
@@ -89,4 +94,5 @@ export {
   getAllRoomHost,
   getAllRoomApproveHost,
   searchCityFindRoom,
+  getRoomSearchAddress
 };

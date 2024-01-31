@@ -78,7 +78,6 @@ const DepositBooking = () => {
               >
                 Danh sách người dùng
               </Typography>
-              kjghhg
               <TableUser data={dataUser!} onClickNav={handleClickNav} />
             </Paper>
           </Grid>

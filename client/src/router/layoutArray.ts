@@ -18,6 +18,7 @@ import {
   Register,
   SearchHotel,
 } from "../page/user";
+import DetaiSearchRoom from "../page/user/DetaiSearchRoom";
 
 import { Layout, Role } from "../type";
 
@@ -27,6 +28,7 @@ const publicPage: Layout = [
   { id: 2, path: "/search", component: SearchHotel, layout: true },
   { id: 3, path: "/detail", component: Detail, layout: true },
   { id: 4, path: "/detail/:id", component: DetailRoom, layout: true },
+  { id: 22, path: "/searchresult", component: DetaiSearchRoom, layout: true },
   { id: 5, path: "/city/:id", component: ListStay, layout: true },
   { id: 6, path: "/register", component: Register, layout: false },
   { id: 7, path: "/login", component: Login, layout: false },

@@ -19,7 +19,7 @@ const getBookingStatus = async (
 
 // tạo booking
 const createBooking = async (booking: IBookingData) => {
-  const bookingStatus: PatchBooking = { booking_status: BookingStatus.pending };
+  const bookingStatus = { booking_status: BookingStatus.pending, start_date: booking.start_date, end_date: booking.end_date };
   await patchStatusBooking(booking.id_touris!, bookingStatus);
   const res = await instance.post(`/bookings/`, booking);
   const bookingUser = { id_user: booking.user_id, id_host: res.data.host_id };
@@ -43,14 +43,12 @@ const getBookingService = async () => {
 
 const getBookingHostId = async (id_host: string) => {
   const res = await instance.get("user_booking", { params: { id_host } });
-  console.log(res.data);
   try {
     const data = Promise.all(
       res.data.map((item: { id: number; id_user: string; id_host: string }) =>
         getUserHostId(item.id_user)
       )
     );
-
     return data;
   } catch (error) {
     throw new Error("user Ivalid");
@@ -101,6 +99,12 @@ const getBookingUserStatus = async (
   return booking;
 };
 
+const checkSearchDate = async (idRoom: number) => {
+  const res = await instance.get("/bookings/", { params: { id_touris: idRoom } })
+  console.log(res.data)
+  return res.data
+}
+
 export {
   patchBookingConfirm,
   getBookingStatus,
@@ -113,4 +117,5 @@ export {
   getBookingHostStatus,
   getBookingUser,
   getBookingUserStatus,
+  checkSearchDate
 };

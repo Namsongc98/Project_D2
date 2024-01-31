@@ -27,18 +27,26 @@ interface IBookingData {
   phone: number;
   email: string;
   name_room: string;
+  address_room: string;
   booking_status: BookingStatus;
   start_date: number;
   end_date: number;
-  cout_persion?: number;
+  cout_person?: number;
   price?: number;
   count_date?: number;
   count_person?: number;
   pay_status?: StatusPayment;
   total: number;
   complete_touris: boolean;
-  [key: string]: any; 
+  [key: string]: any;
+}
+
+interface IDataSearch {
+  address: string | null;
+  startDate: number | undefined;
+  endDate: number | undefined;
+  person: number;
 }
 
 export { StatusPayment, BookingStatus };
-export type { IBookingData, PatchBooking, BookingType };
+export type { IBookingData, PatchBooking, BookingType, IDataSearch };
