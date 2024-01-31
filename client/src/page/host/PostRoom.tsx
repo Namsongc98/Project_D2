@@ -7,7 +7,7 @@ import {
   SelectOptionType,
 } from "../../type";
 import { useButton, useGetUser, useInputMultiple } from "../../hook";
-import { PreviewImg } from "../../component/componentReuse";
+import { AlertComponent, PreviewImg } from "../../component/componentReuse";
 import { useEffect, useState } from "react";
 
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -16,12 +16,14 @@ import * as yup from "yup";
 import SnackBarReuse from "../../component/componentReuse/SnackBarReuse";
 import { createRoom, upfileClodinary } from "../../service";
 import { Title } from "../../component/componentPage";
-import { AlertColor } from "@mui/material";
+import { AlertColor, Stack } from "@mui/material";
 
 const PostRoom = () => {
   const [loading, setLoading] = useState(false);
   const [type, setType] = useState<AlertColor | undefined>(undefined);
   const [error, setError] = useState("");
+  const [typeAlert, setTypeAlert] = useState<AlertColor | undefined>(undefined);
+  const [errorAlert, setErrorAlert] = useState("");
   const user = useGetUser();
   //  SelectOption
   const City = [
@@ -83,8 +85,8 @@ const PostRoom = () => {
 
   useEffect(() => {
     if (message) {
-      setType("warning");
-      setError(message);
+      setTypeAlert("warning");
+      setErrorAlert(message);
     }
   }, [message]);
 
@@ -135,7 +137,6 @@ const PostRoom = () => {
       setLoading(false);
     }
   };
-
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     resetButton.onClick(e);
   };
@@ -147,8 +148,12 @@ const PostRoom = () => {
         action=""
         className="bg-white rounded-xl p-4 mt-7 min-w-[70%] shadow-md"
         onSubmit={handleSubmit(onSubmit)}
-      >
-        <Title>Thêm phòng</Title>
+      ><Stack direction="row" justifyContent="space-between">
+          <Title>Thêm phòng</Title>
+          <div className="w-1/3">
+            <AlertComponent error={errorAlert} type={typeAlert} setError={setErrorAlert} />
+          </div>
+        </Stack>
         <div className="flex flex-row gap-5 mt-5">
           <div className="w-2/3">
             <PreviewImg imageRoom={imageRoom} />
@@ -237,9 +242,8 @@ const PostRoom = () => {
                 <Button
                   type="submit"
                   disabled={loading}
-                  className={`text-white ${
-                    loading && "opacity-70"
-                  } bg-[#5A8DEE] w-full rounded px-6 py-2 hover:opacity-80 shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] hover:shadow-[0_4px_12px_0_rgba(90,141,238,0.6)]`}
+                  className={`text-white ${loading && "opacity-70"
+                    } bg-[#5A8DEE] w-full rounded px-6 py-2 hover:opacity-80 shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] hover:shadow-[0_4px_12px_0_rgba(90,141,238,0.6)]`}
                 >
                   Lưu
                 </Button>

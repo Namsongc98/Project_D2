@@ -57,7 +57,7 @@ const SearchHotel = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (inputStartDate.timestamp === inputEndDate.timestamp) {
+    if (inputStartDate.timestamp! >= inputEndDate.timestamp!) {
       setType("warning");
       setMessage("Ngày tháng không hợp lệ");
       return;
