@@ -96,8 +96,8 @@ interface PropsBooking {
   data: IBookingData[];
   columns: TableRoom[];
   detail: boolean;
-  getData?: () => void;
-  getData2?: () => void;
+  getData: () => void;
+  user:IProfileUser
 }
 
 interface PropsUser {

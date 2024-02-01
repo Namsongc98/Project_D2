@@ -64,7 +64,7 @@ const BookingUser = () => {
   }, [userType, host]);
   return (
     <Grid item xs={12} md={12} lg={12}>
-      <TableBooking data={data!} columns={columnBooking} detail={true} />
+      <TableBooking data={data!} columns={columnBooking} detail={true} getData={checkTypeParam}/>
     </Grid>
   );
 };

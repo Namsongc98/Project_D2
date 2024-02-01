@@ -46,8 +46,8 @@ const DetailComponent = ({
               : booking?.booking_status === BookingStatus.success
               ? "Đã được chấp nhận"
               : booking?.booking_status === BookingStatus.cancel
-              ? "Đơn đẵ bị hủy"
-              : "Đơn đã bị hủy"}
+              ? "Đơn đã bị hủy"
+              : "Chờ xác nhận"}
           </Typography>
         )}
       </Stack>

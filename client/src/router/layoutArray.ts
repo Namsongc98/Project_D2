@@ -8,15 +8,14 @@ import {
   RoomHost,
 } from "../page/host";
 import {
-  Detail,
   DetailRoom,
   HistoryBooking,
   Home,
   ListStay,
+  ListStayCity,
   Login,
   Profile,
   Register,
-  SearchHotel,
 } from "../page/user";
 import DetaiSearchRoom from "../page/user/DetaiSearchRoom";
 
@@ -25,21 +24,20 @@ import { Layout, Role } from "../type";
 //  laout user
 const publicPage: Layout = [
   { id: 1, path: "/", component: Home, layout: true },
-  { id: 2, path: "/search", component: SearchHotel, layout: true },
-  { id: 3, path: "/detail", component: Detail, layout: true },
-  { id: 4, path: "/detail/:id", component: DetailRoom, layout: true },
-  { id: 22, path: "/searchresult", component: DetaiSearchRoom, layout: true },
-  { id: 5, path: "/city/:id", component: ListStay, layout: true },
+  { id: 22, path: "", component: DetaiSearchRoom, layout: true, childrenRole: "city" },
   { id: 6, path: "/register", component: Register, layout: false },
   { id: 7, path: "/login", component: Login, layout: false },
-  // lyout User
+  { id: 2, path: ":id", component: DetailRoom, layout: true, childrenRole: "detail", },
+  { id: 5, path: ":id", component: ListStayCity, layout: true, childrenRole: "city", },
+  { id: 4, path: "", component: ListStay, layout: true, childrenRole: "city", },
+  // layout User
   {
     id: 8,
     path: "",
     component: HistoryBooking,
     layout: true,
     role: Role.guide,
-    children: true,
+    childrenRole: "user"
   },
   {
     id: 9,

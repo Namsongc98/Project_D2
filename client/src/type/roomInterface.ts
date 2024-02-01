@@ -15,8 +15,7 @@ interface IRoomSubmit {
 enum Approve {
     pending = "Pending",
     success = "Success",
-    fail = "Empty",
-
+    fail = "Fail",
 }
 
 type ApproveType = Approve.fail | Approve.pending | Approve.success

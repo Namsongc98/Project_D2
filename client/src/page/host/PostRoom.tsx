@@ -68,6 +68,7 @@ const PostRoom = () => {
     register,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm({
     resolver: yupResolver(schema),
   });
@@ -85,8 +86,11 @@ const PostRoom = () => {
 
   useEffect(() => {
     if (message) {
-      setTypeAlert("warning");
+      setTypeAlert("info");
       setErrorAlert(message);
+    } else {
+      setTypeAlert("info");
+      setErrorAlert("");
     }
   }, [message]);
 
@@ -129,16 +133,26 @@ const PostRoom = () => {
       await createRoom(room);
       setType("success");
       setError("Tạo phòng thành công");
+      setErrorAlert("");
     } catch (error) {
       setType("error");
       setError("Tạo phòng thất bại");
       setLoading(false);
     } finally {
       setLoading(false);
+      setErrorAlert("");
     }
   };
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     resetButton.onClick(e);
+    imageRoom.arrImgView.forEach((image: any) => URL.revokeObjectURL(image));
+    imageRoom.setArrImgView([]);
+    reset({
+      address: "",
+      nameHotel: "",
+      price: 0,
+      decription: "",
+    });
   };
 
   return (
@@ -148,10 +162,15 @@ const PostRoom = () => {
         action=""
         className="bg-white rounded-xl p-4 mt-7 min-w-[70%] shadow-md"
         onSubmit={handleSubmit(onSubmit)}
-      ><Stack direction="row" justifyContent="space-between">
+      >
+        <Stack direction="row" justifyContent="space-between">
           <Title>Thêm phòng</Title>
           <div className="w-1/3">
-            <AlertComponent error={errorAlert} type={typeAlert} setError={setErrorAlert} />
+            <AlertComponent
+              error={errorAlert}
+              type={typeAlert}
+              setError={setErrorAlert}
+            />
           </div>
         </Stack>
         <div className="flex flex-row gap-5 mt-5">
@@ -242,8 +261,9 @@ const PostRoom = () => {
                 <Button
                   type="submit"
                   disabled={loading}
-                  className={`text-white ${loading && "opacity-70"
-                    } bg-[#5A8DEE] w-full rounded px-6 py-2 hover:opacity-80 shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] hover:shadow-[0_4px_12px_0_rgba(90,141,238,0.6)]`}
+                  className={`text-white ${
+                    loading && "opacity-70"
+                  } bg-[#5A8DEE] w-full rounded px-6 py-2 hover:opacity-80 shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] hover:shadow-[0_4px_12px_0_rgba(90,141,238,0.6)]`}
                 >
                   Lưu
                 </Button>

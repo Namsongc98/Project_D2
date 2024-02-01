@@ -1,11 +1,11 @@
 export { default as Home } from "./Home";
 export { default as Login } from "./Login";
 export { default as Register } from "./Register";
-export { default as SearchHotel } from "./SearchHotel";
-export { default as ListStay } from "./ListStay";
+export { default as ListStayCity } from "./ListStayCity";
 export { default as User } from "./User";
 export { default as Detail } from "./Detail";
 export { default as DetailRoom } from "./DetailRoom";
 export { default as HistoryBooking } from "./HistoryBooking";
 export { default as Profile } from "./Profile";
 export { default as NotFound } from "./NotFound";
+export { default as ListStay } from "./ListStay";

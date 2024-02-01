@@ -1,5 +1,4 @@
 import {
-  Box,
   Card,
   CardContent,
   CardMedia,
@@ -7,35 +6,18 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { SelectOptionType, typeGetRoom } from "../../type";
-import { Link } from "react-router-dom";
-import { getListRoom } from "../../service";
-import { formatcurrency } from "../../common";
+import { getRoomCity } from "../../service";
+import { Approve, typeGetRoom } from "../../type";
 
-const ListStay = () => {
+const ListStayCity = () => {
   const [dataRoom, setDataRoom] = useState<typeGetRoom[] | undefined>();
-  const selectSort: SelectOptionType[] = [
-    {
-      label: "Mới nhất",
-      value: "id",
-    },
-    {
-      label: "Cũ nhất",
-      value: "id",
-    },
-    {
-      label: "Giá: Cao -> thấp",
-      value: "price",
-    },
-    {
-      label: "Giá: thấp -> cao",
-      value: "price",
-    },
-  ];
+  const params = useParams();
+
   const getDataRoomCity = async () => {
     try {
-      const res = await getListRoom();
+      const res = await getRoomCity(params.id!, Approve.success);
       setDataRoom(res.data);
     } catch (error) {
       console.log(error);
@@ -44,12 +26,11 @@ const ListStay = () => {
   useEffect(() => {
     getDataRoomCity();
   }, []);
+
+
+
   return (
-    <Box>
-      <Stack direction="row" justifyContent={"space-between"} sx={{ my: 5 }}>
-        <div className=""></div>
-        <div className=""></div>
-      </Stack>
+    <>
       <Stack
         direction="row"
         spacing={2}
@@ -82,10 +63,7 @@ const ListStay = () => {
                     <div className="text-xs font-medium bg-purple-100 py-1 px-3 rounded-xl">
                       {room.type_tourism}
                     </div>
-                    <Typography sx={{ color: "red" }}>
-                   
-                      {formatcurrency(room.price)}
-                    </Typography>
+                    <Typography sx={{ color: "red" }}>{room.price}</Typography>
                   </Stack>
                   <Typography
                     gutterBottom
@@ -108,8 +86,8 @@ const ListStay = () => {
           </Link>
         ))}
       </Stack>
-    </Box>
+    </>
   );
 };
 
-export default ListStay;
+export default ListStayCity;

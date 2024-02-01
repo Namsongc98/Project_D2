@@ -14,7 +14,7 @@ enum BookingStatus {
   success = "Success",
   emtry = "Empty",
   cancel = "Cancel",
-  pendingCancel = "Pendng Cancel"
+  pendingCancel = "PendingCancel"
 }
 
 type BookingType = BookingStatus.cancel | BookingStatus.emtry | BookingStatus.pending | BookingStatus.success | BookingStatus.pendingCancel

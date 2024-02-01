@@ -58,6 +58,13 @@ const getRoomCity = async (
   });
 };
 
+const getListRoom = async () => {
+  const approve = Approve.success
+  return await instance.get("/touris", {
+    params: { approve_room: approve },
+  });
+}
+
 // addmin cho phép đặt phòng
 const patchApprove = async (idRoom: number, approve: ApprovePacth) => {
   return await instance.patch(`/touris/${idRoom}`, approve);
@@ -68,7 +75,11 @@ const patchStatusBooking = async (
   idRoom: number,
   statusBooking: PatchBooking
 ) => {
-  return await instance.patch(`/touris/${idRoom}`, statusBooking);
+  console.log("touris", statusBooking)
+  const result = await instance.patch(`/touris/${idRoom}`, statusBooking);
+  console.log(result)
+  return
+
 };
 
 
@@ -79,7 +90,21 @@ const searchCityFindRoom = async (city: string) => {
 
 // summitSearch get city 
 const getRoomSearchAddress = async (dataSearch: { address: string, checkin: string, checkout: string, person: string }) => {
-  const res = await instance.get(`/touris/`, { params: { address_like: dataSearch.address, cout_people_gte: dataSearch.person, start_date_lte: dataSearch.checkin, end_date_lte: dataSearch.checkin } })
+  const res = await instance.get(`/touris/`, {
+    params: {
+      address_like: dataSearch.address,
+      cout_people_gte: dataSearch.person,
+      start_date_lt: dataSearch.checkout,
+      end_date_gt: dataSearch.checkin,
+      approve_room: Approve.success
+    }
+  })
+  return res
+}
+
+const checkRoomDate = async (start_date: number, end_date: number) => {
+  console.log(start_date, end_date)
+  const res = await instance.get("/touris/", { params: { start_date_lt: end_date, end_date_gt: start_date } })
   return res
 }
 
@@ -94,5 +119,7 @@ export {
   getAllRoomHost,
   getAllRoomApproveHost,
   searchCityFindRoom,
-  getRoomSearchAddress
+  getRoomSearchAddress,
+  checkRoomDate,
+  getListRoom,
 };

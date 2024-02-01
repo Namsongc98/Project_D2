@@ -1,4 +1,4 @@
-import { getUserHostId, patchStatusBooking } from ".";
+import { checkRoomDate, getUserHostId, patchStatusBooking } from ".";
 import { instance } from "../config";
 import {
   BookingStatus,
@@ -19,12 +19,14 @@ const getBookingStatus = async (
 
 // tạo booking
 const createBooking = async (booking: IBookingData) => {
-  const bookingStatus = { booking_status: BookingStatus.pending, start_date: booking.start_date, end_date: booking.end_date };
-  await patchStatusBooking(booking.id_touris!, bookingStatus);
-  const res = await instance.post(`/bookings/`, booking);
-  const bookingUser = { id_user: booking.user_id, id_host: res.data.host_id };
-  await instance.post("/user_booking/", bookingUser);
-  return res;
+  const result = checkRoomDate(booking.start_date, booking.end_date)
+  console.log(result)
+  // const bookingStatus = { booking_status: BookingStatus.pending, start_date: booking.start_date, end_date: booking.end_date };
+  // await patchStatusBooking(booking.id_touris!, bookingStatus);
+  // const res = await instance.post(`/bookings/`, booking);
+  // const bookingUser = { id_user: booking.user_id, id_host: res.data.host_id };
+  // await instance.post("/user_booking/", bookingUser);
+  // return res;
 };
 
 // cho phép người dùng đặt phòng
@@ -32,8 +34,9 @@ const patchBookingConfirm = async (
   idBooking: number,
   bookingStatus: PatchBooking
 ) => {
-  await instance.patch(`/bookings/${idBooking}`, bookingStatus);
-  await patchStatusBooking(idBooking, bookingStatus);
+  console.log(bookingStatus)
+  const result = await instance.patch(`/bookings/${idBooking}`, bookingStatus);
+  await patchStatusBooking(result.data.id_touris, bookingStatus);
   return;
 };
 

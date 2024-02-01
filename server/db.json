@@ -10,7 +10,7 @@
       "gender": "Nam",
       "age": "24",
       "phone": "0981875345",
-      "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705031469/oevjxkxiadlj8icukhbw.jpg"
+      "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1706754322/apmm8eu6d7zv8ciihtz8.jpg"
     },
     {
       "email": "anhphudeptrai@gmail.com",
@@ -94,7 +94,7 @@
       "gender": "Nữ",
       "age": "21",
       "phone": "098657546",
-      "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1706599263/kmkphghontpohm7qjlmw.jpg"
+      "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1706754211/bexlpqp1htdvai6evy3i.jpg"
     },
     {
       "email": "tramyxinhgai@gmail.com",
@@ -125,7 +125,7 @@
     {
       "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
       "created_at": 1705564741095,
-      "booking_status": "Pending",
+      "booking_status": "Success",
       "name": "khách sạn Host1 ",
       "address": "lào cai, yên bái",
       "price": 12000000,
@@ -147,13 +147,13 @@
           "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705564740/scaqbbfslvwledxdbeir.webp"
         }
       ],
-      "approve_room": "Empty",
+      "approve_room": "Fail",
       "id": 1
     },
     {
       "host_id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
       "created_at": 1705564839299,
-      "booking_status": "Pending",
+      "booking_status": "PendingCancel",
       "name": "Tràng An Family Homestay",
       "address": "Xóm 2 - Thôn Khê Thượng - Xã Ninh Xuân - Huyện Hoa Lư - Tỉnh Ninh Bình",
       "price": 12334,
@@ -171,7 +171,7 @@
           "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705564839/woijwvng1qgrdyua8t8a.webp"
         }
       ],
-      "approve_room": "Empty",
+      "approve_room": "Pending",
       "id": 2
     },
     {
@@ -305,7 +305,7 @@
     {
       "host_id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
       "created_at": 1705907685985,
-      "booking_status": "Pending",
+      "booking_status": "Cancel",
       "name": "Sapa Praha Hotel",
       "address": "85 Violet, Phường Sa Pa, Thị xã Sa Pa, Tỉnh Lào Cai",
       "price": 10500000,
@@ -587,8 +587,72 @@
           "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705909408/j1skpfj8t8q7pra60fng.jpg"
         }
       ],
-      "approve_room": "Pending",
+      "approve_room": "Success",
       "id": 15
+    },
+    {
+      "host_id": "397418b9-5290-4005-bcd9-fbb62a074569",
+      "created_at": 1706750691949,
+      "booking_status": "Empty",
+      "name": "Tam Coc brothers homestay",
+      "address": "Xã Ninh Thắng - Huyện Hoa Lư - Tỉnh Ninh Bình",
+      "price": 600000,
+      "cout_people": 4,
+      "city": "Ninh Bình",
+      "type_tourism": "Homestay",
+      "bedroom": 1,
+      "bathroom": 1,
+      "start_date": 1706750691949,
+      "end_date": 1706750691949,
+      "decription": "Nằm tại tỉnh Ninh Bình, cách Chùa Bái Đính 25 km, Tam Coc Brothers Homestay có nhà hàng, chỗ đỗ xe riêng miễn phí, quán bar và phòng khách chung. Chỗ nghỉ này còn có phòng gia đình và sân hiên. Chỗ nghỉ cung cấp dịch vụ lễ tân 24 giờ, dịch vụ đưa đón, dịch vụ phòng và WiFi miễn phí trong toàn bộ khuôn viên.",
+      "image": [
+        {
+          "id": 1,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1706750692/efubjn1ceyew3bo0srxy.jpg"
+        },
+        {
+          "id": 2,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1706750692/df6bupnsnfmkj9epqznb.jpg"
+        },
+        {
+          "id": 3,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1706750692/uskv7w8j7dlwv57bahwo.jpg"
+        }
+      ],
+      "approve_room": "Pending",
+      "id": 16
+    },
+    {
+      "host_id": "640f7a52-7f62-4403-8019-55cbae2609c9",
+      "created_at": 1706751007612,
+      "booking_status": "Empty",
+      "name": "Summer Taste Homestay",
+      "address": "208 Cống Quỳnh - Phường Phạm Ngũ Lão - Quận 1 - Thành phố Hồ Chí Minh",
+      "price": 400000,
+      "cout_people": 4,
+      "city": "Hồ Chí Minh",
+      "type_tourism": "khách sạn",
+      "bedroom": 2,
+      "bathroom": 1,
+      "start_date": 1706751007612,
+      "end_date": 1706751007612,
+      "decription": "Trong số các điểm tham quan nổi tiếng gần homestay này có Công viên Tao Đàn, Bảo tàng Thành phố Hồ Chí Minh và trung tâm thương mại Takashimaya Việt Nam. Sân bay gần nhất là sân bay quốc tế Tân Sơn Nhất, cách Summer Taste Homestay 13 km.",
+      "image": [
+        {
+          "id": 1,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1706751007/ikgdfa5yfk9f4gucwidc.jpg"
+        },
+        {
+          "id": 2,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1706751008/qwkiyzi5xrpxgr809y5a.jpg"
+        },
+        {
+          "id": 3,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1706751008/wylymogs0acmdqumlkb3.jpg"
+        }
+      ],
+      "approve_room": "Success",
+      "id": 17
     }
   ],
   "bookings": [
@@ -600,8 +664,8 @@
       "phone": 967856546,
       "email": "tramyxinhgai@gmail.com",
       "name_room": "Yarra Ocean Suites Danang",
-      "address_room": "Phường Mỹ An - Quận Ngũ Hành Sơn - Thành phố Đà Nẵng ",
-      "booking_status": "Pending",
+      "address_room": "Phường Mỹ An - Quận Ngũ Hành Sơn - Thành phố Đà Nẵng",
+      "booking_status": "Success",
       "start_date": 1706659200000,
       "end_date": 1706745600000,
       "count_date": 1,
@@ -621,7 +685,7 @@
       "email": "tramyxinhgai@gmail.com",
       "name_room": "Sapa Praha Hotel",
       "address_room": "85 Violet, Phường Sa Pa, Thị xã Sa Pa, Tỉnh Lào Cai",
-      "booking_status": "Pending",
+      "booking_status": "Cancel",
       "start_date": 1704067200000,
       "end_date": 1704153600000,
       "count_date": 1,
@@ -631,106 +695,6 @@
       "complete_touris": false,
       "pay_status": "Pending",
       "id": 2
-    },
-    {
-      "id_touris": 7,
-      "user_id": "b4818218-fde8-426c-8aad-97b020fc927a",
-      "host_id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
-      "name_user": "tra my",
-      "phone": 98,
-      "email": "tramyxinhgai@gmail.com",
-      "name_room": "Sapa Praha Hotel",
-      "address_room": "85 Violet, Phường Sa Pa, Thị xã Sa Pa, Tỉnh Lào Cai",
-      "booking_status": "Pending",
-      "start_date": 1704067200000,
-      "end_date": 1704153600000,
-      "count_date": 1,
-      "count_person": 2,
-      "price": 10500000,
-      "total": 10500000,
-      "complete_touris": false,
-      "pay_status": "Pending",
-      "id": 3
-    },
-    {
-      "id_touris": 7,
-      "user_id": "b4818218-fde8-426c-8aad-97b020fc927a",
-      "host_id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
-      "name_user": "tra my",
-      "phone": 98,
-      "email": "tramyxinhgai@gmail.com",
-      "name_room": "Sapa Praha Hotel",
-      "address_room": "85 Violet, Phường Sa Pa, Thị xã Sa Pa, Tỉnh Lào Cai",
-      "booking_status": "Pending",
-      "start_date": 1704067200000,
-      "end_date": 1704153600000,
-      "count_date": 1,
-      "count_person": 2,
-      "price": 10500000,
-      "total": 10500000,
-      "complete_touris": false,
-      "pay_status": "Pending",
-      "id": 4
-    },
-    {
-      "id_touris": 7,
-      "user_id": "b4818218-fde8-426c-8aad-97b020fc927a",
-      "host_id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
-      "name_user": "tra my",
-      "phone": 98,
-      "email": "tramyxinhgai@gmail.com",
-      "name_room": "Sapa Praha Hotel",
-      "address_room": "85 Violet, Phường Sa Pa, Thị xã Sa Pa, Tỉnh Lào Cai",
-      "booking_status": "Pending",
-      "start_date": 1704067200000,
-      "end_date": 1704153600000,
-      "count_date": 1,
-      "count_person": 2,
-      "price": 10500000,
-      "total": 10500000,
-      "complete_touris": false,
-      "pay_status": "Pending",
-      "id": 5
-    },
-    {
-      "id_touris": 7,
-      "user_id": "b4818218-fde8-426c-8aad-97b020fc927a",
-      "host_id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
-      "name_user": "tra my",
-      "phone": 98,
-      "email": "tramyxinhgai@gmail.com",
-      "name_room": "Sapa Praha Hotel",
-      "address_room": "85 Violet, Phường Sa Pa, Thị xã Sa Pa, Tỉnh Lào Cai",
-      "booking_status": "Pending",
-      "start_date": 1704067200000,
-      "end_date": 1704153600000,
-      "count_date": 1,
-      "count_person": 2,
-      "price": 10500000,
-      "total": 10500000,
-      "complete_touris": false,
-      "pay_status": "Pending",
-      "id": 6
-    },
-    {
-      "id_touris": 7,
-      "user_id": "b4818218-fde8-426c-8aad-97b020fc927a",
-      "host_id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
-      "name_user": "tra my",
-      "phone": 98,
-      "email": "tramyxinhgai@gmail.com",
-      "name_room": "Sapa Praha Hotel",
-      "address_room": "85 Violet, Phường Sa Pa, Thị xã Sa Pa, Tỉnh Lào Cai",
-      "booking_status": "Pending",
-      "start_date": 1704067200000,
-      "end_date": 1704153600000,
-      "count_date": 1,
-      "count_person": 2,
-      "price": 10500000,
-      "total": 10500000,
-      "complete_touris": false,
-      "pay_status": "Pending",
-      "id": 7
     }
   ],
   "user_booking": [
@@ -743,31 +707,6 @@
       "id_user": "b4818218-fde8-426c-8aad-97b020fc927a",
       "id_host": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
       "id": 2
-    },
-    {
-      "id_user": "b4818218-fde8-426c-8aad-97b020fc927a",
-      "id_host": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
-      "id": 3
-    },
-    {
-      "id_user": "b4818218-fde8-426c-8aad-97b020fc927a",
-      "id_host": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
-      "id": 4
-    },
-    {
-      "id_user": "b4818218-fde8-426c-8aad-97b020fc927a",
-      "id_host": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
-      "id": 5
-    },
-    {
-      "id_user": "b4818218-fde8-426c-8aad-97b020fc927a",
-      "id_host": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
-      "id": 6
-    },
-    {
-      "id_user": "b4818218-fde8-426c-8aad-97b020fc927a",
-      "id_host": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
-      "id": 7
     }
   ]
 }

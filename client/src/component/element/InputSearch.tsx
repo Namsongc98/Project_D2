@@ -22,7 +22,7 @@ const InputSearch = ({
   required,
 }: {
   placeholder: string;
-  search: string | null;
+  search: string;
   handleSearch: React.ChangeEventHandler<HTMLInputElement>;
   required: boolean;
 }) => {

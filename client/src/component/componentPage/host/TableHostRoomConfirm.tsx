@@ -18,6 +18,7 @@ import {
 import { AlertColor, Stack } from "@mui/material";
 
 import imgEmtry from "../../../assets/image/img_emtry.png";
+import { useSearchParams } from "react-router-dom";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -39,11 +40,20 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const TableHostRoomConfirm: React.FC<PropsBooking> = ({ data, columns }) => {
+const TableHostRoomConfirm: React.FC<PropsBooking> = ({
+  data,
+  columns,
+  getData,
+  user,
+}) => {
   const [type, setType] = useState<AlertColor | undefined>();
   const [message, setMessage] = useState<string>("");
   const [openConfirm, setOpenConfirm] = useState(false);
   const [inforBooking, setInforBooking] = useState<IBookingData | undefined>();
+
+  const [searchParams] = useSearchParams();
+
+  const typeParam = searchParams.get("booking");
 
   const handleOpenConfirm = (Booking: IBookingData | undefined = undefined) => {
     setOpenConfirm(!openConfirm);
@@ -52,12 +62,13 @@ const TableHostRoomConfirm: React.FC<PropsBooking> = ({ data, columns }) => {
 
   const handleSuccess = async (idBooking: number) => {
     const bookingStatus = {
-      booking_status: BookingStatus.cancel,
+      booking_status: BookingStatus.success,
     };
     try {
       await patchBookingConfirm(idBooking, bookingStatus);
       setType("success");
-      setMessage("Xác Nhận cho hủy");
+      setMessage("Cho phép đặt phòng thành công");
+      getData();
     } catch (error) {
       setType("error");
       setMessage("Có lỗi không thể thực hiện");
@@ -67,12 +78,13 @@ const TableHostRoomConfirm: React.FC<PropsBooking> = ({ data, columns }) => {
   };
   const handleFail = async (idBooking: number) => {
     const bookingStatus = {
-      booking_status: BookingStatus.pending,
+      booking_status: BookingStatus.cancel,
     };
     try {
       await patchBookingConfirm(idBooking, bookingStatus);
       setType("success");
-      setMessage("Xác Nhận không cho hủy");
+      setMessage("Xác nhận hủy phòng thành công");
+      getData();
     } catch (error) {
       setType("error");
       setMessage("Có lỗi không thể thực hiện");
@@ -178,7 +190,11 @@ const TableHostRoomConfirm: React.FC<PropsBooking> = ({ data, columns }) => {
             infor={inforBooking}
             handleSuccess={handleSuccess}
             handleFail={handleFail}
-            label="Xác nhận hủy phòng"
+            label="Xác nhận đặt phòng"
+            typeParam={typeParam}
+            decription={`Xác nhận cho người dùng đặt phòng!`}
+            setOpen={setOpenConfirm}
+            user={user}
           />
         </ModalComponent>
       </Paper>

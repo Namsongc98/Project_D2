@@ -20,7 +20,6 @@ const BookingHostStatus = () => {
   ) => {
     try {
       const res = await getBookingHostStatus(userId, bookingStatus, complete);
-      console.log(res.data);
       setBookingArr(res.data);
     } catch (error) {
       console.log(error);
@@ -37,7 +36,7 @@ const BookingHostStatus = () => {
     }
   };
 
-  useEffect(() => {
+  const checkParams = () => {
     if (host) {
       if (type === "1") {
         getBookingStatus(host!.id, BookingStatus.pending, false);
@@ -53,14 +52,20 @@ const BookingHostStatus = () => {
         getBooking(host!.id);
       }
     }
+  };
+
+  useEffect(() => {
+    checkParams();
   }, [type, host]);
   return (
     <Grid item xs={12}>
-      <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>   
+      <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
         <TableHostRoomConfirm
           data={bookingArr!}
           columns={columnBooking}
           detail={false}
+          getData={checkParams}
+          user={host!}
         />
       </Paper>
     </Grid>

@@ -36,12 +36,12 @@ const HistoryBooking = () => {
   const getBooking = async (userId: string) => {
     try {
       const res = await getBookingUser(userId);
+
       setBookingArr(res.data);
     } catch (error) {
       console.log(error);
     }
   };
-
   const getBookingStatus = async (
     userId: string,
     bookingStatus: BookingType,

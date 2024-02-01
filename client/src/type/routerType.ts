@@ -8,7 +8,7 @@ type Layout = {
   layout: boolean;
   role?: Role;
   children?: boolean;
-  childrenRole?: "booking" | "user" | "room" | "type";
+  childrenRole?: "booking" | "user" | "room" | "type" | "detail" | "city";
 }[];
 
 type PathType = {

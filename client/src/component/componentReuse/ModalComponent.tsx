@@ -8,23 +8,19 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   bgcolor: "background.paper",
-  border: "2px solid #000",
+  borderRadius: "10px",
   boxShadow: 24,
   pt: 2,
   px: 4,
   pb: 3,
 };
 
-const ModalComponent = ({
-  setOpen,
-  open,
-  children,
-}: PropChangePassword) => {
+const ModalComponent = ({ setOpen, open, children }: PropChangePassword) => {
   const handleClose = () => setOpen(false);
 
   return (
     <Modal open={open} onClose={handleClose}>
-      <Box sx={{ ...style }}>{children}</Box>
+      <Box sx={{ ...style, minWidth: "400px" }}>{children}</Box>
     </Modal>
   );
 };

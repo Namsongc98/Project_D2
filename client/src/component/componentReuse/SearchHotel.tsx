@@ -21,7 +21,7 @@ const SearchHotel = () => {
   const [type, setType] = useState<AlertColor | undefined>();
   const [message, setMessage] = useState("");
   const [person, setperson] = useState<number | "">("");
-  const [search, setSearch] = useState<string | null>(null);
+  const [search, setSearch] = useState<string>("");
   const [dataCity, setDataCity] = useState([] as IRoomPost[]);
   const deBounce = useDebounce(search, 500);
   const navigate = useNavigate();
@@ -73,7 +73,7 @@ const SearchHotel = () => {
       person: person.toString(),
     };
     navigate({
-      pathname: "/searchresult",
+      pathname: "/city",
       search: `?${createSearchParams(params)}`,
     });
   };
@@ -114,7 +114,7 @@ const SearchHotel = () => {
                       <MenuItem
                         value={item.address}
                         sx={{ width: "100%" }}
-                        onClick={(e) => setSearch(e.currentTarget.textContent)}
+                        onClick={(e) => setSearch(e.currentTarget.textContent!)}
                         key={item.id}
                         selected={search === item.address}
                       >
@@ -127,7 +127,7 @@ const SearchHotel = () => {
                       <MenuItem
                         value={item.city}
                         sx={{ width: "100%" }}
-                        onClick={(e) => setSearch(e.currentTarget.textContent)}
+                        onClick={(e) => setSearch(e.currentTarget.textContent!)}
                         key={item.id}
                         selected={search === item.address}
                       >

@@ -56,12 +56,12 @@ const DetailRoom = () => {
     try {
       if (param.id) {
         const dataRoom = await getOneRoom(+param.id);
+
         setDetailRoom(dataRoom.data);
-      } else {
-        navigate("*");
       }
     } catch (error) {
-      console.log(error);
+      navigate("/*");
+      throw new Error("Phòng không tồn tại");
     }
   };
   useEffect(() => {

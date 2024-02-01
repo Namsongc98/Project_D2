@@ -16,8 +16,10 @@ import { Approve, ApproveType, typeGetRoom } from "../../type";
 import { columnsTable } from "../../constain";
 import DetailComponent from "../../component/componentReuse/DetailComponent";
 import { useSearchParams } from "react-router-dom";
+import { useGetUser } from "../../hook";
 
 const Roomtype = () => {
+  const admin = useGetUser();
   const [searchParams] = useSearchParams();
   const [rooms, setRoom] = useState([] as any);
   const [page, setPage] = useState(0);
@@ -106,6 +108,7 @@ const Roomtype = () => {
   ) => {
     try {
       const res = await getAllRoomApprove(page, rowsPerPage, approve);
+      console.log(res);
       setRoom(res.data);
     } catch (error) {
       console.log(error);
@@ -151,13 +154,16 @@ const Roomtype = () => {
                   handleOpenApprove={handleOpenApprove}
                   handleOpenInfor={handleOpenInfor}
                 />
-
                 <ModalComponent setOpen={setOpenApprove} open={openApprove}>
                   <ModalConfirm
+                    infor={inforRoom}
                     handleSuccess={handleApproveSuccess}
                     handleFail={handleApproveFail}
-                    infor={inforRoom}
                     label="Bạn đồng ý duyệt phòng!"
+                    user={admin}
+                    setOpen={setOpenApprove}
+                    typeParam={typeParam}
+                    decription={`Xác nhận cho ${inforRoom?.name} hoạt động!`}
                   />
                 </ModalComponent>
 
@@ -177,7 +183,6 @@ const Roomtype = () => {
               </Paper>
             </Grid>
           </Grid>
-        
         </Container>
       </Box>
     </>
