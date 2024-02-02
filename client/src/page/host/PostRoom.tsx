@@ -38,7 +38,7 @@ const PostRoom = () => {
     ...City.map((city) => ({ label: city, value: city })),
   ];
 
-  const TypeTouris = ["Căn hộ dịch vụ", "Biệt thự", "Homestay", "khách sạn"];
+  const TypeTouris = ["Căn hộ dịch vụ", "Biệt thự", "Homestay", "Khách sạn"];
   const optionsTypetouris: SelectOptionType[] = [
     ...TypeTouris.map((type) => ({ label: type, value: type })),
   ];
@@ -114,7 +114,7 @@ const PostRoom = () => {
       const room: IRoomPost = {
         host_id: user!.id,
         created_at: Date.now(),
-        booking_status: BookingStatus.emtry,
+        booking_status: BookingStatus.empty,
         name: data.nameHotel,
         address: data.address,
         price: data.price,

@@ -12,12 +12,12 @@ type PatchBooking = {
 enum BookingStatus {
   pending = "Pending",
   success = "Success",
-  emtry = "Empty",
+  empty = "Empty",
   cancel = "Cancel",
   pendingCancel = "PendingCancel"
 }
 
-type BookingType = BookingStatus.cancel | BookingStatus.emtry | BookingStatus.pending | BookingStatus.success | BookingStatus.pendingCancel
+type BookingType = BookingStatus.cancel | BookingStatus.empty | BookingStatus.pending | BookingStatus.success | BookingStatus.pendingCancel
 interface IBookingData {
   id?: number;
   id_touris: number;

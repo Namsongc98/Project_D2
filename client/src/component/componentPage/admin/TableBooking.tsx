@@ -13,7 +13,7 @@ import InfoIcon from "@mui/icons-material/Info";
 import { DetailComponent, ModalComponent } from "../../componentReuse";
 import { getOneRoom } from "../../../service";
 import { Stack } from "@mui/material";
-import imgEmtry from "../../../assets/image/img_emtry.png";
+import imgEmpty from "../../../assets/image/img_empty.png";
 
 export default function TableBooking({ data, columns, detail }: PropsBooking) {
   // page
@@ -139,10 +139,10 @@ export default function TableBooking({ data, columns, detail }: PropsBooking) {
           >
             <div className="">
               <img
-                src={imgEmtry}
+                src={imgEmpty}
                 width={100}
                 height={100}
-                alt={imgEmtry}
+                alt={imgEmpty}
                 className="mx-auto my-0"
               />
               <p className="text-center mt-2">Đơn hàng trống</p>

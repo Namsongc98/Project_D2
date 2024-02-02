@@ -12,6 +12,7 @@ import AvatarUser from "../componentReuse/AvatarUser";
 import { useSelector } from "react-redux";
 import { getUser, setUser } from "../../store/reducer/userSlice";
 import { useDispatch } from "react-redux";
+import LocationCityIcon from "@mui/icons-material/LocationCity";
 
 import BookIcon from "@mui/icons-material/Book";
 
@@ -47,6 +48,13 @@ const Header = () => {
           >
             <HomeIcon className="text-[#00afdd]" />
             <p>Trang chủ</p>
+          </Link>
+          <Link
+            to="/city"
+            className="flex gap-2 items-center hover:bg-[#e0ecff] px-3 py-2 rounded-md text-base text-[#00afdd]"
+          >
+            <LocationCityIcon className="text-[#00afdd]" />
+            <p>Danh sách phòng</p>
           </Link>
           {userSelector && (
             <Link

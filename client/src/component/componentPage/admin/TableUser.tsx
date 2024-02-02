@@ -11,7 +11,7 @@ import InfoIcon from "@mui/icons-material/Info";
 import { PropsUser } from "../../../type";
 import { Avatar, IconButton, Stack } from "@mui/material";
 import { columnUser } from "../../../constain";
-import imgEmtry from "../../../assets/image/img_emtry.png";
+import imgEmpty from "../../../assets/image/img_empty.png";
 
 const TableUser = ({ data, onClickNav }: PropsUser) => {
   // page
@@ -105,10 +105,10 @@ const TableUser = ({ data, onClickNav }: PropsUser) => {
           >
             <div className="">
               <img
-                src={imgEmtry}
+                src={imgEmpty}
                 width={100}
                 height={100}
-                alt={imgEmtry}
+                alt={imgEmpty}
                 className="mx-auto my-0"
               />
               <p className="text-center mt-2">Đơn hàng trống</p>

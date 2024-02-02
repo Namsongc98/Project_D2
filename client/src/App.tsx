@@ -15,13 +15,13 @@ import { Detail, NotFound, User } from "./page/user";
 import { BookingConfirm, HostStatistics } from "./page/host";
 import { RoomManager } from "./page/admin";
 import UserLayout from "./page/admin/UserLayout";
-
 function App() {
   return (
     <>
       <Router>
         <Routes>
           {/* layout user public */}
+
           {publicPage.map((router) => {
             const Layout = router.layout ? DefaultLayout : LayoutMember;
             const LayoutRoleAmin = LayoutAdmin;

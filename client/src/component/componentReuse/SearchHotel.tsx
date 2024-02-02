@@ -55,6 +55,10 @@ const SearchHotel = () => {
     handleSearch();
   }, [deBounce]);
 
+  const handleClick = (e: any) => {
+    setSearch(e.currentTarget.textContent);
+    setDataCity([]);
+  };
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (inputStartDate.timestamp! >= inputEndDate.timestamp!) {
@@ -73,7 +77,7 @@ const SearchHotel = () => {
       person: person.toString(),
     };
     navigate({
-      pathname: "/city",
+      pathname: "/city/search",
       search: `?${createSearchParams(params)}`,
     });
   };
@@ -114,7 +118,7 @@ const SearchHotel = () => {
                       <MenuItem
                         value={item.address}
                         sx={{ width: "100%" }}
-                        onClick={(e) => setSearch(e.currentTarget.textContent!)}
+                        onClick={handleClick}
                         key={item.id}
                         selected={search === item.address}
                       >
@@ -127,7 +131,7 @@ const SearchHotel = () => {
                       <MenuItem
                         value={item.city}
                         sx={{ width: "100%" }}
-                        onClick={(e) => setSearch(e.currentTarget.textContent!)}
+                        onClick={handleClick}
                         key={item.id}
                         selected={search === item.address}
                       >
@@ -145,7 +149,6 @@ const SearchHotel = () => {
               )}
             </div>
           </div>
-
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <Box
               sx={{

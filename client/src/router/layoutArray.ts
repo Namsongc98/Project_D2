@@ -24,11 +24,11 @@ import { Layout, Role } from "../type";
 //  laout user
 const publicPage: Layout = [
   { id: 1, path: "/", component: Home, layout: true },
-  { id: 22, path: "", component: DetaiSearchRoom, layout: true, childrenRole: "city" },
   { id: 6, path: "/register", component: Register, layout: false },
   { id: 7, path: "/login", component: Login, layout: false },
   { id: 2, path: ":id", component: DetailRoom, layout: true, childrenRole: "detail", },
   { id: 5, path: ":id", component: ListStayCity, layout: true, childrenRole: "city", },
+  { id: 22, path: "search", component: DetaiSearchRoom, layout: true, childrenRole: "city" },
   { id: 4, path: "", component: ListStay, layout: true, childrenRole: "city", },
   // layout User
   {
@@ -90,7 +90,6 @@ const publicPage: Layout = [
     childrenRole: "room",
   },
   // layout Host
-
   {
     id: 14,
     path: "/host/postroom",

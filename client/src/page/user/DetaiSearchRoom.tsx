@@ -1,5 +1,4 @@
 import {
-  Box,
   Card,
   CardContent,
   CardMedia,
@@ -26,8 +25,8 @@ const DetaiSearchRoom = () => {
     person: string;
   }) => {
     try {
-      const res = await getRoomSearchAddress(dataParam);
-      setRoomArr(res.data);
+      const res: typeGetRoom[] = await getRoomSearchAddress(dataParam);
+      setRoomArr(res);
     } catch (error) {
       throw new Error("Không tìm thấy kết quả");
     }

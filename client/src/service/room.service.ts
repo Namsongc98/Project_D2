@@ -4,8 +4,11 @@ import {
   Approve,
   ApprovePacth,
   ApproveType,
+  BookingStatus,
+  IBookingData,
   IRoomPost,
   PatchBooking,
+  typeGetRoom,
 } from "../type";
 
 // tạo phòng
@@ -45,16 +48,20 @@ const getAllRoomApproveHost = async (
 
 // data detail
 const getOneRoom = async (id: number) => {
-  return await instance.get(`/touris/${id}`);
+  const res = await instance.get(`/touris/${id}`);
+  if (!(res.data.approve_room === Approve.success)) {
+    throw new Error("Phòng chưa dk duyệt")
+  }
+  return res
 };
 
-//lấy dữ liệu theo city có status là emtry admin  success
+//lấy dữ liệu theo city có status là empty admin  success
 const getRoomCity = async (
   city: string,
   approve: Approve.success
 ) => {
   return await instance.get("/touris", {
-    params: { city, approve_room: approve },
+    params: { city, approve_room: approve, booking_status: BookingStatus.empty },
   });
 };
 
@@ -88,24 +95,39 @@ const searchCityFindRoom = async (city: string) => {
   return await instance.get(`/touris?city_like=${city}`);
 };
 
+
 // summitSearch get city 
 const getRoomSearchAddress = async (dataSearch: { address: string, checkin: string, checkout: string, person: string }) => {
-  const res = await instance.get(`/touris/`, {
-    params: {
-      address_like: dataSearch.address,
-      cout_people_gte: dataSearch.person,
-      start_date_lt: dataSearch.checkout,
-      end_date_gt: dataSearch.checkin,
-      approve_room: Approve.success
-    }
-  })
-  return res
+  try {
+    const res = await instance.get(`/touris/`, {
+      params: {
+        address_like: dataSearch.address,
+        cout_people_gte: dataSearch.person,
+        approve_room: Approve.success,
+        booking_status: BookingStatus.empty
+      }
+    })
+    const result: typeGetRoom[] = res.data.filter((room: IRoomPost) => {
+      return (+dataSearch.checkin > room.end_date || +dataSearch.checkout <= room.start_date)
+    })
+    return result
+  } catch (error) {
+    throw new Error("Lỗi không lấy được room")
+  }
 }
 
-const checkRoomDate = async (start_date: number, end_date: number) => {
-  console.log(start_date, end_date)
-  const res = await instance.get("/touris/", { params: { start_date_lt: end_date, end_date_gt: start_date } })
-  return res
+const checkRoomDate = async (booking: IBookingData) => {
+  try {
+    const res = await instance.get('/touris/' + booking.id_touris)
+    const room = res.data
+    if (booking.start_date == room.start_date || booking.end_date == room.end_date) {
+      return false
+    }
+    return true
+  } catch (error) {
+    throw new Error("Không tìm thấy phòng!")
+  }
+
 }
 
 export {

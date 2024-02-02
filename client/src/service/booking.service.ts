@@ -19,14 +19,21 @@ const getBookingStatus = async (
 
 // tạo booking
 const createBooking = async (booking: IBookingData) => {
-  const result = checkRoomDate(booking.start_date, booking.end_date)
-  console.log(result)
-  // const bookingStatus = { booking_status: BookingStatus.pending, start_date: booking.start_date, end_date: booking.end_date };
-  // await patchStatusBooking(booking.id_touris!, bookingStatus);
-  // const res = await instance.post(`/bookings/`, booking);
-  // const bookingUser = { id_user: booking.user_id, id_host: res.data.host_id };
-  // await instance.post("/user_booking/", bookingUser);
-  // return res;
+  try {
+    const result = checkRoomDate(booking)
+    if (!result) {
+      throw new Error("Phòng có người đặt")
+    }
+    const bookingStatus = { booking_status: BookingStatus.pending, start_date: booking.start_date, end_date: booking.end_date };
+    await patchStatusBooking(booking.id_touris!, bookingStatus);
+    const res = await instance.post(`/bookings/`, booking);
+    const bookingUser = { id_user: booking.user_id, id_host: res.data.host_id };
+    await instance.post("/user_booking/", bookingUser);
+    return res;
+  } catch (error: unknown) {
+    throw new Error(error)
+  }
+
 };
 
 // cho phép người dùng đặt phòng

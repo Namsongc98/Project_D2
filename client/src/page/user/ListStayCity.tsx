@@ -10,6 +10,7 @@ import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getRoomCity } from "../../service";
 import { Approve, typeGetRoom } from "../../type";
+import { formatcurrency } from "../../common";
 
 const ListStayCity = () => {
   const [dataRoom, setDataRoom] = useState<typeGetRoom[] | undefined>();
@@ -26,8 +27,6 @@ const ListStayCity = () => {
   useEffect(() => {
     getDataRoomCity();
   }, []);
-
-
 
   return (
     <>
@@ -63,7 +62,9 @@ const ListStayCity = () => {
                     <div className="text-xs font-medium bg-purple-100 py-1 px-3 rounded-xl">
                       {room.type_tourism}
                     </div>
-                    <Typography sx={{ color: "red" }}>{room.price}</Typography>
+                    <Typography sx={{ color: "red" }}>
+                      {formatcurrency(room.price)}{" "}
+                    </Typography>
                   </Stack>
                   <Typography
                     gutterBottom

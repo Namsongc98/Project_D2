@@ -8,31 +8,13 @@ import {
   Typography,
 } from "@mui/material";
 import { useEffect, useState } from "react";
-import { SelectOptionType, typeGetRoom } from "../../type";
+import { typeGetRoom } from "../../type";
 import { Link } from "react-router-dom";
 import { getListRoom } from "../../service";
 import { formatcurrency } from "../../common";
 
 const ListStay = () => {
   const [dataRoom, setDataRoom] = useState<typeGetRoom[] | undefined>();
-  const selectSort: SelectOptionType[] = [
-    {
-      label: "Mới nhất",
-      value: "id",
-    },
-    {
-      label: "Cũ nhất",
-      value: "id",
-    },
-    {
-      label: "Giá: Cao -> thấp",
-      value: "price",
-    },
-    {
-      label: "Giá: thấp -> cao",
-      value: "price",
-    },
-  ];
   const getDataRoomCity = async () => {
     try {
       const res = await getListRoom();
@@ -83,7 +65,6 @@ const ListStay = () => {
                       {room.type_tourism}
                     </div>
                     <Typography sx={{ color: "red" }}>
-                   
                       {formatcurrency(room.price)}
                     </Typography>
                   </Stack>

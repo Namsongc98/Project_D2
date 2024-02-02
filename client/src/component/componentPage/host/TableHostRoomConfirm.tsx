@@ -17,7 +17,7 @@ import {
 } from "../../componentReuse";
 import { AlertColor, Stack } from "@mui/material";
 
-import imgEmtry from "../../../assets/image/img_emtry.png";
+import imgEmpty from "../../../assets/image/img_empty.png";
 import { useSearchParams } from "react-router-dom";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -173,10 +173,10 @@ const TableHostRoomConfirm: React.FC<PropsBooking> = ({
             >
               <div className="">
                 <img
-                  src={imgEmtry}
+                  src={imgEmpty}
                   width={100}
                   height={100}
-                  alt={imgEmtry}
+                  alt={imgEmpty}
                   className="mx-auto my-0"
                 />
                 <p className="text-center mt-2">Đơn hàng trống</p>

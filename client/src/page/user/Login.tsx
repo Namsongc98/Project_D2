@@ -108,7 +108,7 @@ const Login = () => {
                 required={true}
               />
               <Input
-                type="text"
+                type="password"
                 title="Mật khẩu"
                 placeholder="Nhập Password"
                 label="password"

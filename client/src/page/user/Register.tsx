@@ -118,7 +118,7 @@ const Register = () => {
               required={true}
             />
             <Input
-              type="text"
+              type="password"
               title="Mật khẩu"
               placeholder="Nhập Password"
               label="password"
@@ -127,7 +127,7 @@ const Register = () => {
               required={true}
             />
             <Input
-              type="text"
+              type="password"
               title="Nhập lại mật khẩu"
               placeholder="Nhập lại Password"
               label="confirmPassword"

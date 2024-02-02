@@ -11,7 +11,7 @@ import {
 import InfoIcon from "@mui/icons-material/Info";
 import { Button } from "../element";
 import { Approve } from "../../type";
-import imgEmtry from "../../assets/image/img_emtry.png";
+import imgEmpty from "../../assets/image/img_empty.png";
 
 const TableConfirm = ({
   columnsTable,
@@ -100,10 +100,10 @@ const TableConfirm = ({
           >
             <div className="">
               <img
-                src={imgEmtry}
+                src={imgEmpty}
                 width={100}
                 height={100}
-                alt={imgEmtry}
+                alt={imgEmpty}
                 className="mx-auto my-0"
               />
               <p className="text-center mt-2">Đơn hàng trống</p>

@@ -29,6 +29,8 @@ interface IRoomPost {
     address: string,
     price: number,
     cout_people: number,
+    start_date: number,
+    end_date: number,
     city: string,
     type_tourism: string,
     bedroom: number,
