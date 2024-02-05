@@ -76,15 +76,18 @@ interface IFormInput {
   password: string;
 }
 
-type ImgageFiles = {
-  id: number, error: boolean, url: string, file: File
+type ImageFiles = {
+  id: number,
+  error: boolean,
+  url: string,
+  file: File
 }
 
 type ImageMultiple = {
-  arrImgView: Array<ImgageFiles>,
+  arrImgView: Array<ImageFiles>,
   onChange: (e: React.FormEvent<HTMLInputElement>) => void,
   errorImg: string,
-  setArrImgView: React.Dispatch<React.SetStateAction<Array<ImgageFiles>>>
+  setArrImgView: React.Dispatch<React.SetStateAction<Array<ImageFiles>>>
 }
 
 type TextArea = {
@@ -95,6 +98,51 @@ type TextArea = {
   register?: unknown;
   title: string
   required: boolean
+}
+
+
+interface ColumnTable {
+  id:
+  | "id"
+  | "address"
+  | "city"
+  | "approve_room"
+  | "bathroom"
+  | "bedroom"
+  | "cout_people"
+  | "created_at"
+  | "decription"
+  | "name"
+  | "price"
+  | "type_tourism";
+  label: string;
+  minWidth?: number;
+  align?: "right";
+  format?: (value: number) => string;
+}
+
+type AlignTable =
+  | "center"
+  | "right"
+  | "left"
+  | "inherit"
+  | "justify"
+  | undefined;
+
+type TableRoom = {
+  index: string;
+  label: string;
+  minWidth: number;
+  align: AlignTable;
+  url?: boolean
+  format?: (value: number) => void;
+};
+
+interface ITaps {
+  id: number;
+  value: number;
+  label: string;
+  to: { pathname: string, search: string };
 }
 
 
@@ -112,6 +160,9 @@ export type {
   InputDate,
   checkboxType,
   ImageMultiple,
-  ImgageFiles,
-  TextArea
+  ImageFiles,
+  TextArea,
+  ColumnTable,
+  TableRoom,
+  ITaps
 };

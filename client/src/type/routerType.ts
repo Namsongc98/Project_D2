@@ -1,8 +1,22 @@
+import { ReactNode } from "react";
+import { Role } from ".";
 
- type Layout = {
-    path: string;
-    component: React.FC | (() => JSX.Element | React.ReactNode);
-    layout: boolean;
-}[]
+type Layout = {
+  id: number;
+  path: string;
+  component: React.FC | (() => JSX.Element | React.ReactNode);
+  layout: boolean;
+  role?: Role;
+  children?: boolean;
+  childrenRole?: "booking" | "user" | "room" | "type" | "detail" | "city";
+}[];
 
-export type {Layout}
+type PathType = {
+  id: number;
+  path: string;
+  icon: ReactNode;
+  title: string;
+  chilrend?: boolean;
+};
+
+export type { Layout, PathType };

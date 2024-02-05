@@ -1,25 +1,6 @@
 {
   "users": [
     {
-      "email": "namsongc98@gmail.com",
-      "password": "$2a$10$Qf1tOq7osXc/gUOX7BSone.xLHa4locduz4x2GUWfDnlLHU7Y3RWG",
-      "id": "a3226aa0-80e4-4a81-a6e1-e834a6ef28fe",
-      "role": "Guide",
-      "gender": "Nam",
-      "firstName": "",
-      "lastName": "",
-      "age": "24",
-      "phone": "09876554",
-      "avatar": "",
-      "non_block": false
-    },
-    {
-      "email": "namsongc9812@gmail.com",
-      "password": "$2a$10$xEsN.4ZJd0SfKG8ztLkYDOmo/8U/7u9Zi9M/brT2CHj11tll87hAa",
-      "id": "6dbe0a70-c5dd-4b0d-8bd8-3637afaff1f7",
-      "role": "Guide"
-    },
-    {
       "email": "admin123@gmail.com",
       "password": "$2a$10$Hf9TtksLmMnrSxmSbRQNT.3g7arnosQFdvo63IVZIqiTx5Mz2D7cy",
       "id": "313c9b13-dffe-42ed-9d35-72161f02d9ba",
@@ -29,25 +10,7 @@
       "gender": "Nam",
       "age": "24",
       "phone": "0981875345",
-      "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705031469/oevjxkxiadlj8icukhbw.jpg"
-    },
-    {
-      "email": "minhduong@gmail.com",
-      "password": "$2a$10$L22dv5QuhZWt.HsoQjaV9.feWvXD0ENjvZGHWUB9lVe1e7ztR0xPS",
-      "id": "4d62c98c-0d63-4ed1-94ca-a3cffaf874f3",
-      "role": "Guide",
-      "firstName": "",
-      "lastName": "",
-      "gender": "",
-      "age": "",
-      "phone": "",
-      "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1704970591/oziabo4elqfyqab5dye1.png"
-    },
-    {
-      "email": "minhduong12@gmail.com",
-      "password": "$2a$10$Xv9yjU0rFzCeY9ECZVo7aO/pjobPtaC9H3Q0ZePE7GmfgNPInAXly",
-      "id": "af4aba3c-7c1c-46e9-b914-39773248be53",
-      "role": "Guide"
+      "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1706754322/apmm8eu6d7zv8ciihtz8.jpg"
     },
     {
       "email": "anhphudeptrai@gmail.com",
@@ -60,64 +23,702 @@
       "age": "",
       "phone": "",
       "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705462573/ybc4vdsr0fdqungmkkir.png"
+    },
+    {
+      "email": "host1@gmail.com",
+      "password": "$2a$10$flLWmOz7nFc72dhyiDUVIuHDxcv4DP4PN/LCIf9KbJ1kR7jcTDU0W",
+      "id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "role": "Host",
+      "firstName": "Hello",
+      "lastName": "host1",
+      "gender": "Nam",
+      "age": "23",
+      "phone": "345546",
+      "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705563156/jkw37npcj9jh2alq6l00.webp"
+    },
+    {
+      "email": "namsongc98@gmail.com",
+      "password": "$2a$10$XCAaxRKwrPSynZ0Q17zDMOdbELV55FMjFVSho7i0Wx3td4/OmoTc2",
+      "id": "083fad4e-73a0-4975-a2cb-adeb8237d1ec",
+      "role": "Guide",
+      "firstName": "vũ",
+      "lastName": "Sơn",
+      "gender": "Nam",
+      "age": "25",
+      "phone": "09895787654",
+      "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1706861937/bvitf1yzl1blu63q5pkr.jpg"
+    },
+    {
+      "email": "host2@gmail.com",
+      "password": "$2a$10$E3RPu.B8SIuBzikoelxDxuv973M.3KYavbdlFSOc/eWkGWE/.fwpK",
+      "id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
+      "role": "Host",
+      "firstName": "host",
+      "lastName": "2",
+      "gender": "Nữ",
+      "age": "30",
+      "phone": "0978967853",
+      "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1706232008/d9ompej5qr51obgbrxda.jpg"
+    },
+    {
+      "email": "host3@gmail.com",
+      "password": "$2a$10$GAkLBOib7KwhDN/6nIeq3.ojuJfS2kh/GPbT/xvKQHippAbCBsNKO",
+      "id": "397418b9-5290-4005-bcd9-fbb62a074569",
+      "role": "Host",
+      "firstName": "host",
+      "lastName": "1",
+      "gender": "Nam",
+      "age": "23",
+      "phone": "08567545435",
+      "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1706231761/pdmkyigog2l7jedidin2.jpg"
+    },
+    {
+      "email": "host4@gmail.com",
+      "password": "$2a$10$OP2vps1OpkeooFNIdB1R9.Y3c.wwLsfvv9TmYsARixX3ZImSdvd5W",
+      "id": "640f7a52-7f62-4403-8019-55cbae2609c9",
+      "role": "Host",
+      "firstName": "host ",
+      "lastName": "4",
+      "gender": "Nam",
+      "age": "35",
+      "phone": "09854534534",
+      "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1706231932/ywmwq34e8wdnfcemjvj3.jpg"
+    },
+    {
+      "email": "quynhanh@gmail.com",
+      "password": "$2a$10$CEj2d43k2yREGr7lnddQJ.iDM51hwSivzApgl6Wp7Z0xLIowUA8Pi",
+      "id": "9708f548-48ce-4e96-94cb-2a18419e54f2",
+      "role": "Guide",
+      "firstName": "quỳnh",
+      "lastName": "anh",
+      "gender": "Nữ",
+      "age": "21",
+      "phone": "098657546",
+      "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1706754211/bexlpqp1htdvai6evy3i.jpg"
+    },
+    {
+      "email": "tramyxinhgai@gmail.com",
+      "password": "$2a$10$67DN6gw.0CeEu9YmjsyNZexOhSdsrVQgZbWCbclNIcmjxEJRgr2eK",
+      "id": "b4818218-fde8-426c-8aad-97b020fc927a",
+      "role": "Guide",
+      "firstName": "tra",
+      "lastName": "my",
+      "gender": "Nữ",
+      "age": "23",
+      "phone": "0977685675",
+      "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1706599026/rtkvossgkkvrim0zwk0c.jpg"
+    },
+    {
+      "email": "truongbeo@gmail.com",
+      "password": "$2a$10$SReAgh3zCfcROeWqAgZAJuyEpjgIfBYwi9vMh79LF2Ik.rEJ6QhTC",
+      "id": "ad350080-38e2-4be0-8808-3614d23978c6",
+      "role": "Guide",
+      "firstName": "trường",
+      "lastName": "béo",
+      "gender": "Nam",
+      "age": "30",
+      "phone": "0934665756",
+      "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1706597789/occn4yalobujlkp035rl.jpg"
+    },
+    {
+      "email": "maiduong@gmail.com",
+      "password": "$2a$10$gYiOYZEZgFTkjiji.KFQbuN8XKqW0AzjPtUF5ubAAMkK30FyK0/Hm",
+      "id": "d4329a61-28b6-4a73-856b-aed4bcd00626",
+      "role": "Guide",
+      "firstName": "Mai Xuân",
+      "lastName": "Hải Dương",
+      "gender": "Nam",
+      "age": "19",
+      "phone": "098675456",
+      "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1706863264/tbnx1cj9jwusmocce79c.jpg"
     }
   ],
   "touris": [
     {
-      "id": 1,
-      "city": "",
-      "user_id": 1,
-      "approve_room": true,
-      "name": "",
-      "price": 0,
-      "decription": "",
-      "created_at": "",
-      "address": "",
+      "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "created_at": 1705564741095,
+      "booking_status": "Empty",
+      "name": "Khách sạn Host1 ",
+      "address": "lào cai, yên bái",
+      "price": 12000000,
+      "cout_people": 3,
+      "city": "Lào Cai",
       "type_tourism": "Khách sạn",
-      "bathroom": 1,
       "bedroom": 1,
-      "cout_people": 2,
+      "bathroom": 1,
+      "start_date": 0,
+      "end_date": 0,
+      "decription": "nhà đẹp nhà xinh",
       "image": [
         {
           "id": 1,
-          "image": ""
-        }
-      ]
-    },
-    {
-      "user_id": "d219bf37-f35c-425d-9c6d-e074b0e4f9f3",
-      "created_at": 1705465182373,
-      "name": "Hoàng Mai",
-      "address": "Mỹ Đình, Hà Nội",
-      "price": 235445,
-      "cout_people": 235445,
-      "city": "Lào Cai",
-      "type_tourism": 32,
-      "bedroom": 1,
-      "bathroom": 1,
-      "decription": "sgsgfsdfg",
-      "approve_room": false,
-      "imge": [
-        {
-          "id": 1,
-          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705465182/qiytdfwleirmnok0pu95.webp"
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705564740/m5w0q4fcqqzyrfwi6iyq.webp"
         },
         {
           "id": 2,
-          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705465183/uqlv1hlpwhldopfbbyt5.webp"
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705564740/scaqbbfslvwledxdbeir.webp"
         }
       ],
+      "approve_room": "Fail",
       "id": 1
+    },
+    {
+      "host_id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
+      "created_at": 1705564839299,
+      "booking_status": "Empty",
+      "name": "Tràng An Family Homestay",
+      "address": "Xóm 2 - Thôn Khê Thượng - Xã Ninh Xuân - Huyện Hoa Lư - Tỉnh Ninh Bình",
+      "price": 12334,
+      "cout_people": 3,
+      "city": "Ninh Bình",
+      "type_tourism": "Homestay",
+      "bedroom": 1,
+      "bathroom": 1,
+      "start_date": 0,
+      "end_date": 0,
+      "decription": "phòng đà nẵng",
+      "image": [
+        {
+          "id": 1,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705564839/woijwvng1qgrdyua8t8a.webp"
+        }
+      ],
+      "approve_room": "Fail",
+      "id": 2
+    },
+    {
+      "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "created_at": 1705907284516,
+      "booking_status": "Empty",
+      "name": "Đồi Thông Homestay",
+      "address": "Xã Minh Trí, Huyện Sóc Sơn, Thành phố Hà Nội",
+      "price": 900000,
+      "cout_people": 2,
+      "city": "Hà Nội",
+      "type_tourism": "Homestay",
+      "bedroom": 1,
+      "bathroom": 1,
+      "start_date": 0,
+      "end_date": 0,
+      "decription": "Hanoi Emerald Waters Hotel & Spa tọa lạc tại thủ đô Hà Nội đậm đà bản sắc văn hóa, chỉ cách Nhà hát Múa rối Nước Thăng Long 200 m. Khách sạn có nhà hàng trong khuôn viên phục vụ tiệc tự chọn gồm các món ăn ngon. Những Khách muốn thưởng thức 1 ly cocktail tùy chọn có thể ghé vào quầy bar nằm trong chỗ nghỉ này. Wi-Fi miễn phí có trong toàn bộ khuôn viên.",
+      "image": [
+        {
+          "id": 1,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705907283/m2mhvyz8l6nxzk9bi7up.jpg"
+        },
+        {
+          "id": 2,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705907283/ldmbp1kp6wqfktmjcbh6.jpg"
+        },
+        {
+          "id": 3,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705907283/lxyu8usazffnenlz4bwu.jpg"
+        }
+      ],
+      "approve_room": "Success",
+      "id": 3
+    },
+    {
+      "host_id": "640f7a52-7f62-4403-8019-55cbae2609c9",
+      "created_at": 1705907356838,
+      "booking_status": "Success",
+      "name": "Bình Yên Cottages",
+      "address": "Xã Minh Trí, Huyện Sóc Sơn, Thành phố Hà Nội",
+      "price": 1050000,
+      "cout_people": 2,
+      "city": "Hà Nội",
+      "type_tourism": "Khách sạn",
+      "bedroom": 1,
+      "bathroom": 1,
+      "start_date": 1706832000000,
+      "end_date": 1706918400000,
+      "decription": "Mỗi phòng nghỉ ở đây đều được trang bị nội thất kiểu dáng đẹp với gam màu trung tính. Trong phòng có TV truyền hình vệ tinh màn hình phẳng. Phòng tắm riêng đi kèm góc tắm vòi sen. Áo choàng tắm và dép cũng được cung cấp cho Khách.",
+      "image": [
+        {
+          "id": 1,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705907355/ekywcibzfk19fcpwua35.jpg"
+        },
+        {
+          "id": 2,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705907356/tmmkwgxkpcnry5fvnmrv.jpg"
+        },
+        {
+          "id": 3,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705907356/wvy2wbdng97imgdjeyi4.jpg"
+        }
+      ],
+      "approve_room": "Success",
+      "id": 4
+    },
+    {
+      "host_id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
+      "created_at": 1705907382605,
+      "booking_status": "Empty",
+      "name": "Stream House Nhà Bên Suối",
+      "address": "Đội 4 thôn Minh Tân, Xã Minh Trí, Huyện Sóc Sơn, Thành phố Hà Nội",
+      "price": 1050000,
+      "cout_people": 2,
+      "city": "Hà Nội",
+      "start_date": 0,
+      "end_date": 0,
+      "type_tourism": "Khách sạn",
+      "bedroom": 1,
+      "bathroom": 1,
+      "decription": "Mỗi phòng nghỉ ở đây đều được trang bị nội thất kiểu dáng đẹp với gam màu trung tính. Trong phòng có TV truyền hình vệ tinh màn hình phẳng. Phòng tắm riêng đi kèm góc tắm vòi sen. Áo choàng tắm và dép cũng được cung cấp cho Khách.",
+      "image": [
+        {
+          "id": 1,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705907382/yy4myhmmgwtzzb2itgou.jpg"
+        },
+        {
+          "id": 2,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705907381/ks0rpv4a239avgk6uavk.jpg"
+        },
+        {
+          "id": 3,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705907381/t7cp1akqmhy4e3ijqzpr.jpg"
+        }
+      ],
+      "approve_room": "Success",
+      "id": 5
+    },
+    {
+      "host_id": "397418b9-5290-4005-bcd9-fbb62a074569",
+      "created_at": 1705907644011,
+      "booking_status": "Empty",
+      "name": "EDEN BOUTIQUE & SPA Sapa",
+      "address": "Phường Phan Si Păng, Thị xã Sa Pa, Tỉnh Lào Cai",
+      "price": 11000000,
+      "cout_people": 2,
+      "city": "Lào Cai",
+      "type_tourism": "Căn hộ dịch vụ",
+      "bedroom": 1,
+      "bathroom": 1,
+      "start_date": 0,
+      "end_date": 0,
+      "decription": "Nằm gần Muong Hoa Valley, Khách sạn 4 sao Khách Sạn&Spa Eden Boutique Sa Pa có massage, phòng Khách chung và các hoạt động giải trí. Chỗ ở này cách Bản Cát Cát 25 phút đi bộ và cách Thác Tiên Sa 5 phút lái xe.\nVị trí",
+      "image": [
+        {
+          "id": 1,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705907643/ppylgrsew0whhn6x3erm.jpg"
+        },
+        {
+          "id": 2,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705907642/exsoxj3lffpqkmlxj8ig.jpg"
+        },
+        {
+          "id": 3,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705907642/nqxfyk1rkx51pkkt8xyx.jpg"
+        }
+      ],
+      "approve_room": "Success",
+      "id": 6
+    },
+    {
+      "host_id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
+      "created_at": 1705907685985,
+      "booking_status": "Empty",
+      "name": "Sapa Praha Hotel",
+      "address": "85 Violet, Phường Sa Pa, Thị xã Sa Pa, Tỉnh Lào Cai",
+      "price": 10500000,
+      "cout_people": 2,
+      "city": "Lào Cai",
+      "type_tourism": "Khách sạn",
+      "bedroom": 1,
+      "bathroom": 1,
+      "start_date": 0,
+      "end_date": 0,
+      "decription": "Bữa sáng kiểu Mỹ với nhiều món ăn khác nhau được phục vụ vào mỗi buổi sáng. Nhà hàng Eden là nơi lý tưởng để thưởng thức ẩm thực Mỹ. Du Khách lưu trú tại Khách Sạn&Spa Eden Boutique có thể thưởng thức các lựa chọn ăn uống khác nhau có sẵn tại lounge bar.",
+      "image": [
+        {
+          "id": 1,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705907685/vhqpfzj5rnodatyrn9jv.jpg"
+        },
+        {
+          "id": 2,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705907684/jmmvmssx3i8kr9qk8oo1.jpg"
+        },
+        {
+          "id": 3,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705907683/prh0fwa7wtae9bhwbmic.jpg"
+        }
+      ],
+      "approve_room": "Success",
+      "id": 7
+    },
+    {
+      "host_id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
+      "created_at": 1705908348456,
+      "booking_status": "Empty",
+      "name": "Palette Collect's Boutique Hotel Ha Long",
+      "address": "Bãi cháy, Hạ Long, Quảng Ninh",
+      "price": 700000,
+      "cout_people": 2,
+      "city": "Quảng Ninh",
+      "type_tourism": "Khách sạn",
+      "bedroom": 1,
+      "bathroom": 1,
+      "start_date": 0,
+      "end_date": 0,
+      "decription": "\nTọa lạc bên bờ biển ở thành phố Hạ Long, Palette Collect's Boutique Hotel Ha Long có quầy bar và WiFi miễn phí. Chỗ nghỉ này có các phòng gia đình và sân hiên. Nơi đây cung cấp dịch vụ phòng, bàn đặt tour và phòng giữ hành lý cho Khách.",
+      "image": [
+        {
+          "id": 1,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705908347/i8birtifdthiuxuenpkg.jpg"
+        },
+        {
+          "id": 2,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705908347/e2h7fdqyacxwcunsa8la.jpg"
+        },
+        {
+          "id": 3,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705908347/viabr2wmcuirlwqjgjvj.jpg"
+        }
+      ],
+      "approve_room": "Success",
+      "id": 8
+    },
+    {
+      "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "created_at": 1705908454613,
+      "booking_status": "Empty",
+      "name": "Sài Gòn Hạ Long Hotel",
+      "address": "Bãi cháy, Hạ Long, Quảng Ninh",
+      "price": 900000,
+      "cout_people": 2,
+      "city": "Quảng Ninh",
+      "type_tourism": "Khách sạn",
+      "bedroom": 1,
+      "bathroom": 1,
+      "start_date": 0,
+      "end_date": 0,
+      "decription": "Khách sạn Sài Gòn Hạ Long là một trong những Khách sạn 4 sao hàng đầu tại thành phố Hạ Long. Tọa lạc tại trung tâm khu du lịch Bãi Cháy, Khách sạn sở hữu tầm nhìn bao quát Di sản Thiên nhiên Thế giới Vịnh Hạ Long. Từ đây, du Khách có thể dễ dàng tiếp cận tất cả các điểm tham quan du lịch chính của thành phố như Vịnh Hạ Long, Sun Wolrd Hạ Long complex và bờ biển Bãi Cháy.",
+      "image": [
+        {
+          "id": 1,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705908453/f37qlsjwiyegrfabt0tr.jpg"
+        },
+        {
+          "id": 2,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705908453/oob9jfe1ybr35wm6jnqu.jpg"
+        },
+        {
+          "id": 3,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705908454/riptufp2g4sjop5youxp.jpg"
+        }
+      ],
+      "approve_room": "Success",
+      "id": 9
+    },
+    {
+      "host_id": "640f7a52-7f62-4403-8019-55cbae2609c9",
+      "created_at": 1705908741427,
+      "booking_status": "Empty",
+      "name": "Tam Cốc Palm House",
+      "address": "Xóm 5 - Thôn Đam Khê Trong - Xã Ninh Hải - Huyện Hoa Lư - Tỉnh Ninh Bình",
+      "price": 600000,
+      "cout_people": 3,
+      "city": "Ninh Bình",
+      "type_tourism": "Homestay",
+      "bedroom": 1,
+      "bathroom": 1,
+      "start_date": 0,
+      "end_date": 0,
+      "decription": "Các căn tại đây có tầm nhìn ra khu vườn, khu vực ghế ngồi, máy giặt, khu vực bếp ăn đầy đủ tiện nghi với tủ lạnh và phòng tắm riêng đi kèm dép đi trong phòng cùng máy sấy tóc. Một số căn được bố trí sân trong và/hoặc ban công nhìn ra quang cảnh núi non.",
+      "image": [
+        {
+          "id": 1,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705908740/mqoqsntasftwktcw421r.jpg"
+        },
+        {
+          "id": 2,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705908740/kkgrobgeql3wlsgenttl.jpg"
+        },
+        {
+          "id": 3,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705908740/mq1crvbzysea8jmrg7bi.jpg"
+        }
+      ],
+      "approve_room": "Success",
+      "id": 10
+    },
+    {
+      "host_id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
+      "created_at": 1705908808696,
+      "booking_status": "Empty",
+      "name": "Ninh Bình Bamboo Farmstay",
+      "address": "Xóm 10 - Thôn Đam Khê Trong - Xã Ninh Hải - Huyện Hoa Lư - Tỉnh Ninh Bình",
+      "price": 700000,
+      "cout_people": 3,
+      "city": "Ninh Bình",
+      "type_tourism": "Homestay",
+      "bedroom": 1,
+      "bathroom": 1,
+      "start_date": 0,
+      "end_date": 0,
+      "decription": "Nằm ở tỉnh Ninh Bình, Ninh Binh Bamboo Farmstay có nhà hàng, lễ tân 24 giờ, quầy bar, vườn, sân chơi cho trẻ em, sân hiên tắm nắng và tầm nhìn ra vườn. Chỗ nghỉ này cung cấp WiFi miễn phí.\nCác căn tại đây được bố trí bếp ăn với khu vực ăn uống cũng như phòng tắm riêng đi kèm dép đi trong phòng và vòi xịt/chậu rửa vệ sinh. Một số căn có khu vực ghế ngồi và/hoặc sân trong.",
+      "image": [
+        {
+          "id": 1,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705908807/mwxydzyelqxqvzsjxgvd.jpg"
+        },
+        {
+          "id": 2,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705908808/hnuf2qbf8en4vniiooc9.jpg"
+        },
+        {
+          "id": 3,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705908807/t5atv6dlihlarrh8eclz.jpg"
+        }
+      ],
+      "approve_room": "Success",
+      "id": 11
+    },
+    {
+      "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "created_at": 1705908957801,
+      "booking_status": "Pending",
+      "name": "Yarra Ocean Suites Danang",
+      "address": "Phường Mỹ An - Quận Ngũ Hành Sơn - Thành phố Đà Nẵng ",
+      "price": 700000,
+      "cout_people": 2,
+      "city": "Đà Nẵng",
+      "type_tourism": "Khách sạn",
+      "bedroom": 1,
+      "start_date": 1706659200000,
+      "end_date": 1706745600000,
+      "bathroom": 1,
+      "decription": "This is a new hotel. We rented an apartment with an incredible view over the sea and beach. This apartment gives a stunning perspective with its floor to roof glass windows and three balconies facing the sea. The beach is next to the hotel across the road. Breakfast is the best…",
+      "image": [
+        {
+          "id": 1,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705908957/qq0gi0fz3rxvnajhtcid.jpg"
+        },
+        {
+          "id": 2,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705908957/dbq5swkoy4majslfsrvk.jpg"
+        },
+        {
+          "id": 3,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705908957/lomlawjzzx5jmdvqldb3.jpg"
+        }
+      ],
+      "approve_room": "Success",
+      "id": 12
+    },
+    {
+      "host_id": "640f7a52-7f62-4403-8019-55cbae2609c9",
+      "created_at": 1705909065246,
+      "booking_status": "Empty",
+      "name": "Radisson Blu Danang",
+      "address": "Phường Phước Mỹ - Quận Sơn Trà - Thành phố Đà Nẵng",
+      "price": 670000,
+      "cout_people": 2,
+      "city": "Đà Nẵng",
+      "type_tourism": "Khách sạn",
+      "bedroom": 1,
+      "bathroom": 1,
+      "start_date": 0,
+      "end_date": 0,
+      "decription": "Tận hưởng những ngày đầy nắng bên ly cocktail sảng khoái, ngâm mình dưới làn nước mát lạnh tại hồ bơi vô cực chắc chắn sẽ là những phút giây tuyệt vời nhất của mùa hè.",
+      "image": [
+        {
+          "id": 1,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705909064/wzmytr4ahsiks3gjt7nv.jpg"
+        },
+        {
+          "id": 2,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705909064/nybye6outy6ta02xwdzc.jpg"
+        },
+        {
+          "id": 3,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705909064/emc6hh0dzycr4ohqgqii.jpg"
+        }
+      ],
+      "approve_room": "Success",
+      "id": 13
+    },
+    {
+      "host_id": "397418b9-5290-4005-bcd9-fbb62a074569",
+      "created_at": 1705909357691,
+      "booking_status": "Empty",
+      "name": "M Village TP HCM",
+      "address": "Phường Bến Nghé - Quận 1 - Thành phố Hồ Chí Minh ",
+      "price": 1200000,
+      "cout_people": 3,
+      "city": "Hồ Chí Minh",
+      "type_tourism": "Khách sạn",
+      "bedroom": 1,
+      "bathroom": 1,
+      "start_date": 0,
+      "end_date": 0,
+      "decription": "Tọa lạc tại Thành phố Hồ Chí Minh, cách Bảo tàng Chứng tích Chiến tranh 500 m, M Village The Garden có phòng nghỉ gắn máy điều hòa và khu vườn. Chỗ nghỉ này có dịch vụ tiền sảnh và sân hiên. Nơi đây cung cấp dịch vụ lễ tân 24 giờ và dịch vụ phòng cho Khách.",
+      "image": [
+        {
+          "id": 1,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705909357/ze7hh1lhe1mb3ga3tagc.jpg"
+        },
+        {
+          "id": 2,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705909357/otobhutaxld8kaq1jhgc.jpg"
+        },
+        {
+          "id": 3,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705909357/eg7xjvayuanvqrewa5f5.jpg"
+        }
+      ],
+      "approve_room": "Success",
+      "id": 14
+    },
+    {
+      "host_id": "397418b9-5290-4005-bcd9-fbb62a074569",
+      "created_at": 1705909409250,
+      "booking_status": "Empty",
+      "name": "New World Sài Gòn Hotel",
+      "address": "Phường Bến Nghé - Quận 1 - Thành phố Hồ Chí Minh ",
+      "price": 1200000,
+      "cout_people": 3,
+      "city": "Hồ Chí Minh",
+      "type_tourism": "Khách sạn",
+      "bedroom": 1,
+      "bathroom": 1,
+      "start_date": 0,
+      "end_date": 0,
+      "decription": "New World Saigon Hotel tọa lạc tại một vị trí lý tưởng ở trung tâm Quận 1 thuộc Thành phố Hồ Chí Minh, giữa khu phố sầm uất với các nhà hàng và địa điểm giải trí. Chỗ nghỉ này nằm trong khoảng cách đi bộ từ các chợ, bảo tàng và địa điểm tham quan văn hóa",
+      "image": [
+        {
+          "id": 1,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705909408/bidmn3mwek5tbj7k3pfe.jpg"
+        },
+        {
+          "id": 2,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705909408/alzdqoazwhtvanqrhnud.jpg"
+        },
+        {
+          "id": 3,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705909408/j1skpfj8t8q7pra60fng.jpg"
+        }
+      ],
+      "approve_room": "Success",
+      "id": 15
+    },
+    {
+      "host_id": "397418b9-5290-4005-bcd9-fbb62a074569",
+      "created_at": 1706750691949,
+      "booking_status": "Empty",
+      "name": "Tam Coc brothers homestay",
+      "address": "Xã Ninh Thắng - Huyện Hoa Lư - Tỉnh Ninh Bình",
+      "price": 600000,
+      "cout_people": 4,
+      "city": "Ninh Bình",
+      "type_tourism": "Homestay",
+      "bedroom": 1,
+      "bathroom": 1,
+      "start_date": 1706750691949,
+      "end_date": 1706750691949,
+      "decription": "Nằm tại tỉnh Ninh Bình, cách Chùa Bái Đính 25 km, Tam Coc Brothers Homestay có nhà hàng, chỗ đỗ xe riêng miễn phí, quán bar và phòng Khách chung. Chỗ nghỉ này còn có phòng gia đình và sân hiên. Chỗ nghỉ cung cấp dịch vụ lễ tân 24 giờ, dịch vụ đưa đón, dịch vụ phòng và WiFi miễn phí trong toàn bộ khuôn viên.",
+      "image": [
+        {
+          "id": 1,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1706750692/efubjn1ceyew3bo0srxy.jpg"
+        },
+        {
+          "id": 2,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1706750692/df6bupnsnfmkj9epqznb.jpg"
+        },
+        {
+          "id": 3,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1706750692/uskv7w8j7dlwv57bahwo.jpg"
+        }
+      ],
+      "approve_room": "Pending",
+      "id": 16
+    },
+    {
+      "host_id": "640f7a52-7f62-4403-8019-55cbae2609c9",
+      "created_at": 1706751007612,
+      "booking_status": "Empty",
+      "name": "Summer Taste Homestay",
+      "address": "208 Cống Quỳnh - Phường Phạm Ngũ Lão - Quận 1 - Thành phố Hồ Chí Minh",
+      "price": 400000,
+      "cout_people": 4,
+      "city": "Hồ Chí Minh",
+      "type_tourism": "Khách sạn",
+      "bedroom": 2,
+      "bathroom": 1,
+      "start_date": 1706751007612,
+      "end_date": 1706751007612,
+      "decription": "Trong số các điểm tham quan nổi tiếng gần homestay này có Công viên Tao Đàn, Bảo tàng Thành phố Hồ Chí Minh và trung tâm thương mại Takashimaya Việt Nam. Sân bay gần nhất là sân bay quốc tế Tân Sơn Nhất, cách Summer Taste Homestay 13 km.",
+      "image": [
+        {
+          "id": 1,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1706751007/ikgdfa5yfk9f4gucwidc.jpg"
+        },
+        {
+          "id": 2,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1706751008/qwkiyzi5xrpxgr809y5a.jpg"
+        },
+        {
+          "id": 3,
+          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1706751008/wylymogs0acmdqumlkb3.jpg"
+        }
+      ],
+      "approve_room": "Success",
+      "id": 17
     }
   ],
-  "booking": [
+  "bookings": [
     {
-      "id": 1,
-      "id_touris": 1,
-      "start_date": "987",
-      "end_date": "4567",
-      "cout_persion": 2,
-      "total": 3
+      "id_touris": 12,
+      "user_id": "b4818218-fde8-426c-8aad-97b020fc927a",
+      "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "name_user": "tra my",
+      "phone": 967856546,
+      "email": "tramyxinhgai@gmail.com",
+      "name_room": "Yarra Ocean Suites Danang",
+      "address_room": "Phường Mỹ An - Quận Ngũ Hành Sơn - Thành phố Đà Nẵng",
+      "booking_status": "Success",
+      "start_date": 1706659200000,
+      "end_date": 1706745600000,
+      "count_date": 1,
+      "count_person": 2,
+      "price": 700000,
+      "total": 700000,
+      "complete_touris": false,
+      "pay_status": "Success",
+      "id": 1
+    },
+    {
+      "id_touris": 4,
+      "user_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "host_id": "640f7a52-7f62-4403-8019-55cbae2609c9",
+      "name_user": "Hello host1",
+      "phone": 985566754,
+      "email": "host1@gmail.com",
+      "name_room": "Bình Yên Cottages",
+      "address_room": "Xã Minh Trí, Huyện Sóc Sơn, Thành phố Hà Nội",
+      "booking_status": "Success",
+      "start_date": 1706832000000,
+      "end_date": 1706918400000,
+      "count_date": 1,
+      "count_person": 2,
+      "price": 1050000,
+      "total": 1050000,
+      "complete_touris": false,
+      "pay_status": "Pending",
+      "id": 2
+    }
+  ],
+  "user_booking": [
+    {
+      "id_user": "b4818218-fde8-426c-8aad-97b020fc927a",
+      "id_host": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "id": 1
+    },
+    {
+      "id_user": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "id_host": "640f7a52-7f62-4403-8019-55cbae2609c9",
+      "id": 2
     }
   ]
 }

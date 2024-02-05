@@ -16,6 +16,7 @@ const useGetUser = () => {
             try {
                 const getUser: GetUserApi = await getUserSevice(decodedToken.email);
                 setUser(getUser?.data[0]);
+                
             } catch (error: unknown) {
                 if (typeof error === "string") throw new Error(error);
             }

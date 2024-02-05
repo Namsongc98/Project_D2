@@ -1,8 +1,13 @@
-import { AlertColor, Typography } from "@mui/material";
 import { Button, Input, SelectOption, TextArea } from "../../component/element";
-import { IRoomSubmit, ImgageFiles, SelectOptionType } from "../../type";
+import {
+  Approve,
+  BookingStatus,
+  IRoomPost,
+  ImageFiles,
+  SelectOptionType,
+} from "../../type";
 import { useButton, useGetUser, useInputMultiple } from "../../hook";
-import { PreviewImg } from "../../component/componentReuse";
+import { AlertComponent, PreviewImg } from "../../component/componentReuse";
 import { useEffect, useState } from "react";
 
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -10,11 +15,15 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
 import SnackBarReuse from "../../component/componentReuse/SnackBarReuse";
 import { createRoom, upfileClodinary } from "../../service";
+import { Title } from "../../component/componentPage";
+import { AlertColor, Stack } from "@mui/material";
 
 const PostRoom = () => {
   const [loading, setLoading] = useState(false);
-  const [type, setType] = useState<AlertColor>("success");
+  const [type, setType] = useState<AlertColor | undefined>(undefined);
   const [error, setError] = useState("");
+  const [typeAlert, setTypeAlert] = useState<AlertColor | undefined>(undefined);
+  const [errorAlert, setErrorAlert] = useState("");
   const user = useGetUser();
   //  SelectOption
   const City = [
@@ -29,7 +38,7 @@ const PostRoom = () => {
     ...City.map((city) => ({ label: city, value: city })),
   ];
 
-  const TypeTouris = ["Căn hộ dịch vụ", "Biệt thự", "Homestay", "khách sạn"];
+  const TypeTouris = ["Căn hộ dịch vụ", "Biệt thự", "Homestay", "Khách sạn"];
   const optionsTypetouris: SelectOptionType[] = [
     ...TypeTouris.map((type) => ({ label: type, value: type })),
   ];
@@ -46,12 +55,12 @@ const PostRoom = () => {
   const schema = yup.object({
     address: yup.string().required("Nhập địa chỉ"),
     nameHotel: yup.string().required("Nhập tên khách sạn"),
-    price: yup.number().required("Nhập giá tiền "),
-    coutPeople: yup.number().required("Nhập số lượng người "),
+    price: yup.number().typeError("Nhập giá tiền "),
+    coutPeople: yup.number().typeError("Nhập số lượng người "),
     city: yup.string().required("Nhập tên thành phố "),
     typeTouris: yup.string().required("Nhập loại Du lich"),
-    bedRoom: yup.number().required("Nhập số lượng phòng ngủ"),
-    bathRoom: yup.number().required("Nhập số lượng phòng tắm"),
+    bedRoom: yup.number().typeError("Nhập số lượng phòng ngủ"),
+    bathRoom: yup.number().typeError("Nhập số lượng phòng tắm"),
     decription: yup.string().required("Nhập mô tả phòng"),
   });
 
@@ -59,6 +68,7 @@ const PostRoom = () => {
     register,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm({
     resolver: yupResolver(schema),
   });
@@ -76,24 +86,23 @@ const PostRoom = () => {
 
   useEffect(() => {
     if (message) {
-      setType("error");
-      setError(message);
+      setTypeAlert("info");
+      setErrorAlert(message);
+    } else {
+      setTypeAlert("info");
+      setErrorAlert("");
     }
-    return () => {
-      setError("");
-    };
   }, [message]);
-  const onSubmit: SubmitHandler<IRoomSubmit> = async (
-    data: IRoomSubmit
-  ): Promise<void> => {
+
+  const onSubmit: SubmitHandler<any> = async (data): Promise<void> => {
     setLoading(true);
     if (!imageRoom.arrImgView.length) {
       setType("error");
-      setError("Bạn chưa chọn ảnh");
+      setError("Bạn chưa chọn ảnh!");
       setLoading(false);
       return;
     }
-    const uploadcClodinary = imageRoom.arrImgView.map((file: ImgageFiles) =>
+    const uploadcClodinary = imageRoom.arrImgView.map((file: ImageFiles) =>
       upfileClodinary(file.file)
     );
     try {
@@ -102,9 +111,10 @@ const PostRoom = () => {
         ...uploadUrl.map((item, index) => ({ id: ++index, url: item })),
       ];
 
-      const room = {
-        user_id: user?.id,
+      const room: IRoomPost = {
+        host_id: user!.id,
         created_at: Date.now(),
+        booking_status: BookingStatus.empty,
         name: data.nameHotel,
         address: data.address,
         price: data.price,
@@ -113,40 +123,56 @@ const PostRoom = () => {
         type_tourism: data.typeTouris,
         bedroom: data.bedRoom,
         bathroom: data.bathRoom,
+        start_date: Date.now(),
+        end_date: Date.now(),
         decription: data.decription,
-        imge: dataImg,
-        approve_room: false,
+        image: dataImg,
+        approve_room: Approve.pending,
       };
 
       await createRoom(room);
       setType("success");
       setError("Tạo phòng thành công");
+      setErrorAlert("");
     } catch (error) {
       setType("error");
       setError("Tạo phòng thất bại");
       setLoading(false);
-      console.log(error);
     } finally {
       setLoading(false);
+      setErrorAlert("");
     }
   };
-
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     resetButton.onClick(e);
+    imageRoom.arrImgView.forEach((image: any) => URL.revokeObjectURL(image));
+    imageRoom.setArrImgView([]);
+    reset({
+      address: "",
+      nameHotel: "",
+      price: 0,
+      decription: "",
+    });
   };
 
   return (
     <section className="flex justify-center items-center relative">
-      <SnackBarReuse message={error} type={type} />
+      <SnackBarReuse message={error} type={type} setError={setError} />
       <form
         action=""
         className="bg-white rounded-xl p-4 mt-7 min-w-[70%] shadow-md"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <Typography variant="h6" sx={{ marginBottom: 2 }}>
-          Thêm phòng
-        </Typography>
-
+        <Stack direction="row" justifyContent="space-between">
+          <Title>Thêm phòng</Title>
+          <div className="w-1/3">
+            <AlertComponent
+              error={errorAlert}
+              type={typeAlert}
+              setError={setErrorAlert}
+            />
+          </div>
+        </Stack>
         <div className="flex flex-row gap-5 mt-5">
           <div className="w-2/3">
             <PreviewImg imageRoom={imageRoom} />
@@ -167,7 +193,6 @@ const PostRoom = () => {
                   register={register}
                   defaultValue={1}
                 />
-
                 <SelectOption
                   options={optionsRoom}
                   label="Phòng tắm"

@@ -1,2 +1,3 @@
-export * from "./NavItem"
-export * from "./AppBar"
+
+export { default as AppBarComponent } from "./AppBarComponent"
+export { default as DrawerComponent } from "./DrawerComponent"

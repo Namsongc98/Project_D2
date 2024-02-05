@@ -1,16 +1,19 @@
-import { useEffect } from "react";
-import Alert from "@mui/material/Alert";
+
+import Alert, { AlertColor } from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
-import { AlertProp } from "../../type";
 
-const AlertComponent = (props: AlertProp) => {
-  const { status } = props;
 
-  useEffect(() => { }, []);
+
+const AlertComponent = ({ error, type, setError }: { error: string, type: AlertColor | undefined, setError: React.Dispatch<React.SetStateAction<string>> }) => {
+
   return (
-    <Stack sx={{ width: "100%" }} spacing={2}>
-      <Alert severity={status.type}>{status.message}</Alert>
-    </Stack>
+    <>
+      {error ?
+        <Stack sx={{ width: "100%" }} spacing={2} >
+          <Alert severity={type} >{error}</Alert>
+        </Stack> : <></>
+      }
+    </>
   );
 };
 export default AlertComponent;

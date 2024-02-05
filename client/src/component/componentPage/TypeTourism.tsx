@@ -1,4 +1,4 @@
-import React from "react";
+
 import { typeTouris } from "../../constain";
 const TypeTourism = () => {
   return (

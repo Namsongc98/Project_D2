@@ -24,7 +24,7 @@ const theme = createTheme({
 function PreviewImg({ imageRoom }: PropImages) {
   const { arrImgView, onChange, errorImg, setArrImgView } = imageRoom;
 
-  const [type, setType] = useState<AlertColor>("success");
+  const [type, setType] = useState<AlertColor| undefined>();
   const [message, setMessage] = useState("");
 
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -43,12 +43,12 @@ function PreviewImg({ imageRoom }: PropImages) {
       setType("error");
       setMessage(errorImg);
     }
-    return () => {};
+    return () => { };
   }, [errorImg]);
 
   return (
     <>
-      <SnackBarReuse type={type} message={message} />
+      <SnackBarReuse type={type} message={message} setError={setMessage} />
       <ThemeProvider theme={theme}>
         <Box
           sx={{
@@ -75,9 +75,8 @@ function PreviewImg({ imageRoom }: PropImages) {
                   {arrImgView.map((item) => (
                     <div
                       key={item.id}
-                      className={`border border-solid overflow-hidden rounded w-1/3 relative ${
-                        item.error && "border-red-500"
-                      }`}
+                      className={`border border-solid overflow-hidden rounded w-1/3 relative ${item.error && "border-red-500"
+                        }`}
                     >
                       <img
                         src={item.url}

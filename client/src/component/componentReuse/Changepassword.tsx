@@ -2,10 +2,13 @@ import { Button, Input } from "../element";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
-import { AlertValidate, IChangePassword, IChangePasswordSubmit } from "../../type";
+import {
+  AlertValidate,
+  IChangePassword,
+  IChangePasswordSubmit,
+} from "../../type";
 import { useEffect, useState } from "react";
 import { AlertComponent } from ".";
-
 
 const Changepassword = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -60,15 +63,9 @@ const Changepassword = () => {
     };
   }, [error]);
 
-  const onSubmit: SubmitHandler<IChangePasswordSubmit> = () => {
-
-
-  };
+  const onSubmit: SubmitHandler<IChangePasswordSubmit> = () => {};
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] w-[400px] bg-white shadow-md border border-solid border-[#000] p-4"
-    >
+    <form onSubmit={handleSubmit(onSubmit)}>
       {error && <AlertComponent status={statusApi} />}
       <h1 className="text-center text-2xl mb-3">Đổi mật khẩu</h1>
       <Input
@@ -78,6 +75,7 @@ const Changepassword = () => {
         label="oldPassword"
         className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
         register={register}
+        required={true}
       />
 
       <Input
@@ -87,6 +85,7 @@ const Changepassword = () => {
         label="newPassword"
         className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
         register={register}
+        required={true}
       />
       <Input
         title="Xác nhận mật khẩu mới"
@@ -95,6 +94,7 @@ const Changepassword = () => {
         label="confirmNewPassword"
         className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
         register={register}
+        required={true}
       />
       <Button
         type="submit"
