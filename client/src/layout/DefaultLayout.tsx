@@ -1,12 +1,13 @@
+import { Outlet } from "react-router-dom";
 import Footer from "../component/componentPage/Footer";
 import Header from "../component/componentPage/Header";
-import { PropsLayout } from "../type";
 
-const DefaultLayout = ({ children }: PropsLayout) => {
+const DefaultLayout = () => {
   return (
     <div className="flex flex-col w-full min-h-screen">
       <Header />
-      {children}
+     
+      <Outlet />
       <Footer />
     </div>
   );

@@ -1,9 +1,12 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
+import { useGetUser } from "../hook";
+import { Role } from "../type";
 
-const PrivateAdmin = (): React.ReactElement | null => {
-  const privateRouter = true
-  return privateRouter? <Outlet /> : <></>;
+const PrivateAdmin: React.FC = () => {
+  const user = useGetUser();
+  const privateRouter = user?.role === Role.admin;
+  const navigate = useNavigate();
+  return privateRouter ? <Outlet /> : <>{navigate("*")}</>;
 };
 
 export default PrivateAdmin;

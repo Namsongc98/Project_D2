@@ -11,7 +11,6 @@ const Input = (props: InputType): React.JSX.Element => {
     onChange,
     value,
     required,
-    defaultValue,
   } = props;
 
   return (
@@ -36,7 +35,6 @@ const Input = (props: InputType): React.JSX.Element => {
             ...register(label, { required: required }),
           })}
           placeholder={placeholder}
-          min={defaultValue}
         />
       )}
     </div>

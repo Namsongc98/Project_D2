@@ -1,15 +1,17 @@
 enum Role {
   admin = "Admin",
   guide = "Guide",
-  hosh = "Host",
+  host = "Host",
 }
 
 interface IUser {
   id?: string;
   email: string;
   password: string;
-  role?: "Admin" | "Guide" | "Host";
+  role?: Role;
 }
+
+type TypeRole = Role.admin | Role.guide | Role.host
 
 interface IProfile {
   firstName?: string;
@@ -34,37 +36,10 @@ interface IProfileUser {
   email: string;
   age?: string;
   password?: string;
+  [key: string]: any
 }
 
-interface IRoomSubmit {
-  id?: number;
-  nameHotel: string;
-  city: string;
-  address: string;
-  price: number;
-  typeTouris: string;
-  bedRoom: number;
-  bathRoom: number;
-  decription: string;
-  coutPeople: number;
 
-}
 
-interface IRoomPost {
-  user_id: string | undefined;
-  approve_room?: boolean
-  created_at: number
-  name: string,
-  address: string,
-  price: number,
-  cout_people: number,
-  city: string,
-  type_tourism: string,
-  bedroom: number,
-  bathroom: number,
-  decription: string,
-  imge: any[],
-
-}
-
-export type { IUser, Role, IProfile, IProfileUser, IRoomSubmit, IRoomPost };
+export { Role, };
+export type { IProfile, IProfileUser, IUser, TypeRole }

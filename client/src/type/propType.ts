@@ -1,5 +1,14 @@
 import { AlertColor } from "@mui/material";
-import { IProfileUser, ImageMultiple, SelectOptionType, StatusApi } from ".";
+import {
+  IBookingData,
+  IProfileUser,
+  ImageMultiple,
+  PathType,
+  SelectOptionType,
+  StatusApi,
+  TableRoom,
+  typeGetRoom,
+} from ".";
 import { Dayjs } from "dayjs";
 
 type PropsLayout = {
@@ -11,9 +20,9 @@ type PropsSelect = {
   options?: SelectOptionType[];
   onChange?: any;
   label?: string | number;
-  register?: unknown
-  field?: string
-  defaultValue?: string | number
+  register?: unknown;
+  field?: string;
+  defaultValue?: string | number;
 };
 
 type ToastProp = {
@@ -30,7 +39,7 @@ type AlertProp = {
 };
 
 type PropChangePassword = {
-  handleOpen: () => void;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   open: boolean;
   children: React.ReactNode;
 };
@@ -54,12 +63,46 @@ type PropDatePick = {
 };
 
 type PropImages = {
-  imageRoom: ImageMultiple
-}
+  imageRoom: ImageMultiple;
+};
 
 type PropTypeSnackBar = {
-  type: AlertColor,
-  message: string
+  type: AlertColor | undefined;
+  message: string;
+  setError: React.Dispatch<React.SetStateAction<string>>;
+};
+type PropAppBarType = {
+  toggleDrawer: () => void;
+  open: any;
+};
+type PropDrawerType = {
+  toggleDrawer: () => void;
+  open: boolean;
+  paths: Array<PathType>;
+};
+
+type PropsRoom = {
+  data: typeGetRoom[];
+  getdata: () => void;
+  page: number,
+  rowsPerPage: number,
+  handleChangePage: (event: unknown, newPage: number) => void,
+  handleChangeRowsPerPage: (event: React.ChangeEvent<HTMLInputElement>) => void,
+
+};
+
+
+interface PropsBooking {
+  data: IBookingData[];
+  columns: TableRoom[];
+  detail: boolean;
+  getData: () => void;
+  user:IProfileUser
+}
+
+interface PropsUser {
+  data: IProfileUser[]
+  onClickNav: (idUser: string) => void
 }
 
 export type {
@@ -73,5 +116,10 @@ export type {
   AlertValidate,
   PropDatePick,
   PropImages,
-  PropTypeSnackBar
+  PropTypeSnackBar,
+  PropAppBarType,
+  PropDrawerType,
+  PropsRoom,
+  PropsBooking,
+  PropsUser
 };

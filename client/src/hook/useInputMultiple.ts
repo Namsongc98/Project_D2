@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
-import { ImgageFiles } from "../type";
-
-
+import { ImageFiles } from "../type";
 
 const useInputMultiple = () => {
-  const [arrImgView, setArrImgView] = useState<ImgageFiles[]>([]);
+  const [arrImgView, setArrImgView] = useState<ImageFiles[]>([]);
   const [errorImg, setError] = useState("");
   const allowedTypes = ["image/jpeg", "image/png", "image/gif"];
 
@@ -15,7 +13,7 @@ const useInputMultiple = () => {
     }
     const fileView = e.currentTarget.files;
     const filesArray = Array.from(fileView);
-    const newImageUrls: ImgageFiles[] = [];
+    const newImageUrls: ImageFiles[] = [];
     filesArray.forEach((image, index: number) => {
       newImageUrls.push({ id: index, error: true, url: URL.createObjectURL(image), file: image })
     });
@@ -23,8 +21,8 @@ const useInputMultiple = () => {
   };
 
   useEffect(() => {
-    const newImageUrls: ImgageFiles[] = [];
-    arrImgView.forEach((image: ImgageFiles, index: number) => {
+    const newImageUrls: ImageFiles[] = [];
+    arrImgView.forEach((image: ImageFiles, index: number) => {
       if (!allowedTypes.includes(image.file.type)) {
         newImageUrls.push({ id: index, error: true, url: URL.createObjectURL(image.file), file: image.file })
         setError("Chỉ sử dụng ảnh kiểu JPEG, PNG, GIF");
@@ -42,6 +40,7 @@ const useInputMultiple = () => {
     };
 
   }, [arrImgView.length]);
+
   return {
     arrImgView,
     onChange,

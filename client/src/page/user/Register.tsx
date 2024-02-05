@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import { IFormInput, IFormRegister, IUser } from "../../type";
+import { IFormInput, IFormRegister, IUser, Role } from "../../type";
 import { SubmitHandler } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -66,7 +66,7 @@ const Register = () => {
         id,
         email: data.email,
         password: data.password,
-        role: "Guide",
+        role: Role.guide,
       };
       const registerUser = await createUser(user);
       dispatch(setUser(registerUser.data.user));
@@ -118,7 +118,7 @@ const Register = () => {
               required={true}
             />
             <Input
-              type="text"
+              type="password"
               title="Mật khẩu"
               placeholder="Nhập Password"
               label="password"
@@ -127,7 +127,7 @@ const Register = () => {
               required={true}
             />
             <Input
-              type="text"
+              type="password"
               title="Nhập lại mật khẩu"
               placeholder="Nhập lại Password"
               label="confirmPassword"

@@ -24,12 +24,12 @@ const Login = () => {
       .string()
       .required("Email là bắt buộc")
       .email("Email không hợp lệ")
-      .min(8, "Passworrd trên 8 kí tự")
+      .min(6, "Passworrd trên 8 kí tự")
       .max(32, "Password dưới 32 kí tự"),
     password: yup
       .string()
       .required("Password là bắt buộc")
-      .min(8, "Passworrd trên 8 kí tự")
+      .min(6, "Passworrd trên 8 kí tự")
       .max(32, "Password dưới 32 kí tự"),
   });
   const {
@@ -108,7 +108,7 @@ const Login = () => {
                 required={true}
               />
               <Input
-                type="text"
+                type="password"
                 title="Mật khẩu"
                 placeholder="Nhập Password"
                 label="password"

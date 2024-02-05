@@ -1,9 +1,14 @@
 import React from "react";
-import { Outlet } from "react-router";
+import { Outlet, useNavigate } from "react-router";
+import { useGetUser } from "../hook";
+import { Role } from "../type";
 
-const PrivateHost = () => {
-  const privateRouterHost = true;
-  return privateRouterHost ? <Outlet /> : <></>;
+const PrivateHost: React.FC = () => {
+  const user = useGetUser();
+  const navigate = useNavigate();
+  const privateRouterHost =
+    user?.role === Role.host || user?.role === Role.admin;
+  return privateRouterHost ? <Outlet /> : <>{navigate("*")}</>;
 };
 
 export default PrivateHost;
