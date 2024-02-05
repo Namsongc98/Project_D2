@@ -31,9 +31,9 @@ const createBooking = async (booking: IBookingData) => {
     await instance.post("/user_booking/", bookingUser);
     return res;
   } catch (error: unknown) {
-    throw new Error(error)
+    if (typeof error === "string")
+      throw new Error(error)
   }
-
 };
 
 // cho phép người dùng đặt phòng
@@ -41,7 +41,6 @@ const patchBookingConfirm = async (
   idBooking: number,
   bookingStatus: PatchBooking
 ) => {
-  console.log(bookingStatus)
   const result = await instance.patch(`/bookings/${idBooking}`, bookingStatus);
   await patchStatusBooking(result.data.id_touris, bookingStatus);
   return;
