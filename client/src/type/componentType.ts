@@ -144,8 +144,6 @@ interface ITaps {
   label: string;
   to: { pathname: string, search: string };
 }
-
-
 export type {
   ButonType,
   InputHook,

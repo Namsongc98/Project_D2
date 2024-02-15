@@ -100,14 +100,14 @@ const columnBooking: TableRoom[] = [
   {
     index: "start_date",
     label: "Ngày đặt",
-    minWidth: 50,
+    minWidth: 100,
     align: "left",
     format: (value) => convertDateToTimestamp(value),
   },
   {
     index: "end_date",
     label: "Ngày cuối",
-    minWidth: 50,
+    minWidth: 100,
     align: "left",
     format: (value) => convertDateToTimestamp(value),
   },
@@ -115,11 +115,11 @@ const columnBooking: TableRoom[] = [
   {
     index: "total",
     label: "Tổng tiền",
-    minWidth: 80,
+    minWidth: 100,
     align: "left",
     format: (value) => formatcurrency(value),
   },
-  { index: "pay_status", label: "Thanh toán", minWidth: 110, align: "left" },
+  { index: "pay_status", label: "Thanh toán", minWidth: 150, align: "left" },
 ];
 
 const columnUser: TableRoom[] = [
@@ -128,7 +128,7 @@ const columnUser: TableRoom[] = [
   {
     index: "phone",
     label: "Số điện thoại",
-    minWidth: 30,
+    minWidth: 100,
     align: "left",
   },
 ];

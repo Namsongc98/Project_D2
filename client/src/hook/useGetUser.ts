@@ -1,7 +1,7 @@
 import { jwtDecode } from "jwt-decode";
 import { getLocalToken } from "../common/localStogate";
 import { getUserSevice } from "../service";
-import { Decode, GetUserApi, IProfileUser } from "../type";
+import { Decode, IProfileUser } from "../type";
 import { useEffect, useState } from "react";
 
 
@@ -14,9 +14,8 @@ const useGetUser = () => {
         const decodedToken: Decode = jwtDecode(token);
         const getUser = async () => {
             try {
-                const getUser: GetUserApi = await getUserSevice(decodedToken.email);
+                const getUser = await getUserSevice(decodedToken.email);
                 setUser(getUser?.data[0]);
-                
             } catch (error: unknown) {
                 if (typeof error === "string") throw new Error(error);
             }

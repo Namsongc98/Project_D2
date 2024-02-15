@@ -129,12 +129,14 @@ const checkRoomDate = async (booking: IBookingData) => {
   } catch (error) {
     throw new Error("Không tìm thấy phòng!")
   }
-
 }
 
 const sortListRoom = async (sort: string, order: string) => {
   const approve = Approve.success
-  return await instance.get('/touris', { params: { _sort: sort, _order: order, approve_room: approve } })
+  return await instance.get('/touris/', { params: { _sort: sort, _order: order, approve_room: approve } })
+}
+const roomPayment = async (idRoom: number) => {
+  return await instance.patch(`/touris/${idRoom}`, { booking_status: BookingStatus.empty })
 }
 
 export {
@@ -151,5 +153,6 @@ export {
   getRoomSearchAddress,
   checkRoomDate,
   getListRoom,
-  sortListRoom
+  sortListRoom,
+  roomPayment
 };

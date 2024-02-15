@@ -221,7 +221,7 @@
     {
       "host_id": "640f7a52-7f62-4403-8019-55cbae2609c9",
       "created_at": 1705907356838,
-      "booking_status": "Success",
+      "booking_status": "Pending",
       "name": "Bình Yên Cottages",
       "address": "Xã Minh Trí, Huyện Sóc Sơn, Thành phố Hà Nội",
       "price": 1050000,
@@ -230,8 +230,8 @@
       "type_tourism": "Khách sạn",
       "bedroom": 1,
       "bathroom": 1,
-      "start_date": 1706832000000,
-      "end_date": 1706918400000,
+      "start_date": 1707955200000,
+      "end_date": 1708041600000,
       "decription": "Mỗi phòng nghỉ ở đây đều được trang bị nội thất kiểu dáng đẹp với gam màu trung tính. Trong phòng có TV truyền hình vệ tinh màn hình phẳng. Phòng tắm riêng đi kèm góc tắm vòi sen. Áo choàng tắm và dép cũng được cung cấp cho Khách.",
       "image": [
         {
@@ -253,14 +253,14 @@
     {
       "host_id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
       "created_at": 1705907382605,
-      "booking_status": "Empty",
+      "booking_status": "Cancel",
       "name": "Stream House Nhà Bên Suối",
       "address": "Đội 4 thôn Minh Tân, Xã Minh Trí, Huyện Sóc Sơn, Thành phố Hà Nội",
       "price": 1050000,
       "cout_people": 2,
       "city": "Hà Nội",
-      "start_date": 0,
-      "end_date": 0,
+      "start_date": 1707955200000,
+      "end_date": 1708041600000,
       "type_tourism": "Khách sạn",
       "bedroom": 1,
       "bathroom": 1,
@@ -288,7 +288,7 @@
       "booking_status": "Empty",
       "name": "EDEN BOUTIQUE & SPA Sapa",
       "address": "Phường Phan Si Păng, Thị xã Sa Pa, Tỉnh Lào Cai",
-      "price": 11000000,
+      "price": 1100000,
       "cout_people": 2,
       "city": "Lào Cai",
       "type_tourism": "Căn hộ dịch vụ",
@@ -320,7 +320,7 @@
       "booking_status": "Empty",
       "name": "Sapa Praha Hotel",
       "address": "85 Violet, Phường Sa Pa, Thị xã Sa Pa, Tỉnh Lào Cai",
-      "price": 10500000,
+      "price": 1050000,
       "cout_people": 2,
       "city": "Lào Cai",
       "type_tourism": "Khách sạn",
@@ -705,8 +705,28 @@
       "price": 1050000,
       "total": 1050000,
       "complete_touris": false,
-      "pay_status": "Pending",
+      "pay_status": "Success",
       "id": 2
+    },
+    {
+      "id_touris": 5,
+      "user_id": "9708f548-48ce-4e96-94cb-2a18419e54f2",
+      "host_id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
+      "name_user": "quỳnh anh",
+      "phone": 987765582,
+      "email": "quynhanh@gmail.com",
+      "name_room": "Stream House Nhà Bên Suối",
+      "address_room": "Đội 4 thôn Minh Tân, Xã Minh Trí, Huyện Sóc Sơn, Thành phố Hà Nội",
+      "booking_status": "Cancel",
+      "start_date": 1707955200000,
+      "end_date": 1708041600000,
+      "count_date": 1,
+      "count_person": 2,
+      "price": 1050000,
+      "total": 1050000,
+      "complete_touris": false,
+      "pay_status": "Success",
+      "id": 3
     }
   ],
   "user_booking": [
@@ -719,6 +739,11 @@
       "id_user": "9d7de73d-349a-4f60-8957-44b9372ced4a",
       "id_host": "640f7a52-7f62-4403-8019-55cbae2609c9",
       "id": 2
+    },
+    {
+      "id_user": "9708f548-48ce-4e96-94cb-2a18419e54f2",
+      "id_host": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
+      "id": 3
     }
   ]
 }

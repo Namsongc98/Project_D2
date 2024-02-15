@@ -14,7 +14,7 @@ const useDate = () => {
   ).format("YYYY-MM-DD");
   useEffect(() => {
     setValue(dateNow);
-  }, []);
+  }, [dateNow]);
   const onChange = (newValue: Dayjs | null) => {
     setValue(newValue!.format("YYYY-MM-DD"));
   };

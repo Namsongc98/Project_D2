@@ -22,7 +22,6 @@ function App() {
       <Router>
         <Routes>
           {/* layout user public */}
-
           {publicPage.map((router) => {
             const Layout = router.layout ? DefaultLayout : LayoutMember;
             const LayoutRoleAmin = LayoutAdmin;
@@ -133,5 +132,4 @@ function App() {
     </>
   );
 }
-
 export default App;

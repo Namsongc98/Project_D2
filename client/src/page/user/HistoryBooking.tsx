@@ -7,6 +7,7 @@ import {
   getBookingUserStatus,
   getOneRoom,
   patchBookingConfirm,
+  payment,
 } from "../../service";
 import { useGetUser } from "../../hook";
 import imgEmpty from "../../assets/image/img_empty.png";
@@ -88,6 +89,19 @@ const HistoryBooking = () => {
       patchBookingConfirm(idBooking, bookingStatus);
       setTypeErr("info");
       setMessage("Đợi xác nhận");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handlePayment = (inforBooking: IBookingData) => {
+    const bookingStatus = {
+      booking_status: BookingStatus.success,
+      pay_status: StatusPayment.success,
+    };
+    try {
+      payment(inforBooking, bookingStatus);
+      setTypeErr("info");
+      setMessage("Thanh toán thành công");
     } catch (error) {
       console.log(error);
     }
@@ -242,13 +256,22 @@ const HistoryBooking = () => {
             <Divider light sx={{ my: 2 }} />
             <div className="flex justify-between">
               <div className=""></div>
-              <Button
-                variant="contained"
-                color="error"
-                onClick={() => handleCancel(inforBooking!.id!)}
-              >
-                Hủy đơn
-              </Button>
+              <Stack direction={"row"} spacing={2}>
+                <Button
+                  variant="contained"
+                  color="error"
+                  onClick={() => handleCancel(inforBooking!.id!)}
+                >
+                  Hủy đơn
+                </Button>
+                <Button
+                  variant="contained"
+                  color="info"
+                  onClick={() => handlePayment(inforBooking!)}
+                >
+                  Thanh toán
+                </Button>
+              </Stack>
             </div>
           </>
         </ModalComponent>

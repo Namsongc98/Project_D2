@@ -6,15 +6,18 @@ import { TableUser } from "../../component/componentReuse";
 import { columnUser } from "../../constain";
 import { IProfileUser } from "../../type";
 import { useNavigate } from "react-router-dom";
+import Deposits from "../../component/componentPage/host/Deposit";
 
 const AdminStatistics = () => {
   const [dataUser, setDataUser] = useState([] as IProfileUser[]);
+  const [countHost, setCountHost] = useState();
   const navigate = useNavigate();
 
   const getUser = async () => {
     try {
       const res = await getAllHost();
       setDataUser(res.data);
+      setCountHost(res.data.length);
     } catch (error) {
       console.log(error);
     }
@@ -40,7 +43,12 @@ const AdminStatistics = () => {
                 height: 60,
               }}
             >
-              <Typography color="#1976d2" fontSize="24px" fontWeight="700">
+              <Typography
+                color="#1976d2"
+                fontSize="24px"
+                fontWeight="700"
+                textAlign={"center"}
+              >
                 Thống kê khách hàng
               </Typography>
             </Paper>
@@ -54,7 +62,7 @@ const AdminStatistics = () => {
                 height: 200,
               }}
             >
-              {/* <Deposits label="Số lượng host" count={countHost} /> */}
+              <Deposits label="Số lượng host" count={countHost} />
             </Paper>
           </Grid>
           <Grid item xs={3} md={3} lg={3}>

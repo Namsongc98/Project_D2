@@ -11,6 +11,7 @@ import {
   BookingStatus,
   IBookingData,
   IProfileUser,
+  StatusPayment,
   TableRoom,
 } from "../../../type";
 import React, { useState } from "react";
@@ -21,10 +22,7 @@ import {
   SnackBarReuse,
 } from "../../componentReuse";
 import { AlertColor, Stack } from "@mui/material";
-
 import imgEmpty from "../../../assets/image/img_empty.png";
-import { useSearchParams } from "react-router-dom";
-
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -56,16 +54,10 @@ const TableHostRoomConfirm: React.FC<{
   const [message, setMessage] = useState<string>("");
   const [openConfirm, setOpenConfirm] = useState(false);
   const [inforBooking, setInforBooking] = useState<IBookingData | undefined>();
-
-  const [searchParams] = useSearchParams();
-
-  const typeParam = searchParams.get("booking");
-
   const handleOpenConfirm = (Booking: IBookingData | undefined = undefined) => {
     setOpenConfirm(!openConfirm);
     setInforBooking(Booking);
   };
-
   const handleSuccess = async (idBooking: number) => {
     const bookingStatus = {
       booking_status: BookingStatus.success,
@@ -91,7 +83,6 @@ const TableHostRoomConfirm: React.FC<{
       setType("success");
       setMessage("Xác nhận hủy phòng thành công");
       if (getData) {
-       
         getData();
       }
     } catch (error) {
@@ -131,6 +122,7 @@ const TableHostRoomConfirm: React.FC<{
                 <StyledTableRow key={booking.id}>
                   {columns.map((column) => {
                     const value = booking[column.index];
+                    console.log(value);
                     return (
                       <StyledTableCell
                         key={column.index}
@@ -139,7 +131,15 @@ const TableHostRoomConfirm: React.FC<{
                       >
                         {column.format && typeof value === "number"
                           ? column.format(value)
-                          : value}
+                          : column.index === "pay_status" &&
+                            value === StatusPayment.success
+                          ? "Đã thanh toán"
+                          : column.index === "pay_status" &&
+                            value === StatusPayment.pending
+                          ? "Chưa thanh toán"
+                          : value
+                          ? value
+                          : "Đang cập nhật"}
                       </StyledTableCell>
                     );
                   })}
@@ -158,7 +158,13 @@ const TableHostRoomConfirm: React.FC<{
                           : "bg-red-500"
                       } text-white`}
                       type="button"
-                      onClick={() => handleOpenConfirm(booking)}
+                      onClick={
+                        booking.booking_status ===
+                        (BookingStatus.cancel ||
+                          booking.complete_touris === true)
+                          ? undefined
+                          : () => handleOpenConfirm(booking)
+                      }
                     >
                       {booking.booking_status === BookingStatus.pending
                         ? "Đang chờ"
@@ -200,7 +206,6 @@ const TableHostRoomConfirm: React.FC<{
             handleSuccess={handleSuccess}
             handleFail={handleFail}
             label="Xác nhận đặt phòng"
-            typeParam={typeParam}
             decription={`Xác nhận cho người dùng đặt phòng!`}
             setOpen={setOpenConfirm}
             user={user}

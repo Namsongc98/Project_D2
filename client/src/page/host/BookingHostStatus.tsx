@@ -29,7 +29,6 @@ const BookingHostStatus = () => {
   const getBooking = async (hostId: string) => {
     try {
       const res = await getBookingHost(hostId);
-      console.log(res.data);
       setBookingArr(res.data);
     } catch (error) {
       console.log(error);

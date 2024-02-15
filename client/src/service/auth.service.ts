@@ -33,7 +33,8 @@ const postProfile = async (id: string, profile: IProfile) => {
 };
 
 const getAllHost = async () => {
-  return await instance.get('/users/', { params: { role: Role.host } })
+  const res = await instance.get('/users/', { params: { role: Role.host } })
+  return res
 }
 
 const getAllUser = async () => {

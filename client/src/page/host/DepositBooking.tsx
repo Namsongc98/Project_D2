@@ -47,7 +47,7 @@ const DepositBooking = () => {
                 flexDirection: "column",
               }}
             >
-              <Typography color="#1976d2" fontSize="24px" fontWeight="700">
+              <Typography color="#1976d2" fontSize="24px" fontWeight="700" textAlign={"center"}>
                 Thống kê khách hàng
               </Typography>
             </Paper>

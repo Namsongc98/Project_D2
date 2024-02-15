@@ -1,4 +1,4 @@
-import { checkRoomDate, getUserHostId, patchStatusBooking } from ".";
+import { checkRoomDate, getUserHostId, patchStatusBooking, roomPayment } from ".";
 import { instance } from "../config";
 import {
   BookingStatus,
@@ -46,8 +46,13 @@ const patchBookingConfirm = async (
   return;
 };
 
+const payment = async (booking: IBookingData, bookingStatus: { pay_status: any }) => {
+  await instance.patch(`/bookings/${booking.id}`, bookingStatus)
+  await roomPayment(booking.id_touris)
+}
+
 const getBookingService = async () => {
-  return await instance.get("/bookings");
+  return await instance.get("/bookings/");
 };
 
 const getBookingHostId = async (id_host: string) => {
@@ -110,8 +115,11 @@ const getBookingUserStatus = async (
 
 const checkSearchDate = async (idRoom: number) => {
   const res = await instance.get("/bookings/", { params: { id_touris: idRoom } })
-  console.log(res.data)
   return res.data
+}
+
+const completeTouris = async () => {
+
 }
 
 export {
@@ -126,5 +134,7 @@ export {
   getBookingHostStatus,
   getBookingUser,
   getBookingUserStatus,
-  checkSearchDate
+  checkSearchDate,
+  completeTouris,
+  payment
 };

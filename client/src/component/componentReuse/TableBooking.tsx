@@ -7,7 +7,12 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import { BookingStatus, IBookingData, PropsBooking } from "../../type";
+import {
+  BookingStatus,
+  IBookingData,
+  PropsBooking,
+  StatusPayment,
+} from "../../type";
 import { Button } from "../element";
 import InfoIcon from "@mui/icons-material/Info";
 import { DetailComponent, ModalComponent } from ".";
@@ -26,6 +31,7 @@ export default function TableBooking({ data, columns, detail }: PropsBooking) {
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
+
   const handleChangeRowsPerPage = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -59,7 +65,7 @@ export default function TableBooking({ data, columns, detail }: PropsBooking) {
                   {column.label}
                 </TableCell>
               ))}
-              <TableCell style={{ minWidth: 200 }} align="center">
+              <TableCell style={{ minWidth: 150 }} align="center">
                 Trạng thái
               </TableCell>
               {detail ? (
@@ -79,10 +85,19 @@ export default function TableBooking({ data, columns, detail }: PropsBooking) {
                   <TableRow hover key={booking.id}>
                     {columns.map((column, index) => {
                       const value = booking[column.index];
+                      {
+                        console.log(value);
+                      }
                       return (
                         <TableCell key={index}>
                           {column.format && typeof value === "number"
                             ? column.format(value)
+                            : column.index === "pay_status" &&
+                              value === StatusPayment.success
+                            ? "Đã thanh toán"
+                            : column.index === "pay_status" &&
+                              value === StatusPayment.pending
+                            ? "Chưa thanh toán"
                             : value
                             ? value
                             : "Đang cập nhật"}
