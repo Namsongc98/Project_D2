@@ -1,33 +1,33 @@
 import { Box, Container, Grid, Paper, Typography } from "@mui/material";
 import { CopyRight } from "../../component/componentPage";
-import Deposits from "../../component/componentPage/host/Deposit";
 import { useEffect, useState } from "react";
-import { getAllHost, getAllUser } from "../../service";
+import { getAllHost } from "../../service";
+import { TableUser } from "../../component/componentReuse";
+import { columnUser } from "../../constain";
+import { IProfileUser } from "../../type";
+import { useNavigate } from "react-router-dom";
 
 const AdminStatistics = () => {
-  const [countHost, setCountHost] = useState();
-  const [countUser, setCountUser] = useState();
+  const [dataUser, setDataUser] = useState([] as IProfileUser[]);
+  const navigate = useNavigate();
 
-  const getCountUser = async () => {
-    try {
-      const res = await getAllUser();
-      setCountUser(res.data.length);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const getCountHost = async () => {
+  const getUser = async () => {
     try {
       const res = await getAllHost();
-      setCountHost(res.data.length);
+      setDataUser(res.data);
     } catch (error) {
       console.log(error);
     }
   };
+
   useEffect(() => {
-    getCountUser();
-    getCountHost();
+    getUser();
   }, []);
+
+  const handleClickNav = (idUser: string) => {
+    navigate("/admin/host/" + idUser);
+  };
+
   return (
     <Box component="section">
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
@@ -41,7 +41,7 @@ const AdminStatistics = () => {
               }}
             >
               <Typography color="#1976d2" fontSize="24px" fontWeight="700">
-               Thống kê khách hàng
+                Thống kê khách hàng
               </Typography>
             </Paper>
           </Grid>
@@ -54,7 +54,7 @@ const AdminStatistics = () => {
                 height: 200,
               }}
             >
-              <Deposits label="Số lượng host" count={countHost} />
+              {/* <Deposits label="Số lượng host" count={countHost} /> */}
             </Paper>
           </Grid>
           <Grid item xs={3} md={3} lg={3}>
@@ -66,14 +66,18 @@ const AdminStatistics = () => {
                 height: 200,
               }}
             >
-              <Deposits label="Số lượng user" count={countUser} />
+              {/* <Deposits label="Số lượng user" count={countUser} /> */}
             </Paper>
           </Grid>
 
           <Grid item xs={12}>
-            <Paper
-              sx={{ p: 2, display: "flex", flexDirection: "column" }}
-            ></Paper>
+            <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
+              <TableUser
+                data={dataUser}
+                columns={columnUser}
+                onClickNav={handleClickNav}
+              />
+            </Paper>
           </Grid>
         </Grid>
         <CopyRight sx={{ pt: 4 }} />

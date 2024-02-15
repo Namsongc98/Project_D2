@@ -1,10 +1,12 @@
 import { Box, Container, Grid, Paper, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { Deposit, TableUser } from "../../component/componentPage";
+import { Deposit } from "../../component/componentPage";
 import { getBookingHostId } from "../../service";
 import { useGetUser } from "../../hook";
 import { useNavigate } from "react-router-dom";
 import { IProfileUser } from "../../type";
+import { TableUser } from "../../component/componentReuse";
+import { columnUser } from "../../constain";
 
 const DepositBooking = () => {
   const navigate = useNavigate();
@@ -78,7 +80,11 @@ const DepositBooking = () => {
               >
                 Danh sách người dùng
               </Typography>
-              <TableUser data={dataUser!} onClickNav={handleClickNav} />
+              <TableUser
+                data={dataUser!}
+                onClickNav={handleClickNav}
+                columns={columnUser}
+              />
             </Paper>
           </Grid>
         </Grid>

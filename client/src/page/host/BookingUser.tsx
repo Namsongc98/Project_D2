@@ -4,8 +4,8 @@ import { BookingStatus, BookingType } from "../../type";
 import { useParams, useSearchParams } from "react-router-dom";
 import { Grid } from "@mui/material";
 import { columnBooking } from "../../constain";
-import { TableBooking } from "../../component/componentPage";
 import { useGetUser } from "../../hook";
+import { TableBooking } from "../../component/componentReuse";
 
 const BookingUser = () => {
   const [data, setData] = useState([]);
@@ -31,13 +31,17 @@ const BookingUser = () => {
     complete: boolean
   ) => {
     try {
-      const res = await getBookingUserHostStatus(userId, hostId, bookingStatus, complete);
+      const res = await getBookingUserHostStatus(
+        userId,
+        hostId,
+        bookingStatus,
+        complete
+      );
       setData(res.data);
     } catch (error) {
       console.log(error);
     }
   };
-  console.log(data);
   const checkTypeParam = () => {
     if (param.id && host?.id) {
       if (userType === "1") {
@@ -64,7 +68,12 @@ const BookingUser = () => {
   }, [userType, host]);
   return (
     <Grid item xs={12} md={12} lg={12}>
-      <TableBooking data={data!} columns={columnBooking} detail={true} getData={checkTypeParam}/>
+      <TableBooking
+        data={data!}
+        columns={columnBooking}
+        detail={true}
+        getData={checkTypeParam}
+      />
     </Grid>
   );
 };

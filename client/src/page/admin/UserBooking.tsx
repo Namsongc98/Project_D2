@@ -1,10 +1,12 @@
 import { Grid } from "@mui/material";
 import { useEffect, useState } from "react";
-import { TableBooking } from "../../component/componentPage";
+
 import { columnBooking } from "../../constain";
 import { useParams, useSearchParams } from "react-router-dom";
 import { BookingStatus, BookingType } from "../../type";
 import { getBookingUser, getBookingUserStatus } from "../../service";
+import { TableBooking } from "../../component/componentReuse";
+
 
 const UserBooking = () => {
   const [data, setData] = useState([]);
@@ -62,7 +64,7 @@ const UserBooking = () => {
   return (
     <>
       <Grid item xs={12} md={12} lg={12}>
-        <TableBooking data={data!} columns={columnBooking} detail={true} getData={checkTypeParam}/>
+        <TableBooking data={data!} columns={columnBooking} detail={true} />
       </Grid>
     </>
   );

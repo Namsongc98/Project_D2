@@ -16,14 +16,9 @@ const createRoom = async (room: IRoomPost) => {
   return await instance_token.post("/touris", room);
 };
 
-// data tất cả phòng
+// data tất cả phòng 
 const getAllRoom = async (page: number, limit: number) => {
   return await instance.get(`/touris?_page=${page}&_limit=${limit}`);
-};
-const getAllRoomHost = async (page: number, limit: number, host_id: string) => {
-  return await instance.get(`/touris?_page=${page}&_limit=${limit}`, {
-    params: { host_id },
-  });
 };
 
 const getAllRoomApprove = async (
@@ -34,6 +29,14 @@ const getAllRoomApprove = async (
   return await instance.get(`/touris?_page=${page}&_limit=${limit}`, {
     params: { approve_room },
   });
+};
+
+// lấy phòng theo host
+const getAllRoomHost = async (page: number, limit: number, host_id: string) => {
+  const res = await instance.get(`/touris?_page=${page}&_limit=${limit}`, {
+    params: { host_id },
+  })
+  return res
 };
 const getAllRoomApproveHost = async (
   page: number,
@@ -82,7 +85,6 @@ const patchStatusBooking = async (
   idRoom: number,
   statusBooking: PatchBooking
 ) => {
-  console.log("touris", statusBooking)
   const result = await instance.patch(`/touris/${idRoom}`, statusBooking);
   console.log(result)
   return
@@ -130,6 +132,11 @@ const checkRoomDate = async (booking: IBookingData) => {
 
 }
 
+const sortListRoom = async (sort: string, order: string) => {
+  const approve = Approve.success
+  return await instance.get('/touris', { params: { _sort: sort, _order: order, approve_room: approve } })
+}
+
 export {
   createRoom,
   getAllRoom,
@@ -144,4 +151,5 @@ export {
   getRoomSearchAddress,
   checkRoomDate,
   getListRoom,
+  sortListRoom
 };

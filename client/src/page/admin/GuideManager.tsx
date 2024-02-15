@@ -1,9 +1,11 @@
 import { Box, Container, Grid, Paper, Typography } from "@mui/material";
-import { CopyRight, TableUser } from "../../component/componentPage";
+import { CopyRight } from "../../component/componentPage";
 
 import { useEffect, useState } from "react";
 import { getAllUser } from "../../service";
 import { useNavigate } from "react-router-dom";
+import { TableUser } from "../../component/componentReuse";
+import { columnUser } from "../../constain";
 
 const GuideManager = () => {
   const [dataUser, setDataUser] = useState([]);
@@ -27,6 +29,7 @@ const GuideManager = () => {
   };
   return (
     <Box component="section">
+      
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
         <Grid container spacing={3}>
           <Grid item xs={12} md={12} lg={12}>
@@ -65,7 +68,7 @@ const GuideManager = () => {
                 Danh sách người dùng
               </Typography>
     
-              <TableUser data={dataUser!} onClickNav={handleClickNav} />
+              <TableUser data={dataUser!} onClickNav={handleClickNav} columns={columnUser}/>
             </Paper>
           </Grid>
         </Grid>

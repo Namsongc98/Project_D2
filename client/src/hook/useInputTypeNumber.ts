@@ -9,7 +9,6 @@ const useInputTypeNumber = (initialValue: string): InputHook => {
         setValue(numericValue);
         return value
     };
-
     return {
         value,
         onChange,

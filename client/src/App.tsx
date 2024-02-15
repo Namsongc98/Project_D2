@@ -15,6 +15,7 @@ import { Detail, NotFound, User } from "./page/user";
 import { BookingConfirm, HostStatistics } from "./page/host";
 import { RoomManager } from "./page/admin";
 import UserLayout from "./page/admin/UserLayout";
+import LayoutAdminHost from "./layout/admin/LayoutAdminHost";
 function App() {
   return (
     <>
@@ -34,6 +35,15 @@ function App() {
                   {router.layout && (
                     <Route path={router.path} element={<Page />} />
                   )}
+                  <Route
+                    key={router.id}
+                    path="admin/host/"
+                    element={<LayoutAdminHost />}
+                  >
+                    {router.children && router.childrenRole === "host" && (
+                      <Route path={router.path} element={<Page />} />
+                    )}
+                  </Route>
                   <Route
                     key={router.id}
                     path="admin/room"

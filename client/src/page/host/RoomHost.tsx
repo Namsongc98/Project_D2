@@ -24,7 +24,7 @@ const RoomHost = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const typeParam = searchParams.get("approve");
-  const user = useParams()
+  const user = useParams();
   // modal
   const [openInfor, setOpenInfor] = useState(false);
   const [inforRoom, setInforRoom] = useState<typeGetRoom>();
@@ -59,8 +59,8 @@ const RoomHost = () => {
         const res = await getAllRoomHost(page, rowsPerPage, user.id);
         setRoom(res.data);
       } else {
-        setType("error")
-        setMessage("Không có id")
+        setType("error");
+        setMessage("Không có id");
       }
     } catch (error) {
       console.log(error);
@@ -74,11 +74,16 @@ const RoomHost = () => {
   ) => {
     try {
       if (user.id) {
-        const res = await getAllRoomApproveHost(page, rowsPerPage, user.id, approve);
+        const res = await getAllRoomApproveHost(
+          page,
+          rowsPerPage,
+          user.id,
+          approve
+        );
         setRoom(res.data);
       } else {
-        setType("error")
-        setMessage("Không có id")
+        setType("error");
+        setMessage("Không có id");
       }
     } catch (error) {
       console.log(error);
@@ -129,7 +134,7 @@ const RoomHost = () => {
               <TablePagination
                 rowsPerPageOptions={[5, 10, 15]}
                 component="div"
-                count={Infinity}
+                count={rooms.length + 100}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={handleChangePage}

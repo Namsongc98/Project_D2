@@ -10,11 +10,34 @@ import {
 import { useEffect, useState } from "react";
 import { typeGetRoom } from "../../type";
 import { Link } from "react-router-dom";
-import { getListRoom } from "../../service";
+import { getListRoom, sortListRoom } from "../../service";
 import { formatcurrency } from "../../common";
+import { useSelectOption } from "../../hook";
+import { SelectOption } from "../../component/element";
 
 const ListStay = () => {
   const [dataRoom, setDataRoom] = useState<typeGetRoom[] | undefined>();
+  const sort = useSelectOption("");
+
+  const selectSort = [
+    {
+      label: "Mới nhất lên trên",
+      value: "created_at_asc",
+    },
+    {
+      label: "Cũ nhất lên trên",
+      value: "created_at_desc",
+    },
+    {
+      label: "Giá: thấp -> cao",
+      value: "price_asc",
+    },
+    {
+      label: "Giá: cao -> thấp",
+      value: "price_desc",
+    },
+  ];
+
   const getDataRoomCity = async () => {
     try {
       const res = await getListRoom();
@@ -26,11 +49,34 @@ const ListStay = () => {
   useEffect(() => {
     getDataRoomCity();
   }, []);
+
+  const sortDataRoom = async (sort: string, order: string) => {
+    try {
+      const res = await sortListRoom(sort, order);
+      setDataRoom(res.data);
+    } catch (error) {
+      throw new Error("");
+    }
+  };
+
+  useEffect(() => {
+    if (sort.value === "created_at_asc") {
+      sortDataRoom("created_at", "asc");
+    } else if (sort.value === "created_at_desc") {
+      sortDataRoom("created_at", "desc");
+    } else if (sort.value === "price_asc") {
+      sortDataRoom("price", "asc");
+    } else if (sort.value === "price_desc") {
+      sortDataRoom("price", "desc");
+    }
+  }, [sort.value]);
   return (
     <Box>
       <Stack direction="row" justifyContent={"space-between"} sx={{ my: 5 }}>
         <div className=""></div>
-        <div className=""></div>
+        <div className="w-40">
+          <SelectOption {...sort} options={selectSort} label={"Sắp xếp"} />
+        </div>
       </Stack>
       <Stack
         direction="row"
@@ -59,7 +105,6 @@ const ListStay = () => {
                     direction="row"
                     justifyContent="space-between"
                     alignItems="center"
-                    sx={{}}
                   >
                     <div className="text-xs font-medium bg-purple-100 py-1 px-3 rounded-xl">
                       {room.type_tourism}

@@ -7,7 +7,12 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { patchBookingConfirm } from "../../../service";
-import { BookingStatus, IBookingData, PropsBooking } from "../../../type";
+import {
+  BookingStatus,
+  IBookingData,
+  IProfileUser,
+  TableRoom,
+} from "../../../type";
 import React, { useState } from "react";
 import { Button } from "../../element";
 import {
@@ -40,12 +45,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const TableHostRoomConfirm: React.FC<PropsBooking> = ({
-  data,
-  columns,
-  getData,
-  user,
-}) => {
+const TableHostRoomConfirm: React.FC<{
+  data: IBookingData[];
+  columns: TableRoom[];
+  user: IProfileUser;
+  detail: boolean;
+  getData?: () => void;
+}> = ({ data, columns, getData, user }) => {
   const [type, setType] = useState<AlertColor | undefined>();
   const [message, setMessage] = useState<string>("");
   const [openConfirm, setOpenConfirm] = useState(false);
@@ -68,7 +74,7 @@ const TableHostRoomConfirm: React.FC<PropsBooking> = ({
       await patchBookingConfirm(idBooking, bookingStatus);
       setType("success");
       setMessage("Cho phép đặt phòng thành công");
-      getData();
+      if (getData) getData();
     } catch (error) {
       setType("error");
       setMessage("Có lỗi không thể thực hiện");
@@ -84,7 +90,10 @@ const TableHostRoomConfirm: React.FC<PropsBooking> = ({
       await patchBookingConfirm(idBooking, bookingStatus);
       setType("success");
       setMessage("Xác nhận hủy phòng thành công");
-      getData();
+      if (getData) {
+       
+        getData();
+      }
     } catch (error) {
       setType("error");
       setMessage("Có lỗi không thể thực hiện");

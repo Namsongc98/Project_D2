@@ -7,7 +7,13 @@ import {
   TablePagination,
 } from "@mui/material";
 import { useEffect, useState } from "react";
-import { getAllRoom, getAllRoomApprove, patchApprove } from "../../service";
+import {
+  getAllRoom,
+  getAllRoomApprove,
+  getAllRoomApproveHost,
+  getAllRoomHost,
+  patchApprove,
+} from "../../service";
 import SnackBarReuse from "../../component/componentReuse/SnackBarReuse";
 import TableConfirm from "../../component/componentReuse/TableConfirm";
 import { ModalComponent } from "../../component/componentReuse";
@@ -15,7 +21,7 @@ import ModalConfirm from "../../component/componentReuse/ModalConfirm";
 import { Approve, ApproveType, typeGetRoom } from "../../type";
 import { columnsTable } from "../../constain";
 import DetailComponent from "../../component/componentReuse/DetailComponent";
-import { useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { useGetUser } from "../../hook";
 
 const Roomtype = () => {
@@ -25,6 +31,7 @@ const Roomtype = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const typeParam = searchParams.get("approve");
+  const param = useParams();
   // modal
   const [openApprove, setOpenApprove] = useState(false);
   const [openInfor, setOpenInfor] = useState(false);
@@ -64,6 +71,7 @@ const Roomtype = () => {
       setOpenApprove(!openApprove);
     }
   };
+
   const handleApproveFail = async (id: number) => {
     const updateApprove = {
       approve_room: Approve.fail,
@@ -92,8 +100,15 @@ const Roomtype = () => {
     setPage(0);
   };
 
+  // get data room
+
   const getRoom = async (page: number, rowsPerPage: number) => {
     try {
+      if (param.id) {
+        const res = await getAllRoomHost(page, rowsPerPage, param.id);
+        setRoom(res.data);
+        return;
+      }
       const res = await getAllRoom(page, rowsPerPage);
       setRoom(res.data);
     } catch (error) {
@@ -107,8 +122,17 @@ const Roomtype = () => {
     approve: ApproveType
   ) => {
     try {
+      if (param.id) {
+        const res = await getAllRoomApproveHost(
+          page,
+          rowsPerPage,
+          param.id,
+          approve
+        );
+        setRoom(res.data);
+        return;
+      }
       const res = await getAllRoomApprove(page, rowsPerPage, approve);
-      console.log(res);
       setRoom(res.data);
     } catch (error) {
       console.log(error);
@@ -174,7 +198,7 @@ const Roomtype = () => {
                 <TablePagination
                   rowsPerPageOptions={[5, 10, 15]}
                   component="div"
-                  count={Infinity}
+                  count={rooms.length + 100}
                   rowsPerPage={rowsPerPage}
                   page={page}
                   onPageChange={handleChangePage}

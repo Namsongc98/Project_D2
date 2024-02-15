@@ -1,3 +1,4 @@
+import { AxiosError } from "axios";
 import { instance, instance_token } from "../config";
 import { IProfile, IUser, Role } from "../type";
 
@@ -16,8 +17,13 @@ const loginUser = async (user: IUser) => {
 
 // lấy user theo email
 const getUserSevice = async (email: string) => {
-  const res = await instance.get(`/users`, { params: { email } });
-  return res;
+  try {
+    const res = await instance.get(`/users`, { params: { email } });
+    return res;
+  } catch (error: unknown) {
+    if (error instanceof AxiosError)
+      throw new Error(error.message)
+  }
 };
 
 // thêm data profile
@@ -45,4 +51,4 @@ const getUserHostId = async (idUser: string) => {
 
 
 
-export { createUser, loginUser, postProfile, getUserSevice, getAllHost, getAllUser, getUserHostId };
+export { createUser, loginUser, postProfile, getUserSevice, getAllUser, getAllHost, getUserHostId };

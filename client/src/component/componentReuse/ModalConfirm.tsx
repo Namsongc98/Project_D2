@@ -12,7 +12,7 @@ const ModalConfirm = ({
   setOpen,
   user,
 }: any) => {
-  console.log(user?.role);
+
 
   return (
     <>

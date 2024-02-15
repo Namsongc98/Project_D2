@@ -1,5 +1,7 @@
 import { Bookingmanager, GuideManager, RoomType, UserBooking } from "../page/admin";
 import AdminStatistics from "../page/admin/AdminStatistics";
+import Roomtype from "../page/admin/RoomType";
+
 import {
   BookingHostStatus,
   BookingUser,
@@ -55,6 +57,16 @@ const publicPage: Layout = [
     role: Role.admin,
     children: false,
   },
+  {
+    id: 23,
+    path: ":id",
+    component: Roomtype,
+    layout: true,
+    role: Role.admin,
+    children: true,
+    childrenRole: "host"
+  },
+
   {
     id: 11,
     path: "/admin/user",

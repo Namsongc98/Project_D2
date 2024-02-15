@@ -1,9 +1,9 @@
 import { Box, Container, Grid, Paper, Typography } from "@mui/material";
 import { CopyRight } from "../../component/componentPage";
-import TableBooking from "../../component/componentPage/admin/TableBooking";
 import { useEffect, useState } from "react";
 import { getBookingService } from "../../service";
 import { columnBooking } from "../../constain";
+import { TableBooking } from "../../component/componentReuse";
 
 const Bookingmanager = () => {
   const [data, setData] = useState([]);
@@ -61,7 +61,6 @@ const Bookingmanager = () => {
               </Typography>
               <TableBooking
                 data={data!}
-                getData={getBooking}
                 columns={columnBooking}
                 detail={false}
               />
