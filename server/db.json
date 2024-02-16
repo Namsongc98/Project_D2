@@ -253,7 +253,7 @@
     {
       "host_id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
       "created_at": 1705907382605,
-      "booking_status": "Cancel",
+      "booking_status": "PendingCancel",
       "name": "Stream House Nhà Bên Suối",
       "address": "Đội 4 thôn Minh Tân, Xã Minh Trí, Huyện Sóc Sơn, Thành phố Hà Nội",
       "price": 1050000,
@@ -541,7 +541,7 @@
     {
       "host_id": "397418b9-5290-4005-bcd9-fbb62a074569",
       "created_at": 1705909357691,
-      "booking_status": "Empty",
+      "booking_status": "Cancel",
       "name": "M Village TP HCM",
       "address": "Phường Bến Nghé - Quận 1 - Thành phố Hồ Chí Minh ",
       "price": 1200000,
@@ -550,8 +550,8 @@
       "type_tourism": "Khách sạn",
       "bedroom": 1,
       "bathroom": 1,
-      "start_date": 0,
-      "end_date": 0,
+      "start_date": 1708041600000,
+      "end_date": 1708128000000,
       "decription": "Tọa lạc tại Thành phố Hồ Chí Minh, cách Bảo tàng Chứng tích Chiến tranh 500 m, M Village The Garden có phòng nghỉ gắn máy điều hòa và khu vườn. Chỗ nghỉ này có dịch vụ tiền sảnh và sân hiên. Nơi đây cung cấp dịch vụ lễ tân 24 giờ và dịch vụ phòng cho Khách.",
       "image": [
         {
@@ -717,7 +717,7 @@
       "email": "quynhanh@gmail.com",
       "name_room": "Stream House Nhà Bên Suối",
       "address_room": "Đội 4 thôn Minh Tân, Xã Minh Trí, Huyện Sóc Sơn, Thành phố Hà Nội",
-      "booking_status": "Cancel",
+      "booking_status": "PendingCancel",
       "start_date": 1707955200000,
       "end_date": 1708041600000,
       "count_date": 1,
@@ -727,6 +727,26 @@
       "complete_touris": false,
       "pay_status": "Success",
       "id": 3
+    },
+    {
+      "id_touris": 14,
+      "user_id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
+      "host_id": "397418b9-5290-4005-bcd9-fbb62a074569",
+      "name_user": "host 2",
+      "phone": 985687,
+      "email": "host2@gmail.com",
+      "name_room": "M Village TP HCM",
+      "address_room": "Phường Bến Nghé - Quận 1 - Thành phố Hồ Chí Minh ",
+      "booking_status": "Cancel",
+      "start_date": 1708041600000,
+      "end_date": 1708128000000,
+      "count_date": 1,
+      "count_person": 2,
+      "price": 1200000,
+      "total": 1200000,
+      "complete_touris": false,
+      "pay_status": "Pending",
+      "id": 4
     }
   ],
   "user_booking": [
@@ -744,6 +764,11 @@
       "id_user": "9708f548-48ce-4e96-94cb-2a18419e54f2",
       "id_host": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
       "id": 3
+    },
+    {
+      "id_user": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
+      "id_host": "397418b9-5290-4005-bcd9-fbb62a074569",
+      "id": 4
     }
   ]
 }

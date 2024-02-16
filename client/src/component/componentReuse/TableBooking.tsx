@@ -65,7 +65,7 @@ export default function TableBooking({ data, columns, detail }: PropsBooking) {
                   {column.label}
                 </TableCell>
               ))}
-              <TableCell style={{ minWidth: 150 }} align="center">
+              <TableCell style={{ minWidth: 200 }} align="center">
                 Trạng thái
               </TableCell>
               {detail ? (
@@ -113,6 +113,9 @@ export default function TableBooking({ data, columns, detail }: PropsBooking) {
                             ? "bg-red-500"
                             : booking.booking_status === BookingStatus.success
                             ? "bg-green-500"
+                            : booking.booking_status ===
+                              BookingStatus.pendingCancel
+                            ? "bg-red-500"
                             : "bg-orange-500"
                         } text-white`}
                         type="button"
@@ -123,6 +126,9 @@ export default function TableBooking({ data, columns, detail }: PropsBooking) {
                           ? "Hoạt động"
                           : booking.booking_status === BookingStatus.cancel
                           ? "Đã hủy"
+                          : booking.booking_status ===
+                            BookingStatus.pendingCancel
+                          ? "Khách muốn hủy"
                           : "Phòng chống"}
                       </Button>
                     </TableCell>

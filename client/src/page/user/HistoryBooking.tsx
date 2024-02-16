@@ -89,21 +89,24 @@ const HistoryBooking = () => {
       patchBookingConfirm(idBooking, bookingStatus);
       setTypeErr("info");
       setMessage("Đợi xác nhận");
+      setOpenInfor(false);
+      checkTypeParam();
     } catch (error) {
-      console.log(error);
+      throw new Error();
     }
   };
   const handlePayment = (inforBooking: IBookingData) => {
     const bookingStatus = {
-      booking_status: BookingStatus.success,
       pay_status: StatusPayment.success,
     };
     try {
       payment(inforBooking, bookingStatus);
       setTypeErr("info");
       setMessage("Thanh toán thành công");
+      setOpenInfor(false);
+      checkTypeParam();
     } catch (error) {
-      console.log(error);
+      throw new Error();
     }
   };
 
@@ -267,6 +270,12 @@ const HistoryBooking = () => {
                 <Button
                   variant="contained"
                   color="info"
+                  disabled={
+                    inforBooking?.booking_status === BookingStatus.cancel ||
+                    inforBooking?.booking_status === BookingStatus.pendingCancel
+                      ? true
+                      : false
+                  }
                   onClick={() => handlePayment(inforBooking!)}
                 >
                   Thanh toán

@@ -98,6 +98,7 @@ const SearchHotel = () => {
                 search={search}
                 handleSearch={handleOnChange}
                 required={true}
+                data={dataCity}
               />
               {dataCity.length ? (
                 <List
