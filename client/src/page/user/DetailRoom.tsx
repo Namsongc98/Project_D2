@@ -138,8 +138,7 @@ const DetailRoom = () => {
     };
     try {
       await createBooking(booking);
-      setType("success");
-      setMess("Booking thành công xin chờ xác nhận");
+      navigate("/user")
     } catch (error) {
       setError("Booking không thành công");
     }

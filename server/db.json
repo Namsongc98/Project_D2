@@ -189,7 +189,7 @@
     {
       "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
       "created_at": 1705907284516,
-      "booking_status": "Empty",
+      "booking_status": "Pending",
       "name": "Đồi Thông Homestay",
       "address": "Xã Minh Trí, Huyện Sóc Sơn, Thành phố Hà Nội",
       "price": 900000,
@@ -198,8 +198,8 @@
       "type_tourism": "Homestay",
       "bedroom": 1,
       "bathroom": 1,
-      "start_date": 0,
-      "end_date": 0,
+      "start_date": 1708214400000,
+      "end_date": 1708300800000,
       "decription": "Hanoi Emerald Waters Hotel & Spa tọa lạc tại thủ đô Hà Nội đậm đà bản sắc văn hóa, chỉ cách Nhà hát Múa rối Nước Thăng Long 200 m. Khách sạn có nhà hàng trong khuôn viên phục vụ tiệc tự chọn gồm các món ăn ngon. Những Khách muốn thưởng thức 1 ly cocktail tùy chọn có thể ghé vào quầy bar nằm trong chỗ nghỉ này. Wi-Fi miễn phí có trong toàn bộ khuôn viên.",
       "image": [
         {
@@ -223,7 +223,7 @@
       "created_at": 1705907356838,
       "booking_status": "Pending",
       "name": "Bình Yên Cottages",
-      "address": "Xã Minh Trí, Huyện Sóc Sơn, Thành phố Hà Nội",
+      "address": "Phường Hàng Bạc - Quận Hoàn Kiếm - Thành phố Hà Nội",
       "price": 1050000,
       "cout_people": 2,
       "city": "Hà Nội",
@@ -351,7 +351,7 @@
       "created_at": 1705908348456,
       "booking_status": "Empty",
       "name": "Palette Collect's Boutique Hotel Ha Long",
-      "address": "Bãi cháy, Hạ Long, Quảng Ninh",
+      "address": "Phường Hùng Thắng - Thành phố Hạ Long - Tỉnh Quảng Ninh",
       "price": 700000,
       "cout_people": 2,
       "city": "Quảng Ninh",
@@ -413,7 +413,7 @@
     {
       "host_id": "640f7a52-7f62-4403-8019-55cbae2609c9",
       "created_at": 1705908741427,
-      "booking_status": "Empty",
+      "booking_status": "Pending",
       "name": "Tam Cốc Palm House",
       "address": "Xóm 5 - Thôn Đam Khê Trong - Xã Ninh Hải - Huyện Hoa Lư - Tỉnh Ninh Bình",
       "price": 600000,
@@ -422,8 +422,8 @@
       "type_tourism": "Homestay",
       "bedroom": 1,
       "bathroom": 1,
-      "start_date": 0,
-      "end_date": 0,
+      "start_date": 1708214400000,
+      "end_date": 1708300800000,
       "decription": "Các căn tại đây có tầm nhìn ra khu vườn, khu vực ghế ngồi, máy giặt, khu vực bếp ăn đầy đủ tiện nghi với tủ lạnh và phòng tắm riêng đi kèm dép đi trong phòng cùng máy sấy tóc. Một số căn được bố trí sân trong và/hoặc ban công nhìn ra quang cảnh núi non.",
       "image": [
         {
@@ -543,7 +543,7 @@
       "created_at": 1705909357691,
       "booking_status": "Cancel",
       "name": "M Village TP HCM",
-      "address": "Phường Bến Nghé - Quận 1 - Thành phố Hồ Chí Minh ",
+      "address": "Phường Bến Nghé - Quận 1 - Thành phố Hồ Chí Minh",
       "price": 1200000,
       "cout_people": 3,
       "city": "Hồ Chí Minh",
@@ -729,21 +729,21 @@
       "id": 3
     },
     {
-      "id_touris": 14,
-      "user_id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
-      "host_id": "397418b9-5290-4005-bcd9-fbb62a074569",
-      "name_user": "host 2",
-      "phone": 985687,
-      "email": "host2@gmail.com",
-      "name_room": "M Village TP HCM",
-      "address_room": "Phường Bến Nghé - Quận 1 - Thành phố Hồ Chí Minh ",
-      "booking_status": "Cancel",
-      "start_date": 1708041600000,
-      "end_date": 1708128000000,
+      "id_touris": 10,
+      "user_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "host_id": "640f7a52-7f62-4403-8019-55cbae2609c9",
+      "name_user": "Hello host1",
+      "phone": 967756,
+      "email": "host1@gmail.com",
+      "name_room": "Tam Cốc Palm House",
+      "address_room": "Xóm 5 - Thôn Đam Khê Trong - Xã Ninh Hải - Huyện Hoa Lư - Tỉnh Ninh Bình",
+      "booking_status": "Pending",
+      "start_date": 1708214400000,
+      "end_date": 1708300800000,
       "count_date": 1,
-      "count_person": 2,
-      "price": 1200000,
-      "total": 1200000,
+      "count_person": 1,
+      "price": 600000,
+      "total": 600000,
       "complete_touris": false,
       "pay_status": "Pending",
       "id": 4
@@ -766,8 +766,8 @@
       "id": 3
     },
     {
-      "id_user": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
-      "id_host": "397418b9-5290-4005-bcd9-fbb62a074569",
+      "id_user": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "id_host": "640f7a52-7f62-4403-8019-55cbae2609c9",
       "id": 4
     }
   ]
