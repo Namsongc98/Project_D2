@@ -44,7 +44,7 @@ type InputType = {
   register?: unknown;
   className: string;
   required: boolean,
-  defaultValue?: string | number
+  defaultValue?: number | string
 };
 
 type checkboxType = {

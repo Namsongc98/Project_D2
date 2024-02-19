@@ -11,8 +11,6 @@ import {
   Paper,
   Rating,
   Stack,
-  Tab,
-  Tabs,
   Typography,
 } from "@mui/material";
 import { Button, Input, PickDate } from "../../component/element";
@@ -39,6 +37,8 @@ import useDate from "../../hook/useDate";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import SnackBarReuse from "../../component/componentReuse/SnackBarReuse";
 import { formatcurrency } from "../../common";
+import { useSelector } from "react-redux";
+import { getBookingParam } from "../../store/reducer/bookingSlice";
 const DetailRoom = () => {
   const [detailRoom, setDetailRoom] = useState<typeGetRoom | undefined>();
   const [gapDate, setGapDate] = useState<number>(0);
@@ -47,10 +47,12 @@ const DetailRoom = () => {
   const [total, setTotal] = useState<number>(0);
   const [error, setError] = useState("");
   const [openConfirm, setOpenConfirm] = useState(false);
+  const bookingParam = useSelector(getBookingParam);
+
   const param = useParams();
   const user = useGetUser();
-  const inputStartDate = useDate();
-  const inputEndDate = useDate();
+  const inputStartDate = useDate(bookingParam?.checkin);
+  const inputEndDate = useDate(bookingParam?.checkout);
   const navigate = useNavigate();
   const getRoom = async () => {
     try {
@@ -72,10 +74,9 @@ const DetailRoom = () => {
   };
 
   const schema = yup.object({
-    phone: yup.number().typeError("Mời nhập số điên thoại"),
+    phone: yup.string().required("Mời nhập số điên thoại"),
     countPerson: yup.number().typeError("Mời nhập số lượng người"),
   });
-
   const {
     register,
     formState: { errors },
@@ -83,7 +84,6 @@ const DetailRoom = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-
   const message: string | undefined =
     errors?.phone?.message || errors?.countPerson?.message;
   useEffect(() => {
@@ -138,7 +138,7 @@ const DetailRoom = () => {
     };
     try {
       await createBooking(booking);
-      navigate("/user")
+      navigate("/user");
     } catch (error) {
       setError("Booking không thành công");
     }
@@ -162,20 +162,6 @@ const DetailRoom = () => {
         })}
       </div>
       <Container maxWidth="lg" sx={{ my: 0, mx: "auto" }}>
-        <Box
-          sx={{
-            borderBottom: 1,
-            borderColor: "divider",
-            backgroundColor: "white",
-            mt: 5,
-          }}
-        >
-          <Tabs aria-label="basic tabs example">
-            <Tab label="Tổng Quan" />
-            <Tab label="Tiện ích" />
-            <Tab label="Thư viện ảnh" />
-          </Tabs>
-        </Box>
         <Stack direction="row" sx={{ my: 5 }} spacing={3}>
           <div className="w-[60%]">
             <Paper className="bg-white p-4 w-full mb-5">
@@ -268,6 +254,7 @@ const DetailRoom = () => {
             className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
             required={true}
             register={register}
+            defaultValue={user?.phone}
           />
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <Box
@@ -291,6 +278,7 @@ const DetailRoom = () => {
             className="block py-2 px-3 w-full text-base text-[#475F7B] bg-white rounded border border-solid border-[#DFE3E7] input-register"
             required={true}
             register={register}
+            defaultValue={bookingParam?.person}
           ></Input>
           <Stack sx={{ mt: 2 }} direction="row" justifyContent="space-between">
             <span className="text-xl ">Số ngày đặt:</span>

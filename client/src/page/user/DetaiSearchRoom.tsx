@@ -12,16 +12,17 @@ import { Link, useSearchParams } from "react-router-dom";
 import { getRoomSearchAddress } from "../../service";
 import { typeGetRoom } from "../../type";
 import { formatcurrency } from "../../common";
+import { useDispatch } from "react-redux";
+import { setBookingParam } from "../../store/reducer/bookingSlice";
 
 const DetaiSearchRoom = () => {
   const [roomArr, setRoomArr] = useState([] as typeGetRoom[]);
-
   const [searchParams] = useSearchParams();
-
+  const dispatch = useDispatch();
   const getRoom = async (dataParam: {
     address: string;
-    checkin: string;
-    checkout: string;
+    checkin: number;
+    checkout: number;
     person: string;
   }) => {
     try {
@@ -34,7 +35,12 @@ const DetaiSearchRoom = () => {
 
   useEffect(() => {
     const currentParams: any = Object.fromEntries([...searchParams]);
-    getRoom(currentParams);
+    getRoom({
+      ...currentParams,
+      checkin: new Date(currentParams.checkin).getTime(),
+      checkout: new Date(currentParams.checkout).getTime(),
+    });
+    dispatch(setBookingParam(currentParams));
   }, [searchParams]);
   return (
     <>
@@ -67,7 +73,6 @@ const DetaiSearchRoom = () => {
         sx={{ my: 5 }}
       >
         {roomArr?.map((room) => (
-
           <Link
             className="w-[32%] h-[480px]"
             to={`/detail/${room.id}`}
@@ -114,7 +119,6 @@ const DetaiSearchRoom = () => {
               </CardContent>
             </Card>
           </Link>
-
         ))}
       </Stack>
     </>

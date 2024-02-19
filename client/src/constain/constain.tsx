@@ -88,7 +88,12 @@ const columnsTable: readonly ColumnTable[] = [
   { id: "name", label: "Tên Khách sạn", minWidth: 100 },
   { id: "type_tourism", label: "kiểu dịch vụ", minWidth: 120 },
   { id: "city", label: "Thành phố", minWidth: 100 },
-  { id: "price", label: "Giá phòng", minWidth: 100 },
+  {
+    id: "price",
+    label: "Giá phòng",
+    minWidth: 100,
+    format: (value) => formatcurrency(value),
+  },
 ];
 
 const columnBooking: TableRoom[] = [

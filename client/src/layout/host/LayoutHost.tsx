@@ -38,7 +38,9 @@ const LayoutHost = () => {
               overflow: "auto",
             }}
           >
+          
             <Toolbar />
+            
             <Outlet />
           </Box>
         </Box>

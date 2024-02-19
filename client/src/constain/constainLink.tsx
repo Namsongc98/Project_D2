@@ -130,7 +130,7 @@ const tapAdminRoom: ITaps[] = [
   {
     id: 4,
     value: 3,
-    label: "Không duyệt",
+    label: "Không được duyệt",
     to: { pathname: "/admin/room", search: "?approve=3" },
   },
 ];
@@ -157,7 +157,7 @@ const tapsHostRoom = [
   {
     id: 4,
     value: 3,
-    label: "Không duyệt",
+    label: "Không được duyệt",
     to: { pathname: "/host", search: "?approve=3" },
   },
 ];

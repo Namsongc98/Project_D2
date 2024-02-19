@@ -9,7 +9,7 @@
       "lastName": "Sơn",
       "gender": "Nam",
       "age": "24",
-      "phone": "0981875345",
+      "phone": "095686785",
       "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1706754322/apmm8eu6d7zv8ciihtz8.jpg"
     },
     {
@@ -135,34 +135,6 @@
   ],
   "touris": [
     {
-      "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
-      "created_at": 1705564741095,
-      "booking_status": "Empty",
-      "name": "Khách sạn Host1 ",
-      "address": "lào cai, yên bái",
-      "price": 12000000,
-      "cout_people": 3,
-      "city": "Lào Cai",
-      "type_tourism": "Khách sạn",
-      "bedroom": 1,
-      "bathroom": 1,
-      "start_date": 0,
-      "end_date": 0,
-      "decription": "nhà đẹp nhà xinh",
-      "image": [
-        {
-          "id": 1,
-          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705564740/m5w0q4fcqqzyrfwi6iyq.webp"
-        },
-        {
-          "id": 2,
-          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705564740/scaqbbfslvwledxdbeir.webp"
-        }
-      ],
-      "approve_room": "Fail",
-      "id": 1
-    },
-    {
       "host_id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
       "created_at": 1705564839299,
       "booking_status": "Empty",
@@ -189,7 +161,7 @@
     {
       "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
       "created_at": 1705907284516,
-      "booking_status": "Pending",
+      "booking_status": "Empty",
       "name": "Đồi Thông Homestay",
       "address": "Xã Minh Trí, Huyện Sóc Sơn, Thành phố Hà Nội",
       "price": 900000,
@@ -221,7 +193,7 @@
     {
       "host_id": "640f7a52-7f62-4403-8019-55cbae2609c9",
       "created_at": 1705907356838,
-      "booking_status": "Pending",
+      "booking_status": "Empty",
       "name": "Bình Yên Cottages",
       "address": "Phường Hàng Bạc - Quận Hoàn Kiếm - Thành phố Hà Nội",
       "price": 1050000,
@@ -253,7 +225,7 @@
     {
       "host_id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
       "created_at": 1705907382605,
-      "booking_status": "PendingCancel",
+      "booking_status": "Empty",
       "name": "Stream House Nhà Bên Suối",
       "address": "Đội 4 thôn Minh Tân, Xã Minh Trí, Huyện Sóc Sơn, Thành phố Hà Nội",
       "price": 1050000,
@@ -413,7 +385,7 @@
     {
       "host_id": "640f7a52-7f62-4403-8019-55cbae2609c9",
       "created_at": 1705908741427,
-      "booking_status": "Pending",
+      "booking_status": "Empty",
       "name": "Tam Cốc Palm House",
       "address": "Xóm 5 - Thôn Đam Khê Trong - Xã Ninh Hải - Huyện Hoa Lư - Tỉnh Ninh Bình",
       "price": 600000,
@@ -631,7 +603,7 @@
           "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1706750692/uskv7w8j7dlwv57bahwo.jpg"
         }
       ],
-      "approve_room": "Pending",
+      "approve_room": "Success",
       "id": 16
     },
     {
@@ -687,66 +659,6 @@
       "complete_touris": false,
       "pay_status": "Success",
       "id": 1
-    },
-    {
-      "id_touris": 4,
-      "user_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
-      "host_id": "640f7a52-7f62-4403-8019-55cbae2609c9",
-      "name_user": "Hello host1",
-      "phone": 985566754,
-      "email": "host1@gmail.com",
-      "name_room": "Bình Yên Cottages",
-      "address_room": "Xã Minh Trí, Huyện Sóc Sơn, Thành phố Hà Nội",
-      "booking_status": "Success",
-      "start_date": 1706832000000,
-      "end_date": 1706918400000,
-      "count_date": 1,
-      "count_person": 2,
-      "price": 1050000,
-      "total": 1050000,
-      "complete_touris": false,
-      "pay_status": "Success",
-      "id": 2
-    },
-    {
-      "id_touris": 5,
-      "user_id": "9708f548-48ce-4e96-94cb-2a18419e54f2",
-      "host_id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
-      "name_user": "quỳnh anh",
-      "phone": 987765582,
-      "email": "quynhanh@gmail.com",
-      "name_room": "Stream House Nhà Bên Suối",
-      "address_room": "Đội 4 thôn Minh Tân, Xã Minh Trí, Huyện Sóc Sơn, Thành phố Hà Nội",
-      "booking_status": "PendingCancel",
-      "start_date": 1707955200000,
-      "end_date": 1708041600000,
-      "count_date": 1,
-      "count_person": 2,
-      "price": 1050000,
-      "total": 1050000,
-      "complete_touris": false,
-      "pay_status": "Success",
-      "id": 3
-    },
-    {
-      "id_touris": 10,
-      "user_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
-      "host_id": "640f7a52-7f62-4403-8019-55cbae2609c9",
-      "name_user": "Hello host1",
-      "phone": 967756,
-      "email": "host1@gmail.com",
-      "name_room": "Tam Cốc Palm House",
-      "address_room": "Xóm 5 - Thôn Đam Khê Trong - Xã Ninh Hải - Huyện Hoa Lư - Tỉnh Ninh Bình",
-      "booking_status": "Pending",
-      "start_date": 1708214400000,
-      "end_date": 1708300800000,
-      "count_date": 1,
-      "count_person": 1,
-      "price": 600000,
-      "total": 600000,
-      "complete_touris": false,
-      "pay_status": "Pending",
-      "id": 4
     }
   ],
   "user_booking": [
@@ -754,21 +666,6 @@
       "id_user": "b4818218-fde8-426c-8aad-97b020fc927a",
       "id_host": "9d7de73d-349a-4f60-8957-44b9372ced4a",
       "id": 1
-    },
-    {
-      "id_user": "9d7de73d-349a-4f60-8957-44b9372ced4a",
-      "id_host": "640f7a52-7f62-4403-8019-55cbae2609c9",
-      "id": 2
-    },
-    {
-      "id_user": "9708f548-48ce-4e96-94cb-2a18419e54f2",
-      "id_host": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
-      "id": 3
-    },
-    {
-      "id_user": "9d7de73d-349a-4f60-8957-44b9372ced4a",
-      "id_host": "640f7a52-7f62-4403-8019-55cbae2609c9",
-      "id": 4
     }
   ]
 }

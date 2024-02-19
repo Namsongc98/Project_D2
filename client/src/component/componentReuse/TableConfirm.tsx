@@ -12,6 +12,7 @@ import InfoIcon from "@mui/icons-material/Info";
 import { Button } from "../element";
 import { Approve } from "../../type";
 import imgEmpty from "../../assets/image/img_empty.png";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 
 const TableConfirm = ({
   columnsTable,
@@ -42,6 +43,9 @@ const TableConfirm = ({
               <TableCell style={{ minWidth: 70 }} align="center">
                 Chi tiết
               </TableCell>
+              <TableCell style={{ minWidth: 70 }} align="center">
+                Đặt phòng
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -51,7 +55,13 @@ const TableConfirm = ({
                   <TableRow hover key={item.id}>
                     {columnsTable.map((column: any) => {
                       const value = item[column.id];
-                      return <TableCell key={column.id}>{value}</TableCell>;
+                      return (
+                        <TableCell key={column.id}>
+                          {column.format && typeof value === "number"
+                            ? column.format(value)
+                            : value}
+                        </TableCell>
+                      );
                     })}
                     <TableCell align="center">
                       <Button
@@ -81,6 +91,11 @@ const TableConfirm = ({
                         onClick={() => handleOpenInfor(item)}
                       >
                         <InfoIcon color="primary" fontSize="inherit" />
+                      </IconButton>
+                    </TableCell>
+                    <TableCell align="center">
+                      <IconButton aria-label="infor" size="small">
+                        <CalendarMonthIcon color="primary" fontSize="inherit" />
                       </IconButton>
                     </TableCell>
                   </TableRow>

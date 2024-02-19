@@ -5,6 +5,7 @@ import Roomtype from "../page/admin/RoomType";
 import {
   BookingHostStatus,
   BookingUser,
+  CalendarHost,
   DepositBooking,
   PostRoom,
   RoomHost,
@@ -48,6 +49,7 @@ const publicPage: Layout = [
     layout: true,
     role: Role.guide,
   },
+
   // layout Admin
   {
     id: 10,
@@ -144,6 +146,14 @@ const publicPage: Layout = [
     role: Role.host,
     children: true,
     childrenRole: "room",
+  },
+  {
+    id: 23,
+    path: "/host/calendar",
+    component: CalendarHost,
+    layout: true,
+    role: Role.host,
+    children: true,
   },
 ];
 // layout login register

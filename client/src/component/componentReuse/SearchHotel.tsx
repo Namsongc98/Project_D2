@@ -13,19 +13,21 @@ import { SnackBarReuse } from ".";
 import { createSearchParams, useNavigate } from "react-router-dom";
 
 const SearchHotel = () => {
-  const inputStartDate = useDate();
-  const inputEndDate = useDate();
+  const inputStartDate = useDate(undefined);
+  const inputEndDate = useDate(undefined);
   const [type, setType] = useState<AlertColor | undefined>();
   const [message, setMessage] = useState("");
   const [person, setPerson] = useState<number | "">("");
   const [search, setSearch] = useState<string>("");
-  const [itemRoom, setItemRoom] = useState<IRoomPost | null>(null)
+  const [itemRoom, setItemRoom] = useState<IRoomPost | null>(null);
   const [dataCity, setDataCity] = useState([] as IRoomPost[]);
   const deBounce = useDebounce(search, 500);
   const navigate = useNavigate();
 
   // input Person
-  const handleChangePerson: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+  const handleChangePerson: React.ChangeEventHandler<HTMLInputElement> = (
+    e
+  ) => {
     const inputValue = e.currentTarget.value.replace(/\D/g, "");
     setPerson(inputValue === "" ? "" : parseFloat(inputValue));
   };
@@ -54,8 +56,8 @@ const SearchHotel = () => {
   }, [deBounce]);
 
   const handleChange = (newValue: IRoomPost) => {
-    setItemRoom(newValue)
-    setSearch(newValue.city)
+    setItemRoom(newValue);
+    setSearch(newValue.city);
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -71,10 +73,11 @@ const SearchHotel = () => {
     }
     const params = {
       address: search!,
-      checkin: inputStartDate.timestamp!.toString(),
-      checkout: inputEndDate.timestamp!.toString(),
+      checkin: inputStartDate.value!.toString(),
+      checkout: inputEndDate.value!.toString(),
       person: person.toString(),
     };
+
     navigate({
       pathname: "/city/search",
       search: `?${createSearchParams(params)}`,
@@ -98,7 +101,6 @@ const SearchHotel = () => {
                 data={dataCity}
                 onChange={handleChange}
                 item={itemRoom!}
-
               />
             </div>
           </div>

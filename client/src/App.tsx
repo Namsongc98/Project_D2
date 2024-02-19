@@ -25,13 +25,10 @@ function App() {
           {/* layout user public */}
           {publicPage.map((router) => {
             const Layout = router.layout ? DefaultLayout : LayoutMember;
-            const LayoutRoleAmin = LayoutAdmin;
-            const LayoutRoleHost = LayoutHost;
-            const LayoutRoleGuige = LayoutUser;
             const Page = router.component;
             return router.role === Role.admin ? (
               <Route key={router.id} element={<PrivateAdmin />}>
-                <Route key={router.id} path="/" element={<LayoutRoleAmin />}>
+                <Route key={router.id} path="/" element={<LayoutAdmin />}>
                   {router.layout && (
                     <Route path={router.path} element={<Page />} />
                   )}
@@ -66,7 +63,7 @@ function App() {
               </Route>
             ) : router.role === Role.host ? (
               <Route key={router.id} element={<PrivateHost />}>
-                <Route key={router.id} path="/" element={<LayoutRoleHost />}>
+                <Route key={router.id} path="/" element={<LayoutHost />}>
                   <Route path="host/:id" element={<HostStatistics />}>
                     {router.childrenRole === "room" && (
                       <Route path={router.path} element={<Page />} />
@@ -113,7 +110,7 @@ function App() {
                     <Route
                       key={router.id}
                       path="/user"
-                      element={<LayoutRoleGuige />}
+                      element={<LayoutUser />}
                     >
                       {router.childrenRole === "user" && (
                         <Route path="" element={<User />}>

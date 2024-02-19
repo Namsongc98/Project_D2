@@ -1,10 +1,10 @@
 import { Box, Container, Grid, Paper, Typography } from "@mui/material";
-import { CopyRight } from "../../component/componentPage";
-import { Outlet } from "react-router-dom";
-import { tapHostBooking } from "../../constain";
-import { TabsCpm } from "../../component/componentReuse";
+import React from "react";
+import { formatDate } from "@fullcalendar/core";
+import FullCalendar from "@fullcalendar/react";
+import dayGridPlugin from "@fullcalendar/daygrid";
 
-const BookingConfirm = () => {
+const CalendarHost = () => {
   return (
     <Box component="section">
       <Container sx={{ mt: 4, mb: 4 }}>
@@ -23,20 +23,27 @@ const BookingConfirm = () => {
               </Typography>
             </Paper>
           </Grid>
-
           <Grid item xs={12}>
-            <Paper>
-              <TabsCpm taps={tapHostBooking} />
+            <Paper sx={{ p: 2 }}>
+              <FullCalendar
+                plugins={[dayGridPlugin]}
+                headerToolbar={{
+                  left: "prev,next today",
+                  center: "title",
+                  right: "dayGridMonth",
+                }}
+                initialView="dayGridMonth"
+                editable={true}
+                selectable={true}
+                selectMirror={true}
+                dayMaxEvents={true}
+              />
             </Paper>
           </Grid>
-          <Grid item xs={12}>
-            <Outlet />
-          </Grid>
         </Grid>
-        <CopyRight sx={{ pt: 4 }} />
       </Container>
     </Box>
   );
 };
 
-export default BookingConfirm;
+export default CalendarHost;

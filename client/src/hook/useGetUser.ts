@@ -3,9 +3,6 @@ import { getLocalToken } from "../common/localStogate";
 import { getUserSevice } from "../service";
 import { Decode, IProfileUser } from "../type";
 import { useEffect, useState } from "react";
-
-
-
 const useGetUser = () => {
     const [user, setUser] = useState<IProfileUser>();
     const token = getLocalToken();

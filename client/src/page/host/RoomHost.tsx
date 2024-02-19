@@ -130,7 +130,6 @@ const RoomHost = () => {
               <ModalComponent setOpen={setOpenInfor} open={openInfor}>
                 <DetailComponent room={inforRoom!} />
               </ModalComponent>
-
               <TablePagination
                 rowsPerPageOptions={[5, 10, 15]}
                 component="div"

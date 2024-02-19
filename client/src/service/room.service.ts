@@ -99,7 +99,7 @@ const searchCityFindRoom = async (city: string) => {
 
 
 // summitSearch get city 
-const getRoomSearchAddress = async (dataSearch: { address: string, checkin: string, checkout: string, person: string }) => {
+const getRoomSearchAddress = async (dataSearch: { address: string, checkin: number, checkout: number, person: string }) => {
   try {
     const res = await instance.get(`/touris/`, {
       params: {
