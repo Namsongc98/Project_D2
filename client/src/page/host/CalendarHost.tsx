@@ -1,6 +1,6 @@
 import { Box, Container, Grid, Paper, Typography } from "@mui/material";
 import React from "react";
-import { formatDate } from "@fullcalendar/core";
+
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 
@@ -19,7 +19,7 @@ const CalendarHost = () => {
               }}
             >
               <Typography color="#1976d2" fontSize="24px" fontWeight="700">
-                Quản lý phòng khách sạn
+                Thống kê lịch đặt
               </Typography>
             </Paper>
           </Grid>
@@ -37,6 +37,7 @@ const CalendarHost = () => {
                 selectable={true}
                 selectMirror={true}
                 dayMaxEvents={true}
+                // initialEvents={}
               />
             </Paper>
           </Grid>
