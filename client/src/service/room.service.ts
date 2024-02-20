@@ -85,10 +85,7 @@ const patchStatusBooking = async (
   idRoom: number,
   statusBooking: PatchBooking
 ) => {
-  const result = await instance.patch(`/touris/${idRoom}`, statusBooking);
-  console.log(result)
-  return
-
+  return await instance.patch(`/touris/${idRoom}`, statusBooking);
 };
 
 

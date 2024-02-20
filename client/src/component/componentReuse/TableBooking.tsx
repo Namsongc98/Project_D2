@@ -85,9 +85,6 @@ export default function TableBooking({ data, columns, detail }: PropsBooking) {
                   <TableRow hover key={booking.id}>
                     {columns.map((column, index) => {
                       const value = booking[column.index];
-                      {
-                        console.log(value);
-                      }
                       return (
                         <TableCell key={index}>
                           {column.format && typeof value === "number"

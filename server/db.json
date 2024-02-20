@@ -161,7 +161,7 @@
     {
       "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
       "created_at": 1705907284516,
-      "booking_status": "Empty",
+      "booking_status": "Success",
       "name": "Đồi Thông Homestay",
       "address": "Xã Minh Trí, Huyện Sóc Sơn, Thành phố Hà Nội",
       "price": 900000,
@@ -170,8 +170,8 @@
       "type_tourism": "Homestay",
       "bedroom": 1,
       "bathroom": 1,
-      "start_date": 1708214400000,
-      "end_date": 1708300800000,
+      "start_date": 1708387200000,
+      "end_date": 1708585928000,
       "decription": "Hanoi Emerald Waters Hotel & Spa tọa lạc tại thủ đô Hà Nội đậm đà bản sắc văn hóa, chỉ cách Nhà hát Múa rối Nước Thăng Long 200 m. Khách sạn có nhà hàng trong khuôn viên phục vụ tiệc tự chọn gồm các món ăn ngon. Những Khách muốn thưởng thức 1 ly cocktail tùy chọn có thể ghé vào quầy bar nằm trong chỗ nghỉ này. Wi-Fi miễn phí có trong toàn bộ khuôn viên.",
       "image": [
         {
@@ -193,7 +193,7 @@
     {
       "host_id": "640f7a52-7f62-4403-8019-55cbae2609c9",
       "created_at": 1705907356838,
-      "booking_status": "Empty",
+      "booking_status": "Success",
       "name": "Bình Yên Cottages",
       "address": "Phường Hàng Bạc - Quận Hoàn Kiếm - Thành phố Hà Nội",
       "price": 1050000,
@@ -202,8 +202,8 @@
       "type_tourism": "Khách sạn",
       "bedroom": 1,
       "bathroom": 1,
-      "start_date": 1707955200000,
-      "end_date": 1708041600000,
+      "start_date": 1708448400000,
+      "end_date": 1708794000000,
       "decription": "Mỗi phòng nghỉ ở đây đều được trang bị nội thất kiểu dáng đẹp với gam màu trung tính. Trong phòng có TV truyền hình vệ tinh màn hình phẳng. Phòng tắm riêng đi kèm góc tắm vòi sen. Áo choàng tắm và dép cũng được cung cấp cho Khách.",
       "image": [
         {
@@ -385,7 +385,7 @@
     {
       "host_id": "640f7a52-7f62-4403-8019-55cbae2609c9",
       "created_at": 1705908741427,
-      "booking_status": "Empty",
+      "booking_status": "Pending",
       "name": "Tam Cốc Palm House",
       "address": "Xóm 5 - Thôn Đam Khê Trong - Xã Ninh Hải - Huyện Hoa Lư - Tỉnh Ninh Bình",
       "price": 600000,
@@ -394,8 +394,8 @@
       "type_tourism": "Homestay",
       "bedroom": 1,
       "bathroom": 1,
-      "start_date": 1708214400000,
-      "end_date": 1708300800000,
+      "start_date": 1708387200000,
+      "end_date": 1708448400000,
       "decription": "Các căn tại đây có tầm nhìn ra khu vườn, khu vực ghế ngồi, máy giặt, khu vực bếp ăn đầy đủ tiện nghi với tủ lạnh và phòng tắm riêng đi kèm dép đi trong phòng cùng máy sấy tóc. Một số căn được bố trí sân trong và/hoặc ban công nhìn ra quang cảnh núi non.",
       "image": [
         {
@@ -659,6 +659,46 @@
       "complete_touris": false,
       "pay_status": "Success",
       "id": 1
+    },
+    {
+      "id_touris": 3,
+      "user_id": "313c9b13-dffe-42ed-9d35-72161f02d9ba",
+      "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "name_user": "Nam Sơn",
+      "phone": "095686785",
+      "email": "admin123@gmail.com",
+      "name_room": "Đồi Thông Homestay",
+      "address_room": "Xã Minh Trí, Huyện Sóc Sơn, Thành phố Hà Nội",
+      "booking_status": "Success",
+      "start_date": 1708387200000,
+      "end_date": 1708585928000,
+      "count_date": 2,
+      "count_person": 2,
+      "price": 900000,
+      "total": 1800000,
+      "complete_touris": false,
+      "pay_status": "Pending",
+      "id": 2
+    },
+    {
+      "id_touris": 4,
+      "user_id": "ad350080-38e2-4be0-8808-3614d23978c6",
+      "host_id": "640f7a52-7f62-4403-8019-55cbae2609c9",
+      "name_user": "trường béo",
+      "phone": "0934665756",
+      "email": "truongbeo@gmail.com",
+      "name_room": "Bình Yên Cottages",
+      "address_room": "Phường Hàng Bạc - Quận Hoàn Kiếm - Thành phố Hà Nội",
+      "booking_status": "Success",
+      "start_date": 1708448400000,
+      "end_date": 1708794000000,
+      "count_date": 4,
+      "count_person": 2,
+      "price": 1050000,
+      "total": 4200000,
+      "complete_touris": false,
+      "pay_status": "Pending",
+      "id": 3
     }
   ],
   "user_booking": [
@@ -666,6 +706,16 @@
       "id_user": "b4818218-fde8-426c-8aad-97b020fc927a",
       "id_host": "9d7de73d-349a-4f60-8957-44b9372ced4a",
       "id": 1
+    },
+    {
+      "id_user": "313c9b13-dffe-42ed-9d35-72161f02d9ba",
+      "id_host": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "id": 2
+    },
+    {
+      "id_user": "ad350080-38e2-4be0-8808-3614d23978c6",
+      "id_host": "640f7a52-7f62-4403-8019-55cbae2609c9",
+      "id": 3
     }
   ]
 }

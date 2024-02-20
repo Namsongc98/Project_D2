@@ -168,7 +168,6 @@ const pathHost = [
     path: "/host",
     icon: <DashboardIcon />,
     title: "Danh sách phòng",
-    chilrend: true,
   },
   { id: 2, path: "/host/postroom", icon: <AddHomeIcon />, title: "Thêm phòng" },
   {

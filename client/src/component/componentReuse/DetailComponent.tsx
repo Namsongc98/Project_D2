@@ -95,7 +95,7 @@ const DetailComponent = ({
                     }
                     alt={room?.city}
                     loading="lazy"
-                    className="object-cover h-[168px] w-full"
+                    className="object-cover h-[268px] w-full"
                   />
                 </div>
               ))}

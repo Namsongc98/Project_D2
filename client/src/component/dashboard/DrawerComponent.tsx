@@ -17,7 +17,7 @@ import { NavLink } from "react-router-dom";
 import { useGetUser } from "../../hook";
 
 const DrawerComponent = ({ toggleDrawer, open, paths }: PropDrawerType) => {
-  const user = useGetUser()
+  const user = useGetUser();
   const drawerWidth = 240;
   const Drawer = styled(MuiDrawer, {
     shouldForwardProp: (prop) => prop !== "open",
@@ -44,7 +44,6 @@ const DrawerComponent = ({ toggleDrawer, open, paths }: PropDrawerType) => {
       }),
     },
   }));
-
   return (
     <Drawer variant="permanent" open={open}>
       <Toolbar
@@ -61,10 +60,9 @@ const DrawerComponent = ({ toggleDrawer, open, paths }: PropDrawerType) => {
       </Toolbar>
       <Divider />
       <List component="nav">
-
         {paths?.map((path) => (
           <ListItemButton key={path.id}>
-            <NavLink to={user?.id && path.chilrend ? path?.path + "/" + user.id : path.path} className="flex ">
+            <NavLink to={path.path} className="flex ">
               <ListItemIcon>{path?.icon}</ListItemIcon>
               <ListItemText primary={path.title} />
             </NavLink>

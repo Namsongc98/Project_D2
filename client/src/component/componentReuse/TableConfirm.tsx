@@ -14,11 +14,13 @@ import { Approve } from "../../type";
 import imgEmpty from "../../assets/image/img_empty.png";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 
+
 const TableConfirm = ({
   columnsTable,
   data,
   handleOpenApprove,
   handleOpenInfor,
+  handleNavigate,
 }: any) => {
   return (
     <>
@@ -94,7 +96,11 @@ const TableConfirm = ({
                       </IconButton>
                     </TableCell>
                     <TableCell align="center">
-                      <IconButton aria-label="infor" size="small">
+                      <IconButton
+                        onClick={() => handleNavigate(item.id)}
+                        aria-label="infor"
+                        size="small"
+                      >
                         <CalendarMonthIcon color="primary" fontSize="inherit" />
                       </IconButton>
                     </TableCell>

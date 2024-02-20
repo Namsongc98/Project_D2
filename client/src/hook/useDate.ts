@@ -12,6 +12,7 @@ const useDate = (defaultValue: string | undefined) => {
       setValue(defaultValue)
     } else {
       const date = new Date();
+
       date.getFullYear();
       date.getMonth();
       date.getDate();
@@ -23,9 +24,8 @@ const useDate = (defaultValue: string | undefined) => {
   }, []);
 
   const onChange = (newValue: Dayjs | null) => {
-    setValue(newValue!.format("YYYY-MM-DD"));
+    setValue(newValue!.format("YYYY-MM-DD HH:mm:ss"));
   };
-
   useEffect(() => {
     const startTime = new Date(value!).getTime();
     setTimestamp(startTime)

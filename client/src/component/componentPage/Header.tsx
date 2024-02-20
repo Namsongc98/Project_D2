@@ -83,7 +83,7 @@ const Header = () => {
                     </Link>
                   ) : userSelector?.role === Role.host && userSelector?.id ? (
                     <Link
-                      to={`/host/${userSelector.id}`}
+                      to={`/host`}
                       className="flex items-center gap-1 px-3 hover:bg-[#e6e6e6] py-2 hover:text-[#808089] "
                     >
                       <AdminPanelSettingsIcon /> <span>Host</span>{" "}
@@ -129,12 +129,6 @@ const Header = () => {
                 to="/login"
               >
                 Đăng nhập
-              </Link>
-              <Link
-                className="  text-white bg-[#5A8DEE] text-center rounded px-4 py-2 hover:text-white hover:opacity-80 shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] btn-register"
-                to="/login"
-              >
-                Chủ nhà
               </Link>
             </>
           )}

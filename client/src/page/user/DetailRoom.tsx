@@ -93,8 +93,9 @@ const DetailRoom = () => {
     };
   }, [message]);
   useEffect(() => {
-    const gapTimespamp = inputEndDate.timestamp! - inputStartDate.timestamp!;
-    const gapDate = gapTimespamp / (1000 * 60 * 60 * 24);
+    const gapTimespamp =
+      inputEndDate.timestamp! + 24 * 60 * 60 * 1000 - inputStartDate.timestamp!;
+    const gapDate = Math.floor(gapTimespamp / (1000 * 60 * 60 * 24));
     setGapDate(gapDate);
     if (detailRoom) {
       const total = gapDate * detailRoom.price;
@@ -128,7 +129,7 @@ const DetailRoom = () => {
       address_room: detailRoom!.address,
       booking_status: BookingStatus.pending,
       start_date: inputStartDate.timestamp!,
-      end_date: inputEndDate.timestamp!,
+      end_date: inputEndDate.timestamp! + 24 * 60 * 60 * 1000,
       count_date: gapDate,
       count_person: data.countPerson,
       price: detailRoom!.price,

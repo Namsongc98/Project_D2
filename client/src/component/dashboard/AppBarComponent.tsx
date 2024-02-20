@@ -102,7 +102,7 @@ const AppBarComponent = ({ toggleDrawer, open }: PropAppBarType) => {
               </Link>
             ) : user?.role === Role.host ? (
               <Link
-                to={"/host/" + user?.id}
+                to={"/host"}
                 className="flex items-center gap-1 px-3 hover:bg-[#e6e6e6] py-2 hover:text-[#808089] "
               >
                 <AdminPanelSettingsIcon /> <span>Host</span>{" "}

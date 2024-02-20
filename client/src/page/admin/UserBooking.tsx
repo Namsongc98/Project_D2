@@ -7,7 +7,6 @@ import { BookingStatus, BookingType } from "../../type";
 import { getBookingUser, getBookingUserStatus } from "../../service";
 import { TableBooking } from "../../component/componentReuse";
 
-
 const UserBooking = () => {
   const [data, setData] = useState([]);
   const param = useParams();
@@ -17,7 +16,6 @@ const UserBooking = () => {
   const getBooking = async (userId: string) => {
     try {
       const res = await getBookingUser(userId);
-      console.log(res);
       setData(res.data);
     } catch (error) {
       console.log(error);
