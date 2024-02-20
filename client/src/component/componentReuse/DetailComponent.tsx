@@ -39,7 +39,7 @@ const DetailComponent = ({
   booking,
   room,
 }: {
-  booking?: IBookingData;
+  booking?: IBookingData | any;
   room?: typeGetRoom;
 }) => {
   const settings = {
@@ -87,12 +87,9 @@ const DetailComponent = ({
           <div className="relative w-[400px] mx-auto my-0">
             <Slider {...settings} className="">
               {room!.image.map((item) => (
-                <div className="">
+                <div className="" key={item.id}>
                   <img
-                    src={
-                      item.url +
-                      "?fit=crop&auto=format"
-                    }
+                    src={item.url + "?fit=crop&auto=format"}
                     alt={room?.city}
                     loading="lazy"
                     className="object-cover h-[268px] w-full"
@@ -101,7 +98,6 @@ const DetailComponent = ({
               ))}
             </Slider>
           </div>
-
           <Box>
             <Divider sx={{ my: 2 }} light />
             <div className="">

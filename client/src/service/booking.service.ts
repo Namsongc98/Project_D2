@@ -117,8 +117,9 @@ const checkSearchDate = async (idRoom: number) => {
   const res = await instance.get("/bookings/", { params: { id_touris: idRoom } })
   return res.data
 }
-const completeTouris = async () => {
-
+const getBookingCarendar = async (id_touris: number) => {
+  const res = await instance.get(`/bookings/`, { params: { id_touris } });
+  return res
 }
 
 export {
@@ -134,6 +135,6 @@ export {
   getBookingUser,
   getBookingUserStatus,
   checkSearchDate,
-  completeTouris,
+  getBookingCarendar,
   payment
 };

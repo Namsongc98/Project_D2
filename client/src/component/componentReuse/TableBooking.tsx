@@ -52,6 +52,7 @@ export default function TableBooking({ data, columns, detail }: PropsBooking) {
 
   return (
     <Paper sx={{ width: "100%", overflow: "auto" }}>
+   
       <TableContainer sx={{ height: 440, overflow: "auto" }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>

@@ -53,10 +53,12 @@ const getAllRoomApproveHost = async (
 const getOneRoom = async (id: number) => {
   const res = await instance.get(`/touris/${id}`);
   if (!(res.data.approve_room === Approve.success)) {
-    throw new Error("Phòng chưa dk duyệt")
+    throw new Error("Phòng chưa được duyệt")
   }
   return res
 };
+
+
 
 //lấy dữ liệu theo city có status là empty admin  success
 const getRoomCity = async (
@@ -151,5 +153,6 @@ export {
   checkRoomDate,
   getListRoom,
   sortListRoom,
-  roomPayment
+  roomPayment,
+
 };

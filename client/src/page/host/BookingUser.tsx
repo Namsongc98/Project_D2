@@ -72,6 +72,7 @@ const BookingUser = () => {
   return (
     <Grid item xs={12} md={12} lg={12}>
       <SnackBarReuse type={type} message={error} setError={setError} />
+      
       <TableBooking
         data={data!}
         columns={columnBooking}
