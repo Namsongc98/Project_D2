@@ -3,10 +3,7 @@ import { CopyRight } from "../../component/componentPage";
 import { TabsCpm } from "../../component/componentReuse";
 import { tapsHostRoom } from "../../constain";
 import { Outlet } from "react-router-dom";
-
 const HostStatistics = () => {
-
-
   return (
     <Box component="section">
       <Container sx={{ mt: 4, mb: 4 }}>
@@ -38,7 +35,7 @@ const HostStatistics = () => {
                 flexDirection: "column",
               }}
             >
-              <Outlet />
+                <Outlet />
             </Paper>
           </Grid>
         </Grid>

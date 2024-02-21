@@ -22,6 +22,8 @@ import {
   BookingConfirm,
   BookingHostStatus,
   BookingUser,
+  CalendarHost,
+  CalendarHostParam,
   HostStatistics,
   RoomHost,
 } from "./page/host";
@@ -62,26 +64,35 @@ function App() {
               </Route>
             ) : router.role === Role.host ? (
               <Route key={router.id} element={<PrivateHost />}>
-                <Route key={router.id} path="/" element={<LayoutHost />}>
-                  <Route path={router.path} element={<Page />} />
-                  <Route path="host" element={<HostStatistics />}>
-                    <Route path={""} element={<RoomHost />} />
+             
+                  <Route key={router.id} path="/" element={<LayoutHost />}>
+                    <Route path={router.path} element={<Page />} />
+                    <Route path="host" element={<HostStatistics />}>
+                      <Route path={""} element={<RoomHost />} />
+                    </Route>
+                    <Route
+                      key={router.id}
+                      path="host/user/:id"
+                      element={<LayoutBookingUser />}
+                    >
+                      <Route path={""} element={<BookingUser />} />
+                    </Route>
+                    <Route
+                      key={router.id}
+                      path="host/booking"
+                      element={<BookingConfirm />}
+                    >
+                      <Route path="" element={<BookingHostStatus />} />
+                    </Route>
+                    <Route
+                      key={router.id}
+                      path="/host/calendar"
+                      element={<CalendarHost />}
+                    >
+                      <Route path="" element={<CalendarHostParam />} />
+                    </Route>
                   </Route>
-                  <Route
-                    key={router.id}
-                    path="host/user/:id"
-                    element={<LayoutBookingUser />}
-                  >
-                    <Route path={""} element={<BookingUser />} />
-                  </Route>
-                  <Route
-                    key={router.id}
-                    path="host/booking"
-                    element={<BookingConfirm />}
-                  >
-                    <Route path="" element={<BookingHostStatus />} />
-                  </Route>
-                </Route>
+           
               </Route>
             ) : (
               <Route key={router.id} path="/" element={<Layout />}>

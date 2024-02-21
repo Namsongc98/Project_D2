@@ -38,6 +38,12 @@ const getAllRoomHost = async (page: number, limit: number, host_id: string) => {
   })
   return res
 };
+const getAllRoomHostNav = async ( host_id: string) => {
+  const res = await instance.get(`/touris/`, {
+    params: { host_id },
+  })
+  return res
+};
 const getAllRoomApproveHost = async (
   page: number,
   limit: number,
@@ -154,5 +160,5 @@ export {
   getListRoom,
   sortListRoom,
   roomPayment,
-
+  getAllRoomHostNav
 };

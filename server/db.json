@@ -481,7 +481,7 @@
     {
       "host_id": "640f7a52-7f62-4403-8019-55cbae2609c9",
       "created_at": 1705909065246,
-      "booking_status": "Empty",
+      "booking_status": "Success",
       "name": "Radisson Blu Danang",
       "address": "Phường Phước Mỹ - Quận Sơn Trà - Thành phố Đà Nẵng",
       "price": 670000,
@@ -490,8 +490,8 @@
       "type_tourism": "Khách sạn",
       "bedroom": 1,
       "bathroom": 1,
-      "start_date": 0,
-      "end_date": 0,
+      "start_date": 1709226000000,
+      "end_date": 1709624196000,
       "decription": "Tận hưởng những ngày đầy nắng bên ly cocktail sảng khoái, ngâm mình dưới làn nước mát lạnh tại hồ bơi vô cực chắc chắn sẽ là những phút giây tuyệt vời nhất của mùa hè.",
       "image": [
         {
@@ -699,6 +699,26 @@
       "complete_touris": false,
       "pay_status": "Pending",
       "id": 3
+    },
+    {
+      "id_touris": 13,
+      "user_id": "640f7a52-7f62-4403-8019-55cbae2609c9",
+      "host_id": "640f7a52-7f62-4403-8019-55cbae2609c9",
+      "name_user": "host  4",
+      "phone": "09854534534",
+      "email": "host4@gmail.com",
+      "name_room": "Radisson Blu Danang",
+      "address_room": "Phường Phước Mỹ - Quận Sơn Trà - Thành phố Đà Nẵng",
+      "booking_status": "Success",
+      "start_date": 1709226000000,
+      "end_date": 1709624196000,
+      "count_date": 4,
+      "count_person": 2,
+      "price": 670000,
+      "total": 2680000,
+      "complete_touris": false,
+      "pay_status": "Pending",
+      "id": 4
     }
   ],
   "user_booking": [
@@ -716,6 +736,11 @@
       "id_user": "ad350080-38e2-4be0-8808-3614d23978c6",
       "id_host": "640f7a52-7f62-4403-8019-55cbae2609c9",
       "id": 3
+    },
+    {
+      "id_user": "640f7a52-7f62-4403-8019-55cbae2609c9",
+      "id_host": "640f7a52-7f62-4403-8019-55cbae2609c9",
+      "id": 4
     }
   ]
 }

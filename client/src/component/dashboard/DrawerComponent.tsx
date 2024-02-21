@@ -14,10 +14,10 @@ import { PropDrawerType } from "../../type";
 import HomeIcon from "@mui/icons-material/Home";
 
 import { NavLink } from "react-router-dom";
-import { useGetUser } from "../../hook";
+
 
 const DrawerComponent = ({ toggleDrawer, open, paths }: PropDrawerType) => {
-  const user = useGetUser();
+  
   const drawerWidth = 240;
   const Drawer = styled(MuiDrawer, {
     shouldForwardProp: (prop) => prop !== "open",

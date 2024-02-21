@@ -7,7 +7,6 @@ import { useState } from "react";
 import { AppBarComponent, DrawerComponent } from "../../component/dashboard";
 import { pathHost } from "../../constain";
 
-
 const LayoutHost = () => {
   const defaultTheme = createTheme();
 
@@ -26,9 +25,8 @@ const LayoutHost = () => {
           <DrawerComponent
             toggleDrawer={toggleDrawer}
             open={open}
-            paths={pathHost }
+            paths={pathHost}
           />
-
           <Box
             component="main"
             sx={{
@@ -38,9 +36,8 @@ const LayoutHost = () => {
               overflow: "auto",
             }}
           >
-          
             <Toolbar />
-            
+
             <Outlet />
           </Box>
         </Box>
