@@ -161,7 +161,7 @@
     {
       "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
       "created_at": 1705907284516,
-      "booking_status": "Success",
+      "booking_status": "Empty",
       "name": "Đồi Thông Homestay",
       "address": "Xã Minh Trí, Huyện Sóc Sơn, Thành phố Hà Nội",
       "price": 900000,
@@ -353,7 +353,7 @@
     {
       "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
       "created_at": 1705908454613,
-      "booking_status": "Empty",
+      "booking_status": "Success",
       "name": "Sài Gòn Hạ Long Hotel",
       "address": "Bãi cháy, Hạ Long, Quảng Ninh",
       "price": 900000,
@@ -362,8 +362,8 @@
       "type_tourism": "Khách sạn",
       "bedroom": 1,
       "bathroom": 1,
-      "start_date": 0,
-      "end_date": 0,
+      "start_date": 1708699369000,
+      "end_date": 1708872169000,
       "decription": "Khách sạn Sài Gòn Hạ Long là một trong những Khách sạn 4 sao hàng đầu tại thành phố Hạ Long. Tọa lạc tại trung tâm khu du lịch Bãi Cháy, Khách sạn sở hữu tầm nhìn bao quát Di sản Thiên nhiên Thế giới Vịnh Hạ Long. Từ đây, du Khách có thể dễ dàng tiếp cận tất cả các điểm tham quan du lịch chính của thành phố như Vịnh Hạ Long, Sun Wolrd Hạ Long complex và bờ biển Bãi Cháy.",
       "image": [
         {
@@ -719,6 +719,46 @@
       "complete_touris": false,
       "pay_status": "Pending",
       "id": 4
+    },
+    {
+      "id_touris": 9,
+      "user_id": "640f7a52-7f62-4403-8019-55cbae2609c9",
+      "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "name_user": "host  4",
+      "phone": "09854534534",
+      "email": "host4@gmail.com",
+      "name_room": "Sài Gòn Hạ Long Hotel",
+      "address_room": "Bãi cháy, Hạ Long, Quảng Ninh",
+      "booking_status": "Success",
+      "start_date": 1708473600000,
+      "end_date": 1708699151000,
+      "count_date": 2,
+      "count_person": 2,
+      "price": 900000,
+      "total": 1800000,
+      "complete_touris": false,
+      "pay_status": "Pending",
+      "id": 5
+    },
+    {
+      "id_touris": 9,
+      "user_id": "ad350080-38e2-4be0-8808-3614d23978c6",
+      "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "name_user": "trường béo",
+      "phone": "0934665756",
+      "email": "truongbeo@gmail.com",
+      "name_room": "Sài Gòn Hạ Long Hotel",
+      "address_room": "Bãi cháy, Hạ Long, Quảng Ninh",
+      "booking_status": "Success",
+      "start_date": 1708699369000,
+      "end_date": 1708872169000,
+      "count_date": 2,
+      "count_person": 2,
+      "price": 900000,
+      "total": 1800000,
+      "complete_touris": false,
+      "pay_status": "Pending",
+      "id": 6
     }
   ],
   "user_booking": [
@@ -741,6 +781,16 @@
       "id_user": "640f7a52-7f62-4403-8019-55cbae2609c9",
       "id_host": "640f7a52-7f62-4403-8019-55cbae2609c9",
       "id": 4
+    },
+    {
+      "id_user": "640f7a52-7f62-4403-8019-55cbae2609c9",
+      "id_host": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "id": 5
+    },
+    {
+      "id_user": "ad350080-38e2-4be0-8808-3614d23978c6",
+      "id_host": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "id": 6
     }
   ]
 }

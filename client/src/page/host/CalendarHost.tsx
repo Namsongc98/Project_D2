@@ -8,7 +8,7 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { getAllRoomHostNav } from "../../service";
 import { useEffect, useState } from "react";
 import { useGetUser } from "../../hook";
@@ -16,6 +16,7 @@ import { useGetUser } from "../../hook";
 const CalendarHost = () => {
   const [arrRoom, setArrRoom] = useState([] as any[]);
   const user = useGetUser();
+  const { state } = useLocation()
   useEffect(() => {
     (async () => {
       try {
@@ -62,12 +63,10 @@ const CalendarHost = () => {
                 </Typography>
                 {arrRoom?.map((room) => (
                   <NavLink
+                    key={room.id}
                     to={room.room}
                     state={{ id: room.id }}
-                    // className={({ isActive }) => {
-                    //   console.log(isActive);
-                    //   return isActive ? "text-[#1976D2]" : "";
-                    // }}
+                    className={state.id === room.id ? "text-[#1976d2]" : ""}
                   >
                     <ListItemButton key={room.id} component="nav">
                       <ListItemText primary={room.name} />
@@ -77,7 +76,6 @@ const CalendarHost = () => {
               </List>
             </Paper>
           </Grid>
-
           <Grid item xs={10}>
             <Paper sx={{ p: 2 }}>
               <Outlet />
