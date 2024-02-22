@@ -8,8 +8,8 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import { Outlet, useLocation } from "react-router-dom";
-import { getAllRoomHostNav } from "../../service";
+import { useLocation } from "react-router-dom";
+import { getAllRoomHostNav, getBookingCarendar } from "../../service";
 import { useEffect, useState } from "react";
 import { useGetUser } from "../../hook";
 import { IRoomPost } from "../../type";
@@ -17,7 +17,8 @@ import { CalendarHostParam } from ".";
 
 const CalendarHost = () => {
   const [arrRoom, setArrRoom] = useState([] as any[]);
-  const [copyArrRoom, setCopyArrRoom] = useState([] as any[]);
+  const [arrBooking, setArrBooking] = useState([] as any[]);
+
   const [checkAll, setCheckAll] = useState(false);
   const user = useGetUser();
   const { state } = useLocation();
@@ -27,12 +28,13 @@ const CalendarHost = () => {
         if (user?.id) {
           const res = await getAllRoomHostNav(user.id);
           setArrRoom(
-            res.data.map((room) => ({
+            res.data.map((room: IRoomPost) => ({
               ...room,
-              active: room.id === state.id ? true : false,
+              active: room.id! === state.id ? true : false,
             }))
           );
-          setCopyArrRoom(res.data);
+          const result = await getBookingCarendar(state.id);
+          setArrBooking(result)
         }
       } catch (error) {
         console.log(error);
@@ -44,13 +46,40 @@ const CalendarHost = () => {
     e: React.SyntheticEvent<Element, Event>,
     room: IRoomPost
   ) => {
-    console.log(room);
+    const roomsCopy = [...arrRoom];
+    const roomFind = arrRoom.find((car) => car.id === room.id);
+    roomFind.active = !roomFind.active;
+    if (!roomFind.active && checkAll) {
+      handleSelectAll();
+    }
+
+    setArrRoom(roomsCopy);
+    let flag = true;
+    for (let i = 0; i < arrRoom.length; i++) {
+      flag = flag && arrRoom[i].active;
+    }
+    if (flag && !checkAll) {
+      handleSelectAll();
+    }
   };
 
-  const handleselectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSelectAll = () => {
     setCheckAll((prevState) => !prevState);
     setArrRoom(arrRoom.map((room) => ({ ...room, active: !checkAll })));
   };
+  const getBookingArr = async (arrRoom: IRoomPost[]) => {
+    try {
+      const result = await Promise.all(arrRoom.map((room) => getBookingCarendar(room.id!)))
+      setArrBooking(result.flat())
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    const copyArrRoom = (arrRoom.filter((room) => (room.active)))
+    getBookingArr(copyArrRoom)
+  }, [arrRoom])
 
   return (
     <Box component="section">
@@ -89,7 +118,7 @@ const CalendarHost = () => {
                 <FormControlLabel
                   label="Chọn tất cả"
                   control={
-                    <Checkbox checked={checkAll} onChange={handleselectAll} />
+                    <Checkbox checked={checkAll} onChange={handleSelectAll} />
                   }
                 />
                 <Box sx={{ display: "flex", flexDirection: "column" }}>
@@ -112,7 +141,7 @@ const CalendarHost = () => {
           </Grid>
           <Grid item xs={10}>
             <Paper sx={{ p: 2 }}>
-              <CalendarHostParam data={copyArrRoom} />
+              <CalendarHostParam data={arrBooking} />
             </Paper>
           </Grid>
         </Grid>
