@@ -24,7 +24,7 @@ const useDate = (defaultValue: string | undefined) => {
   }, []);
 
   const onChange = (newValue: Dayjs | null) => {
-    setValue(newValue!.format("YYYY-MM-DD HH:mm:ss"));
+    setValue(newValue!.format("YYYY-MM-DD"));
   };
   useEffect(() => {
     const startTime = new Date(value!).getTime();

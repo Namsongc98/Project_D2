@@ -107,6 +107,13 @@ const DetailComponent = ({
           </Box>
         </Box>
         <Box sx={{ width: "45%" }}>
+          <div>
+            <div className="flex justify-between items-center ">
+              <h3 className="font-medium min-w-[100px]">Khách hàng </h3>
+              <span>{booking.name_user}</span>
+            </div>
+            <Divider sx={{ my: 2 }} light />
+          </div>
           {room &&
             rowsRoom.map((row) => {
               const value = room[row.id];

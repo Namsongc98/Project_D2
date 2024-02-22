@@ -74,6 +74,13 @@ const publicPage: Layout = [
     layout: true,
     role: Role.host,
   },
+  {
+    id: 13,
+    path: "/host/calendar",
+    component: CalendarHost,
+    layout: true,
+    role: Role.host,
+  },
 
 ];
 // layout login register

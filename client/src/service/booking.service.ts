@@ -20,19 +20,20 @@ const getBookingStatus = async (
 // tạo booking
 const createBooking = async (booking: IBookingData) => {
   try {
-    const result = checkRoomDate(booking)
-    if (!result) {
-      throw new Error("Phòng có người đặt")
+    // kiểm tra phòng có người đặt hay không
+    const result = await checkRoomDate(booking)
+    if (result) {
+      throw new Error("Khoảng này thời gian có người đặt")
     }
+    const res = await instance.post(`/bookings/`, booking);
+    //update trạng thái phòng khi có người đặt
     const bookingStatus = { booking_status: BookingStatus.pending, start_date: booking.start_date, end_date: booking.end_date };
     await patchStatusBooking(booking.id_touris!, bookingStatus);
-    const res = await instance.post(`/bookings/`, booking);
     const bookingUser = { id_user: booking.user_id, id_host: res.data.host_id };
     await instance.post("/user_booking/", bookingUser);
     return res;
-  } catch (error: unknown) {
-    if (typeof error === "string")
-      throw new Error(error)
+  } catch (error: any) {
+    throw new Error(error)
   }
 };
 

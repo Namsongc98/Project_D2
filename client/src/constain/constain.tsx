@@ -114,7 +114,7 @@ const columnBooking: TableRoom[] = [
     label: "Ngày cuối",
     minWidth: 100,
     align: "left",
-    format: (value) => convertDateToTimestamp(value),
+    format: (value) => convertDateToTimestamp(value - 24 * 60 * 60 * 1000),
   },
   { index: "count_person", label: "Số người", minWidth: 100, align: "left" },
   {
@@ -159,7 +159,8 @@ const rowsBooking = [
   {
     id: "end_date",
     label: "Đến ngày:",
-    format: (value: number) => convertDateToTimestamp(value),
+    format: (value: number) =>
+      convertDateToTimestamp(value - 24 * 60 * 60 * 1000),
   },
   {
     id: "count_date",

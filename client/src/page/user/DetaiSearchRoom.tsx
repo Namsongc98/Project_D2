@@ -41,6 +41,7 @@ const DetaiSearchRoom = () => {
       checkout: new Date(currentParams.checkout).getTime(),
     });
     dispatch(setBookingParam(currentParams));
+    console.log(currentParams)
   }, [searchParams]);
   return (
     <>

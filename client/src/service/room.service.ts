@@ -69,7 +69,6 @@ const getRoomCity = async (city: string, approve: Approve.success) => {
     params: {
       city,
       approve_room: approve,
-      booking_status: BookingStatus.empty,
     },
   });
 };
@@ -115,12 +114,9 @@ const getRoomSearchAddress = async (dataSearch: {
       },
     });
     const result: typeGetRoom[] = res.data.filter((room: IRoomPost) => {
-      console.log(!(dataSearch.checkin >= room.start_date));
-      console.log(!(dataSearch.checkout <= room.end_date));
-
       return !(
-        dataSearch.checkin >= room.start_date &&
-        dataSearch.checkout <= room.end_date
+        (dataSearch.checkin >= room.start_date || 0) &&
+        (dataSearch.checkout <= room.end_date || 0)
       );
     });
     return result;
@@ -134,12 +130,12 @@ const checkRoomDate = async (booking: IBookingData) => {
     const res = await instance.get("/touris/" + booking.id_touris);
     const room = res.data;
     if (
-      booking.start_date == room.start_date ||
-      booking.end_date == room.end_date
+      (booking.start_date >= room.start_date) &&
+      (booking.end_date <= room.end_date)
     ) {
-      return false;
+      return true;
     }
-    return true;
+    return false;
   } catch (error) {
     throw new Error("Không tìm thấy phòng!");
   }

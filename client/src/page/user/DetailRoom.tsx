@@ -1,5 +1,4 @@
 import {
-  AlertColor,
   Box,
   Container,
   Divider,
@@ -35,15 +34,14 @@ import { useGetUser } from "../../hook";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import useDate from "../../hook/useDate";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import SnackBarReuse from "../../component/componentReuse/SnackBarReuse";
+
 import { formatcurrency } from "../../common";
 import { useSelector } from "react-redux";
 import { getBookingParam } from "../../store/reducer/bookingSlice";
 const DetailRoom = () => {
   const [detailRoom, setDetailRoom] = useState<typeGetRoom | undefined>();
   const [gapDate, setGapDate] = useState<number>(0);
-  const [type, setType] = useState<AlertColor | undefined>(undefined);
-  const [mess, setMess] = useState("");
+
   const [total, setTotal] = useState<number>(0);
   const [error, setError] = useState("");
   const [openConfirm, setOpenConfirm] = useState(false);
@@ -74,7 +72,7 @@ const DetailRoom = () => {
   };
 
   const schema = yup.object({
-    phone: yup.string().required("Mời nhập số điên thoại"),
+    phone: yup.string().required("Mời nhập số điện thoại"),
     countPerson: yup.number().typeError("Mời nhập số lượng người"),
   });
   const {
@@ -95,7 +93,9 @@ const DetailRoom = () => {
   useEffect(() => {
     const gapTimespamp =
       inputEndDate.timestamp! + 24 * 60 * 60 * 1000 - inputStartDate.timestamp!;
-    const gapDate = Math.floor(gapTimespamp / (1000 * 60 * 60 * 24));
+
+    const gapDate = Math.ceil(gapTimespamp / (1000 * 60 * 60 * 24));
+
     setGapDate(gapDate);
     if (detailRoom) {
       const total = gapDate * detailRoom.price;
@@ -140,14 +140,13 @@ const DetailRoom = () => {
     try {
       await createBooking(booking);
       navigate("/user");
-    } catch (error) {
-      setError("Booking không thành công");
+    } catch (error: any) {
+      setError(error.message);
     }
   };
 
   return (
     <Box sx={{ backgroundColor: "#P5f5f5" }}>
-      <SnackBarReuse type={type} message={mess} setError={setMess} />
       <div className="w-full flex h-[480px]">
         {detailRoom?.image?.map((item) => {
           return (

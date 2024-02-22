@@ -62,11 +62,7 @@ const SearchHotel = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (inputStartDate.timestamp! >= inputEndDate.timestamp!) {
-      setType("warning");
-      setMessage("Ngày tháng không hợp lệ");
-      return;
-    } else if (!person) {
+    if (!person) {
       setType("warning");
       setMessage("Mời nhập số lượng người");
       return;

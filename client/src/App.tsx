@@ -30,6 +30,8 @@ import {
 import { RoomManager, RoomType, UserBooking } from "./page/admin";
 import UserLayout from "./page/admin/UserLayout";
 import LayoutAdminHost from "./layout/admin/LayoutAdminHost";
+import CalendarAdmin from "./page/admin/CalendarAdmin";
+import CalendarAdminParam from "./page/admin/CalendarAdminParam";
 
 function App() {
   return (
@@ -60,39 +62,37 @@ function App() {
                   >
                     <Route path="" element={<UserBooking />} />
                   </Route>
+                  <Route
+                    key={router.id}
+                    path="/admin/calendar"
+                    element={<CalendarAdmin />}
+                  >
+                    <Route path="" element={<CalendarAdminParam />} />
+                  </Route>
                 </Route>
               </Route>
             ) : router.role === Role.host ? (
               <Route key={router.id} element={<PrivateHost />}>
-             
-                  <Route key={router.id} path="/" element={<LayoutHost />}>
-                    <Route path={router.path} element={<Page />} />
-                    <Route path="host" element={<HostStatistics />}>
-                      <Route path={""} element={<RoomHost />} />
-                    </Route>
-                    <Route
-                      key={router.id}
-                      path="host/user/:id"
-                      element={<LayoutBookingUser />}
-                    >
-                      <Route path={""} element={<BookingUser />} />
-                    </Route>
-                    <Route
-                      key={router.id}
-                      path="host/booking"
-                      element={<BookingConfirm />}
-                    >
-                      <Route path="" element={<BookingHostStatus />} />
-                    </Route>
-                    <Route
-                      key={router.id}
-                      path="/host/calendar"
-                      element={<CalendarHost />}
-                    >
-                      <Route path="" element={<CalendarHostParam />} />
-                    </Route>
+                <Route key={router.id} path="/" element={<LayoutHost />}>
+                  <Route path={router.path} element={<Page />} />
+                  <Route path="host" element={<HostStatistics />}>
+                    <Route path={""} element={<RoomHost />} />
                   </Route>
-           
+                  <Route
+                    key={router.id}
+                    path="host/user/:id"
+                    element={<LayoutBookingUser />}
+                  >
+                    <Route path={""} element={<BookingUser />} />
+                  </Route>
+                  <Route
+                    key={router.id}
+                    path="host/booking"
+                    element={<BookingConfirm />}
+                  >
+                    <Route path="" element={<BookingHostStatus />} />
+                  </Route>
+                </Route>
               </Route>
             ) : (
               <Route key={router.id} path="/" element={<Layout />}>
