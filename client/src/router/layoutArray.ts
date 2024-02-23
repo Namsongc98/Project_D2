@@ -1,5 +1,6 @@
 import { Bookingmanager, GuideManager } from "../page/admin";
 import AdminStatistics from "../page/admin/AdminStatistics";
+import CalendarAdmin from "../page/admin/CalendarAdmin";
 import {
   CalendarHost,
   DepositBooking,
@@ -55,7 +56,14 @@ const publicPage: Layout = [
   {
     id: 14,
     path: "/admin/calendar",
-    component: CalendarHost,
+    component: CalendarAdmin,
+    layout: true,
+    role: Role.admin,
+  },
+  {
+    id: 14,
+    path: "/admin/calendar",
+    component: CalendarAdmin,
     layout: true,
     role: Role.admin,
   },

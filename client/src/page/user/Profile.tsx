@@ -1,11 +1,10 @@
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "../../style/styleComponent.scss";
 import imgUpload from "../../assets/image/upanh.png";
 import { NavLink } from "react-router-dom";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import {
   useButton,
-  useGetUser,
   useInput,
   useInputTypeFileImg,
   useInputTypeNumber,
@@ -33,13 +32,8 @@ const Profile = () => {
   const [loading, setLoading] = useState(false);
   const [type, setType] = useState<AlertColor>("success");
   const [error, setError] = useState("");
-  const user = useGetUser();
   const userSelector = useSelector(getUser);
   const dispatch: AppDispatch = useDispatch();
-
-  useLayoutEffect(() => {
-    dispatch(setUser(user));
-  }, [user]);
 
   const genders = ["Nam", "Nữ"];
   const options: SelectOptionType[] = [

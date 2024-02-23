@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import "../../style/styleComponent.scss";
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Person2Icon from "@mui/icons-material/Person2";
@@ -13,7 +13,6 @@ import { useSelector } from "react-redux";
 import { getUser, setUser } from "../../store/reducer/userSlice";
 import { useDispatch } from "react-redux";
 import LocationCityIcon from "@mui/icons-material/LocationCity";
-
 import BookIcon from "@mui/icons-material/Book";
 import { Role } from "../../type";
 
@@ -27,7 +26,7 @@ const Header = () => {
     setAnchor(anchor ? null : event.currentTarget);
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     dispatch(setUser(user));
   }, [user]);
 
@@ -118,7 +117,7 @@ const Header = () => {
           ) : (
             <>
               <Link
-                className=" hover:text-[#5A8DEE] transition duration-200 ease-in-out "
+                className="hover:text-[#5A8DEE] transition duration-200 ease-in-out"
                 to="/register"
               >
                 Đăng kí

@@ -151,12 +151,20 @@ const DetailComponent = ({
             })}
           {booking && (
             <div className="flex justify-between items-center  ">
-              <h3 className="font-medium">Trạng thái thanh toán:</h3>
-              <span>
+              <h3 className="font-medium ">Trạng thái thanh toán:</h3>
+              <span
+                className={
+                  booking?.pay_status === StatusPayment.pending
+                    ? "text-[#1976d2]"
+                    : booking?.pay_status === StatusPayment.success
+                    ? "text-[#4CAF50]"
+                    : ""
+                }
+              >
                 {booking?.pay_status === StatusPayment.pending
                   ? "Chưa thanh toán"
                   : booking?.pay_status === StatusPayment.success
-                  ? "đã thanh toán"
+                  ? "Đã thanh toán"
                   : ""}{" "}
               </span>
             </div>

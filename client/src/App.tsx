@@ -7,7 +7,7 @@ import {
   LayoutMember,
 } from "./layout";
 import { publicPage } from "./router/layoutArray";
-import { PrivateAdmin, PrivateHost } from "./router";
+import { PrivateAdmin, PrivateHost, PrivateUser } from "./router";
 import LayoutHost from "./layout/host/LayoutHost";
 import { Role } from "./type";
 import LayoutUser from "./layout/LayoutUser";
@@ -22,17 +22,12 @@ import {
   BookingConfirm,
   BookingHostStatus,
   BookingUser,
-  CalendarHost,
-  CalendarHostParam,
   HostStatistics,
   RoomHost,
 } from "./page/host";
 import { RoomManager, RoomType, UserBooking } from "./page/admin";
 import UserLayout from "./page/admin/UserLayout";
 import LayoutAdminHost from "./layout/admin/LayoutAdminHost";
-import CalendarAdmin from "./page/admin/CalendarAdmin";
-import CalendarAdminParam from "./page/admin/CalendarAdminParam";
-
 function App() {
   return (
     <>
@@ -61,13 +56,6 @@ function App() {
                     element={<UserLayout />}
                   >
                     <Route path="" element={<UserBooking />} />
-                  </Route>
-                  <Route
-                    key={router.id}
-                    path="/admin/calendar"
-                    element={<CalendarAdmin />}
-                  >
-                    <Route path="" element={<CalendarAdminParam />} />
                   </Route>
                 </Route>
               </Route>
@@ -106,23 +94,25 @@ function App() {
                       <Route path={router.path} element={<Page />} />
                     )}
                   </Route>
-                  {router.role === Role.guide && (
-                    <Route
-                      key={router.id}
-                      path="/user"
-                      element={<LayoutUser />}
-                    >
-                      <Route path="" element={<User />}>
-                        <Route path="" element={<HistoryBooking />} />
+                  <Route element={<PrivateUser />}>
+                    {router.role === Role.guide && (
+                      <Route
+                        key={router.id}
+                        path="/user"
+                        element={<LayoutUser />}
+                      >
+                        <Route path="" element={<User />}>
+                          <Route path="" element={<HistoryBooking />} />
+                        </Route>
+                        <Route path={router.path} element={<Page />} />
                       </Route>
-                      <Route path={router.path} element={<Page />} />
-                    </Route>
-                  )}
+                    )}
+                  </Route>
                 </>
               </Route>
             );
           })}
-          <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<NotFound />} />;
         </Routes>
       </Router>
     </>

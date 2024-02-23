@@ -34,7 +34,7 @@ const CalendarHost = () => {
             }))
           );
           const result = await getBookingCarendar(state.id);
-          setArrBooking(result)
+          setArrBooking(result);
         }
       } catch (error) {
         console.log(error);
@@ -69,17 +69,19 @@ const CalendarHost = () => {
   };
   const getBookingArr = async (arrRoom: IRoomPost[]) => {
     try {
-      const result = await Promise.all(arrRoom.map((room) => getBookingCarendar(room.id!)))
-      setArrBooking(result.flat())
+      const result = await Promise.all(
+        arrRoom.map((room) => getBookingCarendar(room.id!))
+      );
+      setArrBooking(result.flat());
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   useEffect(() => {
-    const copyArrRoom = (arrRoom.filter((room) => (room.active)))
-    getBookingArr(copyArrRoom)
-  }, [arrRoom])
+    const copyArrRoom = arrRoom.filter((room) => room.active);
+    getBookingArr(copyArrRoom);
+  }, [arrRoom]);
 
   return (
     <Box component="section">

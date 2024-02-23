@@ -6,68 +6,64 @@ import {
   DetailComponent,
   ModalComponent,
 } from "../../component/componentReuse";
-import { getBookingCarendar, getOneRoom } from "../../service";
+import { getOneRoom } from "../../service";
 import { BookingStatus, IRoomPost, typeGetRoom } from "../../type";
 
-const CalendarHostParam = ({ data }) => {
+const CalendarHostParam = ({ data }: { data: IRoomPost[] }) => {
   const [booking, setbooking] = useState<any[]>([] as any);
   const [room, setRoom] = useState<typeGetRoom | undefined>();
   const [openInfor, setOpenInfor] = useState(false);
   const [arrBooking, setArrBooking] = useState<any[]>([] as any);
 
   useEffect(() => {
-    if (data.length) {
-      const eventsCarendar: any[] = [
-        ...data.map((booking: IRoomPost) => {
-          const startDate = new Date(booking.start_date);
-          const start = `${startDate.getFullYear()}-${(startDate.getMonth() + 1)
-            .toString()
-            .padStart(2, "0")}-${startDate
-              .getDate()
-              .toString()
-              .padStart(2, "0")}`;
-          const endDate = new Date(booking.end_date);
-          const end = `${endDate.getFullYear()}-${(endDate.getMonth() + 1)
-            .toString()
-            .padStart(2, "0")}-${endDate.getDate().toString().padStart(2, "0")}`;
-          const BookingPending = booking.booking_status === BookingStatus.pending;
-          const BookingSuccess = booking.booking_status === BookingStatus.success;
-          const BookingpendingCancel =
-            booking.booking_status === BookingStatus.pendingCancel;
-          return {
-            ...booking,
-            title: BookingPending
-              ? "Khách chờ duyệt phòng"
-              : BookingSuccess
-                ? "Phòng có khách đặt"
-                : BookingpendingCancel
-                  ? "Khách chờ hủy phòng"
-                  : "Khách hủy phòng",
-            backgroundColor: BookingPending
-              ? "#1796D2"
-              : BookingSuccess
-                ? "rgb(34 197 94)"
-                : BookingpendingCancel
-                  ? "Khách chờ hủy phòng"
-                  : "#ef4444",
-            borderColor: BookingPending
-              ? "#1796D2"
-              : BookingSuccess
-                ? "rgb(34 197 94)"
-                : BookingpendingCancel
-                  ? "Khách chờ hủy phòng"
-                  : "#ef4444",
-            start,
-            end,
-          };
-        }),
-      ];
-      setArrBooking(eventsCarendar);
+    const eventsCarendar: any[] = [
+      ...data.map((booking: IRoomPost) => {
+        const startDate = new Date(booking.start_date);
+        const start = `${startDate.getFullYear()}-${(startDate.getMonth() + 1)
+          .toString()
+          .padStart(2, "0")}-${startDate
+          .getDate()
+          .toString()
+          .padStart(2, "0")}`;
+        const endDate = new Date(booking.end_date);
+        const end = `${endDate.getFullYear()}-${(endDate.getMonth() + 1)
+          .toString()
+          .padStart(2, "0")}-${endDate.getDate().toString().padStart(2, "0")}`;
+        const BookingPending = booking.booking_status === BookingStatus.pending;
+        const BookingSuccess = booking.booking_status === BookingStatus.success;
+        const BookingpendingCancel =
+          booking.booking_status === BookingStatus.pendingCancel;
+        return {
+          ...booking,
+          title: BookingPending
+            ? "Khách chờ duyệt phòng"
+            : BookingSuccess
+            ? "Phòng có khách đặt"
+            : BookingpendingCancel
+            ? "Khách chờ hủy phòng"
+            : "Khách hủy phòng",
+          backgroundColor: BookingPending
+            ? "#1796D2"
+            : BookingSuccess
+            ? "rgb(34 197 94)"
+            : BookingpendingCancel
+            ? "Khách chờ hủy phòng"
+            : "#ef4444",
+          borderColor: BookingPending
+            ? "#1796D2"
+            : BookingSuccess
+            ? "rgb(34 197 94)"
+            : BookingpendingCancel
+            ? "Khách chờ hủy phòng"
+            : "#ef4444",
+          start,
+          end,
+        };
+      }),
+    ];
+    setArrBooking(eventsCarendar);
+  }, [data, arrBooking.length]);
 
-    } else {
-      setArrBooking([]);
-    }
-  }, [data]);
   const eventClick = async (clickInfo: any) => {
     try {
       setbooking(clickInfo.event.extendedProps);

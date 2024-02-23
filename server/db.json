@@ -89,10 +89,10 @@
       "password": "$2a$10$CEj2d43k2yREGr7lnddQJ.iDM51hwSivzApgl6Wp7Z0xLIowUA8Pi",
       "id": "9708f548-48ce-4e96-94cb-2a18419e54f2",
       "role": "Guide",
-      "firstName": "quỳnh",
+      "firstName": "Quỳnh",
       "lastName": "anh",
       "gender": "Nữ",
-      "age": "21",
+      "age": "23",
       "phone": "098657546",
       "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1706754211/bexlpqp1htdvai6evy3i.jpg"
     },
@@ -353,7 +353,7 @@
     {
       "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
       "created_at": 1705908454613,
-      "booking_status": "Success",
+      "booking_status": "PendingCancel",
       "name": "Sài Gòn Hạ Long Hotel",
       "address": "Bãi cháy, Hạ Long, Quảng Ninh",
       "price": 900000,
@@ -362,8 +362,8 @@
       "type_tourism": "Khách sạn",
       "bedroom": 1,
       "bathroom": 1,
-      "start_date": 1708699369000,
-      "end_date": 1708872169000,
+      "start_date": 1708560000000,
+      "end_date": 1708660753000,
       "decription": "Khách sạn Sài Gòn Hạ Long là một trong những Khách sạn 4 sao hàng đầu tại thành phố Hạ Long. Tọa lạc tại trung tâm khu du lịch Bãi Cháy, Khách sạn sở hữu tầm nhìn bao quát Di sản Thiên nhiên Thế giới Vịnh Hạ Long. Từ đây, du Khách có thể dễ dàng tiếp cận tất cả các điểm tham quan du lịch chính của thành phố như Vịnh Hạ Long, Sun Wolrd Hạ Long complex và bờ biển Bãi Cháy.",
       "image": [
         {
@@ -759,6 +759,26 @@
       "complete_touris": false,
       "pay_status": "Pending",
       "id": 6
+    },
+    {
+      "id_touris": 9,
+      "user_id": "9708f548-48ce-4e96-94cb-2a18419e54f2",
+      "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "name_user": "quỳnh anh",
+      "phone": "098657546",
+      "email": "quynhanh@gmail.com",
+      "name_room": "Sài Gòn Hạ Long Hotel",
+      "address_room": "Bãi cháy, Hạ Long, Quảng Ninh",
+      "booking_status": "Success",
+      "start_date": 1708825865000,
+      "end_date": 1709085065000,
+      "count_date": 3,
+      "count_person": 2,
+      "price": 900000,
+      "total": 2700000,
+      "complete_touris": false,
+      "pay_status": "Success",
+      "id": 7
     }
   ],
   "user_booking": [
@@ -791,6 +811,11 @@
       "id_user": "ad350080-38e2-4be0-8808-3614d23978c6",
       "id_host": "9d7de73d-349a-4f60-8957-44b9372ced4a",
       "id": 6
+    },
+    {
+      "id_user": "9708f548-48ce-4e96-94cb-2a18419e54f2",
+      "id_host": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "id": 7
     }
   ]
 }
