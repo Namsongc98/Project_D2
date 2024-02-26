@@ -1,4 +1,5 @@
 import {
+  AlertColor,
   Box,
   Checkbox,
   Container,
@@ -14,11 +15,13 @@ import { useEffect, useState } from "react";
 import { useGetUser } from "../../hook";
 import { IRoomPost } from "../../type";
 import { CalendarHostParam } from ".";
+import { SnackBarReuse } from "../../component/componentReuse";
 
 const CalendarHost = () => {
   const [arrRoom, setArrRoom] = useState([] as any[]);
   const [arrBooking, setArrBooking] = useState([] as any[]);
-
+  const [type, setType] = useState<AlertColor | undefined>();
+  const [message, setMessage] = useState<string>("");
   const [checkAll, setCheckAll] = useState(false);
   const user = useGetUser();
   const { state } = useLocation();
@@ -37,7 +40,8 @@ const CalendarHost = () => {
           setArrBooking(result);
         }
       } catch (error) {
-        console.log(error);
+        setType("error");
+        setMessage("error sever");
       }
     })();
   }, [user, state]);
@@ -74,7 +78,8 @@ const CalendarHost = () => {
       );
       setArrBooking(result.flat());
     } catch (error) {
-      console.log(error);
+      setType("error");
+      setMessage("error sever");
     }
   };
 
@@ -85,6 +90,7 @@ const CalendarHost = () => {
 
   return (
     <Box component="section">
+      <SnackBarReuse type={type} message={message} setError={setMessage} />
       <Container sx={{ my: 4, mx: 2 }} maxWidth={false}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
@@ -97,7 +103,7 @@ const CalendarHost = () => {
               }}
             >
               <Typography color="#1976d2" fontSize="24px" fontWeight="700">
-                Thống kê lịch đặt
+                Thống kê phòng đặt
               </Typography>
             </Paper>
           </Grid>
@@ -119,6 +125,7 @@ const CalendarHost = () => {
                 </Typography>
                 <FormControlLabel
                   label="Chọn tất cả"
+                  sx={{ color: checkAll ? "#1976d2" : "black" }}
                   control={
                     <Checkbox checked={checkAll} onChange={handleSelectAll} />
                   }

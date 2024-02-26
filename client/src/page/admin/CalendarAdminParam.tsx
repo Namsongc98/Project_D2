@@ -5,15 +5,19 @@ import { useEffect, useState } from "react";
 import {
   DetailComponent,
   ModalComponent,
+  SnackBarReuse,
 } from "../../component/componentReuse";
 import { getBookingCarendar, getOneRoom } from "../../service";
 import { BookingStatus, IRoomPost, typeGetRoom } from "../../type";
 import { useLocation } from "react-router-dom";
+import { AlertColor } from "@mui/material";
 const CalendarAdminParam = () => {
   const [booking, setbooking] = useState<any[]>([] as any);
   const [room, setRoom] = useState<typeGetRoom | undefined>();
   const [openInfor, setOpenInfor] = useState(false);
   const [arrBooking, setArrBooking] = useState<any[]>([] as any);
+  const [type, setType] = useState<AlertColor | undefined>();
+  const [message, setMessage] = useState<string>("");
   const { state } = useLocation();
   useEffect(() => {
     (async () => {
@@ -74,7 +78,8 @@ const CalendarAdminParam = () => {
         ];
         setArrBooking(eventsCarendar);
       } catch (error) {
-        console.log(error);
+        setType("error");
+        setMessage("error sever");
       }
     })();
   }, [state.id]);
@@ -98,6 +103,7 @@ const CalendarAdminParam = () => {
   }
   return (
     <>
+      <SnackBarReuse type={type} message={message} setError={setMessage} />
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin]}
         headerToolbar={{

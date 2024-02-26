@@ -7,9 +7,9 @@ import {
   ModalComponent,
 } from "../../component/componentReuse";
 import { getOneRoom } from "../../service";
-import { BookingStatus, IRoomPost, typeGetRoom } from "../../type";
+import { BookingStatus, IBookingData, typeGetRoom } from "../../type";
 
-const CalendarHostParam = ({ data }: { data: IRoomPost[] }) => {
+const CalendarHostParam = ({ data }: { data: IBookingData[] }) => {
   const [booking, setbooking] = useState<any[]>([] as any);
   const [room, setRoom] = useState<typeGetRoom | undefined>();
   const [openInfor, setOpenInfor] = useState(false);
@@ -17,7 +17,7 @@ const CalendarHostParam = ({ data }: { data: IRoomPost[] }) => {
 
   useEffect(() => {
     const eventsCarendar: any[] = [
-      ...data.map((booking: IRoomPost) => {
+      ...data.map((booking: IBookingData) => {
         const startDate = new Date(booking.start_date);
         const start = `${startDate.getFullYear()}-${(startDate.getMonth() + 1)
           .toString()
@@ -33,26 +33,31 @@ const CalendarHostParam = ({ data }: { data: IRoomPost[] }) => {
         const BookingSuccess = booking.booking_status === BookingStatus.success;
         const BookingpendingCancel =
           booking.booking_status === BookingStatus.pendingCancel;
+        const bookingTouris = booking.complete_touris;
         return {
           ...booking,
           title: BookingPending
-            ? "Khách chờ duyệt phòng"
+            ? `Khách chờ duyệt phòng`
             : BookingSuccess
-            ? "Phòng có khách đặt"
+            ? `Phòng có khách đặt`
             : BookingpendingCancel
-            ? "Khách chờ hủy phòng"
-            : "Khách hủy phòng",
+            ? `Khách chờ hủy phòng`
+            : `Khách hủy phòng`,
           backgroundColor: BookingPending
             ? "#1796D2"
             : BookingSuccess
-            ? "rgb(34 197 94)"
+            ? bookingTouris
+              ? "#3d5afe"
+              : "rgb(34 197 94)"
             : BookingpendingCancel
             ? "Khách chờ hủy phòng"
             : "#ef4444",
           borderColor: BookingPending
             ? "#1796D2"
             : BookingSuccess
-            ? "rgb(34 197 94)"
+            ? bookingTouris
+              ? "#3d5afe"
+              : "rgb(34 197 94)"
             : BookingpendingCancel
             ? "Khách chờ hủy phòng"
             : "#ef4444",
@@ -77,8 +82,20 @@ const CalendarHostParam = ({ data }: { data: IRoomPost[] }) => {
 
   function renderEventContent(eventInfo: any) {
     return (
-      <div className="">
+      <div className="px-2">
         <i className="">{eventInfo.event.title}</i>
+        <p className="">
+          Khách sạn:{" "}
+          <span className="font-bold">
+            {eventInfo.event.extendedProps.name_room}
+          </span>
+        </p>
+        <p>
+          Khách hàng:{" "}
+          <span className="font-bold">
+            {eventInfo.event.extendedProps.name_user}
+          </span>
+        </p>
       </div>
     );
   }
@@ -96,7 +113,7 @@ const CalendarHostParam = ({ data }: { data: IRoomPost[] }) => {
         selectable={true}
         selectMirror={true}
         dayMaxEvents={true}
-        eventContent={renderEventContent}
+        eventContent={(eventInfo) => renderEventContent(eventInfo)}
         events={arrBooking}
         eventClick={(clickInfo) => eventClick(clickInfo)}
         eventColor="black"

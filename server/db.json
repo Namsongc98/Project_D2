@@ -656,7 +656,7 @@
       "count_person": 2,
       "price": 700000,
       "total": 700000,
-      "complete_touris": false,
+      "complete_touris": true,
       "pay_status": "Success",
       "id": 1
     },

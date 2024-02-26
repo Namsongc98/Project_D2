@@ -1,8 +1,15 @@
-import { Box, Container, Grid, Paper, Typography } from "@mui/material";
+import {
+  AlertColor,
+  Box,
+  Container,
+  Grid,
+  Paper,
+  Typography,
+} from "@mui/material";
 import { CopyRight } from "../../component/componentPage";
 import { useEffect, useState } from "react";
 import { getAllHost } from "../../service";
-import { TableUser } from "../../component/componentReuse";
+import { SnackBarReuse, TableUser } from "../../component/componentReuse";
 import { columnUser } from "../../constain";
 import { IProfileUser } from "../../type";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +17,8 @@ import Deposits from "../../component/componentPage/host/Deposit";
 
 const AdminStatistics = () => {
   const [dataUser, setDataUser] = useState([] as IProfileUser[]);
+  const [type, setType] = useState<AlertColor | undefined>();
+  const [mess, setMess] = useState("");
   const [countHost, setCountHost] = useState();
   const navigate = useNavigate();
 
@@ -18,8 +27,9 @@ const AdminStatistics = () => {
       const res = await getAllHost();
       setDataUser(res.data);
       setCountHost(res.data.length);
-    } catch (error) {
-      console.log(error);
+    } catch (error: unknown) {
+      setType("error");
+      setMess("error sever");
     }
   };
 
@@ -33,6 +43,7 @@ const AdminStatistics = () => {
 
   return (
     <Box component="section">
+      <SnackBarReuse type={type} message={mess} setError={setMess} />
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
         <Grid container spacing={3}>
           <Grid item xs={12} md={12} lg={12}>

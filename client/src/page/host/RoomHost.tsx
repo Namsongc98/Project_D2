@@ -6,7 +6,7 @@ import {
   Paper,
   TablePagination,
 } from "@mui/material";
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   DetailComponent,
   ModalComponent,
@@ -19,9 +19,7 @@ import { getAllRoomApproveHost, getAllRoomHost } from "../../service";
 import { columnsTable } from "../../constain";
 import { useGetUser } from "../../hook";
 
-
 const RoomHost = () => {
- 
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const [rooms, setRoom] = useState([] as any);
@@ -65,7 +63,8 @@ const RoomHost = () => {
         setRoom(res.data);
       }
     } catch (error) {
-      console.log(error);
+      setType("error");
+      setMessage("error sever");
     }
   };
 
@@ -85,7 +84,8 @@ const RoomHost = () => {
         setRoom(res.data);
       }
     } catch (error) {
-      console.log(error);
+      setType("error");
+      setMessage("error sever");
     }
   };
   const changePage = (page: number, rowsPerPage: number) => {
@@ -103,7 +103,6 @@ const RoomHost = () => {
   useEffect(() => {
     changePage(page + 1, rowsPerPage);
   }, [typeParam, user]);
-
 
   const handleNavigate = (idRoom: number) => {
     navigate("calendar", { state: { id: idRoom } });

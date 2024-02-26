@@ -1,21 +1,31 @@
-import { Box, Container, Grid, Paper, Typography } from "@mui/material";
+import {
+  AlertColor,
+  Box,
+  Container,
+  Grid,
+  Paper,
+  Typography,
+} from "@mui/material";
 import { useLocation } from "react-router-dom";
 import { CalendarHostParam } from "../host";
 import { useEffect, useState } from "react";
 import { getBookingCarendar } from "../../service";
+import { SnackBarReuse } from "../../component/componentReuse";
 
 const CalendarAdmin = () => {
   const [arrBooking, setArrBooking] = useState([]);
+  const [type, setType] = useState<AlertColor | undefined>();
+  const [mess, setMess] = useState("");
   const { state } = useLocation();
 
   useEffect(() => {
     (async () => {
       try {
         const res = await getBookingCarendar(state.id);
-        console.log(res)
         setArrBooking(res);
       } catch (error) {
-        console.log(error);
+        setType("error");
+        setMess("error sever");
       }
     })();
   }, [state.id]);
@@ -23,6 +33,7 @@ const CalendarAdmin = () => {
   return (
     <Box component="section">
       <Container sx={{ my: 4, mx: 1 }} maxWidth={"xl"}>
+        <SnackBarReuse type={type} message={mess} setError={setMess} />
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Paper

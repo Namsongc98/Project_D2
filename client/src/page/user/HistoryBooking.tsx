@@ -40,7 +40,8 @@ const HistoryBooking = () => {
       const res = await getBookingUser(userId);
       setBookingArr(res.data);
     } catch (error) {
-      console.log(error);
+      setTypeErr("error");
+      setMessage("error sever");
     }
   };
   const getBookingStatus = async (
@@ -52,7 +53,8 @@ const HistoryBooking = () => {
       const res = await getBookingUserStatus(userId, bookingStatus, complete);
       setBookingArr(res.data);
     } catch (error) {
-      console.log(error);
+      setTypeErr("error");
+      setMessage("error sever");
     }
   };
 
@@ -92,7 +94,8 @@ const HistoryBooking = () => {
       setOpenInfor(false);
       checkTypeParam();
     } catch (error) {
-      throw new Error();
+      setTypeErr("error");
+      setMessage("error sever");
     }
   };
   const handlePayment = (inforBooking: IBookingData) => {
@@ -106,7 +109,13 @@ const HistoryBooking = () => {
       setOpenInfor(false);
       checkTypeParam();
     } catch (error) {
-      if (error instanceof Error) throw new Error();
+      if (error instanceof Error) {
+        setTypeErr("error");
+        setMessage(error.message);
+      } else {
+        setTypeErr("error");
+        setMessage("error sever");
+      }
     }
   };
 
@@ -121,7 +130,8 @@ const HistoryBooking = () => {
       setInforBooking(booking);
       setOpenInfor(!openInfor);
     } catch (error) {
-      console.log(error);
+      setTypeErr("error");
+      setMessage("error sever");
     }
   };
 

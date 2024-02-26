@@ -1,4 +1,5 @@
 import {
+  AlertColor,
   Card,
   CardContent,
   CardMedia,
@@ -11,9 +12,12 @@ import { useEffect, useState } from "react";
 import { getRoomCity } from "../../service";
 import { Approve, typeGetRoom } from "../../type";
 import { formatcurrency } from "../../common";
+import { SnackBarReuse } from "../../component/componentReuse";
 
 const ListStayCity = () => {
   const [dataRoom, setDataRoom] = useState<typeGetRoom[] | undefined>();
+  const [typeErr, setTypeErr] = useState<AlertColor | undefined>();
+  const [message, setMessage] = useState("");
   const params = useParams();
 
   const getDataRoomCity = async () => {
@@ -21,7 +25,8 @@ const ListStayCity = () => {
       const res = await getRoomCity(params.id!, Approve.success);
       setDataRoom(res.data);
     } catch (error) {
-      console.log(error);
+      setTypeErr("error");
+      setMessage("error sever");
     }
   };
   useEffect(() => {
@@ -30,6 +35,7 @@ const ListStayCity = () => {
 
   return (
     <>
+      <SnackBarReuse type={typeErr} message={message} setError={setMessage} />
       <Stack
         direction="row"
         spacing={2}
@@ -37,7 +43,6 @@ const ListStayCity = () => {
         flexWrap="wrap"
         sx={{ mb: 5 }}
       >
-      
         {dataRoom?.map((room: typeGetRoom) => (
           <Link
             className="w-[32%] h-[480px]"

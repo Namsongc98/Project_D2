@@ -113,7 +113,8 @@ const Roomtype = () => {
       const res = await getAllRoom(page, rowsPerPage);
       setRoom(res.data);
     } catch (error) {
-      console.log(error);
+      setType("error");
+      setMessage("error sever");
     }
   };
 
@@ -136,7 +137,8 @@ const Roomtype = () => {
       const res = await getAllRoomApprove(page, rowsPerPage, approve);
       setRoom(res.data);
     } catch (error) {
-      console.log(error);
+      setType("error");
+      setMessage("error sever");
     }
   };
   const changePage = (page: number, rowsPerPage: number) => {
