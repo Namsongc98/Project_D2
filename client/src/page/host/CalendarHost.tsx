@@ -25,21 +25,34 @@ const CalendarHost = () => {
   const [checkAll, setCheckAll] = useState(false);
   const user = useGetUser();
   const { state } = useLocation();
+
   useEffect(() => {
     (async () => {
       try {
         if (user?.id) {
           const res = await getAllRoomHostNav(user.id);
+
           setArrRoom(
             res.data.map((room: IRoomPost) => ({
               ...room,
-              active: room.id! === state.id ? true : false,
+              active: !state ? true : room.id! === state.id ? true : false,
             }))
           );
-          const result = await getBookingCarendar(state.id);
-          setArrBooking(result);
+          if (state) {
+            const result = await getBookingCarendar(user.id, state.id);
+            setArrBooking(result);
+          } else {
+            console.log("không có state");
+            console.log(user.id);
+            const result = await getBookingCarendar(user.id, undefined);
+            setArrBooking(result);
+          }
+          if (!state) {
+            setCheckAll(true);
+          }
         }
       } catch (error) {
+        console.log(error);
         setType("error");
         setMessage("error sever");
       }
@@ -74,7 +87,7 @@ const CalendarHost = () => {
   const getBookingArr = async (arrRoom: IRoomPost[]) => {
     try {
       const result = await Promise.all(
-        arrRoom.map((room) => getBookingCarendar(room.id!))
+        arrRoom.map((room) => getBookingCarendar(user!.id, room.id!))
       );
       setArrBooking(result.flat());
     } catch (error) {

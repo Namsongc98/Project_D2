@@ -127,9 +127,10 @@ const checkSearchDate = async (idRoom: number) => {
   });
   return res.data;
 };
-const getBookingCarendar = async (id_touris: number) => {
+const getBookingCarendar = async( host_id: string, id_touris: number | undefined) => {
+
   try {
-    const res = await instance.get(`/bookings/`, { params: { id_touris } });
+    const res = await instance.get(`/bookings/`, { params: { host_id, id_touris } });
     return res.data;
   } catch (error) {
     throw new Error("Lỗi không lấy được phòng");
