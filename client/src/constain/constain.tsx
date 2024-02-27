@@ -88,7 +88,12 @@ const columnsTable: readonly ColumnTable[] = [
   { id: "name", label: "Tên Khách sạn", minWidth: 100 },
   { id: "type_tourism", label: "kiểu dịch vụ", minWidth: 120 },
   { id: "city", label: "Thành phố", minWidth: 100 },
-  { id: "price", label: "Giá phòng", minWidth: 100 },
+  {
+    id: "price",
+    label: "Giá phòng",
+    minWidth: 100,
+    format: (value) => formatcurrency(value),
+  },
 ];
 
 const columnBooking: TableRoom[] = [
@@ -109,7 +114,7 @@ const columnBooking: TableRoom[] = [
     label: "Ngày cuối",
     minWidth: 100,
     align: "left",
-    format: (value) => convertDateToTimestamp(value),
+    format: (value) => convertDateToTimestamp(value - 24 * 60 * 60 * 1000),
   },
   { index: "count_person", label: "Số người", minWidth: 100, align: "left" },
   {
@@ -154,7 +159,8 @@ const rowsBooking = [
   {
     id: "end_date",
     label: "Đến ngày:",
-    format: (value: number) => convertDateToTimestamp(value),
+    format: (value: number) =>
+      convertDateToTimestamp(value - 24 * 60 * 60 * 1000),
   },
   {
     id: "count_date",

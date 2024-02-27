@@ -5,6 +5,7 @@ import { styled } from "@mui/material";
 
 import { useLocation } from "react-router-dom";
 import { PropsPopup } from "../../type";
+import zIndex from "@mui/material/styles/zIndex";
 
 const Popup = (props: PropsPopup) => {
   const { setAnchor, anchor, children } = props;
@@ -31,7 +32,7 @@ const Popup = (props: PropsPopup) => {
       `
   );
   return (
-    <BasePopup id={id} open={open} anchor={anchor}>
+    <BasePopup id={id} open={open} anchor={anchor} style={{ zIndex: 99 }}>
       <PopupBody>{children}</PopupBody>
     </BasePopup>
   );

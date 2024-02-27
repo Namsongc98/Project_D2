@@ -1,26 +1,27 @@
-import { Grid } from "@mui/material";
+import { AlertColor, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 
 import { columnBooking } from "../../constain";
 import { useParams, useSearchParams } from "react-router-dom";
 import { BookingStatus, BookingType } from "../../type";
 import { getBookingUser, getBookingUserStatus } from "../../service";
-import { TableBooking } from "../../component/componentReuse";
-
+import { SnackBarReuse, TableBooking } from "../../component/componentReuse";
 
 const UserBooking = () => {
   const [data, setData] = useState([]);
   const param = useParams();
   const [searchParams] = useSearchParams();
   const userType = searchParams.get("user");
+  const [type, setType] = useState<AlertColor | undefined>();
+  const [message, setMessage] = useState<string>("");
 
   const getBooking = async (userId: string) => {
     try {
       const res = await getBookingUser(userId);
-      console.log(res);
       setData(res.data);
     } catch (error) {
-      console.log(error);
+      setType("error");
+      setMessage("error sever");
     }
   };
 
@@ -33,7 +34,8 @@ const UserBooking = () => {
       const res = await getBookingUserStatus(userId, bookingStatus, complete);
       setData(res.data);
     } catch (error) {
-      console.log(error);
+      setType("error");
+      setMessage("error sever");
     }
   };
 
@@ -63,6 +65,7 @@ const UserBooking = () => {
   }, [userType]);
   return (
     <>
+      <SnackBarReuse type={type} message={message} setError={setMessage} />
       <Grid item xs={12} md={12} lg={12}>
         <TableBooking data={data!} columns={columnBooking} detail={true} />
       </Grid>

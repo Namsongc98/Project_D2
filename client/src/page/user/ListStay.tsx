@@ -1,4 +1,5 @@
 import {
+  AlertColor,
   Box,
   Card,
   CardContent,
@@ -14,9 +15,12 @@ import { getListRoom, sortListRoom } from "../../service";
 import { formatcurrency } from "../../common";
 import { useSelectOption } from "../../hook";
 import { SelectOption } from "../../component/element";
+import { SnackBarReuse } from "../../component/componentReuse";
 
 const ListStay = () => {
   const [dataRoom, setDataRoom] = useState<typeGetRoom[] | undefined>();
+  const [typeErr, setTypeErr] = useState<AlertColor | undefined>();
+  const [message, setMessage] = useState("");
   const sort = useSelectOption("");
 
   const selectSort = [
@@ -43,7 +47,8 @@ const ListStay = () => {
       const res = await getListRoom();
       setDataRoom(res.data);
     } catch (error) {
-      console.log(error);
+      setTypeErr("error");
+      setMessage("error sever");
     }
   };
   useEffect(() => {
@@ -55,7 +60,8 @@ const ListStay = () => {
       const res = await sortListRoom(sort, order);
       setDataRoom(res.data);
     } catch (error) {
-      throw new Error("");
+      setTypeErr("error");
+      setMessage("error sever");
     }
   };
 
@@ -72,6 +78,7 @@ const ListStay = () => {
   }, [sort.value]);
   return (
     <Box>
+      <SnackBarReuse type={typeErr} message={message} setError={setMessage} />
       <Stack direction="row" justifyContent={"space-between"} sx={{ my: 5 }}>
         <div className=""></div>
         <div className="w-40">

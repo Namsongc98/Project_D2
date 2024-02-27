@@ -12,8 +12,6 @@ const ModalConfirm = ({
   setOpen,
   user,
 }: any) => {
-
-
   return (
     <>
       <Stack direction={"row"} justifyContent={"space-between"}>
@@ -58,7 +56,7 @@ const ModalConfirm = ({
             onClick={() => infor && handleFail(infor.id!)}
             className="text-white bg-red-500  rounded px-4 py-2 hover:opacity-80 shadow-[0_2px_4px_0_rgba(90,141,238,0.5)] hover:shadow-[0_4px_12px_0_rgba(90,141,238,0.6)] "
           >
-            Không duyệt
+            Không được duyệt
           </Button>
         ) : (
           <></>

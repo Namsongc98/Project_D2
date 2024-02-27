@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { getBookingUserHost, getBookingUserHostStatus } from "../../service";
 import { BookingStatus, BookingType } from "../../type";
 import { useParams, useSearchParams } from "react-router-dom";
-import { Grid } from "@mui/material";
+import { AlertColor, Grid } from "@mui/material";
 import { columnBooking } from "../../constain";
 import { useGetUser } from "../../hook";
-import { TableBooking } from "../../component/componentReuse";
+import { SnackBarReuse, TableBooking } from "../../component/componentReuse";
 
 const BookingUser = () => {
   const [data, setData] = useState([]);
@@ -13,14 +13,16 @@ const BookingUser = () => {
   const [searchParams] = useSearchParams();
   const userType = searchParams.get("user");
   const host = useGetUser();
+  const [type, setType] = useState<AlertColor | undefined>();
+  const [error, setError] = useState("");
 
   const getBooking = async (userId: string, hostId: string) => {
     try {
       const res = await getBookingUserHost(userId, hostId);
-      console.log(res.data);
       setData(res.data);
     } catch (error) {
-      console.log(error);
+      setType("error");
+      setError("Không lấy được dữ liệu");
     }
   };
 
@@ -39,7 +41,8 @@ const BookingUser = () => {
       );
       setData(res.data);
     } catch (error) {
-      console.log(error);
+      setType("error");
+      setError("Không lấy được dữ liệu");
     }
   };
   const checkTypeParam = () => {
@@ -68,6 +71,7 @@ const BookingUser = () => {
   }, [userType, host]);
   return (
     <Grid item xs={12} md={12} lg={12}>
+      <SnackBarReuse type={type} message={error} setError={setError} />
       
       <TableBooking
         data={data!}

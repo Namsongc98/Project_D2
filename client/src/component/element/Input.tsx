@@ -11,6 +11,7 @@ const Input = (props: InputType): React.JSX.Element => {
     onChange,
     value,
     required,
+    defaultValue,
   } = props;
 
   return (
@@ -34,6 +35,7 @@ const Input = (props: InputType): React.JSX.Element => {
           {...(typeof register === "function" && {
             ...register(label, { required: required }),
           })}
+          defaultValue={defaultValue ? defaultValue : ""}
           placeholder={placeholder}
         />
       )}

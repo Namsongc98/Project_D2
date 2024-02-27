@@ -122,7 +122,7 @@ const TableHostRoomConfirm: React.FC<{
                 <StyledTableRow key={booking.id}>
                   {columns.map((column) => {
                     const value = booking[column.index];
-                    console.log(value);
+                   
                     return (
                       <StyledTableCell
                         key={column.index}

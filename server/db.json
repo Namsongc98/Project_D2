@@ -9,7 +9,7 @@
       "lastName": "Sơn",
       "gender": "Nam",
       "age": "24",
-      "phone": "0981875345",
+      "phone": "095686785",
       "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1706754322/apmm8eu6d7zv8ciihtz8.jpg"
     },
     {
@@ -89,10 +89,10 @@
       "password": "$2a$10$CEj2d43k2yREGr7lnddQJ.iDM51hwSivzApgl6Wp7Z0xLIowUA8Pi",
       "id": "9708f548-48ce-4e96-94cb-2a18419e54f2",
       "role": "Guide",
-      "firstName": "quỳnh",
+      "firstName": "Quỳnh",
       "lastName": "anh",
       "gender": "Nữ",
-      "age": "21",
+      "age": "23",
       "phone": "098657546",
       "avatar": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1706754211/bexlpqp1htdvai6evy3i.jpg"
     },
@@ -135,34 +135,6 @@
   ],
   "touris": [
     {
-      "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
-      "created_at": 1705564741095,
-      "booking_status": "Empty",
-      "name": "Khách sạn Host1 ",
-      "address": "lào cai, yên bái",
-      "price": 12000000,
-      "cout_people": 3,
-      "city": "Lào Cai",
-      "type_tourism": "Khách sạn",
-      "bedroom": 1,
-      "bathroom": 1,
-      "start_date": 0,
-      "end_date": 0,
-      "decription": "nhà đẹp nhà xinh",
-      "image": [
-        {
-          "id": 1,
-          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705564740/m5w0q4fcqqzyrfwi6iyq.webp"
-        },
-        {
-          "id": 2,
-          "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1705564740/scaqbbfslvwledxdbeir.webp"
-        }
-      ],
-      "approve_room": "Fail",
-      "id": 1
-    },
-    {
       "host_id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
       "created_at": 1705564839299,
       "booking_status": "Empty",
@@ -198,8 +170,8 @@
       "type_tourism": "Homestay",
       "bedroom": 1,
       "bathroom": 1,
-      "start_date": 0,
-      "end_date": 0,
+      "start_date": 1708387200000,
+      "end_date": 1708585928000,
       "decription": "Hanoi Emerald Waters Hotel & Spa tọa lạc tại thủ đô Hà Nội đậm đà bản sắc văn hóa, chỉ cách Nhà hát Múa rối Nước Thăng Long 200 m. Khách sạn có nhà hàng trong khuôn viên phục vụ tiệc tự chọn gồm các món ăn ngon. Những Khách muốn thưởng thức 1 ly cocktail tùy chọn có thể ghé vào quầy bar nằm trong chỗ nghỉ này. Wi-Fi miễn phí có trong toàn bộ khuôn viên.",
       "image": [
         {
@@ -221,17 +193,17 @@
     {
       "host_id": "640f7a52-7f62-4403-8019-55cbae2609c9",
       "created_at": 1705907356838,
-      "booking_status": "Pending",
+      "booking_status": "Success",
       "name": "Bình Yên Cottages",
-      "address": "Xã Minh Trí, Huyện Sóc Sơn, Thành phố Hà Nội",
+      "address": "Phường Hàng Bạc - Quận Hoàn Kiếm - Thành phố Hà Nội",
       "price": 1050000,
       "cout_people": 2,
       "city": "Hà Nội",
       "type_tourism": "Khách sạn",
       "bedroom": 1,
       "bathroom": 1,
-      "start_date": 1707955200000,
-      "end_date": 1708041600000,
+      "start_date": 1708448400000,
+      "end_date": 1708794000000,
       "decription": "Mỗi phòng nghỉ ở đây đều được trang bị nội thất kiểu dáng đẹp với gam màu trung tính. Trong phòng có TV truyền hình vệ tinh màn hình phẳng. Phòng tắm riêng đi kèm góc tắm vòi sen. Áo choàng tắm và dép cũng được cung cấp cho Khách.",
       "image": [
         {
@@ -253,7 +225,7 @@
     {
       "host_id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
       "created_at": 1705907382605,
-      "booking_status": "PendingCancel",
+      "booking_status": "Empty",
       "name": "Stream House Nhà Bên Suối",
       "address": "Đội 4 thôn Minh Tân, Xã Minh Trí, Huyện Sóc Sơn, Thành phố Hà Nội",
       "price": 1050000,
@@ -351,7 +323,7 @@
       "created_at": 1705908348456,
       "booking_status": "Empty",
       "name": "Palette Collect's Boutique Hotel Ha Long",
-      "address": "Bãi cháy, Hạ Long, Quảng Ninh",
+      "address": "Phường Hùng Thắng - Thành phố Hạ Long - Tỉnh Quảng Ninh",
       "price": 700000,
       "cout_people": 2,
       "city": "Quảng Ninh",
@@ -381,7 +353,7 @@
     {
       "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
       "created_at": 1705908454613,
-      "booking_status": "Empty",
+      "booking_status": "PendingCancel",
       "name": "Sài Gòn Hạ Long Hotel",
       "address": "Bãi cháy, Hạ Long, Quảng Ninh",
       "price": 900000,
@@ -390,8 +362,8 @@
       "type_tourism": "Khách sạn",
       "bedroom": 1,
       "bathroom": 1,
-      "start_date": 0,
-      "end_date": 0,
+      "start_date": 1708560000000,
+      "end_date": 1708660753000,
       "decription": "Khách sạn Sài Gòn Hạ Long là một trong những Khách sạn 4 sao hàng đầu tại thành phố Hạ Long. Tọa lạc tại trung tâm khu du lịch Bãi Cháy, Khách sạn sở hữu tầm nhìn bao quát Di sản Thiên nhiên Thế giới Vịnh Hạ Long. Từ đây, du Khách có thể dễ dàng tiếp cận tất cả các điểm tham quan du lịch chính của thành phố như Vịnh Hạ Long, Sun Wolrd Hạ Long complex và bờ biển Bãi Cháy.",
       "image": [
         {
@@ -413,7 +385,7 @@
     {
       "host_id": "640f7a52-7f62-4403-8019-55cbae2609c9",
       "created_at": 1705908741427,
-      "booking_status": "Empty",
+      "booking_status": "Pending",
       "name": "Tam Cốc Palm House",
       "address": "Xóm 5 - Thôn Đam Khê Trong - Xã Ninh Hải - Huyện Hoa Lư - Tỉnh Ninh Bình",
       "price": 600000,
@@ -422,8 +394,8 @@
       "type_tourism": "Homestay",
       "bedroom": 1,
       "bathroom": 1,
-      "start_date": 0,
-      "end_date": 0,
+      "start_date": 1708387200000,
+      "end_date": 1708448400000,
       "decription": "Các căn tại đây có tầm nhìn ra khu vườn, khu vực ghế ngồi, máy giặt, khu vực bếp ăn đầy đủ tiện nghi với tủ lạnh và phòng tắm riêng đi kèm dép đi trong phòng cùng máy sấy tóc. Một số căn được bố trí sân trong và/hoặc ban công nhìn ra quang cảnh núi non.",
       "image": [
         {
@@ -509,7 +481,7 @@
     {
       "host_id": "640f7a52-7f62-4403-8019-55cbae2609c9",
       "created_at": 1705909065246,
-      "booking_status": "Empty",
+      "booking_status": "Success",
       "name": "Radisson Blu Danang",
       "address": "Phường Phước Mỹ - Quận Sơn Trà - Thành phố Đà Nẵng",
       "price": 670000,
@@ -518,8 +490,8 @@
       "type_tourism": "Khách sạn",
       "bedroom": 1,
       "bathroom": 1,
-      "start_date": 0,
-      "end_date": 0,
+      "start_date": 1709226000000,
+      "end_date": 1709624196000,
       "decription": "Tận hưởng những ngày đầy nắng bên ly cocktail sảng khoái, ngâm mình dưới làn nước mát lạnh tại hồ bơi vô cực chắc chắn sẽ là những phút giây tuyệt vời nhất của mùa hè.",
       "image": [
         {
@@ -543,7 +515,7 @@
       "created_at": 1705909357691,
       "booking_status": "Cancel",
       "name": "M Village TP HCM",
-      "address": "Phường Bến Nghé - Quận 1 - Thành phố Hồ Chí Minh ",
+      "address": "Phường Bến Nghé - Quận 1 - Thành phố Hồ Chí Minh",
       "price": 1200000,
       "cout_people": 3,
       "city": "Hồ Chí Minh",
@@ -631,7 +603,7 @@
           "url": "https://res.cloudinary.com/dlb1ac5xw/image/upload/v1706750692/uskv7w8j7dlwv57bahwo.jpg"
         }
       ],
-      "approve_room": "Pending",
+      "approve_room": "Success",
       "id": 16
     },
     {
@@ -684,69 +656,129 @@
       "count_person": 2,
       "price": 700000,
       "total": 700000,
-      "complete_touris": false,
+      "complete_touris": true,
       "pay_status": "Success",
       "id": 1
     },
     {
-      "id_touris": 4,
-      "user_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
-      "host_id": "640f7a52-7f62-4403-8019-55cbae2609c9",
-      "name_user": "Hello host1",
-      "phone": 985566754,
-      "email": "host1@gmail.com",
-      "name_room": "Bình Yên Cottages",
+      "id_touris": 3,
+      "user_id": "313c9b13-dffe-42ed-9d35-72161f02d9ba",
+      "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "name_user": "Nam Sơn",
+      "phone": "095686785",
+      "email": "admin123@gmail.com",
+      "name_room": "Đồi Thông Homestay",
       "address_room": "Xã Minh Trí, Huyện Sóc Sơn, Thành phố Hà Nội",
       "booking_status": "Success",
-      "start_date": 1706832000000,
-      "end_date": 1706918400000,
-      "count_date": 1,
+      "start_date": 1708387200000,
+      "end_date": 1708585928000,
+      "count_date": 2,
       "count_person": 2,
-      "price": 1050000,
-      "total": 1050000,
+      "price": 900000,
+      "total": 1800000,
       "complete_touris": false,
-      "pay_status": "Success",
+      "pay_status": "Pending",
       "id": 2
     },
     {
-      "id_touris": 5,
-      "user_id": "9708f548-48ce-4e96-94cb-2a18419e54f2",
-      "host_id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
-      "name_user": "quỳnh anh",
-      "phone": 987765582,
-      "email": "quynhanh@gmail.com",
-      "name_room": "Stream House Nhà Bên Suối",
-      "address_room": "Đội 4 thôn Minh Tân, Xã Minh Trí, Huyện Sóc Sơn, Thành phố Hà Nội",
-      "booking_status": "PendingCancel",
-      "start_date": 1707955200000,
-      "end_date": 1708041600000,
-      "count_date": 1,
+      "id_touris": 4,
+      "user_id": "ad350080-38e2-4be0-8808-3614d23978c6",
+      "host_id": "640f7a52-7f62-4403-8019-55cbae2609c9",
+      "name_user": "trường béo",
+      "phone": "0934665756",
+      "email": "truongbeo@gmail.com",
+      "name_room": "Bình Yên Cottages",
+      "address_room": "Phường Hàng Bạc - Quận Hoàn Kiếm - Thành phố Hà Nội",
+      "booking_status": "Success",
+      "start_date": 1708448400000,
+      "end_date": 1708794000000,
+      "count_date": 4,
       "count_person": 2,
       "price": 1050000,
-      "total": 1050000,
+      "total": 4200000,
       "complete_touris": false,
-      "pay_status": "Success",
+      "pay_status": "Pending",
       "id": 3
     },
     {
-      "id_touris": 14,
-      "user_id": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
-      "host_id": "397418b9-5290-4005-bcd9-fbb62a074569",
-      "name_user": "host 2",
-      "phone": 985687,
-      "email": "host2@gmail.com",
-      "name_room": "M Village TP HCM",
-      "address_room": "Phường Bến Nghé - Quận 1 - Thành phố Hồ Chí Minh ",
-      "booking_status": "Cancel",
-      "start_date": 1708041600000,
-      "end_date": 1708128000000,
-      "count_date": 1,
+      "id_touris": 13,
+      "user_id": "640f7a52-7f62-4403-8019-55cbae2609c9",
+      "host_id": "640f7a52-7f62-4403-8019-55cbae2609c9",
+      "name_user": "host  4",
+      "phone": "09854534534",
+      "email": "host4@gmail.com",
+      "name_room": "Radisson Blu Danang",
+      "address_room": "Phường Phước Mỹ - Quận Sơn Trà - Thành phố Đà Nẵng",
+      "booking_status": "Success",
+      "start_date": 1709226000000,
+      "end_date": 1709624196000,
+      "count_date": 4,
       "count_person": 2,
-      "price": 1200000,
-      "total": 1200000,
+      "price": 670000,
+      "total": 2680000,
       "complete_touris": false,
       "pay_status": "Pending",
       "id": 4
+    },
+    {
+      "id_touris": 9,
+      "user_id": "640f7a52-7f62-4403-8019-55cbae2609c9",
+      "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "name_user": "host  4",
+      "phone": "09854534534",
+      "email": "host4@gmail.com",
+      "name_room": "Sài Gòn Hạ Long Hotel",
+      "address_room": "Bãi cháy, Hạ Long, Quảng Ninh",
+      "booking_status": "Success",
+      "start_date": 1708473600000,
+      "end_date": 1708699151000,
+      "count_date": 2,
+      "count_person": 2,
+      "price": 900000,
+      "total": 1800000,
+      "complete_touris": false,
+      "pay_status": "Pending",
+      "id": 5
+    },
+    {
+      "id_touris": 9,
+      "user_id": "ad350080-38e2-4be0-8808-3614d23978c6",
+      "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "name_user": "trường béo",
+      "phone": "0934665756",
+      "email": "truongbeo@gmail.com",
+      "name_room": "Sài Gòn Hạ Long Hotel",
+      "address_room": "Bãi cháy, Hạ Long, Quảng Ninh",
+      "booking_status": "Success",
+      "start_date": 1708699369000,
+      "end_date": 1708872169000,
+      "count_date": 2,
+      "count_person": 2,
+      "price": 900000,
+      "total": 1800000,
+      "complete_touris": false,
+      "pay_status": "Pending",
+      "id": 6
+    },
+    {
+      "id_touris": 9,
+      "user_id": "9708f548-48ce-4e96-94cb-2a18419e54f2",
+      "host_id": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "name_user": "quỳnh anh",
+      "phone": "098657546",
+      "email": "quynhanh@gmail.com",
+      "name_room": "Sài Gòn Hạ Long Hotel",
+      "address_room": "Bãi cháy, Hạ Long, Quảng Ninh",
+      "booking_status": "Success",
+      "start_date": 1708825865000,
+      "end_date": 1709085065000,
+      "count_date": 3,
+      "count_person": 2,
+      "price": 900000,
+      "total": 2700000,
+      "complete_touris": false,
+      "pay_status": "Success",
+      "id": 7
     }
   ],
   "user_booking": [
@@ -756,19 +788,34 @@
       "id": 1
     },
     {
-      "id_user": "9d7de73d-349a-4f60-8957-44b9372ced4a",
-      "id_host": "640f7a52-7f62-4403-8019-55cbae2609c9",
+      "id_user": "313c9b13-dffe-42ed-9d35-72161f02d9ba",
+      "id_host": "9d7de73d-349a-4f60-8957-44b9372ced4a",
       "id": 2
     },
     {
-      "id_user": "9708f548-48ce-4e96-94cb-2a18419e54f2",
-      "id_host": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
+      "id_user": "ad350080-38e2-4be0-8808-3614d23978c6",
+      "id_host": "640f7a52-7f62-4403-8019-55cbae2609c9",
       "id": 3
     },
     {
-      "id_user": "f942f4e8-b2d3-4b84-a845-8e5fada961bb",
-      "id_host": "397418b9-5290-4005-bcd9-fbb62a074569",
+      "id_user": "640f7a52-7f62-4403-8019-55cbae2609c9",
+      "id_host": "640f7a52-7f62-4403-8019-55cbae2609c9",
       "id": 4
+    },
+    {
+      "id_user": "640f7a52-7f62-4403-8019-55cbae2609c9",
+      "id_host": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "id": 5
+    },
+    {
+      "id_user": "ad350080-38e2-4be0-8808-3614d23978c6",
+      "id_host": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "id": 6
+    },
+    {
+      "id_user": "9708f548-48ce-4e96-94cb-2a18419e54f2",
+      "id_host": "9d7de73d-349a-4f60-8957-44b9372ced4a",
+      "id": 7
     }
   ]
 }

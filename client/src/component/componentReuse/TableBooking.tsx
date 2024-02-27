@@ -52,6 +52,7 @@ export default function TableBooking({ data, columns, detail }: PropsBooking) {
 
   return (
     <Paper sx={{ width: "100%", overflow: "auto" }}>
+   
       <TableContainer sx={{ height: 440, overflow: "auto" }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -85,9 +86,6 @@ export default function TableBooking({ data, columns, detail }: PropsBooking) {
                   <TableRow hover key={booking.id}>
                     {columns.map((column, index) => {
                       const value = booking[column.index];
-                      {
-                        console.log(value);
-                      }
                       return (
                         <TableCell key={index}>
                           {column.format && typeof value === "number"

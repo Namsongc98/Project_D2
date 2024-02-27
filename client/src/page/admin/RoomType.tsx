@@ -21,7 +21,7 @@ import ModalConfirm from "../../component/componentReuse/ModalConfirm";
 import { Approve, ApproveType, typeGetRoom } from "../../type";
 import { columnsTable } from "../../constain";
 import DetailComponent from "../../component/componentReuse/DetailComponent";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useGetUser } from "../../hook";
 
 const Roomtype = () => {
@@ -31,6 +31,7 @@ const Roomtype = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const typeParam = searchParams.get("approve");
+  const navigate = useNavigate();
   const param = useParams();
   // modal
   const [openApprove, setOpenApprove] = useState(false);
@@ -112,7 +113,8 @@ const Roomtype = () => {
       const res = await getAllRoom(page, rowsPerPage);
       setRoom(res.data);
     } catch (error) {
-      console.log(error);
+      setType("error");
+      setMessage("error sever");
     }
   };
 
@@ -135,7 +137,8 @@ const Roomtype = () => {
       const res = await getAllRoomApprove(page, rowsPerPage, approve);
       setRoom(res.data);
     } catch (error) {
-      console.log(error);
+      setType("error");
+      setMessage("error sever");
     }
   };
   const changePage = (page: number, rowsPerPage: number) => {
@@ -153,6 +156,10 @@ const Roomtype = () => {
   useEffect(() => {
     changePage(page + 1, rowsPerPage);
   }, [typeParam]);
+
+  const handleNavigate = (idRoom: number) => {
+    navigate("/admin/calendar", { state: { id: idRoom } });
+  };
 
   return (
     <>
@@ -177,6 +184,7 @@ const Roomtype = () => {
                   data={rooms}
                   handleOpenApprove={handleOpenApprove}
                   handleOpenInfor={handleOpenInfor}
+                  handleNavigate={handleNavigate}
                 />
                 <ModalComponent setOpen={setOpenApprove} open={openApprove}>
                   <ModalConfirm
