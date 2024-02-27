@@ -42,9 +42,7 @@ const CalendarHost = () => {
             const result = await getBookingCarendar(user.id, state.id);
             setArrBooking(result);
           } else {
-            console.log("không có state");
-            console.log(user.id);
-            const result = await getBookingCarendar(user.id, undefined);
+            const result = await getBookingCarendar(user.id);
             setArrBooking(result);
           }
           if (!state) {

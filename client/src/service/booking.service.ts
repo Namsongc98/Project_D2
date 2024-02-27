@@ -127,7 +127,7 @@ const checkSearchDate = async (idRoom: number) => {
   });
   return res.data;
 };
-const getBookingCarendar = async( host_id: string, id_touris: number | undefined) => {
+const getBookingCarendar = async (host_id: string, id_touris: number | undefined = undefined) => {
 
   try {
     const res = await instance.get(`/bookings/`, { params: { host_id, id_touris } });
