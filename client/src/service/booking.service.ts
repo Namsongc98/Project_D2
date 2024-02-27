@@ -20,19 +20,24 @@ const getBookingStatus = async (
 // tạo booking
 const createBooking = async (booking: IBookingData) => {
   try {
-    const result = checkRoomDate(booking)
-    if (!result) {
-      throw new Error("Phòng có người đặt")
+    // kiểm tra phòng có người đặt hay không
+    const result = await checkRoomDate(booking);
+    if (result) {
+      throw new Error("Khoảng này thời gian có người đặt");
     }
-    const bookingStatus = { booking_status: BookingStatus.pending, start_date: booking.start_date, end_date: booking.end_date };
-    await patchStatusBooking(booking.id_touris!, bookingStatus);
     const res = await instance.post(`/bookings/`, booking);
+    //update trạng thái phòng khi có người đặt
+    const bookingStatus = {
+      booking_status: BookingStatus.pending,
+      start_date: booking.start_date,
+      end_date: booking.end_date,
+    };
+    await patchStatusBooking(booking.id_touris!, bookingStatus);
     const bookingUser = { id_user: booking.user_id, id_host: res.data.host_id };
     await instance.post("/user_booking/", bookingUser);
     return res;
-  } catch (error: unknown) {
-    if (typeof error === "string")
-      throw new Error(error)
+  } catch (error: any) {
+    throw new Error(error);
   }
 };
 
@@ -46,8 +51,16 @@ const patchBookingConfirm = async (
   return;
 };
 
+const payment = async (
+  booking: IBookingData,
+  bookingStatus: { pay_status: any }
+) => {
+  await instance.patch(`/bookings/${booking.id}`, bookingStatus);
+  // await roomPayment(booking.id_touris)
+};
+
 const getBookingService = async () => {
-  return await instance.get("/bookings");
+  return await instance.get("/bookings/");
 };
 
 const getBookingHostId = async (id_host: string) => {
@@ -109,10 +122,19 @@ const getBookingUserStatus = async (
 };
 
 const checkSearchDate = async (idRoom: number) => {
-  const res = await instance.get("/bookings/", { params: { id_touris: idRoom } })
-  console.log(res.data)
-  return res.data
-}
+  const res = await instance.get("/bookings/", {
+    params: { id_touris: idRoom },
+  });
+  return res.data;
+};
+const getBookingCarendar = async (id_touris: number) => {
+  try {
+    const res = await instance.get(`/bookings/`, { params: { id_touris } });
+    return res.data;
+  } catch (error) {
+    throw new Error("Lỗi không lấy được phòng");
+  }
+};
 
 export {
   patchBookingConfirm,
@@ -126,5 +148,7 @@ export {
   getBookingHostStatus,
   getBookingUser,
   getBookingUserStatus,
-  checkSearchDate
+  checkSearchDate,
+  getBookingCarendar,
+  payment,
 };

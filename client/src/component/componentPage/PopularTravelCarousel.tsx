@@ -36,7 +36,7 @@ const PopularTravelCarousel = () => {
     slidesToShow: 5,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 5000,
     pauseOnHover: true,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
@@ -84,7 +84,6 @@ const PopularTravelCarousel = () => {
                 <h2 className="absolute text-white text-lg bottom-0 mb-4 ml-4 font-bold">
                   {item.city}
                 </h2>
-
                 <img src={item.img} alt="" className="object-cover h-[248px]" />
               </div>
             </Link>

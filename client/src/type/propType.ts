@@ -96,13 +96,13 @@ interface PropsBooking {
   data: IBookingData[];
   columns: TableRoom[];
   detail: boolean;
-  getData: () => void;
-  user:IProfileUser
+  getData?: () => void;
 }
 
 interface PropsUser {
   data: IProfileUser[]
-  onClickNav: (idUser: string) => void
+  onClickNav: (idUser: string) => void;
+  columns: TableRoom[]
 }
 
 export type {

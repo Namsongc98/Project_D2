@@ -7,7 +7,13 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { patchBookingConfirm } from "../../../service";
-import { BookingStatus, IBookingData, PropsBooking } from "../../../type";
+import {
+  BookingStatus,
+  IBookingData,
+  IProfileUser,
+  StatusPayment,
+  TableRoom,
+} from "../../../type";
 import React, { useState } from "react";
 import { Button } from "../../element";
 import {
@@ -16,10 +22,7 @@ import {
   SnackBarReuse,
 } from "../../componentReuse";
 import { AlertColor, Stack } from "@mui/material";
-
 import imgEmpty from "../../../assets/image/img_empty.png";
-import { useSearchParams } from "react-router-dom";
-
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -40,26 +43,21 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const TableHostRoomConfirm: React.FC<PropsBooking> = ({
-  data,
-  columns,
-  getData,
-  user,
-}) => {
+const TableHostRoomConfirm: React.FC<{
+  data: IBookingData[];
+  columns: TableRoom[];
+  user: IProfileUser;
+  detail: boolean;
+  getData?: () => void;
+}> = ({ data, columns, getData, user }) => {
   const [type, setType] = useState<AlertColor | undefined>();
   const [message, setMessage] = useState<string>("");
   const [openConfirm, setOpenConfirm] = useState(false);
   const [inforBooking, setInforBooking] = useState<IBookingData | undefined>();
-
-  const [searchParams] = useSearchParams();
-
-  const typeParam = searchParams.get("booking");
-
   const handleOpenConfirm = (Booking: IBookingData | undefined = undefined) => {
     setOpenConfirm(!openConfirm);
     setInforBooking(Booking);
   };
-
   const handleSuccess = async (idBooking: number) => {
     const bookingStatus = {
       booking_status: BookingStatus.success,
@@ -68,7 +66,7 @@ const TableHostRoomConfirm: React.FC<PropsBooking> = ({
       await patchBookingConfirm(idBooking, bookingStatus);
       setType("success");
       setMessage("Cho phép đặt phòng thành công");
-      getData();
+      if (getData) getData();
     } catch (error) {
       setType("error");
       setMessage("Có lỗi không thể thực hiện");
@@ -84,7 +82,9 @@ const TableHostRoomConfirm: React.FC<PropsBooking> = ({
       await patchBookingConfirm(idBooking, bookingStatus);
       setType("success");
       setMessage("Xác nhận hủy phòng thành công");
-      getData();
+      if (getData) {
+        getData();
+      }
     } catch (error) {
       setType("error");
       setMessage("Có lỗi không thể thực hiện");
@@ -122,6 +122,7 @@ const TableHostRoomConfirm: React.FC<PropsBooking> = ({
                 <StyledTableRow key={booking.id}>
                   {columns.map((column) => {
                     const value = booking[column.index];
+                   
                     return (
                       <StyledTableCell
                         key={column.index}
@@ -130,7 +131,15 @@ const TableHostRoomConfirm: React.FC<PropsBooking> = ({
                       >
                         {column.format && typeof value === "number"
                           ? column.format(value)
-                          : value}
+                          : column.index === "pay_status" &&
+                            value === StatusPayment.success
+                          ? "Đã thanh toán"
+                          : column.index === "pay_status" &&
+                            value === StatusPayment.pending
+                          ? "Chưa thanh toán"
+                          : value
+                          ? value
+                          : "Đang cập nhật"}
                       </StyledTableCell>
                     );
                   })}
@@ -149,7 +158,13 @@ const TableHostRoomConfirm: React.FC<PropsBooking> = ({
                           : "bg-red-500"
                       } text-white`}
                       type="button"
-                      onClick={() => handleOpenConfirm(booking)}
+                      onClick={
+                        booking.booking_status ===
+                        (BookingStatus.cancel ||
+                          booking.complete_touris === true)
+                          ? undefined
+                          : () => handleOpenConfirm(booking)
+                      }
                     >
                       {booking.booking_status === BookingStatus.pending
                         ? "Đang chờ"
@@ -191,7 +206,6 @@ const TableHostRoomConfirm: React.FC<PropsBooking> = ({
             handleSuccess={handleSuccess}
             handleFail={handleFail}
             label="Xác nhận đặt phòng"
-            typeParam={typeParam}
             decription={`Xác nhận cho người dùng đặt phòng!`}
             setOpen={setOpenConfirm}
             user={user}

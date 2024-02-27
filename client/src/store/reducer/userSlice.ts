@@ -1,10 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchUser } from "../asyncThunk/userAsyncThunk";
-
 
 const initialState = {
-    user: {},
-
+    user: {}
 }
 const UserSlice = createSlice({
     name: "user",
@@ -13,12 +10,6 @@ const UserSlice = createSlice({
         setUser: (state, action) => {
             state.user = action.payload
         },
-    },
-    extraReducers: (builder) => {
-        builder
-            .addCase(fetchUser.fulfilled, (state, action) => {
-                state.user = action.payload
-            })
     },
 })
 

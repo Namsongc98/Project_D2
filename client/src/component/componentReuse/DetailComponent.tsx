@@ -1,11 +1,4 @@
-import {
-  Box,
-  Divider,
-  ImageList,
-  ImageListItem,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Divider, Stack, Typography } from "@mui/material";
 import {
   BookingStatus,
   IBookingData,
@@ -13,14 +6,51 @@ import {
   typeGetRoom,
 } from "../../type";
 import { rowsRoom, rowsBooking } from "../../constain";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+function SamplePrevArrow(props: any) {
+  const { onClick } = props;
+  return (
+    <div
+      className="bg-[#1976d2] z-10 absolute top-[40%] left-[-30px] p-1 rounded-full flex justify-center items-center"
+      onClick={onClick}
+    >
+      <ArrowBackIosNewIcon fontSize="inherit" sx={{ color: "white" }} />
+    </div>
+  );
+}
+
+function SampleNextArrow(props: any) {
+  const { onClick } = props;
+  return (
+    <div
+      className=" bg-[#1976d2] z-10 absolute top-[40%] right-[-30px] p-1 rounded-full flex justify-center items-center"
+      onClick={onClick}
+    >
+      <ArrowForwardIosIcon fontSize="inherit" sx={{ color: "white" }} />
+    </div>
+  );
+}
 
 const DetailComponent = ({
   booking,
   room,
 }: {
-  booking?: IBookingData;
+  booking?: IBookingData | any;
   room?: typeGetRoom;
 }) => {
+  const settings = {
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    fade: true,
+    speed: 500,
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />,
+  };
   return (
     <>
       <Stack display={"flex"} direction="row" justifyContent="space-between">
@@ -54,14 +84,20 @@ const DetailComponent = ({
       <Divider sx={{ my: 2 }} light />
       <Stack direction="row" spacing={2} useFlexGap flexWrap="wrap">
         <Box sx={{ width: 1 / 2 }}>
-          <ImageList sx={{ height: "auto" }} cols={2} rowHeight={164}>
-            {room!.image.map((item) => (
-              <ImageListItem key={item.id}>
-                <img src={item.url} alt={room?.city} loading="lazy" />
-              </ImageListItem>
-            ))}
-          </ImageList>
-
+          <div className="relative w-[400px] mx-auto my-0">
+            <Slider {...settings} className="">
+              {room!.image.map((item) => (
+                <div className="" key={item.id}>
+                  <img
+                    src={item.url + "?fit=crop&auto=format"}
+                    alt={room?.city}
+                    loading="lazy"
+                    className="object-cover h-[268px] w-full"
+                  />
+                </div>
+              ))}
+            </Slider>
+          </div>
           <Box>
             <Divider sx={{ my: 2 }} light />
             <div className="">
@@ -71,13 +107,20 @@ const DetailComponent = ({
           </Box>
         </Box>
         <Box sx={{ width: "45%" }}>
+          <div>
+            <div className="flex justify-between items-center ">
+              <h3 className="font-medium min-w-[100px]">Khách hàng </h3>
+              <span>{booking.name_user}</span>
+            </div>
+            <Divider sx={{ my: 2 }} light />
+          </div>
           {room &&
             rowsRoom.map((row) => {
               const value = room[row.id];
               return (
                 <div key={row.id}>
                   <div className="flex justify-between items-center ">
-                    <h3 className="font-medium">{row.label} </h3>
+                    <h3 className="font-medium min-w-[100px]">{row.label} </h3>
                     <span>
                       {row.format && typeof value === "number"
                         ? row.format(value)
@@ -94,8 +137,8 @@ const DetailComponent = ({
               const value = booking[row.id];
               return (
                 <div key={row.id}>
-                  <div className="flex justify-between items-center ">
-                    <h3 className="font-medium">{row.label}</h3>
+                  <div className="flex justify-between items-center">
+                    <h3 className="font-medium min-w-[100px]">{row.label}</h3>
                     <span>
                       {row.format && typeof value === "number" && value > 1000
                         ? row.format(value)
@@ -108,12 +151,20 @@ const DetailComponent = ({
             })}
           {booking && (
             <div className="flex justify-between items-center  ">
-              <h3 className="font-medium">Trạng thái thanh toán:</h3>
-              <span>
+              <h3 className="font-medium ">Trạng thái thanh toán:</h3>
+              <span
+                className={
+                  booking?.pay_status === StatusPayment.pending
+                    ? "text-[#1976d2]"
+                    : booking?.pay_status === StatusPayment.success
+                    ? "text-[#4CAF50]"
+                    : ""
+                }
+              >
                 {booking?.pay_status === StatusPayment.pending
                   ? "Chưa thanh toán"
                   : booking?.pay_status === StatusPayment.success
-                  ? "đã thanh toán"
+                  ? "Đã thanh toán"
                   : ""}{" "}
               </span>
             </div>

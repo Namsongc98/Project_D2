@@ -13,24 +13,27 @@ import {
   SnackBarReuse,
   TableConfirm,
 } from "../../component/componentReuse";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Approve, ApproveType, typeGetRoom } from "../../type";
 import { getAllRoomApproveHost, getAllRoomHost } from "../../service";
 import { columnsTable } from "../../constain";
+import { useGetUser } from "../../hook";
 
 const RoomHost = () => {
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   const [rooms, setRoom] = useState([] as any);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const typeParam = searchParams.get("approve");
-  const user = useParams()
+  const user = useGetUser();
   // modal
   const [openInfor, setOpenInfor] = useState(false);
   const [inforRoom, setInforRoom] = useState<typeGetRoom>();
   // error
   const [type, setType] = useState<AlertColor>("success");
   const [message, setMessage] = useState<string>("");
+
   // page
 
   // open modal chi tiết phòng
@@ -55,15 +58,13 @@ const RoomHost = () => {
 
   const getRoom = async (page: number, rowsPerPage: number) => {
     try {
-      if (user.id) {
+      if (user?.id) {
         const res = await getAllRoomHost(page, rowsPerPage, user.id);
         setRoom(res.data);
-      } else {
-        setType("error")
-        setMessage("Không có id")
       }
     } catch (error) {
-      console.log(error);
+      setType("error");
+      setMessage("error sever");
     }
   };
 
@@ -73,15 +74,18 @@ const RoomHost = () => {
     approve: ApproveType
   ) => {
     try {
-      if (user.id) {
-        const res = await getAllRoomApproveHost(page, rowsPerPage, user.id, approve);
+      if (user?.id) {
+        const res = await getAllRoomApproveHost(
+          page,
+          rowsPerPage,
+          user.id,
+          approve
+        );
         setRoom(res.data);
-      } else {
-        setType("error")
-        setMessage("Không có id")
       }
     } catch (error) {
-      console.log(error);
+      setType("error");
+      setMessage("error sever");
     }
   };
   const changePage = (page: number, rowsPerPage: number) => {
@@ -98,7 +102,11 @@ const RoomHost = () => {
 
   useEffect(() => {
     changePage(page + 1, rowsPerPage);
-  }, [typeParam]);
+  }, [typeParam, user]);
+
+  const handleNavigate = (idRoom: number) => {
+    navigate("calendar", { state: { id: idRoom } });
+  };
   return (
     <Box component="section">
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
@@ -121,15 +129,15 @@ const RoomHost = () => {
                 columnsTable={columnsTable}
                 data={rooms}
                 handleOpenInfor={handleOpenInfor}
+                handleNavigate={handleNavigate}
               />
               <ModalComponent setOpen={setOpenInfor} open={openInfor}>
                 <DetailComponent room={inforRoom!} />
               </ModalComponent>
-
               <TablePagination
                 rowsPerPageOptions={[5, 10, 15]}
                 component="div"
-                count={Infinity}
+                count={rooms.length + 100}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={handleChangePage}

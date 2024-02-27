@@ -14,8 +14,6 @@ const TabsCpm = ({ taps }: { taps: ITaps[] }) => {
     <Tabs
       value={value}
       onChange={handleChange}
-      textColor="secondary"
-      indicatorColor="secondary"
       aria-label="secondary tabs example"
     >
       {taps?.map((tap) => (

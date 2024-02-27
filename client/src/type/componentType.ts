@@ -44,7 +44,7 @@ type InputType = {
   register?: unknown;
   className: string;
   required: boolean,
-  defaultValue?: string | number
+  defaultValue?: number | string
 };
 
 type checkboxType = {
@@ -144,8 +144,6 @@ interface ITaps {
   label: string;
   to: { pathname: string, search: string };
 }
-
-
 export type {
   ButonType,
   InputHook,

@@ -35,6 +35,7 @@ const PickDate = (props: PropDatePick) => {
       <label className={`absolute  text-white opacity-70 text-sm`}>
         {label}
       </label>
+  
       <ThemeProvider theme={theme}>
         <DatePicker
           sx={{

@@ -8,12 +8,12 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import InfoIcon from "@mui/icons-material/Info";
-import { PropsUser } from "../../../type";
+import { PropsUser } from "../../type";
 import { Avatar, IconButton, Stack } from "@mui/material";
-import { columnUser } from "../../../constain";
-import imgEmpty from "../../../assets/image/img_empty.png";
 
-const TableUser = ({ data, onClickNav }: PropsUser) => {
+import imgEmpty from "../../assets/image/img_empty.png";
+
+const TableUser = ({ data, onClickNav, columns }: PropsUser) => {
   // page
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(4);
@@ -36,7 +36,7 @@ const TableUser = ({ data, onClickNav }: PropsUser) => {
           <TableHead>
             <TableRow>
               <TableCell align="left">Email</TableCell>
-              {columnUser.map((column) => (
+              {columns?.map((column) => (
                 <TableCell
                   key={column.index}
                   align={column.align}
@@ -46,7 +46,7 @@ const TableUser = ({ data, onClickNav }: PropsUser) => {
                 </TableCell>
               ))}
               <TableCell style={{ minWidth: 70 }} align="center">
-                Chi tiết đặt lịch
+                Chi tiết
               </TableCell>
             </TableRow>
           </TableHead>
@@ -71,7 +71,7 @@ const TableUser = ({ data, onClickNav }: PropsUser) => {
                         </div>
                       </Stack>
                     </TableCell>
-                    {columnUser.map((column, index) => {
+                    {columns?.map((column, index) => {
                       const value = profile[column.index];
                       return (
                         <TableCell key={index}>

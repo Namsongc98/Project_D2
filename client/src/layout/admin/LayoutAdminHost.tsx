@@ -1,12 +1,14 @@
 import { Box, Container, Grid, Paper, Typography } from "@mui/material";
+import React from "react";
+import { TabsCpm } from "../../component/componentReuse";
 import { CopyRight } from "../../component/componentPage";
 import { Outlet } from "react-router-dom";
-import { TabsCpm } from "../../component/componentReuse";
 import { tapAdminRoom } from "../../constain";
 
-const RoomManager = () => {
+const LayoutAdminHost = () => {
   return (
     <>
+      {" "}
       <Box component="section">
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
           <Grid container spacing={3}>
@@ -60,4 +62,4 @@ const RoomManager = () => {
   );
 };
 
-export default RoomManager;
+export default LayoutAdminHost;

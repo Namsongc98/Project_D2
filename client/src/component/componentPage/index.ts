@@ -8,6 +8,4 @@ export { default as Deposit } from "./host/Deposit"
 export { default as Title } from "./host/Title"
 export { default as CopyRight } from "./host/CopyRight"
 export { default as TableHostRoomConfirm } from "./host/TableHostRoomConfirm"
-export { default as TableUser } from "./admin/TableUser"
-export { default as TableBooking } from "./admin/TableBooking"
 

@@ -1,12 +1,14 @@
-import { Box, Container, Grid, Paper, Typography } from "@mui/material";
+import { AlertColor, Box, Container, Grid, Paper, Typography } from "@mui/material";
 import { CopyRight } from "../../component/componentPage";
-import TableBooking from "../../component/componentPage/admin/TableBooking";
 import { useEffect, useState } from "react";
 import { getBookingService } from "../../service";
 import { columnBooking } from "../../constain";
+import { SnackBarReuse, TableBooking } from "../../component/componentReuse";
 
 const Bookingmanager = () => {
   const [data, setData] = useState([]);
+  const [type, setType] = useState<AlertColor | undefined>();
+  const [message, setMessage] = useState<string>("");
 
   useEffect(() => {
     getBooking();
@@ -17,11 +19,13 @@ const Bookingmanager = () => {
       const res = await getBookingService();
       setData(res.data);
     } catch (error) {
-      console.log(error);
+      setType("error");
+      setMessage("error sever");
     }
   };
   return (
     <Box component="section">
+      <SnackBarReuse type={type} message={message} setError={setMessage} />
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
         <Grid container spacing={3}>
           <Grid item xs={12} md={12} lg={12}>
@@ -61,7 +65,6 @@ const Bookingmanager = () => {
               </Typography>
               <TableBooking
                 data={data!}
-                getData={getBooking}
                 columns={columnBooking}
                 detail={false}
               />

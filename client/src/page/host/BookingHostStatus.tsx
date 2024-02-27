@@ -1,4 +1,4 @@
-import { Grid, Paper } from "@mui/material";
+import { AlertColor, Grid, Paper } from "@mui/material";
 import { useEffect, useState } from "react";
 import { TableHostRoomConfirm } from "../../component/componentPage";
 import { useSearchParams } from "react-router-dom";
@@ -6,9 +6,12 @@ import { useGetUser } from "../../hook";
 import { BookingStatus, BookingType, IBookingData } from "../../type";
 import { getBookingHost, getBookingHostStatus } from "../../service";
 import { columnBooking } from "../../constain";
+import { SnackBarReuse } from "../../component/componentReuse";
 
 const BookingHostStatus = () => {
   const [bookingArr, setBookingArr] = useState<IBookingData[]>([]);
+  const [typeError, setTypeError] = useState<AlertColor | undefined>();
+  const [message, setMessage] = useState<string>("");
   const [searchParams] = useSearchParams();
   const type = searchParams.get("booking");
   const host = useGetUser();
@@ -22,17 +25,18 @@ const BookingHostStatus = () => {
       const res = await getBookingHostStatus(userId, bookingStatus, complete);
       setBookingArr(res.data);
     } catch (error) {
-      console.log(error);
+      setTypeError("error");
+      setMessage("error sever");
     }
   };
 
   const getBooking = async (hostId: string) => {
     try {
       const res = await getBookingHost(hostId);
-      console.log(res.data);
       setBookingArr(res.data);
     } catch (error) {
-      console.log(error);
+      setTypeError("error");
+      setMessage("error sever");
     }
   };
 
@@ -59,6 +63,7 @@ const BookingHostStatus = () => {
   }, [type, host]);
   return (
     <Grid item xs={12}>
+      <SnackBarReuse type={typeError} message={message} setError={setMessage} />
       <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
         <TableHostRoomConfirm
           data={bookingArr!}

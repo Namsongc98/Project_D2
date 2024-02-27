@@ -1,14 +1,14 @@
 import { AlertColor, Box, Button, Divider, Paper, Stack } from "@mui/material";
 
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import {
   getBookingUser,
   getBookingUserStatus,
   getOneRoom,
   patchBookingConfirm,
+  payment,
 } from "../../service";
-import { useGetUser } from "../../hook";
 import imgEmpty from "../../assets/image/img_empty.png";
 import {
   BookingStatus,
@@ -21,11 +21,13 @@ import { convertDateToTimestamp, formatcurrency } from "../../common";
 import { ModalComponent } from "../../component/componentReuse";
 import DetailComponent from "../../component/componentReuse/DetailComponent";
 import SnackBarReuse from "../../component/componentReuse/SnackBarReuse";
+import { useSelector } from "react-redux";
+import { getUser } from "../../store/reducer/userSlice";
 
 const HistoryBooking = () => {
   const [searchParams] = useSearchParams();
   const [bookingArr, setBookingArr] = useState<IBookingData[]>([]);
-  const user = useGetUser();
+  const user = useSelector(getUser);
   const type = searchParams.get("type");
   const [openInfor, setOpenInfor] = useState(false);
   const [inforBooking, setInforBooking] = useState<IBookingData>();
@@ -36,10 +38,10 @@ const HistoryBooking = () => {
   const getBooking = async (userId: string) => {
     try {
       const res = await getBookingUser(userId);
-
       setBookingArr(res.data);
     } catch (error) {
-      console.log(error);
+      setTypeErr("error");
+      setMessage("error sever");
     }
   };
   const getBookingStatus = async (
@@ -51,7 +53,8 @@ const HistoryBooking = () => {
       const res = await getBookingUserStatus(userId, bookingStatus, complete);
       setBookingArr(res.data);
     } catch (error) {
-      console.log(error);
+      setTypeErr("error");
+      setMessage("error sever");
     }
   };
 
@@ -76,7 +79,7 @@ const HistoryBooking = () => {
     }
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     checkTypeParam();
   }, [type, user]);
 
@@ -88,8 +91,31 @@ const HistoryBooking = () => {
       patchBookingConfirm(idBooking, bookingStatus);
       setTypeErr("info");
       setMessage("Đợi xác nhận");
+      setOpenInfor(false);
+      checkTypeParam();
     } catch (error) {
-      console.log(error);
+      setTypeErr("error");
+      setMessage("error sever");
+    }
+  };
+  const handlePayment = (inforBooking: IBookingData) => {
+    const bookingStatus = {
+      pay_status: StatusPayment.success,
+    };
+    try {
+      payment(inforBooking, bookingStatus);
+      setTypeErr("info");
+      setMessage("Thanh toán thành công");
+      setOpenInfor(false);
+      checkTypeParam();
+    } catch (error) {
+      if (error instanceof Error) {
+        setTypeErr("error");
+        setMessage(error.message);
+      } else {
+        setTypeErr("error");
+        setMessage("error sever");
+      }
     }
   };
 
@@ -104,7 +130,8 @@ const HistoryBooking = () => {
       setInforBooking(booking);
       setOpenInfor(!openInfor);
     } catch (error) {
-      console.log(error);
+      setTypeErr("error");
+      setMessage("error sever");
     }
   };
 
@@ -132,14 +159,16 @@ const HistoryBooking = () => {
                         </p>
                         <p className="text-sm opacity-80 mt-1">
                           Từ ngày: {convertDateToTimestamp(booking.start_date)}{" "}
-                          - {convertDateToTimestamp(booking.end_date)}
+                          -{" "}
+                          {convertDateToTimestamp(
+                            booking.end_date - 24 * 60 * 60 * 1000
+                          )}
                         </p>
                         <p className="text-sm opacity-80 mt-1">
                           Số lượng người:
                         </p>
                         <p className="text-sm  mt-1">
                           <span className="opacity-80">
-                            {" "}
                             Xác nhận lịch đặt:{" "}
                           </span>
                           <span className="font-medium">
@@ -156,7 +185,7 @@ const HistoryBooking = () => {
                           </span>
                         </p>
                         <p className="text-sm  mt-1">
-                          <span className="opacity-80">Chuyến đi:</span>
+                          <span className="opacity-80">Chuyến đi: </span>
                           <span className="font-medium">
                             {booking.complete_touris
                               ? "Hoàn thành"
@@ -167,7 +196,7 @@ const HistoryBooking = () => {
                           <span className="opacity-80">Thanh toán: </span>
                           <span className="font-medium">
                             {booking.pay_status === StatusPayment.pending
-                              ? "chờ thanh toán"
+                              ? "Chờ thanh toán"
                               : "Đã thanh toán"}
                           </span>
                         </p>
@@ -242,13 +271,33 @@ const HistoryBooking = () => {
             <Divider light sx={{ my: 2 }} />
             <div className="flex justify-between">
               <div className=""></div>
-              <Button
-                variant="contained"
-                color="error"
-                onClick={() => handleCancel(inforBooking!.id!)}
-              >
-                Hủy đơn
-              </Button>
+              <Stack direction={"row"} spacing={2}>
+                <Button
+                  variant="contained"
+                  color="error"
+                  onClick={() => handleCancel(inforBooking!.id!)}
+                  disabled={
+                    inforBooking?.pay_status === StatusPayment.success
+                      ? true
+                      : false
+                  }
+                >
+                  Hủy đơn
+                </Button>
+                <Button
+                  variant="contained"
+                  color="info"
+                  disabled={
+                    inforBooking?.booking_status === BookingStatus.success &&
+                    inforBooking?.pay_status === StatusPayment.pending
+                      ? false
+                      : true
+                  }
+                  onClick={() => handlePayment(inforBooking!)}
+                >
+                  Thanh toán
+                </Button>
+              </Stack>
             </div>
           </>
         </ModalComponent>

@@ -1,40 +1,40 @@
 import { LocalizationProvider } from "@mui/x-date-pickers";
-
-import { AlertColor, Box, InputBase, List, MenuItem } from "@mui/material";
+import { AlertColor, Box, InputBase } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import EscalatorWarningIcon from "@mui/icons-material/EscalatorWarning";
 import "../../style/styleComponent.scss";
 import { Button, InputSearch, PickDate } from "../element";
 import useDate from "../../hook/useDate";
 import { useEffect, useState } from "react";
-import LocationCityIcon from "@mui/icons-material/LocationCity";
 import { useDebounce } from "../../hook";
 import { searchCityFindRoom } from "../../service";
 import { IRoomPost } from "../../type";
 import { SnackBarReuse } from ".";
 import { createSearchParams, useNavigate } from "react-router-dom";
-import AddLocationIcon from "@mui/icons-material/AddLocation";
 
 const SearchHotel = () => {
-  const inputStartDate = useDate();
-  const inputEndDate = useDate();
+  const inputStartDate = useDate(undefined);
+  const inputEndDate = useDate(undefined);
   const [type, setType] = useState<AlertColor | undefined>();
   const [message, setMessage] = useState("");
-  const [person, setperson] = useState<number | "">("");
+  const [person, setPerson] = useState<number | "">("");
   const [search, setSearch] = useState<string>("");
+  const [itemRoom, setItemRoom] = useState<IRoomPost | null>(null);
   const [dataCity, setDataCity] = useState([] as IRoomPost[]);
   const deBounce = useDebounce(search, 500);
   const navigate = useNavigate();
 
-  const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+  // input Person
+  const handleChangePerson: React.ChangeEventHandler<HTMLInputElement> = (
+    e
+  ) => {
     const inputValue = e.currentTarget.value.replace(/\D/g, "");
-    setperson(inputValue === "" ? "" : parseFloat(inputValue));
+    setPerson(inputValue === "" ? "" : parseFloat(inputValue));
   };
 
-  const handleOnChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    const changeValue = e.currentTarget.value;
-    if (!changeValue.startsWith(" ")) {
-      setSearch(e.currentTarget.value);
+  const handleOnChange = (_: any, value: string) => {
+    if (!value.startsWith(" ")) {
+      setSearch(value);
     }
   };
 
@@ -55,27 +55,25 @@ const SearchHotel = () => {
     handleSearch();
   }, [deBounce]);
 
-  const handleClick = (e: any) => {
-    setSearch(e.currentTarget.textContent);
-    setDataCity([]);
+  const handleChange = (newValue: IRoomPost) => {
+    setItemRoom(newValue);
+    setSearch(newValue.city);
   };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (inputStartDate.timestamp! >= inputEndDate.timestamp!) {
-      setType("warning");
-      setMessage("Ngày tháng không hợp lệ");
-      return;
-    } else if (!person) {
+    if (!person) {
       setType("warning");
       setMessage("Mời nhập số lượng người");
       return;
     }
     const params = {
       address: search!,
-      checkin: inputStartDate.timestamp!.toString(),
-      checkout: inputEndDate.timestamp!.toString(),
+      checkin: inputStartDate.value!.toString(),
+      checkout: inputEndDate.value!.toString(),
       person: person.toString(),
     };
+
     navigate({
       pathname: "/city/search",
       search: `?${createSearchParams(params)}`,
@@ -94,59 +92,12 @@ const SearchHotel = () => {
           <div className="relative bg-white w-2/5 h-12 ">
             <div className="flex items-center relative">
               <InputSearch
-                placeholder="Bạn muốn đi đâu?"
                 search={search}
                 handleSearch={handleOnChange}
-                required={true}
+                data={dataCity}
+                onChange={handleChange}
+                item={itemRoom!}
               />
-              {dataCity.length ? (
-                <List
-                  component="div"
-                  sx={{
-                    bgcolor: "white",
-                    position: "absolute",
-                    top: "55px",
-                    maxHeight: 200,
-                    width: "100%",
-                    overflow: "auto",
-                    paddingTop: 1,
-                    paddingBottom: 1,
-                  }}
-                >
-                  {dataCity?.map((item) => (
-                    <>
-                      <MenuItem
-                        value={item.address}
-                        sx={{ width: "100%" }}
-                        onClick={handleClick}
-                        key={item.id}
-                        selected={search === item.address}
-                      >
-                        <LocationCityIcon
-                          fontSize="small"
-                          sx={{ color: "#00afdd", marginRight: 1 }}
-                        />
-                        {item.city}
-                      </MenuItem>
-                      <MenuItem
-                        value={item.city}
-                        sx={{ width: "100%" }}
-                        onClick={handleClick}
-                        key={item.id}
-                        selected={search === item.address}
-                      >
-                        <AddLocationIcon
-                          fontSize="small"
-                          sx={{ color: "#00afdd", marginRight: 1 }}
-                        />
-                        {item.address}
-                      </MenuItem>
-                    </>
-                  ))}
-                </List>
-              ) : (
-                <></>
-              )}
             </div>
           </div>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -175,7 +126,7 @@ const SearchHotel = () => {
             <InputBase
               sx={{ ml: 1, flex: 1 }}
               value={person}
-              onChange={handleChange}
+              onChange={handleChangePerson}
               type="text"
             />
             <EscalatorWarningIcon className="absolute right-[0.7rem]  translate-y-[-170%] top-[50px] text-[#09b2de]" />
